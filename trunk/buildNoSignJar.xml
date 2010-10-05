@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<!--  Statistics Online Computational Resources Java Build File for "ant" compiling  -->
+
+<project name="SOCR-distributome" default="usage" basedir=".">
+
+	<!-- =================================================================== -->
+	<!-- Initialization target                                               -->
+	<!-- =================================================================== -->
+	<target name="init">
+		<tstamp />
+		<property name="Name" value="SOCR" />
+		<property name="name" value="SOCR" />
+		<property name="version" value="1.2.6" />
+		<property name="year" value="2001-2010" />
+		<property name="group" value="SOCR/I.D.Dinov" />
+
+		<echo message="---------------- ${Name} ${version} ${group} [${year}] -------------" />
+
+		<property name="build.dir" value="." />
+		<property name="build.src" value="src" />
+		<property name="build.dest" value="classes" />
+		<property name="jars" value="jars" />
+		<property name="docs" value="docs" />
+		<property name="classpath" value="${jars}/loniEditor.jar"/>
+		<property name="htmldir" value="." />
+		<property name="browser" location="C:/Program Files/Internet Explorer/iexplore.exe" />
+		<available file="${browser}" property="browser.found">
+		</available>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Help on usage                                                       -->
+	<!-- =================================================================== -->
+	<target name="usage" depends="init">
+		<echo message="" />
+		<echo message="" />
+		<echo message="${Name} Build file" />
+		<echo message="-------------------------------------------------------------" />
+		<echo message="" />	
+		<echo message="   distributome		--> packages SOCR Distributome"/>
+		<echo message="   usage     		--> show this message (default)" />
+		<echo message="" />
+		<echo message=" See the comments inside the build.xml file for more details." />
+		<echo message="-------------------------------------------------------------" />
+		<echo message="" />
+		<echo message="" />
+	</target>
+				
+   <target name="clean" depends="init">
+	<delete>
+		<fileset dir="${build.dest}" />
+	</delete>
+   </target>
+	
+	<!-- =================================================================== -->
+				<!-- Compiles the SOCR Distributome source directory                             -->
+				<!-- =================================================================== -->
+			<target name = "distributome" depends="init">
+				<echo message="Compiling the SOCR Distributome sources" />
+				<copy todir="${build.dest}/org/distributome/">
+					<fileset dir="${build.src}/org/distributome/" excludes="CVS/**" />
+				</copy>	
+				<copy todir="${build.dest}/edu/ucla/stat/SOCR/touchgraph">
+					<fileset dir="${build.src}/edu/ucla/stat/SOCR/touchgraph/" excludes="CVS/**"/>
+				</copy>
+				
+				<javac srcdir="${build.src}/org/distributome:${build.src}/edu/ucla/stat/SOCR/touchgraph" destdir="${build.dest}" classpath="${classpath}" 
+								debug="false" optimize="false" deprecation="on" verbose="false">
+								<compilerarg value="-Xlint:all,-serial"/>
+				</javac>
+			
+				<jar jarfile="${jars}/SOCR_distributome.jar" basedir="${build.dest}" includes="org/distributome/**, edu/ucla/stat/SOCR/touchgraph/**"/> 
+				<!--signjar keystore="${jars}/SOCR_2010_Comodo_Key.ks" storepass="SOCRstorepass" keypass="SOCRkeypass" jar="${jars}/SOCR_distributome.jar" alias="567a062f-58ef-468e-8461-82f47f331d38"/-->					
+				</target>	
+	
+</project>
