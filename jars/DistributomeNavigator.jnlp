@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?> 
   <jnlp
   codebase="http://www.distributome.org/jars/" 
-  href="SOCR_distributome.jnlp"> 
+  href="DistributomeNavigator.jnlp"> 
     <information> 
-       <title>SOCR Distributome</title> 
-       <vendor>SOCR</vendor> 
-       <description>Distributome</description> 
-       <description kind="short">SOCR Distributome </description> 
+       <title>Distributome Navigator</title> 
+       <vendor>Distributome</vendor> 
+       <description>Distributome Navigator</description> 
+       <description kind="short">Distributome Navigator</description> 
        <offline-allowed/> 
      </information> 
      <resources> 
@@ -15,7 +15,7 @@
      </resources> 
     <applet-desc 
       documentBase="http://www.distributome.org/jars/" 
-      name="Distributome" 
+      name="Distributome Navigator" 
       main-class="org.distributome.TGViewerApplet" 
       width="1500" 
       height="900"> 
