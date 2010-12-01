@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?> 
   <jnlp
   codebase="http://www.distributome.org/jars/" 
-  href="SOCR_distributomeEditor.jnlp"> 
+  href="DistributomeEditor.jnlp"> 
     <information> 
-       <title>SOCR Distributome Editor</title> 
-       <vendor>SOCR</vendor> 
+       <title>Distributome Editor</title> 
+       <vendor>Distributome</vendor> 
        <description>DistributomeEditor</description> 
-       <description kind="short">SOCR Distributome Editor</description> 
+       <description kind="short">Distributome Editor</description> 
        <offline-allowed/> 
      </information> 
      <resources> 
