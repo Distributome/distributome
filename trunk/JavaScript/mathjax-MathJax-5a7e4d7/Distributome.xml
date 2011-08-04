@@ -709,6 +709,7 @@
 	<family>scale </family>
 	<family>exponential </family>
 	<family>stable</family>
+	<cite>Dinov Christou Sanchez 2008</cite>
 </distribution>
 
 <distribution id="Pareto">
@@ -1227,6 +1228,7 @@
 	<to>standard normal distribution</to>
 	<statement>If \(X_n\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and fixed \(p \in (0, 1)\) then then the distribution of \(Z_n = \frac{X_n - n p}{\sqrt{n p (1 - p)}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
 	<type>central limit theorem</type>
+	<cite>Dinov Christou Sanchez 2008</cite>
 </relation>
 
 <relation id="binomial/Bernoulli">
@@ -1297,6 +1299,7 @@
 	<to>standard normal distribution</to>
 	<statement>If \(X_n\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then the distribution of \(Z = \frac{X_n - n}{\sqrt{2 n}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
 	<type>central limit theorem</type>
+	<cite>Dinov Christou Sanchez 2008</cite>
 </relation>
 
 <relation id="chi-square/F">
