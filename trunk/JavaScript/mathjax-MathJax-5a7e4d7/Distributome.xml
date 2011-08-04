@@ -1326,7 +1326,7 @@
 <relation id="chi-square/standard-normal/student"> 
 	<from>chi-square distribution</from>
 	<from>standard normal distribution</from>
-	<to>Student's's t-distribution</to>
+	<to>Student's t-distribution</to>
 	<statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's's \(t\)-distribution with \(n\) degrees of freedom.</statement>
 	<type>transformation</type>
 </relation>
@@ -2833,7 +2833,7 @@
 	<title>Quantifying uncertainties in multi-scale studies of fractured reservoir analogues: Implemented statistical analysis of scan line data from carbonate rocks</title>
 	<journal> Journal of Structural Geology </journal>
 	<year>2009</year>
-	<url>http://www.sciencedirect.com/science?_ob=Articleurl&amp;_udi=B6V9D-4W7RY92-2&amp;_user=446478&amp;_coverDate=09%2F30%2F2010&amp;_rdoc=1&amp;_fmt=high&amp;_orig=gateway&amp;_origin=gateway&amp;_sort=d&amp;_docanchor=&amp;view=c&amp;_acct=C000020380&amp;_version=1&amp;_urlVersion=0&amp;_userid=446478&amp;md5=a969efe855e9e4f4dee9e80431c4225f&amp;searchtype=a</url>
+	<url>http://dx.doi.org/10.1016/j.jsg.2009.04.016</url>
 </reference>
 <reference id="Ahrens Dieter 1982" type="article">
 	<author>Joachim H. Ahrens</author>
