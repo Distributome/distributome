@@ -130,7 +130,7 @@ for (i=0;i<DistributomeXML_Objects.length;i++) {
 		  				// currLevel1Prop.childNodes[0].nodeValue == "distribution"
 					document.write("<br />");
 	 
-					Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[0].childNodes;
+					Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
 						//Level2Prop = vector of property-objects for "distribution" parent
 					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
 						// currLevel2Prop = "first" property object "name" for the first "distribution"
