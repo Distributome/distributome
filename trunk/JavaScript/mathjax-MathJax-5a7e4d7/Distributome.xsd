@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.distributome.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.distributome.org">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="xsi.xsd"/>
+  <xs:element name="distributome">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:distributions"/>
+        <xs:element ref="ns1:relations"/>
+        <xs:element ref="ns1:references"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:decimal"/>
+      <xs:attribute ref="xsi:schemaLocation" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="distributions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:distribution"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="distribution">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:name"/>
+        <xs:element ref="ns1:type"/>
+        <xs:element ref="ns1:model"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:parameter"/>
+        <xs:element minOccurs="0" ref="ns1:support"/>
+        <xs:element ref="ns1:pdf"/>
+        <xs:element minOccurs="0" ref="ns1:mode"/>
+        <xs:element ref="ns1:cdf"/>
+        <xs:element ref="ns1:qf"/>
+        <xs:element minOccurs="0" ref="ns1:pgf"/>
+        <xs:element minOccurs="0" ref="ns1:mgf"/>
+        <xs:element minOccurs="0" ref="ns1:cf"/>
+        <xs:element minOccurs="0" ref="ns1:moments"/>
+        <xs:element ref="ns1:mean"/>
+        <xs:element ref="ns1:variance"/>
+        <xs:element minOccurs="0" ref="ns1:skew"/>
+        <xs:element minOccurs="0" ref="ns1:kurt"/>
+        <xs:element minOccurs="0" ref="ns1:entropy"/>
+        <xs:element ref="ns1:median"/>
+        <xs:element ref="ns1:q1"/>
+        <xs:element ref="ns1:q3"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:family"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="model" type="xs:string"/>
+  <xs:element name="parameter" type="xs:string"/>
+  <xs:element name="support" type="xs:string"/>
+  <xs:element name="pdf" type="xs:string"/>
+  <xs:element name="mode" type="xs:string"/>
+  <xs:element name="cdf" type="xs:string"/>
+  <xs:element name="qf" type="xs:string"/>
+  <xs:element name="pgf" type="xs:string"/>
+  <xs:element name="mgf" type="xs:string"/>
+  <xs:element name="cf" type="xs:string"/>
+  <xs:element name="moments">
+    <xs:complexType mixed="true">
+      <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mean" type="xs:string"/>
+  <xs:element name="variance" type="xs:string"/>
+  <xs:element name="skew" type="xs:string"/>
+  <xs:element name="kurt" type="xs:string"/>
+  <xs:element name="entropy" type="xs:string"/>
+  <xs:element name="median" type="xs:string"/>
+  <xs:element name="q1" type="xs:string"/>
+  <xs:element name="q3" type="xs:string"/>
+  <xs:element name="family" type="xs:string"/>
+  <xs:element name="relations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:relation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relation">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:type"/>
+        <xs:element ref="ns1:from"/>
+        <xs:element ref="ns1:statement"/>
+        <xs:element ref="ns1:to"/>
+      </xs:choice>
+      <xs:attribute name="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="from" type="xs:string"/>
+  <xs:element name="statement" type="xs:string"/>
+  <xs:element name="to" type="xs:string"/>
+  <xs:element name="references">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:reference"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reference">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:name"/>
+        <xs:element ref="ns1:publisher"/>
+        <xs:element ref="ns1:title"/>
+        <xs:element ref="ns1:url"/>
+        <xs:element ref="ns1:year"/>
+        <xs:element ref="ns1:Journal"/>
+        <xs:element ref="ns1:address"/>
+        <xs:element ref="ns1:auhtor"/>
+        <xs:element ref="ns1:author"/>
+        <xs:element ref="ns1:doi"/>
+        <xs:element ref="ns1:edition"/>
+        <xs:element ref="ns1:jounral"/>
+        <xs:element ref="ns1:journal"/>
+        <xs:element ref="ns1:number"/>
+        <xs:element ref="ns1:page"/>
+        <xs:element ref="ns1:report"/>
+        <xs:element ref="ns1:tilte"/>
+        <xs:element ref="ns1:volume"/>
+      </xs:choice>
+      <xs:attribute name="id" use="required"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Journal" type="xs:string"/>
+  <xs:element name="address" type="xs:string"/>
+  <xs:element name="auhtor" type="xs:string"/>
+  <xs:element name="author">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:publisher"/>
+        <xs:element ref="ns1:title"/>
+        <xs:element ref="ns1:url"/>
+        <xs:element ref="ns1:year"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="doi" type="xs:string"/>
+  <xs:element name="edition" type="xs:string"/>
+  <xs:element name="jounral" type="xs:string"/>
+  <xs:element name="journal" type="xs:string"/>
+  <xs:element name="number" type="xs:integer"/>
+  <xs:element name="page" type="xs:NMTOKEN"/>
+  <xs:element name="report" type="xs:string"/>
+  <xs:element name="tilte" type="xs:string"/>
+  <xs:element name="volume" type="xs:integer"/>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="url" type="xs:anyURI"/>
+  <xs:element name="publisher" type="xs:string"/>
+  <xs:element name="year" type="xs:string"/>
+  <xs:element name="title" type="xs:string"/>
+</xs:schema>
