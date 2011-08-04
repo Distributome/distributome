@@ -418,7 +418,7 @@
 	<parameter>\(m\), the number of type 1 objects in the population</parameter>
 	<parameter>\(n\), the sample size</parameter>
 	<support>\(\{\max(0, n + m - N), \ldots, \min(m, n)\}\)</support>
-	<pdf>\(f(x) = \frac{{m \choose x} {N-m \choose n-x}}{N \choose n}}, \; x \in \{\max(0, n + m - N), \ldots, \min(m, n)\}\)</pdf>
+	<pdf>\(f(x) = \frac{{m \choose x} {N-m \choose n-x}}{{N \choose n}}, \; x \in \{\max(0, n + m - N), \ldots, \min(m, n)\}\)</pdf>
 	<mode>\(\lfloor \frac{(n+1)(m+1)}{N+2} \rfloor\)</mode>
 	<cdf>\(F(x) = \sum_{\max(0, n+m-N)}^x f(t), \quad x \in \{\max(0, n + m - N), \ldots, \min(m, n)\}\) where \(f\) is the probability density function</cdf>
 	<qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
