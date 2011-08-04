@@ -1983,7 +1983,7 @@
 	<from>Poisson distribution</from>
 	<from>logarithmic distribution</from>
 	<to>negative binomial distribution</to>
-	<statement>If \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\), \(N\) has the Poisson distribution with parameter \(-r \ln(1 - p)\) where \(r \in (0, \infty)\), and \(N\) and \(\bs{X}\) are independent, then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with stopping parameter \(r\) and sucess parameter \(p\).</statement>
+	<statement>If \(\bs{X} =(X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\), \(N\) has the Poisson distribution with parameter \(-r \ln(1 - p)\) where \(r \in (0, \infty)\), and \(N\) and \(\bs{X}\) are independent, then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with stopping parameter \(r\) and sucess parameter \(p\).</statement>
 	<type>compound Poisson transformation</type>
 </relation>
 
