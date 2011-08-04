@@ -44,6 +44,7 @@
         <xs:element ref="ns1:q1"/>
         <xs:element ref="ns1:q3"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:family"/>
+        <xs:element minOccurs="0" ref="ns1:cite"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
     </xs:complexType>
@@ -82,6 +83,7 @@
   <xs:element name="relation">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:cite"/>
         <xs:element ref="ns1:type"/>
         <xs:element ref="ns1:from"/>
         <xs:element ref="ns1:statement"/>
@@ -150,6 +152,7 @@
   <xs:element name="volume" type="xs:integer"/>
   <xs:element name="name" type="xs:string"/>
   <xs:element name="type" type="xs:string"/>
+  <xs:element name="cite" type="xs:string"/>
   <xs:element name="url" type="xs:anyURI"/>
   <xs:element name="publisher" type="xs:string"/>
   <xs:element name="year" type="xs:string"/>
