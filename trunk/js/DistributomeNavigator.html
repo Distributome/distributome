@@ -8,7 +8,7 @@
   	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Java Applets">
   	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
   
-  	<link rel="stylesheet" type="text/css" href="./images/Distributome_style.css">
+  	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
   	<link rel="shortcut icon" href="../images/favicon.ico">
   
   	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
@@ -126,8 +126,8 @@
   	<!-- Main Distributome JS Graphical Navigator -->
 		<center>
 			<script type="text/javascript+protovis">
-				var w = document.body.clientWidth,
-   				h = document.body.clientHeight,
+				var w = document.body.clientWidth-200,
+   				h = document.body.clientHeight-200,
     			colors = pv.Colors.category20();
 
 				var classes = pv.nodes(distributome.nodes);
@@ -177,19 +177,18 @@
 			xmlhttp.send();
 			xmlDoc=xmlhttp.responseXML;
 			DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-			document.write("Distribution Properties <br />");
+			document.write("<b><u>Distribution Properties</u></b> <br />");
 			var i=1;
 			var j_corr=0;
-				if (DistributomeXML_Objects[i].nodeType==1) {
-					//Process only level=1 element nodes (type 1) 
-					document.write(DistributomeXML_Objects[i].nodeName+" : "
-						+DistributomeXML_Objects[i].childNodes[0].nodeValue);
+			if (DistributomeXML_Objects[i].nodeType==1) {
+				//Process only level=1 element nodes (type 1) 
+				document.write(DistributomeXML_Objects[i].nodeName+" : "
+					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
 				document.write("<br />");
 
 				Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 				currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-				if (i=5) {	// for "references" objects ****/
-					document.write("<br />References ... <br />");
+				if (i=1) {	// for "distributions" objects ****/
 					for (j=0;j<Level1Prop.length;j++) {
 						var k_corr=0;					
 						if (currLevel1Prop.nodeType==1) {
@@ -201,7 +200,7 @@
 							currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
 							for (k=0;k<Level2Prop.length;k++) {
 								if (currLevel2Prop.nodeType==1)
-									{ //Process only level=3 element nodes (type 1)
+									{	//Process only level=3 element nodes (type 1)
 										document.write("---------"+ currLevel2Prop.nodeName+": "+
 	  										currLevel2Prop.childNodes[0].nodeValue);
 									document.write("<br />");
@@ -211,9 +210,9 @@
 							} else j_corr++;
 						currLevel1Prop=currLevel1Prop.nextSibling;
 					}
-				} // End for "References" objects
+				} // End for "distributions" objects
 				document.write("<br />");
-				} else i_corr++;
+			}
 				
 			/*********************
 			var i_corr=0;
@@ -285,45 +284,43 @@
 					xmlhttp.send();
 					xmlDoc=xmlhttp.responseXML;
 					DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-					document.write("Inter-Distribution Relations <br />");
+					document.write("<b><u>Inter-Distribution Relations</u></b> <br />");
 
 					var i=3;
 					var j_corr=0;
-						if (DistributomeXML_Objects[i].nodeType==1) {
-							//Process only level=1 element nodes (type 1) 
-							document.write(DistributomeXML_Objects[i].nodeName+" : "
-		  						+DistributomeXML_Objects[i].childNodes[0].nodeValue);
+					if (DistributomeXML_Objects[i].nodeType==1) {
+						//Process only level=1 element nodes (type 1) 
+						document.write(DistributomeXML_Objects[i].nodeName+" : "
+		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
 						document.write("<br />");
 
 						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-						if (i=5) {	// for "references" objects ****/
-							document.write("<br />References ... <br />");
-							for (j=0;j<Level1Prop.length;j++) {
-								var k_corr=0;					
-								if (currLevel1Prop.nodeType==1) {
-  									document.write("------" + currLevel1Prop.nodeName+": "+
-  		  								currLevel1Prop.childNodes[0].nodeValue);
-									document.write("<br />");
+						//if (i=5) {	// for "relations" objects ****/
+						document.write("<br />References ... <br />");
+						for (j=0;j<Level1Prop.length;j++) {
+							var k_corr=0;					
+							if (currLevel1Prop.nodeType==1) {
+  								document.write("------" + currLevel1Prop.nodeName+": "+
+  		  							currLevel1Prop.childNodes[0].nodeValue);
+								document.write("<br />");
  
-									Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
-									currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
-									for (k=0;k<Level2Prop.length;k++) {
-										if (currLevel2Prop.nodeType==1)
-  										{ //Process only level=3 element nodes (type 1)
-  											document.write("---------"+ currLevel2Prop.nodeName+": "+
-  		  										currLevel2Prop.childNodes[0].nodeValue);
-											document.write("<br />");
-  										} else k_corr++;
-										currLevel2Prop=currLevel2Prop.nextSibling;
-									}
-  								} else j_corr++;
-								currLevel1Prop=currLevel1Prop.nextSibling;
-							}
-						} // End for "References" objects
+								Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
+								currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
+								for (k=0;k<Level2Prop.length;k++) {
+									if (currLevel2Prop.nodeType==1) {
+  										//Process only level=3 element nodes (type 1)
+  										document.write("---------"+ currLevel2Prop.nodeName+": "+
+  		  									currLevel2Prop.childNodes[0].nodeValue);
+										document.write("<br />");
+  									} else k_corr++;
+									currLevel2Prop=currLevel2Prop.nextSibling;
+								}
+  							} else j_corr++;
+							currLevel1Prop=currLevel1Prop.nextSibling;
+						}
 						document.write("<br />");
-						} else i_corr++;
-							
+					} // End for "Relations" objects
 				</script>
 			</div>
 
@@ -334,44 +331,44 @@
 					xmlhttp.send();
 					xmlDoc=xmlhttp.responseXML;
 					DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-					document.write("Distribution referencies <br />");
+					document.write("<b><u>Distribution referencies</u></b> <br />");
 					var i_corr=0;
 					var i=5;
-						var j_corr=0;
-   						if (DistributomeXML_Objects[i].nodeType==1) {
-  							//Process only level=1 element nodes (type 1) 
-  							document.write(DistributomeXML_Objects[i].nodeName+" : "
-  		  						+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-							document.write("<br />");
+					var j_corr=0;
+   					if (DistributomeXML_Objects[i].nodeType==1) {
+  						//Process only level=1 element nodes (type 1) 
+  						document.write(DistributomeXML_Objects[i].nodeName+" : "
+  		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
+						document.write("<br />");
 
-							Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-							currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-							if (i=5) {	// for "references" objects ****/
-								document.write("<br />References ... <br />");
-								for (j=0;j<Level1Prop.length;j++) {
-									var k_corr=0;					
-									if (currLevel1Prop.nodeType==1) {
-	  									document.write("------" + currLevel1Prop.nodeName+": "+
-	  		  								currLevel1Prop.childNodes[0].nodeValue);
-										document.write("<br />");
+						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
+						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
+						if (i=5) {	// for "references" objects ****/
+							document.write("<br />References ... <br />");
+							for (j=0;j<Level1Prop.length;j++) {
+								var k_corr=0;					
+								if (currLevel1Prop.nodeType==1) {
+	  								document.write("------" + currLevel1Prop.nodeName+": "+
+	  		  							currLevel1Prop.childNodes[0].nodeValue);
+									document.write("<br />");
 	 
-										Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
-										currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
-										for (k=0;k<Level2Prop.length;k++) {
-											if (currLevel2Prop.nodeType==1)
-	  										{ //Process only level=3 element nodes (type 1)
-	  											document.write("---------"+ currLevel2Prop.nodeName+": "+
-	  		  										currLevel2Prop.childNodes[0].nodeValue);
-												document.write("<br />");
-	  										} else k_corr++;
-											currLevel2Prop=currLevel2Prop.nextSibling;
-										}
-	  								} else j_corr++;
-									currLevel1Prop=currLevel1Prop.nextSibling;
-								}
-							} // End for "References" objects
+									Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
+									currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
+									for (k=0;k<Level2Prop.length;k++) {
+										if (currLevel2Prop.nodeType==1) {
+	  										//Process only level=3 element nodes (type 1)
+	  										document.write("---------"+ currLevel2Prop.nodeName+": "+
+	  		  									currLevel2Prop.childNodes[0].nodeValue);
+											document.write("<br />");
+	  									} else k_corr++;
+										currLevel2Prop=currLevel2Prop.nextSibling;
+									}
+	  							} else j_corr++;
+								currLevel1Prop=currLevel1Prop.nextSibling;
+							}
 							document.write("<br />");
-  						} else i_corr++;
+						}
+  					} // End for "References" objects
 				</script>
 			</div>
 		</div>
