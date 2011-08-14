@@ -128,7 +128,7 @@
   		<!-- Search Area -->
   			<td class="tool">
 				<label id="search" for="search"></label>
-				<input name="s" type="search" placeholder="Find distributions or relations", results="5" />
+				<input name="s" size="30" type="search" placeholder="Find distributions or relations", results="5" />
 			</td>
 
   		<!--Neighbors Selector --> 
@@ -188,6 +188,9 @@
   	<div id="LeftPanel"> 
 		<!-- center -->
 		<script type="text/javascript+protovis">
+			/**	To Do: Make the height and width of the Graph panel 
+				auto-adjust to the "LeftPanel" panel size that it's embedded in!  
+			***/
 			var w = document.body.clientWidth-200,
   				h = document.body.clientHeight-200,
   				colors = pv.Colors.category20();
@@ -560,6 +563,21 @@ $().ready(function() {
 	});
 	$("#RightSide_Splitter3").trigger("resize");
 	});
+</script>
+
+<script type="text/javascript+protovis">
+	function resetNavigator(){
+		var classes = pv.nodes(distributome.nodes);		
+
+		classes.slice(1).forEach(function(d) {
+			var i = 5;
+			d.nodeValue = d.nodeValue.value;
+			if (isNaN(d.x)) d.x = w / 2 + 40 * Math.random() - 20;
+	    	if (isNaN(d.y)) d.y = h / 2 + 40 * Math.random() - 20;
+		});
+		var force = vis.add(pv.Layout.Force);
+		force.reset();
+	}
 </script>
 
 <!-- Start of StatCounter Code -->
