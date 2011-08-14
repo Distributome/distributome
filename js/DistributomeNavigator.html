@@ -8,7 +8,7 @@
   	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Java Applets">
   	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
   
-  	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
+  	<link rel="stylesheet" type="text/css" href="./images/Distributome_style.css">
   	<link rel="shortcut icon" href="../images/favicon.ico">
   
   	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
@@ -17,6 +17,9 @@
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
 
 	<!-- MathJax LaTeX/TeX Typesetting scripts -->
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	
 	<script> 
   		MathJax.Hub.Config({
   			TeX: {
@@ -37,8 +40,6 @@
     		tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
   		});
   	</script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-	</script>
 	<!-- End of MathJax LaTeX/TeX Typesetting scripts -->
 	
   	<style type="text/css" media="all">
@@ -120,53 +121,113 @@
 
 <div style="text-align: justify;" id="content">
 
+<center>
+  	<!-- Controls Panel -->
+  	<table class="toolbar" style="width=90%">
+	<tr>
+  		<!-- Search Area -->
+  			<td class="tool">
+				<label id="search" for="search"></label>
+				<input name="s" type="search" placeholder="Find distributions or relations", results="5" />
+			</td>
+
+  		<!--Neighbors Selector --> 
+  			<td class="tool">
+  				<form action="NeughborAction">
+					<select name="Neughbors">
+						<option value="neighbors">Neighbors</option>
+						<option value="parent">Show Parent</option>
+						<option value="children">Show Children</option>
+						<option value="parentChildren">Parents and Children</option>
+					</select>
+				</form>
+			</td>
+
+  		<!-- Node-Type Selector -->
+ 			<td class="tool">
+ 				<form action="NodeTypeAction">
+					<select name="NodeType">
+						<option value="distributionType">Distribution Type</option>
+						<option value="convolution">Convolution</option>
+						<option value="memoryless">Memoryless</option>
+						<option value="inverse">Inverse</option>
+						<option value="linearCombination">Linear Combination</option>
+						<option value="maximum">Maximum</option>
+						<option value="mimimum">Mimimum</option>
+					</select>
+				</form>
+			</td>
+
+		<!-- Edge-Type Selector -->
+			<td class="tool">
+				<form action="EdgeTypeAction">
+					<select name="EdgeType">
+						<option value="relationType">Relation Type</option>
+						<option value="specialCase">Special Case</option>
+						<option value="transform">Transform</option>
+						<option value="limiting">Limiting</option>
+						<option value="bayesian">Bayesian</option>
+					</select>
+				</form>
+			</td>
+
+			<!-- Reset Navigator -->
+			<td class="tool">
+				<button type="button" id="resetButton" tabindex="4" 
+					title="Reset View" onclick="resetNavigator();">Reset
+				</button>
+			</td>
+		</tr>
+	</table>
+</center>
+
 <!-- #MainSplitPaneObject -->
 <div id="MainSplitPaneObject">
-  	<div class="Left Pane">	
+
   	<!-- Main Distributome JS Graphical Navigator -->
-		<center>
-			<script type="text/javascript+protovis">
-				var w = document.body.clientWidth-200,
-   				h = document.body.clientHeight-200,
-    			colors = pv.Colors.category20();
+  	<div id="LeftPanel"> 
+		<!-- center -->
+		<script type="text/javascript+protovis">
+			var w = document.body.clientWidth-200,
+  				h = document.body.clientHeight-200,
+  				colors = pv.Colors.category20();
 
-				var classes = pv.nodes(distributome.nodes);
-				classes.slice(1).forEach(function(d) {
-  					d.nodeName = "Distributome." + d.nodeValue;
-  					var i = 5;
-  					d.className = d.nodeName.substring(0,2);
-  					d.packageName = d.nodeName.substring(0, i);
-  					d.nodeValue = d.nodeValue.value;
-				});
+			var classes = pv.nodes(distributome.nodes);
+			classes.slice(1).forEach(function(d) {
+  				d.nodeName = "Distributome." + d.nodeValue;
+  				var i = 5;
+  				d.className = d.nodeName.substring(0,2);
+  				d.packageName = d.nodeName.substring(0, i);
+  				d.nodeValue = d.nodeValue.value;
+			});
 
-				var vis = new pv.Panel()
-    				.width(w)
-    				.height(h)
-   					.fillStyle("white")
-    				.event("mousedown", pv.Behavior.pan())
-    				.event("mousewheel", pv.Behavior.zoom(2));
+			var vis = new pv.Panel()
+    			.width(w)
+    			.height(h)
+   				.fillStyle("white")
+    			.event("mousedown", pv.Behavior.pan())
+    			.event("mousewheel", pv.Behavior.zoom(2));
 
-				var force = vis.add(pv.Layout.Force)
-    				.nodes(distributome.nodes)
-    				.links(distributome.links);
+			var force = vis.add(pv.Layout.Force)
+    			.nodes(distributome.nodes)
+    			.links(distributome.links);
 
-				force.link.add(pv.Line);
+			force.link.add(pv.Line);
 
-				force.node.add(pv.Dot)
-    				.size(function(d) (4*d.linkDegree + 4) * Math.pow(this.scale, -1.5))
-    				.fillStyle(function(d) d.fix ? "brown" : colors(d.group))
-    				.strokeStyle(function() this.fillStyle().darker())
-    				.lineWidth(1)
-    				.title(function(d) d.nodeName)
-    				.event("mousedown", pv.Behavior.drag())
-    				.event("drag", force)
-    				.anchor("center").add(pv.Label)
-    				.text(function(d) d.nodeName );
-
-				vis.render();
-    		</script>
-    	</center>
-  	</div> 
+			force.node.add(pv.Dot)
+				.size(function(d) (4*d.linkDegree + 4) * Math.pow(this.scale, -1.5))
+				.fillStyle(function(d) d.fix ? "brown" : colors(d.group))
+				.strokeStyle(function() this.fillStyle().darker())
+				.lineWidth(1)
+				.title(function(d) d.nodeName)
+				.event("mousedown", pv.Behavior.drag())
+				.event("drag", force)
+				.anchor("center").add(pv.Label)
+				.text(function(d) d.nodeName );
+			vis.render();
+		</script>
+		<!--  /center -->
+  	</div> 	<!-- Left Pane -->	
 
     <div id="RightSide_Splitter1"> 
  
@@ -368,7 +429,7 @@
 					xmlhttp.send();
 					xmlDoc=xmlhttp.responseXML;
 					DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-					document.write("<b><u>Distribution referencies</u></b> <br />");
+					document.write("<b><u>Distribution Referencies</u></b> <br />");
 					var i_corr=0;
 					var i=5;
 					var j_corr=0;
@@ -381,7 +442,7 @@
 						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
-						document.write("Example Lesser & Pearl, JSE, 2008 Reference (Index 9)<br />");
+						document.write("Example Lesser Pearl, JSE, 2008 Reference (Index 9)<br />");
 						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].childNodes;
 						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
 						var k_corr=0;
@@ -458,6 +519,17 @@ $().ready(function() {
 	//$("#MainSplitPaneObject").css("height", "400px").trigger("resize");
 	$("#MainSplitPaneObject").trigger("resize");
 
+	// Left-Side Split-Panel
+	// Top horizontal splitter, nested in the right pane of the vertical splitter.
+	$("#LeftSide_HSplitter").splitter({
+		splitHorizontal: true,
+		outline: true,
+		//sizeTo: window,
+		sizeTop: 100, minTop: 100, maxTop: 100,
+		accessKey: "Q"
+	});
+	$("#LeftSide_HSplitter").trigger("resize");
+	
 	// Right-Side CompositePanel including 4-split nested panels
 	// Top horizontal splitter, nested in the right pane of the vertical splitter.
 	$("#RightSide_Splitter1").splitter({
