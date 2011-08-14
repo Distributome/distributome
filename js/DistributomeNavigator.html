@@ -188,7 +188,24 @@
 
 				Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 				currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-				if (i=1) {	// for "distributions" objects ****/
+
+				document.write("Example with the Cauchy Distributioin (Index 5)<br />");
+				Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].childNodes;
+				currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].firstChild;
+				var k_corr=0;
+				for (k=0;k<Level2Prop.length;k++) {
+					if (currLevel2Prop.nodeType==1)
+						{	//Process only level=3 element nodes (type 1)
+							document.write("---------"+ currLevel2Prop.nodeName+": "+
+									currLevel2Prop.childNodes[0].nodeValue);
+						document.write("<br />");
+						} else k_corr++;
+					currLevel2Prop=currLevel2Prop.nextSibling;
+				}
+				document.write("END Cauchy Distributioin Properties Example<br />");
+
+				/************************
+				if (i=1) {	// for "distributions" objects 
 					for (j=0;j<Level1Prop.length;j++) {
 						var k_corr=0;					
 						if (currLevel1Prop.nodeType==1) {
@@ -207,13 +224,14 @@
 									} else k_corr++;
 								currLevel2Prop=currLevel2Prop.nextSibling;
 							}
-							} else j_corr++;
+						} else j_corr++;
 						currLevel1Prop=currLevel1Prop.nextSibling;
 					}
 				} // End for "distributions" objects
 				document.write("<br />");
+				**********************************/
 			}
-				
+							
 			/*********************
 			var i_corr=0;
 			for (i=0;i<DistributomeXML_Objects.length;i++) {
@@ -268,11 +286,12 @@
 	
 	<div id="RightSide_Splitter2">
 		<div class="Middle Pane 1">
-			Distribution Actions <br />
+			<b><u>Distribution Actions</u></b> <br />
 			<ul> 
 				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator">Calculator</a></li>
 				<li><a href="./exp/PoissonExperiment.html" target="_blank" title="Run Virtual Distribution Experiment">Experiment</a></li>
 				<li><a href="./sim/NormalSimulation.html" target="_blank" title="Distribution Sampling and Simulation">Simulation</a></li>
+				<li><a href="./Distributome.xml.html" target="_blank" title="Render the entire Distributome Database as a web-page">Distributome DB HTML View</a></li>
 			</ul>
 		</div>
 
@@ -296,7 +315,24 @@
 
 						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-						//if (i=5) {	// for "relations" objects ****/
+
+						document.write("Example Beta --> Semicircle distribution relation (Index 7)<br />");
+						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].childNodes;
+						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].firstChild;
+						var k_corr=0;
+						for (k=0;k<Level2Prop.length;k++) {
+							if (currLevel2Prop.nodeType==1)
+								{	//Process only level=3 element nodes (type 1)
+									document.write("---------"+ currLevel2Prop.nodeName+": "+
+											currLevel2Prop.childNodes[0].nodeValue);
+								document.write("<br />");
+								} else k_corr++;
+							currLevel2Prop=currLevel2Prop.nextSibling;
+						}
+						document.write("END Beta --> Semicircle distribution relation Example<br />");
+								
+
+						/**************************  for "relations" objects 
 						document.write("<br />References ... <br />");
 						for (j=0;j<Level1Prop.length;j++) {
 							var k_corr=0;					
@@ -320,6 +356,7 @@
 							currLevel1Prop=currLevel1Prop.nextSibling;
 						}
 						document.write("<br />");
+						**************************************/
 					} // End for "Relations" objects
 				</script>
 			</div>
@@ -343,7 +380,23 @@
 
 						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-						if (i=5) {	// for "references" objects ****/
+
+						document.write("Example Lesser & Pearl, JSE, 2008 Reference (Index 9)<br />");
+						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].childNodes;
+						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
+						var k_corr=0;
+						for (k=0;k<Level2Prop.length;k++) {
+							if (currLevel2Prop.nodeType==1)
+								{	document.write("---------"+ currLevel2Prop.nodeName+": "+
+											currLevel2Prop.childNodes[0].nodeValue);
+								document.write("<br />");
+								} else k_corr++;
+							currLevel2Prop=currLevel2Prop.nextSibling;
+						}
+						document.write("END Example Lesser & Pearl, JSE, 2008 Reference <br />");
+								
+						/*****************************
+						if (i=5) {	// for "references" objects
 							document.write("<br />References ... <br />");
 							for (j=0;j<Level1Prop.length;j++) {
 								var k_corr=0;					
@@ -368,6 +421,7 @@
 							}
 							document.write("<br />");
 						}
+						****************************************/
   					} // End for "References" objects
 				</script>
 			</div>
@@ -410,7 +464,7 @@ $().ready(function() {
 		splitHorizontal: true,
 		outline: true,
 		//sizeTo: window,
-		sizeTop: 200, minTop: 150, //maxTop: 400,
+		sizeTop: 200, minTop: 100, //maxTop: 400,
 		accessKey: "V"
 	});
 	$("#RightSide_Splitter1").trigger("resize");
@@ -419,7 +473,7 @@ $().ready(function() {
 	$("#RightSide_Splitter2").splitter({
 		splitHorizontal: true,
 		outline: true,
-		//sizeTop: 200, minTop: 150,
+		sizeTop: 150, minTop: 100,
 		accessKey: "J"
 	});
 	$("#RightSide_Splitter2").trigger("resize");
@@ -429,6 +483,7 @@ $().ready(function() {
 		splitHorizontal: true,
 		outline: true,
 		//resizeBottom: 200, minTop: 150,
+		sizeTop: 200, minTop: 100,
 		accessKey: "M"
 	});
 	$("#RightSide_Splitter3").trigger("resize");
