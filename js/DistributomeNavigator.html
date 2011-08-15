@@ -236,11 +236,15 @@
  
 	<div class="Top Pane">		<!-- Get the Distribution Properties from Distributome.xml -->
 		<script type="text/javascript">
-			xmlhttp=new XMLHttpRequest();
+
+			/***	To Do: Need to separate IE from Mozilla/CHrome browser handling of XMLHtmlRequests. See:
+					http://www.szajkowski.com/ajaxsample.html
+			*****/
+			var xmlhttp=new XMLHttpRequest();
 			xmlhttp.open("GET","Distributome.xml",false);
 			xmlhttp.send();
-			xmlDoc=xmlhttp.responseXML;
-			DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+			var xmlDoc=xmlhttp.responseXML;
+			var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
 			document.write("<b><u>Distribution Properties</u></b> <br />");
 			var i=1;
 			var j_corr=0;
@@ -250,12 +254,12 @@
 					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
 				document.write("<br />");
 
-				Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-				currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
+				var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
+				var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
 				document.write("Example with the Cauchy Distributioin (Index 5)<br />");
-				Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].childNodes;
-				currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].firstChild;
+				var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].childNodes;
+				var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].firstChild;
 				var k_corr=0;
 				for (k=0;k<Level2Prop.length;k++) {
 					if (currLevel2Prop.nodeType==1)
@@ -362,11 +366,11 @@
 		<div id="RightSide_Splitter3">
 			<div class="Middle Pane 2"> <!-- Get the Inter-Distribution Relation Properties from Distributome.xml -->
 				<script type="text/javascript">
-					xmlhttp=new XMLHttpRequest();
+					var xmlhttp=new XMLHttpRequest();
 					xmlhttp.open("GET","Distributome.xml",false);
 					xmlhttp.send();
-					xmlDoc=xmlhttp.responseXML;
-					DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+					var xmlDoc=xmlhttp.responseXML;
+					var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
 					document.write("<b><u>Inter-Distribution Relations</u></b> <br />");
 
 					var i=3;
@@ -377,12 +381,12 @@
 		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
 						document.write("<br />");
 
-						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
+						var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
+						var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
 						document.write("Example Beta --> Semicircle distribution relation (Index 7)<br />");
-						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].childNodes;
-						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].firstChild;
+						var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].childNodes;
+						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].firstChild;
 						var k_corr=0;
 						for (k=0;k<Level2Prop.length;k++) {
 							if (currLevel2Prop.nodeType==1)
@@ -427,12 +431,13 @@
 
 			<div class="Bottom Pane"> <!-- Get the References from Distributome.xml -->
 				<script type="text/javascript">
-					xmlhttp=new XMLHttpRequest();
+					var xmlhttp=new XMLHttpRequest();
 					xmlhttp.open("GET","Distributome.xml",false);
 					xmlhttp.send();
-					xmlDoc=xmlhttp.responseXML;
-					DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+					var xmlDoc=xmlhttp.responseXML;
+					var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
 					document.write("<b><u>Distribution Referencies</u></b> <br />");
+
 					var i_corr=0;
 					var i=5;
 					var j_corr=0;
@@ -442,12 +447,12 @@
   		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
 						document.write("<br />");
 
-						Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-						currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
+						var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
+						var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
 						document.write("Example Lesser Pearl, JSE, 2008 Reference (Index 9)<br />");
-						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].childNodes;
-						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
+						var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].childNodes;
+						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
 						var k_corr=0;
 						for (k=0;k<Level2Prop.length;k++) {
 							if (currLevel2Prop.nodeType==1)
