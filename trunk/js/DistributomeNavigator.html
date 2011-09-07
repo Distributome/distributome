@@ -322,18 +322,23 @@
 				var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 				var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
-				document.write("Example with the Cauchy Distributioin (Index 5)<br />");
 				var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].childNodes;
 				var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].firstChild;
+				document.write("Example with the (Index 5) Cauchy Distributioin <br />");
+				
 				var k_corr=0;
 				for (k=0;k<Level2Prop.length;k++) {
-					if (currLevel2Prop.nodeType==1)
-						{	//Process only level=3 element nodes (type 1)
+					try {
+						if (currLevel2Prop.nodeType==1) {
+							//Process only level=3 element nodes (type 1)
 							document.write("---------"+ currLevel2Prop.nodeName+": "+
 									currLevel2Prop.childNodes[0].nodeValue);
-						document.write("<br />");
+							document.write("<br />");
 						} else k_corr++;
-					currLevel2Prop=currLevel2Prop.nextSibling;
+						currLevel2Prop=currLevel2Prop.nextSibling;
+					} catch (err) {
+						document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
+					}
 				}
 				document.write("END Cauchy Distributioin Properties Example<br />");
 			}
@@ -427,13 +432,17 @@
 						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].firstChild;
 						var k_corr=0;
 						for (k=0;k<Level2Prop.length;k++) {
-							if (currLevel2Prop.nodeType==1)
-								{	//Process only level=3 element nodes (type 1)
+							try {
+								if (currLevel2Prop.nodeType==1) {
+									//Process only level=3 element nodes (type 1)
 									document.write("---------"+ currLevel2Prop.nodeName+": "+
 											currLevel2Prop.childNodes[0].nodeValue);
-								document.write("<br />");
+									document.write("<br />");
 								} else k_corr++;
-							currLevel2Prop=currLevel2Prop.nextSibling;
+								currLevel2Prop=currLevel2Prop.nextSibling;
+							} catch (err) {
+								document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
+							}
 						}
 						document.write("END Beta --> Semicircle distribution relation Example<br />");
 					} // End for "Relations" objects
@@ -466,12 +475,16 @@
 						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
 						var k_corr=0;
 						for (k=0;k<Level2Prop.length;k++) {
-							if (currLevel2Prop.nodeType==1)
-								{	document.write("---------"+ currLevel2Prop.nodeName+": "+
+							try { 
+								if (currLevel2Prop.nodeType==1) {
+									document.write("---------"+ currLevel2Prop.nodeName+": "+
 											currLevel2Prop.childNodes[0].nodeValue);
-								document.write("<br />");
+									document.write("<br />");
 								} else k_corr++;
-							currLevel2Prop=currLevel2Prop.nextSibling;
+								currLevel2Prop=currLevel2Prop.nextSibling;
+							} catch (err) {
+								document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
+							}
 						}
 						document.write("END Example Lesser & Pearl, JSE, 2008 Reference <br />");
   					} // End for "References" objects
