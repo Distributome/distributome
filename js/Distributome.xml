@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="Distributome_072111_files/distributome.css" type="text/css"?>
+<?xml-stylesheet href="Distributome.css" type="text/css"?>
 <distributome version="1.1" 
 	xmlns="http://www.distributome.org" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -8,6 +8,7 @@
 <distributions>
 <distribution id="arcsine">
 	<name>arcsine distribution</name>
+	<name>Levy arcsine distribution</name>
 	<type>continuous</type>
 	<model>The arcsine distribution models the proportion of time that Brownian motion is positive.</model>
 	<support>\((0, 1)\)</support>
@@ -22,6 +23,7 @@
 	<median>\(\frac{1}{2}\)</median>
 	<q1>\(\frac{2 - \sqrt{2}}{4}\)</q1>
 	<q3>\(\frac{2 + \sqrt{2}}{4}\)</q3>
+	<history>Derived by Paul Levy in 1939 as the distribution of proportion of time that Brownian motion is  positive.</history>
 </distribution>
 
 <distribution id="Bernoulli">
@@ -48,6 +50,7 @@
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>power series </family>
 	<family>exponential</family>
+	<history>Named for Jacob Bernoulli</history>
 </distribution>
 
 <distribution id="beta">
@@ -97,6 +100,7 @@
 	<q3>\(Q(\frac{1}{3})\) where \(Q\) is the quantile function</q3>
 	<family>power series </family>
 	<family>exponential</family>
+	<history>The binomial distribution is attributed to Jacob Bernoulli</history>
 </distribution>
 
 <distribution id="beta-binomial">
@@ -146,6 +150,7 @@
 	<family>location </family>
 	<family>scale </family>
 	<family>stable</family>
+	<history>The distribution was first used by Simeon Poisson in 1824 and was re-introduced by Augustin Cauchy in 1853. It is also named for Hendrick Lorentz.</history>
 </distribution>
 
 <distribution id="chi-square">
@@ -170,6 +175,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>exponential</family>
+	<history>The chi-square distribution was first used by Karl Pearson in 1900.</history>
 </distribution>
 
 <distribution id="chi">
@@ -266,6 +272,7 @@
 	<q3>\(\frac{\ln(3)}{r}\)</q3>
 	<family>exponential </family>
 	<family>scale</family>
+	<history>The exponential distribution was named by Karl Pearson in 1895.</history>
 </distribution>
 
 <distribution id="exponential-logarithmic">
@@ -334,6 +341,7 @@
 	<median> \(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The \(F\)-distribution was first derived by George Snedecor in 1934.  The letter <em>F</em> was chosen as a tribute to Ronald Fisher.</history>
 </distribution>
 
 <distribution id="gamma">
@@ -384,6 +392,7 @@
 	<q3>\(\lceil \frac{-\ln(4)}{\ln(1 - p)} \rceil\)</q3>
 	<family>power series </family>
 	<family>exponential</family>
+	<history>The geometric distribution was used very early in the history of probability, but the name has been attributed to William Feller in 1950.</history>
 </distribution>
 
 <distribution id="Gumbel">
@@ -408,6 +417,7 @@
 	<q3>\(\mu - \sigma \ln(\ln(4))\)</q3>
 	<family>location </family>
 	<family>scale</family>
+	<history>The Gumbel distribution is named for Emil Gumbel, who derived it in his study of extreme values in 1954.</history>
 </distribution>
 
 <distribution id="hypergeometric">
@@ -429,6 +439,7 @@
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The hypergeometric distribution is very old, and was used by Jacob Bernoulli, Abraham DeMoivre, and others. The named was coined by H.T. Gonin in 1936.</history>
 </distribution>
 
 <distribution id="hyperbolic-secant">
@@ -469,6 +480,7 @@
 	<median>\(\frac{n}{2}\)</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The Irwin-Hall distribution is named for Joseph Irwin and Phillip Hall who independently analyzed the distribution in 1927.</history>
 </distribution>
 
 <distribution id="inverted-beta"> 
@@ -515,6 +527,7 @@
 	<q3>\(\mu + b \ln(2)\)</q3>
 	<family>location </family>
 	<family>scale</family>
+	<history>The Laplace distribution is named for Pierre Simon Laplace.</history>
 </distribution>
 
 <distribution id="Levy">
@@ -541,6 +554,7 @@
 	<family>location </family>
 	<family>scale </family>
 	<family>stable</family>
+	<history>The Levy distribution is named for Paul Pierre Levy.</history>
 </distribution>
 
 <distribution id="logarithmic">
@@ -564,6 +578,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>power series</family>
+	<history>The logarithmic distribution was first derived by Ronald Fisher in 1943.</history>
 </distribution>
 
 <distribution id="logistic">
@@ -588,6 +603,7 @@
 	<q3>\(\mu + \ln(3) b\)</q3>
 	<family>location </family>
 	<family>scale</family>
+	<history>Logistic regression was first used by D.R. Cox in 1958.</history>
 </distribution>
 
 <distribution id="log-normal">
@@ -615,6 +631,7 @@
 	<q3>\(\exp\left(\mu + \sigma \Phi^{-1}(\frac{3}{4})\right)\), where \(\Phi\) is the standard normal distribution function</q3>
 	<family>scale </family>
 	<family>exponential</family>
+	<history>The lognormal distribution was first studied by Donald McAlister in 1879, in response to a problem posed by Francis Galton. This historical origin is the reason for the alternative name Galton distribution. The term lognormal distribution was first used by J.H. Gaddum in 1945.</history>
 </distribution>
 
 <distribution id="log-logistic">
@@ -636,6 +653,7 @@
 	<q1>\(\alpha \left(\frac{1}{3}\right)^{1/\beta}\)</q1>
 	<q3>\(\alpha 3^{1/\beta}\)</q3>
 	<family>scale</family>
+	<history>The log-logistic distribution is known as the Fisk distribution by economists. P.R. Fisk used the distribution to model income in 1961.</history>
 </distribution>
 
 <distribution id="Maxwell-Boltzman">
@@ -656,6 +674,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>scale</family>
+	<history>The Maxwell-Boltzman distribution is named for James Clerk Maxwell and Ludwig Boltzmann for their use of the distribution is modeling the energy of molecules in a gas.</history>
 </distribution>
 
 <distribution id="negative-binomial">
@@ -680,6 +699,7 @@
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The alternative name Pascal distribution is in honor of Blaise Pascal who used the distribution in his solution to the Problem of Points.</history>
 </distribution>
 
 <distribution id="normal">
@@ -710,6 +730,7 @@
 	<family>exponential </family>
 	<family>stable</family>
 	<cite>Dinov Christou Sanchez 2008</cite>
+	<history>The normal distribution was first derived by Carl Friedrich Gauss in 1809 (hence the alternative name Gaussian distribution). The normalizing constant and the first version of the Central Limit Theorem were contributions by Pierre Simon Laplace. The term <q>normalizing constant</q> was popularized by Karl Pearson around the turn of the 20th century.</history>
 </distribution>
 
 <distribution id="Pareto">
@@ -736,6 +757,7 @@
 	<q1>\(a (\frac{4}{3})^{1/k}\)</q1>
 	<q3>\(a 4 ^{1/k}\)</q3>
 	<family>scale </family>
+	<history>The Pareto distributin is named for the Italian economist Vilfredo Pareto, who used the distribution to model wealth, income and other economic variables. </history>
 </distribution>
  
 <distribution id="Poisson"> 
@@ -762,6 +784,7 @@
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>exponential </family>
 	<family>power series</family>
+	<history>The Poisson distribution is named for Simeon Poisson who first used the distribution in 1838 in a study of judgements in court cases.</history>
 </distribution>
 
 <distribution id="Rademacher">
@@ -784,6 +807,7 @@
 	<median>\(0\)</median>
 	<q1>\(-1\)</q1>
 	<q3>\(1\)</q3>
+	<history>The Rademacher distribution is named for the German mathematician Hans Rademacher.</history>
 </distribution>
 
 <distribution id="Rayleigh">
@@ -807,6 +831,7 @@
 	<q1>\(\sigma \sqrt{\ln(16) - \ln(9)}\)</q1>
 	<q3>\(\sigma \sqrt{\ln(16)}\)</q3>
 	<family>scale</family>
+	<history>The Rayleigh distribution is named for the English mathematician Lord Rayleigh (John William Strutt).</history>
 </distribution>
 
 <distribution id="Rice">
@@ -826,6 +851,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>scale</family>
+	<history>The Rice distribution is named for Stephen O. Rice who used the distribution in 1945 in his study of random noise.</history>
 </distribution>
 
 <distribution id="semicircle">
@@ -852,6 +878,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>scale</family>
+	<history>The semicircle distribution was used by the physicist Eugene Wigner in the study of random matrices. The distribution was also used by Nikio Sato and John Tate in a conjecture in number theory.</history>
 </distribution>
 
 <distribution id="standard-Cauchy">
@@ -934,6 +961,7 @@
 	<median>\(0\)</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The term <q>standard normal distribution</q> came into general use around 1950.</history>
 </distribution>
 
 <distribution id="standard-uniform">
@@ -979,6 +1007,7 @@
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The \(t\)-distribution was derived by William Sealy Gosset while he worked at the Guinness Brewery in Dublin.  Gosset published his work under the pseudonym <em>Student</em>. The \(t\)-test in statistics was developed by Ronald Fisher who called the distribution <q>Student's distribution</q></history>
 </distribution>
 
 <distribution id="triangular">
@@ -1028,6 +1057,7 @@
 <distribution id="von-Mises">
 	<name>von Mises distribution </name>
 	<name>circular normal distribution</name>
+	<name>Tikhanov distribution</name>
 	<type>continuous</type>
 	<model>The von Mises distribution is used as an approximation to the wrapped normal distribution </model>
 	<parameter>\(\mu \in (-\infty, \infty)\), the location parameter</parameter>
@@ -1045,6 +1075,7 @@
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>location</family>
+	<history>The von Mises distribution is named for Richard von Mises based on his work in diffusion processes.</history>
 </distribution>
 
 <distribution id="Wald">
@@ -1068,6 +1099,7 @@
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The Wald distribution is named for Abraham Wald.</history>
 </distribution>
 
 <distribution id="Weibull">
@@ -1091,6 +1123,7 @@
 	<q3>\(\lambda [\ln(4)]^{1/k}\)</q3>
 	<family>exponential </family>
 	<family>scale</family>
+	<history>The Weibull distribution is named for Waloddi Weibull who published a paper on the distribution in 1951. The distribution was used earlier by Maurice Frechet. The term <q>Weibull distribution</q> was first used in 1955 in a paper by Julius Lieblein.</history>
 </distribution>
 
 <distribution id="zeta">
@@ -1109,6 +1142,7 @@
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+	<history>The Zipf distribution is named for the American linguist George Kingsley Zipf, who studied the distribution in the context of the frequency of words.</history>
 </distribution>
 
 <distribution id="location-scale">
@@ -1134,6 +1168,119 @@
 	<median>\(\mu + \sigma q_{0,2}\) where \(q_{0,2}\) is the median of the standard distribution</median>
 	<q1>\(\mu + \sigma q_{0,1}\) where \(q_{0,1}\) is the first quartile of the standard distribution</q1>
 	<q3>\(\mu + \sigma q_{0,3}\) where \(q_{0,3}\) is the third quartile of the standard distribution</q3>
+</distribution>
+
+<distribution id="folded-normal">
+	<name>folded normal distribution</name>
+	<type>continuous</type>
+	<model>The folded normal distribution governs \(|X|\) when \(X\) has a normal distribution</model>
+	<parameter>\(\mu \in (-\infty, \infty)\), the location parameter</parameter>
+	<parameter>\(\sigma \in (0, \infty\), the scale parameter</parameter>
+	<support>\([0, \infty)\)</support>
+	<pdf>\(f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \left[ \exp\left(-\frac{(x + \mu)^2}{2 \sigma^2}\right) + \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2}\right) \right], \quad x \in (0, \infty)\) </pdf>
+	<mode>0</mode>
+	<cdf>\(F(x) = \frac{1}{2} \left[ \erf\left(\frac{x + \mu}{\sqrt{2} \sigma} \right) + \erf\left(\frac{x - \mu}{\sqrt{2}\sigma}\right)\right], \quad x \in [0, \infty)\) where \(\erf\) is the error function</cdf>
+	<qf>\(F^{-1}(p), p \in (0, 1)\) where \(F\) is the distribution funciton</qf>
+	<mean>\(\sigma \sqrt{\frac{2}{\pi}} \exp\left(-\frac{\mu^2}{2 \sigma^2} \right) + \mu\left[1 - 2 \Phi\left(-\frac{\mu}{\sigma}\right) \right]\) where \(\Phi\) is the standard normal distribution function</mean>
+	<variance>\(\mu^2 + \sigma^2 - \left\{\sigma \sqrt{\frac{2}{\pi}} \exp\left(-\frac{\mu^2}{2 \sigma^2} \right) + \mu \left[1 - 2 \Phi(-\frac{\mu}{\sigma}\right]\right\}^2\) where \(\Phi\) is the standard normal distribution function</variance>
+	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the qunatile function</q3>
+</distribution>
+
+<distribution id="half-normal">
+	<name>half normal distributon</name>
+	<type>continuous</type>
+	<model>The half normal distribution governs \(|X|\) when \(X\) has a normal disstribution with mean 0.</model>
+	<parameter>\(\sigma \in (0, \infty\), the scale parameter</parameter>
+	<support>\([0, \infty)\)</support>
+	<pdf>\(f(x) = \sqrt{\frac{2}{\sigma \pi}} \exp\left(-\frac{x^2}{2 \sigma^2}\right), \quad x \in [0, \infty)\)</pdf>
+	<mode>0</mode>
+	<cdf>\(F(x) = \erf \left(\frac{y}{\sqrt{2} \sigma} \right), \quad x \in [0, \infty)\), where \(\erf\) is the error function</cdf>
+	<qf>\(Q(p) = F^{-1}(p)\) where \(F\) is the distribution function</qf>
+	<mean>\(\sigma \sqrt{\frac{2}{\pi}}\)</mean>
+	<variance>\(\sigma^2 \left(1 - \frac{2}{\pi}\right)\)</variance>
+	<entropy>\(\frac{1}{2} \log\left(\frac{\pi \sigma^2}{2}\right) + \frac{1}{2}\)</entropy>
+	<moments type="raw">\(\mu(n) = \frac{\pi^{(n-1)/2}}{\sigma^n} \Gamma\left(\frac{1}{2}(n + 1) \right)\) where \(\Gamma\) is the gamma function</moments >
+	<skew>\(\frac{\sqrt{2}(4 - \pi)}{(\pi - 2)^{3/2}}\)</skew>
+	<kurt>\(\frac{8(\pi - 3)}{(\pi - 2)^2}\)</kurt>
+	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+	<q3>\(Q(\frac{3}{4}\) where \(Q\) is the qunatile function</q3>
+</distribution>
+
+<distribution id="birthday">
+	<name>birthday distribtuion</name>
+	<name>occupancy distribution</name>
+	<type>discrete</type>
+	<model>This distribution models the number of empty cells when \(n\) balls are distributed at random into \(m\) cells</model>
+	<parameter>\(m \in \{1, 2, \ldots\}\), the number of cells</parameter>
+	<parameter>\(n \in \{1, 2, \ldots\}\), the number of balls</parameter>
+	<support>\(\{\max\{m-n, 0\}, \ldots, m - 1\}\)</support>
+	<pdf>\(f(x) = \binom{m}{x} \sum_{j=0}^{m-x} (-1)^j \binom{m - x}{j} \left(1 - \frac{x + j}{m}\right)^n, \quad x \in \{\max\{m-n,0\}, \ldots, m-1\}\)</pdf>
+	<cdf>\(F(x) = \sum_{j = 0}^x f(j), \quad x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function </cdf>
+	<moments type="factorial">\(\mu_{(k)} = \frac{m!}{(m - k)!} \left(\frac{m - k}{m} \right)^n, \quad k \in \{1, 2, \ldots\}\)</moments>
+	<gf type="probability">\(G(t) = \sum_{k=0}^m \binom{m}{k} \left(\frac{m - k}{m}\right)^n (t - 1)^k, \quad t \in \R\)</gf>
+	<mean>\(m \left(1 - \frac{1}{m}\right)^n\)</mean>
+	<variance>\(m (m - 1) \left(1 - \frac{2}{m}\right)^n + m \left(1 - \frac{1}{m}\right)^n - m^2 \left(1 - \frac{1}{m}\right)^{2n}\)</variance>
+	<skew>\(\frac{\mu_3 - 3 \mu_1 \mu_2 + 2 \mu_1^2}{\sigma^3}\) where \(\mu_i\) is the \(i\)th raw moment and \(\sigma\) is the standard deviation</skew>
+	<kurt type="excess">\(\frac{\mu_4 - 4 \mu_1 \mu_3 + 6 \mu_1^2 -3 \mu_1^4}{\sigma^4} - 3\) where \(\mu_i\) is the \(i\)th raw moment and \(\sigma\) is the standard deviation</kurt>
+	<qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
+	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the qunatile function</q3>
+	<entropy>\(H = -\sum_{x=0}^n \log[f(x)] f(x)\) where \(f\) is the probability density function</entropy>
+</distribution>
+
+<distribution id="matching">
+	<name>matching distribtuion</name>
+	<type>discrete</type>
+	<model>The matching distribution governs the number of matches in a random permutation of \(\{1, 2, \ldots, n\}\)</model>
+	<parameter>\(n \in \{2, 3, \ldots\}\), the number of objects permuted</parameter>
+	<support>\(\{0, 1, \ldots, n\}\)</support>
+	<pdf>\(f(x) = \frac{1}{x!} \sum_{j=0}^{n - x} \frac{(-1)^j}{j!}, \; x \in \{0, 1, \ldots, n\}\)</pdf>
+	<mode>\(0\) if \(n\) is even; \(1\) if \(n\) is odd</mode>
+	<cdf>\(F(x) = \sum_{j = 0}^x f(j), \; x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function </cdf>
+	<moments type="factorial">\(\mu_{(k)} = 1, \; k \in \{1, 2, \ldots, n\}; \quad \mu_{(k)} = 0, \; k \in \{n + 1, n + 2, \ldots\}\)</moments>
+	<gf type="factorial-moment">\(G(t) = \sum_{k=1}^n \frac{(t-1)^k}{k!}, \; t \in \R\)</gf>
+	<mean>\(1\)</mean>
+	<variance>\(1\)</variance>
+	<skew>\(\frac{\mu_3 - 3 \mu_1 \mu_2 + 2 \mu_1^2}{\sigma^3}\) where \(\mu_i\) is the \(i\)th raw moment and \(\sigma\) is the standard deviation</skew>
+	<kurt type="excess">\(\frac{\mu_4 - 4 \mu_1 \mu_3 + 6 \mu_1^2 -3 \mu_1^4}{\sigma^4} - 3\) where \(\mu_i\) is the \(i\)th raw moment and \(\sigma\) is the standard deviation</kurt>
+	<qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
+	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the qunatile function</q3>
+	<entropy>\(H = -\sum_{x=0}^n \log[f(x)] f(x)\) where \(f\) is the probability density function</entropy>
+	<history>The matching problem was first formulated by Pierre-Redmond Montmort.</history>
+</distribution>
+
+<distribution id="coupon">
+	<name>coupon-collector distribution</name>
+	<type>discrete</type>
+	<model>This distribution models the number number of samples needed to obtain \(k\) distinct values when sampling at random, with replacement from a population of \(m\) objects</model>
+	<parameter>\(m \in \{1, 2, \ldots\}\), the population size</parameter>
+	<parameter>\(k \in \{1, 2, \ldots\}\), the number of distinct values to be obtained</parameter>
+	<support>\(\{k, k + 1, \ldots\}\)</support>
+	<pdf>\(f(x) = \binom{m - 1}{k - 1} \sum_{j=0}^{k-1} \binom{k-1}{j} \left(\frac{k - j - 1}{m}\right)^{x-1}, \quad x \in \{k, k + 1, \ldots\}\)</pdf>
+	<cdf>\(F(x) = \sum_{j = 0}^x f(j), \quad x \in \{k, k + 1, \ldots\}\) where \(f\) is the probability density function </cdf>
+	<gf type="probability">\(G(t) = \prod_{i=1}^k \frac{m - (i - 1)}{m - (i - 1)t}, \quad |t| \lt \frac{m}{k - 1} \)</gf>
+	<mean>\(\sum_{i=1}^k \frac{m}{m - i + 1}\)</mean>
+	<variance>\(\sum_{i=1}^k \frac{(i-1)m}{(m - i + 1)^2}\)</variance>
+</distribution>
+
+<distribution id="finite-order">
+	<name>finite order statistic distribution</name>
+	<type>discrete</type>
+	<model>This distribution models an order statistic when a sample is chosen at random, without replacement, from a finite, ordered population</model>
+	<parameter>\(m \in \{1, 2, \ldots\}\), the population size</parameter>
+	<parameter>\(n \in \{1, 2, \ldots, m\}\), the sample size</parameter>
+	<parameter>\(k \in \{1, 2, \ldots, n\}\), the the order</parameter>
+	<support>\(\{k, k + 1, \ldots, m - n + 1\}\)</support>
+	<pdf>\(f(x) = \frac{\binom{x-1}{k-1} \binom{m-x}{n-k}}{\binom{m}{n}}, \quad x \in \{k, k + 1, \quad m - n + 1\}\)</pdf>
+	<mean>\(k \frac{m+1}{n+1}\)</mean>
+	<median></median>
+	<variance>\(k(n - k + 1) \frac{(m + 1)(m - n)}{(m + 1)^2 (n + 2)}\)</variance>
 </distribution>
 </distributions>
 
@@ -2168,6 +2315,7 @@
 	<title>CRC Standard Mathematical Tables </title>
 	<publisher>CRC Press</publisher>
 	<year>1987</year>
+
 	<edition>28th</edition>
 	<address>Boca Raton, FL</address>
 </reference>
