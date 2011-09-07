@@ -9,22 +9,27 @@
   <meta name="description"
  content="Probability and Statistics Distributions Resource - Distributome">
   <meta name="keywords"
- content="Probability Statistics Distributions Resource Distributome Java Applets">
+ content="Distributome Probability Distributions StatisticsResource Web apps">
   <meta name="author" content="Ivo Dinov - http://www.Distributome.org">
   <link rel="stylesheet" type="text/css"
  href="./images/Distributome_style.css">
   <link rel="shortcut icon" href="./images/favicon.ico">
+  <script type="text/javascript"
+ 	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
   <style>
-h1 {text-align:center}
-h2 {
-  font-weight: bold;
-  background-color: #DDDDDD;
-  padding: .2em .5em;
-  margin-top: 1.5em;
-  border-top: 3px solid #666666;
-  border-bottom: 2px solid #999999;
-}
+	h1 {text-align:center}
+	h2 {
+  		font-weight: bold;
+  		background-color: #DDDDDD;
+  		padding: .2em .5em;
+  		margin-top: 1.5em;
+  		border-top: 3px solid #666666;
+  		border-bottom: 2px solid #999999;
+  }
   </style>
+  
   <script> 
   	MathJax.Hub.Config({
   		TeX: {
@@ -47,9 +52,7 @@ h2 {
     tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
   });
   </script>
-<script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+
 <div id="wrapper-menu-top">
 <div id="menu-top">
 <ul>
@@ -138,15 +141,20 @@ for (i=0;i<DistributomeXML_Objects.length;i++) {
 							//Level2Prop.length+"<br />");
 					 
 					for (k=0;k<Level2Prop.length;k++) {
-						if (currLevel2Prop.nodeType==1)
-	  					{ //Process only level=3 element nodes (type 1)
-	  						document.write("---------"+ currLevel2Prop.nodeName+": "+
+					  	try {
+							if (currLevel2Prop.nodeType==1)
+	  						{ //Process only level=3 element nodes (type 1)
+	  							document.write("---------"+ currLevel2Prop.nodeName+": "+
 	  		  						currLevel2Prop.childNodes[0].nodeValue);
 	  								//currLevel2Prop.childNodes[k-k_corr].nodeValue);
 	  								//xmlDoc.getElementsByTagName(Level2Prop[k].nodeName)[k-k_corr].nodeValue);
-							document.write("<br />");
-	  					} else k_corr++;
-						currLevel2Prop=currLevel2Prop.nextSibling;
+								document.write("<br />");
+	  						} else k_corr++;
+								currLevel2Prop=currLevel2Prop.nextSibling;
+					  	} catch (err) {
+							document.write("Empty tag: " + 
+									currLevel2Prop.nodeName + "<br />");
+					  	}
 					}
 	  			} else j_corr++;
 				currLevel1Prop=currLevel1Prop.nextSibling;
@@ -173,15 +181,20 @@ for (i=0;i<DistributomeXML_Objects.length;i++) {
 							//Level2Prop.length+"<br />");
 					 
 					for (k=0;k<Level2Prop.length;k++) {
-						if (currLevel2Prop.nodeType==1)
-	  					{ //Process only level=3 element nodes (type 1)
-	  						document.write("---------"+ currLevel2Prop.nodeName+": "+
+						try {
+							if (currLevel2Prop.nodeType==1)
+	  						{ //Process only level=3 element nodes (type 1)
+	  							document.write("---------"+ currLevel2Prop.nodeName+": "+
 	  		  						currLevel2Prop.childNodes[0].nodeValue);
 	  								//currLevel2Prop.childNodes[k-k_corr].nodeValue);
 	  								//xmlDoc.getElementsByTagName(Level2Prop[k].nodeName)[k-k_corr].nodeValue);
-							document.write("<br />");
-	  					} else k_corr++;
-						currLevel2Prop=currLevel2Prop.nextSibling;
+								document.write("<br />");
+	  						} else k_corr++;
+							currLevel2Prop=currLevel2Prop.nextSibling;
+						} catch (err) {
+							document.write("Empty tag: " + 
+									currLevel2Prop.nodeName + "<br />");
+						}
 					}
 	  			} else j_corr++;
 				currLevel1Prop=currLevel1Prop.nextSibling;
