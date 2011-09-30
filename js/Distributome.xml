@@ -196,14 +196,16 @@
 	<parameter>\(k \in (0, \infty)\), degrees of freedom</parameter>
 	<parameter>\(\lambda \in (0, \infty)\), non-centrality parameter</parameter>
 	<support>\((0, \infty)\)</support>
-	<pdf>\(f(x) = \frac{1}{2}e^{-(x+\lambda)/2}\left (\frac{x}{\lambda} \right)^{k/4-1/2} I_{k/2-1}(\sqrt{\lambda x})</pdf>
-	<cdf>\(F(x) = 1 - Q_{\frac{k}{2}} \left( \sqrt{\lambda}, \sqrt{x} \right), where Q_M(a,b) is the Marcum Q-function</cdf>
-	<mgf>\frac{\exp\left(\frac{ \lambda t}{1-2t }\right)}{(1-2 t)^{k/2}}, for 2t<1</mgf>
+	<pdf>\(f(x) = \frac{1}{2}e^{-(x+\lambda)/2}\left (\frac{x}{\lambda} \right)^{k/4-1/2} 
+	I_{k/2-1}(\sqrt{\lambda x})\)</pdf>
+	<cdf>\(F(x) = 1 - Q_{\frac{k}{2}} \left( \sqrt{\lambda}, \sqrt{x} \right)\), 
+	where \(Q_M(a,b)\) is the Marcum Q-function</cdf>
+	<mgf>\(\frac{\exp\left(\frac{ \lambda t}{1-2t }\right)}{(1-2 t)^{k/2}}, for 2t \lt 1\)</mgf>
 	<cf>\(\frac{1}{(1 - 2 i t^{n/2}}) \; t \in (-\infty, \infty)\)</cf>
-	<mean>k+\lambda</mean>
-	<variance>2(k+2\lambda)</variance>
-	<skew>\frac{2^{3/2}(k+3\lambda)}{(k+2\lambda)^{3/2}}</skew>
-	<kurt>\frac{12(k+4\lambda)}{(k+2\lambda)^2}</kurt>
+	<mean>\(k+\lambda\)</mean>
+	<variance>\(2(k+2\lambda)\)</variance>
+	<skew>\(\frac{2^{3/2}(k+3\lambda)}{(k+2\lambda)^{3/2}}\)</skew>
+	<kurt>\(\frac{12(k+4\lambda)}{(k+2\lambda)^2}\)</kurt>
 	<family>exponential</family>
 </distribution>
 
@@ -660,11 +662,11 @@
 	Other families of distributions that have also been called generalized 
 	ogistic distributions include the shifted log-logistic distribution, 
 	which is a generalization of the log-logistic distribution.</model>
-	<parameter>\alpha >0, the location parameter</parameter>
-	<parameter>\beta >0, the scale parameter</parameter>
+	<parameter>\(\alpha >0\), the location parameter</parameter>
+	<parameter>\(\beta >0\), the scale parameter</parameter>
 	<support>\((-\infty, \infty)\)</support>
-	<pdf>f(x;\alpha,\beta)=\frac{1}{B(\alpha,\beta)}\frac{\exp(-\beta x)}
-		{(1+\exp(-x))^{\alpha+\beta}}</pdf>
+	<pdf>\(f(x;\alpha,\beta)=\frac{1}{B(\alpha,\beta)}\frac{\exp(-\beta x)}
+		{(1+\exp(-x))^{\alpha+\beta}}\)</pdf>
 </distribution>
 
 <distribution id="log-normal">
@@ -704,7 +706,9 @@
 	<parameter>\(\beta \in (0, \infty)\), the shape parameter</parameter>
 	<support>\((0, \infty)\)</support>
 	<pdf>\(f(x) = \frac{\beta}{\alpha} \frac{(x/\alpha)^{\beta-1}}{[1 + (x/\alpha)^\beta]^2}, \; x \in (0, \infty)\)</pdf>
-	<mode>\(0\) if \(\beta = 1\); \quad \(\alpha \left(\frac{\beta - 1}{\beta + 1}\right)^{1/\beta}\) if \(\beta \in (1, \infty)\)</mode>
+	<mode>\(0\), if \(\beta = 1\); 
+		\(\alpha \left(\frac{\beta - 1}{\beta + 1}\right)^{1/\beta}\), 
+		if \(\beta \in (1, \infty)\)</mode>
 	<cdf>\(F(x) = \frac{1}{1 + (x/\alpha)^{-\beta}}, \; x \in (0, \infty)\)</cdf>
 	<qf>\(Q(p) = \alpha \left(\frac{p}{1 - p}\right)^{1/\beta}, \; p \in (0, 1)\)</qf>
 	<moments type="raw">\(\mu(n) = \alpha^n \frac{n \pi /\beta}{\sin(n \pi / \beta)}, \; n \lt \beta\)</moments>
@@ -811,18 +815,21 @@
 	hyperbolic distribution</model>
 	<parameter>\(df \in (1, \infty)\), degrees of freedom</parameter>
 	<support>\((-\infty, \infty)\)</support>
-	<pdf>\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\! \; x \in (-\infty, \infty)\)</pdf>
+	<pdf>\(\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,
+	\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\! \;
+	 x \in (-\infty, \infty)\)</pdf>
 	<mode>\(\mu\)</mode>
-	<cdf>\begin{matrix}
+	<cdf>\(\begin{matrix}
      \frac{1}{2} + x \Gamma \left( \frac{\nu+1}{2} \right)  \cdot
      \frac{\,_2F_1 \left ( \frac{1}{2},\frac{\nu+1}{2};\frac{3}{2};
      -\frac{x^2}{\nu} \right)}  {\sqrt{\pi\nu}\,\Gamma \left(\frac{\nu}{2}\right)}
-     \end{matrix}, where { }_2F_1 is the hypergeometric function</cdf>
+     \end{matrix}\), where \({ }_2F_1\) is the hypergeometric function</cdf>
 	<mgf>\(M(t) = \exp(\mu t + \frac{1}{2} \sigma^2 t^2), \; t \in (-\infty, \infty)\)</mgf>
 	<mean>0</mean>
-	<variance>\frac{\nu}{\nu-2}, for \nu > 2; \infty for 1 < \nu \leq 2, otherwise undefined</variance>
+	<variance>\(\frac{\nu}{\nu-2}, for \nu > 2; \infty for 1 \lt \nu \leq 2\), 
+		otherwise undefined</variance>
 	<skew>0</skew>
-	<kurt>\frac{6}{\nu-4}, for \nu > 4</kurt>
+	<kurt>\(\frac{6}{\nu-4}, for \nu > 4\)</kurt>
 	<median>0</median>
 	<family>location </family>
 	<family>scale </family>
@@ -838,18 +845,19 @@
 	The truncated normal distribution has wide applications in statistics and econometrics</model>
 	<parameter>\(\mu \in (-\infty, \infty)\), the location parameter</parameter>
 	<parameter>\(\sigma \in (0, \infty)\), the scale parameter</parameter>
-	<parameter>a \in (-\infty, \infty)\), left limit</parameter>
-	<parameter>b \in (a, \infty)\), right limit</parameter>
-	<support>[a, b]</support>
-	<pdf>f(x;\mu,\sigma, a,b) = \frac{1}{\sigma Z}\phi(\xi), where 
-	\xi=\frac{x-\mu}{\sigma},\ \alpha=\frac{a-\mu}{\sigma},\ \beta=\frac{b-\mu}{\sigma}, and 
-	Z=\Phi(\beta)-\Phi(\alpha)</pdf>
-	<mode>\left\{\begin{array}{ll}a, & \mathrm{if}\ \mu<a \\ \mu, 
-	& \mathrm{if}\ a\le\mu\le b\\ b, & \mathrm{if}\ \mu>b\end{array}\right.</mode>
-	<cdf>F(x;\mu,\sigma, a,b) = \frac{\Phi(\xi) - \Phi(\alpha)}{Z}</cdf>
-	<mean>\mu +  \frac{\phi(\alpha)-\phi(\beta)}{Z}\sigma</mean>
-	<variance>\sigma^2\left[1+\frac{\alpha\phi(\alpha)-\beta\phi(\beta)}{Z}
-	-\left(\frac{\phi(\alpha)-\phi(\beta)}{Z}\right)^2\right]</variance>
+	<parameter>\(a \in (-\infty, \infty)\), left limit</parameter>
+	<parameter>\(b \in (a, \infty)\), right limit</parameter>
+	<support>\([a, b]\)</support>
+	<pdf>\(f(x;\mu,\sigma, a,b) = \frac{1}{\sigma Z}\phi(\xi)\), where 
+	\(\xi=\frac{x-\mu}{\sigma},\ \alpha=\frac{a-\mu}{\sigma},\ \beta=\frac{b-\mu}{\sigma}\), and 
+	\(Z=\Phi(\beta)-\Phi(\alpha)\)</pdf>
+	<mode>\(\left\{\begin{array}{ll}a, if \mu \lt a \\ 
+		\mu, if a\le\mu\le b\\ 
+		b, if \mu \gt b \end{array}\right.\)</mode>
+	<cdf>\(F(x;\mu,\sigma, a,b) = \frac{\Phi(\xi) - \Phi(\alpha)}{Z}\)</cdf>
+	<mean>\(\mu +  \frac{\phi(\alpha)-\phi(\beta)}{Z}\sigma\)</mean>
+	<variance>\(\sigma^2\left[1+\frac{\alpha\phi(\alpha)-\beta\phi(\beta)}{Z}
+	-\left(\frac{\phi(\alpha)-\phi(\beta)}{Z}\right)^2\right]\)</variance>
 </distribution>
 
 <distribution id="Pareto">
@@ -1400,18 +1408,18 @@
 	<parameter>\(A \in \{-\infty , \infty\}\), left limit</parameter>
 	<parameter>\(B \in \{A , \infty\}\), right limit (B>A)</parameter>
 	<support>\(\{A, B\}\)</support>
-	<pdf>\begin{cases}
-                  \frac{1}{b - a} & \text{for } x \in [a,b]  \\
-                  0               & \text{otherwise}
-                \end{cases}</pdf>
-	<cdf>\begin{cases}
-                  0               & \text{for } x \le a \\
-                  \frac{x-a}{b-a} & \text{for } x \in [a,b] \\
-                  1               & \text{for } x \ge b
-                \end{cases}</cdf>
-	<mean>\frac{1}{2}(a+b)</mean>
-	<medain>\frac{1}{2}(a+b)</median>
-	<variance>\frac{1}{12}(b-a)^2</variance>
+	<pdf>\(\begin{cases}
+                  \frac{1}{b - a}, \text{for } x \in [a,b]  \\
+                  0               , \text{otherwise}
+                \end{cases}\)</pdf>
+	<cdf>\(\begin{cases}
+                  0               , \text{for } x \le a \\
+                  \frac{x-a}{b-a} , \text{for } x \in [a,b] \\
+                  1               , \text{for } x \ge b
+                \end{cases}\)</cdf>
+	<mean>\(\frac{1}{2}(a+b)\)</mean>
+	<median>\(\frac{1}{2}(a+b)\)</median>
+	<variance>\(\frac{1}{12}(b-a)^2\)</variance>
 </distribution>
 
 <distribution id="standard continuous uniform">
@@ -1421,18 +1429,18 @@
 	<model>The standard continuous uniform distribution is a special case of hte (general)
 	continuous uniform distribution defined on [0 , 1].</model>
 	<support>\(\{0, 1\}\)</support>
-	<pdf>\begin{cases}
+	<pdf>\(\begin{cases}
                   \text{for } x \in [0,1]  \\
-                  0               & \text{otherwise}
-                \end{cases}</pdf>
-	<cdf>\begin{cases}
-                  0               & \text{for } x \le 0 \\
-                  \frac{x-a}{b-a} & \text{for } x \in [0,1] \\
-                  1               & \text{for } x \ge 1
-                \end{cases}</cdf>
-	<mean>\frac{1}{2}</mean>
-	<medain>\frac{1}{2}</median>
-	<variance>\frac{1}{12}</variance>
+                  0               , \text{otherwise}
+                \end{cases}\)</pdf>
+	<cdf>\(\begin{cases}
+                  0               , \text{for } x \le 0 \\
+                  \frac{x-a}{b-a} , \text{for } x \in [0,1] \\
+                  1               , \text{for } x \ge 1
+                \end{cases}\)</cdf>
+	<mean>\(\frac{1}{2}\)</mean>
+	<median>\(\frac{1}{2}\)</median>
+	<variance>\(\frac{1}{12}\)</variance>
 </distribution>
 
 <distribution id="finite-order">
@@ -1457,15 +1465,15 @@
 	might be made at the same time to the operators of the switching stations. This work 
 	on telephone traffic engineering has been expanded to consider waiting times in queueing
 	systems in general</model>
-	<parameter>k \in \mathbb{N}, shape parameter </parameter>
-	<parameter>\lambda > 0\, rate parameter</parameter>
-	<parameter>\theta = 1/\lambda > 0, scale parameter</parameter>
-	<support>x \in [0; \infty)\!</support>
-	<pdf>\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!\,}</pdf>
-	<cdf>\frac{\gamma(k, \lambda x)}{(k-1)!}=1-\sum_{n=0}^{k-1}e^{-\lambda x}(\lambda x)^{n}/n!</cdf>
-	<mean>k/\lambda\,</mean>
+	<parameter>\(k \in \mathbb{N}\), shape parameter </parameter>
+	<parameter>\(\lambda > 0\), rate parameter</parameter>
+	<parameter>\(\theta = 1/\lambda > 0\), scale parameter</parameter>
+	<support>\(x \in [0; \infty)\!\)</support>
+	<pdf>\(\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!\,}\)</pdf>
+	<cdf>\(\frac{\gamma(k, \lambda x)}{(k-1)!}=1-\sum_{n=0}^{k-1}e^{-\lambda x}(\lambda x)^{n}/n!\)</cdf>
+	<mean>\(k/\lambda\)</mean>
 	<median>no simple closed form</median>
-	<variance>k /\lambda^2\,</variance>
+	<variance>\(k /\lambda^2\)</variance>
 </distribution>
 
 </distributions>
