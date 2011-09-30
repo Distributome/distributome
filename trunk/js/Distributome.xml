@@ -76,6 +76,16 @@
 	<family>exponential</family>
 </distribution>
 
+<distribution id="inverse beta">
+	<name>inverse beta distribution</name>
+	<type>continuous</type>
+	<model>The inverse beta distribution, as the name suggests, is the inverse probability dsitribution of a Beta-distributed variable. </model>
+	<parameter>\(\alpha \in (0, \infty)\), the left shape parameter</parameter>
+	<parameter>\(\beta \in (0, \infty)\), the right shape parameter</parameter>
+	<support>\((0, 1)\)</support>
+	<family>exponential</family>
+</distribution>
+
 <distribution id="binomial">
 	<name>binomial distribution</name>
 	<type>discrete</type>
