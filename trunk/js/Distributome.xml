@@ -200,7 +200,7 @@
 	I_{k/2-1}(\sqrt{\lambda x})\)</pdf>
 	<cdf>\(F(x) = 1 - Q_{\frac{k}{2}} \left( \sqrt{\lambda}, \sqrt{x} \right)\), 
 	where \(Q_M(a,b)\) is the Marcum Q-function</cdf>
-	<mgf>\(\frac{\exp\left(\frac{ \lambda t}{1-2t }\right)}{(1-2 t)^{k/2}}, for 2t \lt 1\)</mgf>
+	<mgf>\(\frac{\exp\left(\frac{ \lambda t}{1-2t }\right)}{(1-2 t)^{k/2}}, \) for \( 2t \lt 1\)</mgf>
 	<cf>\(\frac{1}{(1 - 2 i t^{n/2}}) \; t \in (-\infty, \infty)\)</cf>
 	<mean>\(k+\lambda\)</mean>
 	<variance>\(2(k+2\lambda)\)</variance>
@@ -826,10 +826,10 @@
      \end{matrix}\), where \({ }_2F_1\) is the hypergeometric function</cdf>
 	<mgf>\(M(t) = \exp(\mu t + \frac{1}{2} \sigma^2 t^2), \; t \in (-\infty, \infty)\)</mgf>
 	<mean>0</mean>
-	<variance>\(\frac{\nu}{\nu-2}, for \nu > 2; \infty for 1 \lt \nu \leq 2\), 
+	<variance>\(\frac{\nu}{\nu-2}, \) for \(  \nu > 2; \infty \) for \(  1 \lt \nu \leq 2\), 
 		otherwise undefined</variance>
 	<skew>0</skew>
-	<kurt>\(\frac{6}{\nu-4}, for \nu > 4\)</kurt>
+	<kurt>\(\frac{6}{\nu-4}, \) for \(  \nu > 4\)</kurt>
 	<median>0</median>
 	<family>location </family>
 	<family>scale </family>
@@ -1496,7 +1496,10 @@
 <relation id="Bernoulli/negative-binomial"> 
 	<from>Bernoulli distribution</from>
 	<to>negative binomial distribution</to>
-	<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in (0, 1)\), then for \(ki \in \{1, 2, \ldots\}\), \(Y = \min\{n \in \{1, 2, \ldots\}: \sum_{i=1}^n X_i = k\}\) has the negative binomial distribution with parmeters \(k\) and \(p\).</statement>
+	<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, 
+	each with parameter \(p \in (0, 1)\), 
+	then for \(ki \in \{1, 2, \ldots\}\), \(Y = \min\{n \in \{1, 2, \ldots\}: 
+	\sum_{i=1}^n X_i = k\}\) has the negative binomial distribution with parmeters \(k\) and \(p\).</statement>
 	<type>transformation</type>
 </relation>
 
