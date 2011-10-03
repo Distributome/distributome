@@ -1762,13 +1762,13 @@
 
 <relation id="standard-uniform/hyperbolic-secant">
 	<from>standard uniform distribution</from>
-	<to>hyperbolic secant distrbution</to>
+	<to>hyperbolic secant distribution</to>
 	<statement>If \(X\) has the standard uniform distribution then \(\frac{2}{\pi} \ln[\tan(\frac{\pi}{2} X)]\) has the hyperbolic secant distribution.</statement>
 	<type>nonlinear transformation</type>
 </relation>
 
 <relation id="standard-uniform/Laplace">
-	<from>standard uniform distributon</from>
+	<from>standard uniform distribution</from>
 	<to>Laplace distribution</to>
 	<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), \(b \in (0, \infty)\), then \(\mu + b \ln(2 \min\{X, 1 - X\})\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(b\).</statement>
 	<type>nonlinear transformation</type>
@@ -1867,7 +1867,7 @@
 </relation>
 
 <relation id="exponential/normal/Laplace">
-	<from>epxonential distribution</from>
+	<from>exponential distribution</from>
 	<from>normal distribution</from>
 	<to>Laplace distribution</to>
 	<statement>If \(X\) has the standard exponential distribution, \(Z\) has the standard normal distribution, \(X\) and \(Z\) are independent, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\), then \(\mu + \sigma Z \sqrt{2 X}\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
