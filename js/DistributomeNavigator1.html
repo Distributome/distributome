@@ -17,14 +17,14 @@
   	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
   	<link rel="shortcut icon" href="../images/favicon.ico">
   
-  	<script type="text/javascript" src="./scripts/protovis-r3.2.js"></script>
+  	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
   	
   	<!-- 	To Do: Replace the simple list of nodes and edges:
   			http://distributome.org/js/scripts/distributome.js),
 			By the real Distributome.xml DB: http://distributome.org/js/Distributome.xml
   	 -->
-  	<script type="text/javascript" src="./scripts/distributome1.js"></script>
- 	<script type="text/javascript" src="./scripts/jquery.js"></script>
+  	<script type="text/javascript" src="scripts/distributome1.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.js"></script>
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
 
 	<!-- MathJax LaTeX/TeX Typesetting scripts -->
@@ -57,7 +57,7 @@
 		html, body {
 			margin: 0;			/* Remove body margin/padding */
 			padding: 0;
-			/* erflow: hidden;	 Remove scroll bars on browser window */
+			//erflow: hidden;	/* Remove scroll bars on browser window */
 		}
 		/* #header { //padding: 1em; 
 			height: 8%;
@@ -65,15 +65,15 @@
 		}*/
 		#MainSplitPaneObject {
 			border: 3px solid #CCCCCC;
-			/* padding: 2; */
+			//padding: 2;
 			anchorToWindow: true;	/* This allows the MainSplitPaneObject to auto-resize and adopt to resizing the browser frame */
 			min-width: 500px;		/* Splitter can't be too thin ... */
 			min-height: 300px;		/* ... or too flat */
-			/* height: 80%; */
+			//height: 80%;
 		}
 		#MainSplitPaneObject .Pane {
 			overflow: auto;
-			background: #FFFFFF; /* #def; */
+			background: #FFFFFF; //#def;
 		}
 
 		/* Splitbar styles; these are the default class names */
@@ -83,7 +83,7 @@
 		}
 		.vsplitbar:hover, .vsplitbar.active {
 			background: #CCCCCC url(./scripts/img/vgrabber.gif) no-repeat center;
-			opacity: 0.5;	/* how opaque the line-color should be */
+			opacity: 0.5;	// how opaque the line-color should be
 			filter: alpha(opacity=50); /* IE */
 		}
 		.hsplitbar {
@@ -147,6 +147,7 @@
   				<!-- Search for a node (distributon) or edge (relation) by keyword(s).
   					Highlight best matches
   				 -->
+				<!--<input type="text" style="width:50px;height:20px"/>-->
 				<label id="search" for="search"></label>
 				<input id="distributome.text" name="s" size="34" type="search" onKeydown="Javascript: if (event.keyCode==13) textSearch();" placeholder="Find distributions or relations" />
 			</td>
@@ -178,7 +179,7 @@
 						<option value="inverse">Inverse</option>
 						<option value="linearCombination">Linear Combination</option>
 						<option value="maximum">Maximum</option>
-						<option value="mimimum">Minimum</option>
+						<option value="minimum">Minimum</option>
 						<option value="discrete">Discrete</option>
 						<option value="continuous">Continuous</option>
 					</select>
@@ -226,6 +227,7 @@
 			/**	To Do: Make the height and width of the Graph panel 
 				auto-adjust to the "LeftPanel" panel size that the graph is embedded in!  
 			***/
+		try{
 			var w = document.body.clientWidth-200,
   				h = document.body.clientHeight-200,
   				colors = pv.Colors.category10();
@@ -233,8 +235,10 @@
 			var vis = new pv.Panel()
     			.width(w)
     			.height(h)
-   				.fillStyle("white")
-    			.event("mousedown", pv.Behavior.pan())
+   				.fillStyle("rgb(240,240,240)")
+    			//.event("mousedown", pv.Behavior.pan().bound(true))
+				//.event("mousewheel", pv.Behavior.zoom().bound(true));
+				.event("mousedown", pv.Behavior.pan())
     			.event("mousewheel", pv.Behavior.zoom());
 				
 				/*** To Do: Need to trigger a Split-Frame Resizing when the mouse-scroll
@@ -251,12 +255,11 @@
 				.springConstant(0.05)
 				.chargeConstant(-80)
 				.springLength(200)
-				.def('active', false);
-
+				.bound(true); 
+		
 			force.link.add(pv.Line)
 				.cursor("pointer")
 				.strokeStyle(function(d,l) { return l.selected?'red':'rgb(170,170,170)'})
-				/* .fillStyle(function(d,l) { return l.selected?'red':'rgb(170,170,170)'}); */
 				.event("click", function (d, l) getRelationProperties(d.nodeName, l.index));
 
 			force.node.add(pv.Dot)
@@ -265,18 +268,18 @@
 				.fillStyle(function(d) d.selected ? "red" : colors(d.group))
 				.strokeStyle(function() this.fillStyle().darker())
 				.lineWidth(1)
-				.title(function(d) d.nodeName)
+				//.title(function(d) d.nodeName)
 				.cursor("pointer")
 				.event("click", function (d) getNodeProperties(this.index, d.nodeName))
 				.event("mousedown", pv.Behavior.drag())
 				.event("drag", force)
-				.event("mouseover", function() { return this.parent.active(true); })
-				.event("mouseout", function() { return this.parent.active(false); })
 				.anchor("center").add(pv.Label)
 				.text(function(d) d.nodeName )
 				.font(function(d) d.selected?'bold 10pt sans-serif':'normal 7pt sans-serif');
 
 			vis.render();
+		}catch(e){
+		}
 		</script>
 		<!--  /center -->
   	</div> 	<!-- Left Pane -->	
@@ -307,7 +310,7 @@
 		<div class="Middle Pane 1">
 			<b><u>Distribution Actions</u></b> <br />
 			<ul> 
-				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator">Calculator</a></li>
+				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator" id="distributome.calculator">Calculator</a></li>
 				<li><a href="./exp/PoissonExperiment.html" target="_blank" title="Run Virtual Distribution Experiment">Experiment</a></li>
 				<li><a href="./sim/NormalSimulation.html" target="_blank" title="Distribution Sampling and Simulation">Simulation</a></li>
 				<li><a href="./Distributome.xml.html" target="_blank" title="Render the entire Distributome Database as a web-page">Distributome DB HTML View</a></li>
@@ -343,7 +346,7 @@
 <script type="text/javascript">
 $().ready(function() {
 
-	/* Vertical splitter. Set min/max/starting sizes for the left pane. */
+	// Vertical splitter. Set min/max/starting sizes for the left pane.
 	$("#MainSplitPaneObject").splitter({
 		splitVertical: true,
 		outline: true,
@@ -352,11 +355,11 @@ $().ready(function() {
 		anchorToWindow: true,
 		accessKey: "L"
 	});
-	/* $("#MainSplitPaneObject").css("height", "400px").trigger("resize"); */
+	//$("#MainSplitPaneObject").css("height", "400px").trigger("resize");
 	$("#MainSplitPaneObject").trigger("resize");
 
-	/* Right-Side CompositePanel including 4-split nested panels
-	   Top horizontal splitter, nested in the right pane of the vertical splitter. */
+	// Right-Side CompositePanel including 4-split nested panels
+	// Top horizontal splitter, nested in the right pane of the vertical splitter.
 	$("#RightSide_Splitter1").splitter({
 		splitHorizontal: true,
 		outline: true,
@@ -366,8 +369,7 @@ $().ready(function() {
 	});
 	$("#RightSide_Splitter1").trigger("resize");
 
-	/* Middle horizontal splitter, nested in RightSide_Panel3 of first 
-		horizontal splitter */
+	// Middle horizontal splitter, nested in RightSide_Panel3 of first horizontal splitter
 	$("#RightSide_Splitter2").splitter({
 		splitHorizontal: true,
 		outline: true,
@@ -376,12 +378,11 @@ $().ready(function() {
 	});
 	$("#RightSide_Splitter2").trigger("resize");
 
-	/* Bottom horizontal splitter, nested in RightSide_Panel3 of 
-		first horizontal splitter */
+	// Bottom horizontal splitter, nested in RightSide_Panel3 of first horizontal splitter
 	$("#RightSide_Splitter3").splitter({
 		splitHorizontal: true,
 		outline: true,
-		/* resizeBottom: 200, minTop: 150, */
+		//resizeBottom: 200, minTop: 150,
 		sizeTop: 200, minTop: 100,
 		accessKey: "M"
 	});
@@ -391,7 +392,13 @@ $().ready(function() {
 
 <script type="text/javascript+protovis">
 	function resetNavigator(){
-		resetVariables();
+		resetView();
+		resetNodesEdges();
+		//force = vis.add(pv.Layout.Force);
+		force.reset();
+	}
+	
+	function resetNodesEdges(){
 		var classes = pv.nodes(distributome.nodes);		
 		classes.slice(1).forEach(function(d) {
 			var i = 5;
@@ -404,10 +411,8 @@ $().ready(function() {
 		classes.slice(1).forEach(function(d) {
 			d.nodeValue.selected = false;
 		});
-		var force = vis.add(pv.Layout.Force);
-		force.reset();
+		
 	}
-	
 	function protovisRender(){
 		resetVariables();
 		var classes = pv.nodes(distributome.nodes);		
@@ -418,7 +423,7 @@ $().ready(function() {
 		classes.slice(1).forEach(function(d) {
 			document.write('edges'+d.nodeValue.selected);
 		});
-		var force = vis.add(pv.Layout.Force);
+		force = vis.add(pv.Layout.Force);
 		force.reset();
 	}
 </script>
