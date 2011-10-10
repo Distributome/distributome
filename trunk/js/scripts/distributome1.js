@@ -7,7 +7,8 @@ var distributomeNodes = new Array();
 var referenceNodes = new Array();
 var DistributomeXML_Objects;
 var selectedNode = null;
-var selectedEdge = null;		
+var selectedEdge = null;	
+var xmlDoc;	
 
 var relationStrength = new Array();
 relationStrength["convolution"] = 2;
@@ -42,7 +43,19 @@ group["discrete"] = 3;
 function resetVariables(){
 	selectedNode = null;
 	selectedEdge = null;
+	//Default href for calculator
+	document.getElementById('distributome.calculator').href = './calc/NormalCalculator.html';
+}
+
+/*************** Reset search text **************/
+function resetText(){
 	document.getElementById('distributome.text').value = '';
+}
+
+/*************** Reset view **************/
+function resetView(){
+	resetVariables();
+	resetText();
 }
 
 /*************** Fetch group information for node **************/
@@ -68,6 +81,10 @@ function getNodeIndex(nodeName){
 	return (distributomeNodes[nodeName] != undefined)?distributomeNodes[nodeName]:0;
 }
 
+function renderMath(){
+	MathJax.Hub.Typeset();
+}
+
 /*************** Fetch node properties **************/
 function getNodeProperties(index, nodeName){
 	if(selectedNode!=null){
@@ -77,12 +94,30 @@ function getNodeProperties(index, nodeName){
 	distributome.nodes[index].selected = true;
 	var html = new Array();
 	html.push("<b><u>Distribution Properties</u></b> <br />");
-	var parserOutput = XMLParser(1, 1, index, true);
+	var parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, index, true);
 	html.push(parserOutput[0]);
 	var referenceName= parserOutput[1];
 	document.getElementById('distributome.propertiesPannel').innerHTML = html.join('');	
 	if(referenceName !=null)
 		getReferences(referenceNodes[referenceName]);
+	renderMath();
+	nodeName = trimSpecialCharacters(nodeName);
+	var firstChar = nodeName.substring(0,1).toUpperCase();
+	nodeName = nodeName.substring(1); //Is it camel case or only first letter Upper Case?
+	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
+}
+
+function getObjectReferenceNumber(object){
+	var browser = navigator.appName;
+	if(browser == "Microsoft Internet Explorer"){
+		if(object == 'node') return 0;
+		else if(object == 'relation') return 1;
+		else return 2;
+	}else{
+		if(object == 'node') return 1;
+		else if(object == 'relation') return 3;
+		else return 5;
+	}
 }
 
 /*************** Parse XML to fetch information per node in the XML **************/
@@ -90,15 +125,10 @@ function XMLParser(i, nodeNameIndex, index, reference){
 	var html = new Array();
 	var referenceName = null;
 	if (DistributomeXML_Objects[i].nodeType==1) {
-		//Process only level=1 element nodes (type 1) 
-		html.push(DistributomeXML_Objects[i].nodeName+" : "
-			+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-		html.push("<br />");
 		
 		var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 
-		//Level1Prop[i].nodeName = 'distribution'
 		var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].childNodes;
 		var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].firstChild;
 		
@@ -112,7 +142,7 @@ function XMLParser(i, nodeNameIndex, index, reference){
 							referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
 						}
 					}
-					html.push("---------"+ trim(currLevel2Prop.nodeName)+": "+
+					html.push(trim(currLevel2Prop.nodeName)+": "+
 							trim(currLevel2Prop.childNodes[0].nodeValue));
 					html.push("<br />");
 				} else k_corr++;
@@ -127,8 +157,7 @@ function XMLParser(i, nodeNameIndex, index, reference){
 
 /*************** Function invoked on node and edges action **************/
 function search(searchType, indexType, type){
-	var i=1;
-	if(searchType == "edge") i = 3;
+	var i= getObjectReferenceNumber(searchType);
 	if (DistributomeXML_Objects[i].nodeType==1) {
 		var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
@@ -146,10 +175,10 @@ function search(searchType, indexType, type){
 								var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 								if (currLevel2Prop.nodeName == "type" && value == type) {
 									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = true;
-									if(searchType == "edge") distributome.edges[currentNodeIndex].selected = true; 
+									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = true; 
 								}else if (currLevel2Prop.nodeName == "type" && value != type) {
 									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = false;
-									if(searchType == "edge") distributome.edges[currentNodeIndex].selected = false;
+									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = false;
 								}
 							} else k_corr++;
 							currLevel2Prop=currLevel2Prop.nextSibling;
@@ -164,10 +193,15 @@ function search(searchType, indexType, type){
 	}
 }
 
+function neighborsFetch(){
+	var type = getDropDownSelectedValue('distributome.neighborAction');
+	
+}
+
 /////TODO finish the parent child dropdown
-function parentChildSearch(searchType, indexType, type){
-	var i=1;
-	if(searchType == "edge") i = 3;
+function parentChildSearch(type){
+	var i= getObjectReferenceNumber("relation");
+	var indexType = 7;
 	if (DistributomeXML_Objects[i].nodeType==1) {
 		var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
@@ -185,10 +219,10 @@ function parentChildSearch(searchType, indexType, type){
 								var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 								if (currLevel2Prop.nodeName == "type" && value == type) {
 									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = true;
-									if(searchType == "edge") distributome.edges[currentNodeIndex].selected = true; 
+									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = true; 
 								}else if (currLevel2Prop.nodeName == "type" && value != type) {
 									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = false;
-									if(searchType == "edge") distributome.edges[currentNodeIndex].selected = false;
+									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = false;
 								}
 							} else k_corr++;
 							currLevel2Prop=currLevel2Prop.nextSibling;
@@ -205,16 +239,17 @@ function parentChildSearch(searchType, indexType, type){
 
 /*************** Function invoked on enter of the input box for search **************/
 function textSearch(){
-	//resetVariables();
+	resetVariables();
+	resetNodesEdges();
 	var searchString = document.getElementById('distributome.text').value;
 	traverseXML(true, searchString);
 }
 
-/*************** Fetch Referances from the XML **************/
+/*************** Fetch References from the XML **************/
 function getReferences(index){
 	var html = new Array();
 	html.push("<b><u>Distribution Referencies</u></b> <br />");
-	html.push(XMLParser(5, 9, index, false)[0]);
+	html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false)[0]);
 	document.getElementById('distributome.referencePanel').innerHTML = html.join('');
 }
 
@@ -227,12 +262,13 @@ function getRelationProperties(nodeName, linkIndex){
 	distributome.edges[linkIndex].selected = true;
 	var html = new Array();;
 	html.push("<b><u>Inter-Distribution Relations</u></b> <br />");
-	var parserOutput = XMLParser(3, 7, linkIndex, true);
+	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true);
 	html.push(parserOutput[0]);
 	var referenceName = parserOutput[1];
 	document.getElementById('distributome.relationPannel').innerHTML = html.join('');
 	if(referenceName!=null)
 		getReferences(referenceNodes[referenceName]);
+	renderMath();
 }
 
 /******* Remove the starting and leading White Spaces *******/
@@ -272,27 +308,9 @@ function getDropDownSelectedValue(id){
 /*************** Edge Action **************/
 function edgeTypeInfoFetch(){
 	var type = getDropDownSelectedValue('distributome.edgeTypeAction');
-	search("edge", 7, type);
+	search("relation", 7, type);
 }
 
-/*************** Ajax request seperated for IE and others **************/
-function createAjaxRequest(){
-	var xmlHttp; 
-    try{
-		xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');	// Internet Explorer 6+
-	}catch(e){
-        try{
-			xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');   // Internet Explorer 5.5
-		}catch(e2){
-			try{
-				xmlHttp = new XMLHttpRequest();	//  Firefox, Opera 8.0+, Safari
-			}catch(e3){
-				xmlHttp = false;
-			}
-        }
-    }
-	return xmlHttp;
-}
 
 /*************** Function to traverse the XML during initialization and search **************/
 function traverseXML(searchFlag, text){
@@ -307,7 +325,7 @@ function traverseXML(searchFlag, text){
 			//Process only level=1 element nodes (type 1) 
 			Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 			currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-			if (i==1) {	// for "distributions" objects
+			if (Level1Prop[i] && Level1Prop[i].nodeName == 'distribution') {	// for "distributions" objects
 				/**  nodes:[
 						{nodeName:"1:_:Standard Normal", group:0},
 				 ]
@@ -342,7 +360,6 @@ function traverseXML(searchFlag, text){
 								} else k_corr++;
 								currLevel2Prop=currLevel2Prop.nextSibling;
 							} catch (err) {
-								//document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
 							}
 						}
 						if(!searchFlag)	distributome.nodes[currentNodeIndex].selected = false;
@@ -352,7 +369,7 @@ function traverseXML(searchFlag, text){
 				}
 				// End for "distributions" objects
 			
-			} else if ( i==3 ) { // for "relations", edges
+			} else if (Level1Prop[i] && Level1Prop[i].nodeName == 'relation') { // for "relations", edges
 				/*** links:[
 							{source:1, target:0, value:2},
 					 ]
@@ -386,7 +403,6 @@ function traverseXML(searchFlag, text){
 								} else k_corr++;
 								currLevel2Prop=currLevel2Prop.nextSibling;
 							} catch (err) {
-								//document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
 							}
 						}
 						if(!searchFlag)	distributome.edges[currentEdgeIndex].selected = false;
@@ -396,16 +412,16 @@ function traverseXML(searchFlag, text){
 				}
 				// end for relations
 			
-			} else 	if (i == 5 & !searchFlag)	{ // for references, citations
+			} else 	if (Level1Prop[i] && Level1Prop[i].nodeName == 'reference' & !searchFlag)	{ // for references, citations
 				for (j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;					
 					if (currLevel1Prop.nodeType==1) {
 						distributome.references[currentReferencesIndex] = new Object();
 						
 						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
-						parent = xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr];
-						currLevel2Prop=parent.firstChild;
-						referenceNodes[trim(parent.attributes[0].textContent)] = currentReferencesIndex;
+						nodeParent = xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr];
+						currLevel2Prop=nodeParent.firstChild;
+						referenceNodes[trim(nodeParent.attributes.getNamedItem("id").value)] = currentReferencesIndex;
 						for (k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
@@ -421,7 +437,6 @@ function traverseXML(searchFlag, text){
 								} else k_corr++;
 								currLevel2Prop=currLevel2Prop.nextSibling;
 							} catch (err) {
-								//document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
 							}
 						}
 						currentReferencesIndex++;
@@ -435,14 +450,45 @@ function traverseXML(searchFlag, text){
 
 }
 
+
+/*************** Ajax request seperated for IE and others **************/
+function createAjaxRequest(){
+	var xmlHttp;
+	try{
+	 // use the ActiveX control for IE5.x and IE6.
+		xmlHttp = new ActiveXObject('MSXML2.XMLHTTP.3.0');
+	}catch (e){		 
+		try{
+			xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');	// Internet Explorer 6+
+		}catch(e){
+			try{
+				xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');   // Internet Explorer 5.5
+			}catch(e2){
+				try{
+					xmlHttp = new XMLHttpRequest();	//  Firefox, Opera 8.0+, Safari
+				}catch(e3){
+					xmlHttp = false;
+				}
+			}
+		}
+	}
+	return xmlHttp;
+}
+	
 {		
 		
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
 		xmlhttp.send();
-		xmlDoc=xmlhttp.responseXML;
-		DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
+			xmlhttp.responseXML.load(xmlhttp.responseStream);
+		xmlDoc = xmlhttp.responseXML;
+		try{
+			DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+		}catch(error){
+			DistributomeXML_Objects=xmlDoc.childNodes;
+		}
 		traverseXML(false);
 		
 }
