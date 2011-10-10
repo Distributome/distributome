@@ -23,8 +23,8 @@
   			http://distributome.org/js/scripts/distributome.js),
 			By the real Distributome.xml DB: http://distributome.org/js/Distributome.xml
   	 -->
-  	<script type="text/javascript" src="scripts/distributome.js"></script>
- 	<script type="text/javascript" src="./scripts/jquery.js"></script>
+  	<script type="text/javascript" src="scripts/distributome1.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.js"></script>
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
 
 	<!-- MathJax LaTeX/TeX Typesetting scripts -->
@@ -106,18 +106,12 @@
 <div id="menu-top">
 	<ul>
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
+  		<li><span> Tools</span><span> Â»</span></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="http://www.SOCR.ucla.edu" title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
   		<li><a href="http://www.math.uah.edu/stat/" title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
   		<li><a href="http://mbi.osu.edu/" title="OSU Mathematical Biosciences Institute"><span>OSU Bioscience</span></a></li>
   		
-  		<!-- To Do:
-  				(1) Expland the JS to allow interactive Editing/Addition/Modification of the 
-  					Distributome.xml DB -- like the Java Editor prototype: 
-  					http://www.distributome.org/DistributomeEditor.html
-  				(2) Replace the legacy Java Navigator/Editor Links with the new HTML5/JS web-apps
-  		-->
   		<li><a href="http://www.distributome.org/Navigator.html" title="Interactive Distributome Navigator"><span>Navigator (Java)</span></a></li>
   		<li><a href="http://www.distributome.org/DistributomeEditor.html" title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 	</ul>
@@ -153,8 +147,9 @@
   				<!-- Search for a node (distributon) or edge (relation) by keyword(s).
   					Highlight best matches
   				 -->
+				<!--<input type="text" style="width:50px;height:20px"/>-->
 				<label id="search" for="search"></label>
-				<input name="s" size="34" type="search" placeholder="Find distributions or relations", results="5" />
+				<input id="distributome.text" name="s" size="34" type="search" onKeydown="Javascript: if (event.keyCode==13) textSearch();" placeholder="Find distributions or relations" />
 			</td>
 
   		<!--Neighbors Selector --> 
@@ -163,7 +158,7 @@
   					parents, children, or both - parents and children (of a chosen distribution)
   				 -->
   				<form action="NeughborAction">
-					<select name="Neughbors">
+					<select name="Neighbors" id="distributome.neighborAction" onchange="neighborsFetch();">
 						<option value="neighbors">Neighbors</option>
 						<option value="parent">Show Parent</option>
 						<option value="children">Show Children</option>
@@ -177,29 +172,32 @@
  				<form action="NodeTypeAction">
  					<!-- Get the type of a node (distribution) and highlight all nodes of this type.
   				 	-->
-					<select name="NodeType">
+					<select name="NodeType" id="distributome.nodeTypeAction" onchange="nodeTypeInfoFetch();">
 						<option value="distributionType">Distribution Type</option>
 						<option value="convolution">Convolution</option>
 						<option value="memoryless">Memoryless</option>
 						<option value="inverse">Inverse</option>
 						<option value="linearCombination">Linear Combination</option>
 						<option value="maximum">Maximum</option>
-						<option value="mimimum">Mimimum</option>
+						<option value="minimum">Minimum</option>
+						<option value="discrete">Discrete</option>
+						<option value="continuous">Continuous</option>
 					</select>
 				</form>
 			</td>
 
 		<!-- Edge-Type Selector -->
 			<td class="tool">
-				<form action="EdgeTypeAction">
+				<form action="EdgeTypeAction" >
 					<!-- Get the type of an edge (relation) and highlight all edges of this type.
  						Note that all edges are directional!
   				 	-->
-					<select name="EdgeType">
+					<select name="EdgeType" id="distributome.edgeTypeAction" onchange="edgeTypeInfoFetch();">
 						<option value="relationType">Relation Type</option>
-						<option value="specialCase">Special Case</option>
+						<option value="special case">Special Case</option>
 						<option value="transform">Transform</option>
 						<option value="limiting">Limiting</option>
+						<option value="transformation">Transformation</option>
 						<option value="bayesian">Bayesian</option>
 					</select>
 				</form>
@@ -229,26 +227,20 @@
 			/**	To Do: Make the height and width of the Graph panel 
 				auto-adjust to the "LeftPanel" panel size that the graph is embedded in!  
 			***/
+		try{
 			var w = document.body.clientWidth-200,
   				h = document.body.clientHeight-200,
-  				colors = pv.Colors.category20();
-
-			var classes = pv.nodes(distributome.nodes);
-			classes.slice(1).forEach(function(d) {
-  				d.nodeName = "Distributome." + d.nodeValue;
-  				var i = 5;
-  				d.className = d.nodeName.substring(0,2);
-  				d.packageName = d.nodeName.substring(0, i);
-  				d.nodeValue = d.nodeValue.value;
-			});
+  				colors = pv.Colors.category10();
 
 			var vis = new pv.Panel()
     			.width(w)
     			.height(h)
-   				.fillStyle("white")
-    			.event("mousedown", pv.Behavior.pan())
-    			.event("mousewheel", pv.Behavior.zoom(0.5));
-
+   				.fillStyle("rgb(240,240,240)")
+    			//.event("mousedown", pv.Behavior.pan().bound(true))
+				//.event("mousewheel", pv.Behavior.zoom().bound(true));
+				.event("mousedown", pv.Behavior.pan())
+    			.event("mousewheel", pv.Behavior.zoom());
+				
 				/*** To Do: Need to trigger a Split-Frame Resizing when the mouse-scroll
 					 zoom action is triggered. See the split-pane resizing functionality
 					 below ($("#MainSplitPaneObject").trigger("resize");). Something like:
@@ -259,38 +251,42 @@
 
 			var force = vis.add(pv.Layout.Force)
     			.nodes(distributome.nodes)
-    			.links(distributome.links);
-
-			force.link.add(pv.Line);
+    			.links(distributome.edges)
+				.springConstant(0.05)
+				.chargeConstant(-80)
+				.springLength(200)
+				.bound(true); 
+		
+			force.link.add(pv.Line)
+				.cursor("pointer")
+				.strokeStyle(function(d,l) { return l.selected?'red':'rgb(170,170,170)'})
+				.event("click", function (d, l) getRelationProperties(d.nodeName, l.index));
 
 			force.node.add(pv.Dot)
-				.size(function(d) (d.linkDegree + 4) * Math.pow(this.scale, -1.5))
-				.fillStyle(function(d) d.fix ? "brown" : colors(d.group))
+				.bottom(0)
+				.size(function(d) { return d.selected?(d.linkDegree + 15) * Math.pow(this.scale, -1.5):(d.linkDegree + 4) * Math.pow(this.scale, -1.5)})
+				.fillStyle(function(d) d.selected ? "red" : colors(d.group))
 				.strokeStyle(function() this.fillStyle().darker())
 				.lineWidth(1)
-				.title(function(d) d.nodeName)
+				//.title(function(d) d.nodeName)
+				.cursor("pointer")
+				.event("click", function (d) getNodeProperties(this.index, d.nodeName))
 				.event("mousedown", pv.Behavior.drag())
 				.event("drag", force)
 				.anchor("center").add(pv.Label)
-				.text(function(d) d.nodeName );
+				.text(function(d) d.nodeName )
+				.font(function(d) d.selected?'bold 10pt sans-serif':'normal 7pt sans-serif');
 
-			/**	To Do: Make the nodes (distributions) and edges (relations) clickable objects
-				that trigger events (select node/edge name and pass it to the Right-Split Panels 
-				for rendering the appropriate meta-data from the Distributome.xml DB
-				(e.g., distribution-properties, relation-description and citations/references).  
-			***/
 			vis.render();
+		}catch(e){
+		}
 		</script>
 		<!--  /center -->
   	</div> 	<!-- Left Pane -->	
 
     <div id="RightSide_Splitter1"> 
  
- 	<!-- To Do: Need to separate IE from Mozilla/Chrome browser handling of 
-			XMLHtmlRequests. See: http://www.szajkowski.com/ajaxsample.html
-	-->
- 
-	<div class="Top Pane">		<!-- Get the Distribution Properties from Distributome.xml -->
+	<div class="Top Pane" id="distributome.propertiesPannel">		<!-- Get the Distribution Properties from Distributome.xml -->
 		<script type="text/javascript">
 			/****	To Do:
 				Make the content of 3 panels below (Distirbution-proprties, edge properties
@@ -305,101 +301,16 @@
 				read/store it's content once as a global variable/object and just reference
 				the content as necessary?
 			*****/
-			var xmlhttp=new XMLHttpRequest();
-			xmlhttp.open("GET","Distributome.xml",false);
-			xmlhttp.send();
-			var xmlDoc=xmlhttp.responseXML;
-			var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-			document.write("<b><u>Distribution Properties</u></b> <br />");
-			var i=1;
-			var j_corr=0;
-			if (DistributomeXML_Objects[i].nodeType==1) {
-				//Process only level=1 element nodes (type 1) 
-				document.write(DistributomeXML_Objects[i].nodeName+" : "
-					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-				document.write("<br />");
-
-				var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-				var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-
-				var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].childNodes;
-				var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[5].nodeName)[5].firstChild;
-				document.write("Example with the (Index 5) Cauchy Distributioin <br />");
-				
-				var k_corr=0;
-				for (k=0;k<Level2Prop.length;k++) {
-					try {
-						if (currLevel2Prop.nodeType==1) {
-							//Process only level=3 element nodes (type 1)
-							document.write("---------"+ currLevel2Prop.nodeName+": "+
-									currLevel2Prop.childNodes[0].nodeValue);
-							document.write("<br />");
-						} else k_corr++;
-						currLevel2Prop=currLevel2Prop.nextSibling;
-					} catch (err) {
-						document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
-					}
-				}
-				document.write("END Cauchy Distributioin Properties Example<br />");
-			}
-							
-			/********************* Just an example to show parsing the entire Distributome.xml DB 
-			var i_corr=0;
-			for (i=0;i<DistributomeXML_Objects.length;i++) {
-				var j_corr=0;
- 				//document.write("Starting: i="+i+"<br />");
-  				if (DistributomeXML_Objects[i].nodeType==1) {
-  					//Process only level=1 element nodes (type 1) 
-  					document.write(DistributomeXML_Objects[i].nodeName+" : "
-  		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-					document.write("<br />");
-
-					//document.write("---:i="+i+" i_corr="+i_corr);
-					Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-						// Level1Prop = vector of "distributions"
-					currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-						// currLevel1Prop = "first distribution" object (arc-sine distribution)
-						//document.write("---:i="+i+" i_corr="+i_corr+" Distributome Level=2 Tags: "+Level1Prop.length+"<br />");
-
-					if (i=1) {	// for "distributions" objects
-						document.write("<br />DISTRIBUTIONS ... <br />");
-						for (j=0;j<Level1Prop.length;j++) {
-							var k_corr=0;					
-							if (currLevel1Prop.nodeType==1) {
-	  			 				//Process only level=2 element nodes (type 1)
-	  							document.write("------" + currLevel1Prop.nodeName+": "+
-	  		  						currLevel1Prop.childNodes[0].nodeValue);
-		  						// currLevel1Prop.childNodes[0].nodeValue == "distribution"
-								document.write("<br />");
-	 
-								Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
-									//Level2Prop = vector of property-objects for "distribution" parent
-								currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
-								for (k=0;k<Level2Prop.length;k++) {
-									if (currLevel2Prop.nodeType==1)
-	  								{ //Process only level=3 element nodes (type 1)
-	  									document.write("---------"+ currLevel2Prop.nodeName+": "+
-	  		  								currLevel2Prop.childNodes[0].nodeValue);
-										document.write("<br />");
-	  								} else k_corr++;
-									currLevel2Prop=currLevel2Prop.nextSibling;
-								}
-	  						} else j_corr++;
-							currLevel1Prop=currLevel1Prop.nextSibling;
-						}
-					} // End for "distributions" objects
-					document.write("<br />");
-  				} else i_corr++;
-			}
-			**************************/
+			
 		</script>
+		<b><u>Distribution Properties</u></b> <br />
 	</div>
 	
 	<div id="RightSide_Splitter2">
 		<div class="Middle Pane 1">
 			<b><u>Distribution Actions</u></b> <br />
 			<ul> 
-				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator">Calculator</a></li>
+				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator" id="distributome.calculator">Calculator</a></li>
 				<li><a href="./exp/PoissonExperiment.html" target="_blank" title="Run Virtual Distribution Experiment">Experiment</a></li>
 				<li><a href="./sim/NormalSimulation.html" target="_blank" title="Distribution Sampling and Simulation">Simulation</a></li>
 				<li><a href="./Distributome.xml.html" target="_blank" title="Render the entire Distributome Database as a web-page">Distributome DB HTML View</a></li>
@@ -407,88 +318,12 @@
 		</div>
 
 		<div id="RightSide_Splitter3">
-			<div class="Middle Pane 2"> <!-- Get the Inter-Distribution Relation Properties from Distributome.xml -->
-				<script type="text/javascript">
-					var xmlhttp=new XMLHttpRequest();
-					xmlhttp.open("GET","Distributome.xml",false);
-					xmlhttp.send();
-					var xmlDoc=xmlhttp.responseXML;
-					var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-					document.write("<b><u>Inter-Distribution Relations</u></b> <br />");
-
-					var i=3;
-					var j_corr=0;
-					if (DistributomeXML_Objects[i].nodeType==1) {
-						//Process only level=1 element nodes (type 1) 
-						document.write(DistributomeXML_Objects[i].nodeName+" : "
-		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-						document.write("<br />");
-
-						var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-						var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-
-						document.write("Example Beta --> Semicircle distribution relation (Index 7)<br />");
-						var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].childNodes;
-						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[7].nodeName)[7].firstChild;
-						var k_corr=0;
-						for (k=0;k<Level2Prop.length;k++) {
-							try {
-								if (currLevel2Prop.nodeType==1) {
-									//Process only level=3 element nodes (type 1)
-									document.write("---------"+ currLevel2Prop.nodeName+": "+
-											currLevel2Prop.childNodes[0].nodeValue);
-									document.write("<br />");
-								} else k_corr++;
-								currLevel2Prop=currLevel2Prop.nextSibling;
-							} catch (err) {
-								document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
-							}
-						}
-						document.write("END Beta --> Semicircle distribution relation Example<br />");
-					} // End for "Relations" objects
-				</script>
+			<div class="Middle Pane 2" id="distributome.relationPannel"> <!-- Get the Inter-Distribution Relation Properties from Distributome.xml -->
+				<b><u>Inter-Distribution Relations</u></b> <br />
 			</div>
 
-			<div class="Bottom Pane"> <!-- Get the References from Distributome.xml -->
-				<script type="text/javascript">
-					var xmlhttp=new XMLHttpRequest();
-					xmlhttp.open("GET","Distributome.xml",false);
-					xmlhttp.send();
-					var xmlDoc=xmlhttp.responseXML;
-					var DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
-					document.write("<b><u>Distribution Referencies</u></b> <br />");
-
-					var i_corr=0;
-					var i=5;
-					var j_corr=0;
-   					if (DistributomeXML_Objects[i].nodeType==1) {
-  						//Process only level=1 element nodes (type 1) 
-  						document.write(DistributomeXML_Objects[i].nodeName+" : "
-  		  					+DistributomeXML_Objects[i].childNodes[0].nodeValue);
-						document.write("<br />");
-
-						var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
-						var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-
-						document.write("Example Lesser Pearl, JSE, 2008 Reference (Index 9)<br />");
-						var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].childNodes;
-						var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[9].nodeName)[9].firstChild;
-						var k_corr=0;
-						for (k=0;k<Level2Prop.length;k++) {
-							try { 
-								if (currLevel2Prop.nodeType==1) {
-									document.write("---------"+ currLevel2Prop.nodeName+": "+
-											currLevel2Prop.childNodes[0].nodeValue);
-									document.write("<br />");
-								} else k_corr++;
-								currLevel2Prop=currLevel2Prop.nextSibling;
-							} catch (err) {
-								document.write("Empty tag" + currLevel2Prop.nodeValue + "<br />");
-							}
-						}
-						document.write("END Example Lesser & Pearl, JSE, 2008 Reference <br />");
-  					} // End for "References" objects
-				</script>
+			<div class="Bottom Pane" id="distributome.referencePanel"> <!-- Get the References from Distributome.xml -->
+				<b><u>Distribution Referencies</u></b> <br />
 			</div>
 		</div>
 	</div>
@@ -557,15 +392,38 @@ $().ready(function() {
 
 <script type="text/javascript+protovis">
 	function resetNavigator(){
+		resetView();
+		resetNodesEdges();
+		//force = vis.add(pv.Layout.Force);
+		force.reset();
+	}
+	
+	function resetNodesEdges(){
 		var classes = pv.nodes(distributome.nodes);		
-
 		classes.slice(1).forEach(function(d) {
 			var i = 5;
+			d.nodeValue.selected = false;
 			d.nodeValue = d.nodeValue.value;
 			if (isNaN(d.x)) d.x = w / 2 + 40 * Math.random() - 20;
 	    	if (isNaN(d.y)) d.y = h / 2 + 40 * Math.random() - 20;
 		});
-		var force = vis.add(pv.Layout.Force);
+		var classes = pv.nodes(distributome.edges);		
+		classes.slice(1).forEach(function(d) {
+			d.nodeValue.selected = false;
+		});
+		
+	}
+	function protovisRender(){
+		resetVariables();
+		var classes = pv.nodes(distributome.nodes);		
+		classes.slice(1).forEach(function(d) {
+			document.write(d.nodeValue.selected);
+		});
+		var classes = pv.nodes(distributome.edges);		
+		classes.slice(1).forEach(function(d) {
+			document.write('edges'+d.nodeValue.selected);
+		});
+		force = vis.add(pv.Layout.Force);
 		force.reset();
 	}
 </script>
