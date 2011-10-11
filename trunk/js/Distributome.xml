@@ -1694,6 +1694,173 @@
       <support>\((0, \infty)\)</support>
       <pdf>\(f(x)=1-2[\exp{-x^2}-\exp{-4 x^2}+\exp{-9 x^2}-\exp{-16 x^2}+...]\)</pdf>
     </distribution>
+    
+    <distribution id="Logistic-Exponential">
+		<name>Logistic-Exponential</name>
+		<type>continuous</type>
+    	<type>infinte</type>
+		<pdf>\( \alpha = \beta = \frac{1}{2} \)</pdf>
+	</distribution>
+
+	<distribution id="Power-Function">
+		<name>Power-Function</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+		<pdf>\( f(x) = \frac {\alpha(x-a)^{\alpha-1}} {(b-a)^\alpha}  \)</pdf>
+	</distribution>
+
+	<distribution id="Student's T Non-Central">
+		<name>Student's T Non-Central</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>infinite</type>
+		<pdf>\( f(t)=\frac{\nu^{\nu/2}e^{-\nu\mu^2/2(t^2+\nu)}} {\sqrt{\pi}\Gamma(\nu/2)2^{(\nu-1)/2}(t^2+\nu)^{(\nu+1)/2}} \times\int\limits_0^\infty x^\nu\exp\left[-\frac{1}{2}\left(x-\frac{\mu t}{\sqrt{t^2+\nu}}\right)^2\right]dx  \)</pdf>
+	</distribution>
+
+	<distribution id="Inverted Gamma">
+		<name>Inverted Gamma</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( \frac{\beta^\alpha}{\Gamma(\alpha)} x^{-\alpha - 1} \exp \left(\frac{-\beta}{x}\right)  \)</pdf>
+	</distribution>
+
+	<distribution id="Fisher-Tippett">
+		<name>Fisher-Tippett</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( \frac{\beta^\alpha}{\Gamma(\alpha)} x^{-\alpha - 1} \exp \left(\frac{-\beta}{x}\right)  \)</pdf>
+	</distribution>
+
+	<distribution id="Gibrat's">
+		<name>Gibrat's</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( \frac{1}{\sigma\sqrt{2\pi}}\exp\left[-\frac{\left(\ln(x)\right)^2}{2\sigma^2}\right]  \)</pdf>
+	</distribution>
+
+	<distribution id="Gompertz">
+		<name>Gompertz</name>
+		<type>continuous</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( b e^{-bx} e^{-\eta e^{-bx}}\left[1 + \eta\left(1 - e^{-bx}\right)\right]  \)</pdf>
+	</distribution>
+
+	<distribution id="MultiNomial">
+		<name>MultiNomial</name>
+		<type>discrete</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( f(x_1, x_2, \cdots, x_k)={n\choose x_1,x_2,\cdots, x_k}p_1^{x_1}p_2^{x_2}\cdots p_k^{x_k}  \)</pdf>
+	</distribution>
+
+	<distribution id="NegativeMultiNomial">
+		<name>NegativeMultiNomial</name>
+		<type>discrete</type>
+    	<type>nonsymmetric</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( f(k_o, \cdots, k_r) = \Gamma(k_o + \sum_{i=1}^r{k_i}) \frac{p_o^{k_o}}{\Gamma(k_o)} \prod_{i=1}^r{\frac{p_i^{k_i}}{k_i!}}  \)</pdf>
+	</distribution>
+
+	<distribution id="Negative Hypergeometric">
+		<name>Negative Hypergeometric</name>
+		<type>discrete</type>
+    	<type>finite</type>
+    	<type>positive</type>
+    	<model>If \({x \choose 2} \lt\lt W\) and \({b \choose 2} \lt\lt B\) then \(X\) can be
+    	approximated as a negative binomial random variable with parameters \(r = b\) and
+    	\(p = \frac{W}{W+B}\). This approximation simplifies the distribution by looking as
+    	a system with replacement for large values of \(W\) and \(B\).</model>
+    	<parameter>\(W \in \{1,2,...\}\)</parameter>
+    	<parameter>\(B \in \{1,2,...\}\)</parameter>
+    	<parameter>\(b \in \{1,2,...,B\}\)</parameter>
+    	<support>\(x=\{0,1,...,W\}\)</support>
+		<pdf>\( f(x) \frac{ { x+b-1 \choose x} {W+B-b-x \choose W-x} }{ {W+B \choose W} } \)</pdf>
+	</distribution>
+
+	<distribution id="Power Series">
+		<name>Power Series</name>
+		<type>discrete</type>
+    	<type>infinite</type>
+    	<type>positive</type>
+		<pdf>\( f(x; c; A(c)) = a(x) c^x / A(c). (x=(0,1,...), c>0, A(c)=\sum_{x}a(x) c^x) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Beta-Pascal">
+		<name>Beta-Pascal</name>
+		<type>discrete</type>
+    	<type>infinite</type>
+    	<type>positive</type>
+		<pdf>\( f(x; a, b, n) = \binom{n-1+x}{x} \frac{B(n+a, b+x)}{B(a,b)}. (x=(0,1,...); a+b=n) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Gamma-Poisson">
+		<name>Gamma-Poisson</name>
+		<type>discrete</type>
+    	<type>infinite</type>
+    	<type>positive</type>
+		<pdf>\( f(x; \alpha, \beta) = \frac{\Gamma(x+\beta) \alpha^x}{\Gamma(\beta) (1+\alpha)^{\beta+x} x!}.(x=(0,1,...); \alpha>0; \beta>0) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Polya">
+		<name>Polya</name>
+		<type>discrete</type>
+    	<type>finite</type>
+    	<type>positive</type>
+		<pdf>\( f(x; n, p, \beta) = \binom{n}{x} \frac{\prod_{j=0}^{x-1}(p+j\beta) \prod_{k=0}^{n-x-1}(1-p+k\beta)}{\prod_{i=0}^{n-1}(1+i\beta)}. (x=\{0,1,...,n\}) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Gamma-Normal">
+		<name>Gamma-Normal</name>
+		<type>bivariate</type>
+    	<type>continuous</type>
+    	<type>infinite</type>
+		<pdf>\( f(x, \tau; \mu, \lambda,\alpha,\beta) = \frac{\beta^\alpha \sqrt(\lambda)}{\Gamma(\alpha) \sqrt(2 \pi)} \tau^{\alpha-1/2} exp(-\beta \tau) exp(-\frac{\lambda \tau (x-\mu)^2}{2}).(\tau>0) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Discrete Weibull">
+		<name>Discrete Weibull</name>
+		<type>discrete</type>
+    	<type>infinite</type>
+    	<type>positive</type>
+		<pdf>\( f(x; p, \beta) = (1-p)^{x^\beta}-(1-p)^{(x+1)^\beta}. (x=\{0,1,...\}) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Noncentral Beta">
+		<name>Noncentral Beta</name>
+    	<type>continuous</type>
+    	<type>positive</type>
+		<pdf>\( f(x; \beta, \gamma, \delta) = \sum_{i=0}^{\infty}\frac{\Gamma(i+\beta+\gamma)}{\Gamma(\gamma) \Gamma(i+\beta)} \frac{exp(-\delta/2)}{i!} (\delta/2)^i x^{i+\beta-1} (1-x)^{\gamma-1}. (0 \leq x \leq 1) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Arctangent">
+		<name>Arctangent</name>
+    	<type>continuous</type>
+    	<type>infinite</type>
+   	 	<type>positive</type>
+		<pdf>\( f(x; \lambda, \phi)= \frac{\lambda}{[\arctan(\lambda \phi)+\pi/2]
+		[1+\lambda^2 (x - \phi)^2]} (x \geq 0, -\infty 
+		\lt \lambda \lt \infty) \! \)</pdf>
+	</distribution>
+
+	<distribution id="Log Gamma">
+		<name>Log Gamma</name>
+    	<type>continuous</type>
+    	<type>infinite</type>
+		<pdf>\( f(x)=[1/ \alpha^\beta \Gamma(\beta)]e^{\beta x}e^{-e^x/a}\), 
+		where \((-\infty \lt x \lt \infty) \! \)</pdf>
+	</distribution>
+    
 </distributions>
 
 <relations>
@@ -3041,6 +3208,205 @@
       <to>Logistic distribution</to>
       <statement>If X has a log-logistic distribution with scale parameter \(\alpha\) and shape parameter \(\beta\) then \(Y = log(X)\) has a logistic distribution with location parameter \(log(\alpha)\) and scale parameter \(1 / \beta\).</statement>
       <type>transformation</type>
+    </relation>
+
+	<relation id="exponential/Erlang">
+    	<from>Exponential distribution</from>
+   		<to>Erlang distribution</to>
+    	<statement></statement>
+	</relation>
+
+	<relation id="noncentral-student/student"> 
+    	<from>noncentral Student's t-distribution</from>
+    	<to>Student's t-distribution</to>
+    	<statement></statement>
+	</relation>
+
+	<relation id="log-exponential/exponential">
+   	 	<from>logistic exponential distribution</from>
+    	<to>exponential distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="standard-uniform/benford">
+    	<from>standard uniform distribution</from>
+    	<to>benford distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="gamma/inverted-gamma">
+    	<from>gamma distribution</from>
+    	<to>inverted gamma distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="Cauchy/standard-Cauchy">
+    	<from>Cauchy distribution</from>
+    	<to>standard Cauchy distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="standard-Cauchy/hyperbolic-secant">
+    	<from>standard Cauchy distribution</from>
+    	<to>hyperbolic secant distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="negative-binomial/negative-multinomial">
+    	<from>negative binomial distribution</from>
+    	<to>negative multinomial distribuion</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="gamma/pascal"> 
+    	<from>gamma distribution</from>
+    	<to>pascal distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="discrete-uniform/rectangular"> 
+    	<from>Discrete Uniform Distribution</from>
+    	<to>Pascal Distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="power-series/logarithmic">
+    	<from>power-series distribuion</from>
+    	<to>logarithmic distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="pascal/beta-pascal">
+    	<from>pascal distribuion</from>
+    	<to>beta pascal distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="polya/binomial">
+    	<from>polya distribuion</from>
+    	<to>binomial distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="geometric/pascal">
+    	<from>geometric distribuion</from>
+    	<to>pascal distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="pascal/normal">
+    	<from>pascal distribuion</from>
+    	<to>normal distribuion</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="beta/normal">
+    	<from>beta distribution</from>
+    	<to>normal distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="generalized-gamma/log-normal">
+    	<from>generalized gamma distribution </from>
+    	<to>log-normal distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="inverse-gaussian/Wald">
+    	<from>inverse gaussian distribution</from>
+    	<to>Wald distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="chi-square/chi">
+    	<from>chi-square distribution</from>
+    	<to>chi distribution</to>
+    	<statement></statement>
+    </relation>
+
+	<relation id="chi-square/exponential">
+    	<from>chi-square distribution</from>
+    	<to>exponential distribution</to>
+    </relation>
+
+	<relation id="beta/inverted-beta"> 
+   		 <from>beta distribution</from>
+    	<to>inverted beta distribution</to>
+    </relation>
+
+	<relation id="hypoexponential/Erlang">
+    	<from>hypoexponential distribution</from>
+    	<to>Erlang distribution</to>
+    </relation>
+
+	<relation id="doubly-noncentral-t/chi-squre"> 
+    	<from>doubly noncentral t distribution</from>
+    	<to>noncentral t distribution</to>
+    </relation>
+
+	<relation id="noncentral-F/F"> 
+    	<from>noncentral f distribution</from>
+    	<to>f distribution</to>
+    </relation>
+
+	<relation id="hyperexponential/exponential">
+    	<from>hyperexponential distribution</from>
+    	<to>exponential distribution</to>
+    </relation>
+
+	<relation id="exponential/Rayleigh">
+    	<from>exponential distribution</from>
+    	<to>Rayleigh distribution</to>
+    </relation>
+
+	<relation id="standard-uniform/gompertz"> 
+    	<from>standard uniform distribution</from>
+    	<to>gompertz distribution</to>
+    </relation>
+
+	<relation id="error/Laplace">
+    	<from>error distributon</from>
+    	<to>Laplace distribution</to>
+    </relation>
+
+	<relation id="standard-uniform/uniform">
+    	<from>standard uniform distribution</from>
+    	<to>uniform distribution</to>
+    </relation>
+
+	<relation id="standard-power/standard-uniform">
+    	<from>standard power distribution</from>
+    	<to>standard uniform distribution</to>
+    </relation>
+
+	<relation id="minimax/standard-power">
+    	<from>minimax distribution</from>
+    	<to>standard power distribution</to>
+    </relation>
+
+	<relation id="power/standard-power">
+    	<from>power distribution</from>
+    	<to>standard power distribution</to>
+    </relation>
+
+	<relation id="generalized-pareto/Pareto">
+    	<from>generalized Pareto distribution</from>
+    	<to>Pareto distribution</to>
+    </relation>
+
+	<relation id="Extreme-value/Weibull">
+    	<from>Weibull distribution</from>
+    	<to>Extreme-value distribution</to>
+    </relation>
+
+	<relation id="lomax/log-logistic">
+    	<from>lomax distribution</from>
+    	<to>log-logistic distribution</to>
+    </relation>
+
+	<relation id="TSP/triangular">
+    	<from>TSP distribution</from>
+    	<to>triangular distribution</to>
     </relation>
 
 </relations>
