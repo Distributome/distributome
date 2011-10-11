@@ -1453,7 +1453,6 @@
 	<support>\(\{k, k + 1, \ldots, m - n + 1\}\)</support>
 	<pdf>\(f(x) = \frac{\binom{x-1}{k-1} \binom{m-x}{n-k}}{\binom{m}{n}}, \quad x \in \{k, k + 1, \quad m - n + 1\}\)</pdf>
 	<mean>\(k \frac{m+1}{n+1}\)</mean>
-	<median></median>
 	<variance>\(k(n - k + 1) \frac{(m + 1)(m - n)}{(m + 1)^2 (n + 2)}\)</variance>
 </distribution>
 
@@ -1476,6 +1475,225 @@
 	<variance>\(k /\lambda^2\)</variance>
 </distribution>
 
+    <distribution id="Generalized Gamma">
+      <name>Generalized Gamma distribution</name>
+      <type>continuous</type>
+      <model>The generalized gamma distribution is not often used to model life data by itself, but it is sometimes used to determine which of those life distributions should be used to model a particular set of data.</model>
+      <parameter>\(\alpha \in (0, \infty)\), the scale parameter</parameter>
+      <parameter>\(\beta \in (0, \infty)\), the shape parameter</parameter>
+      <parameter>\(\gamma \in (0, \infty)\), the shape parameter</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x)=\frac{\gamma}{\alpha^{\gamma \beta}\Gamma(\beta)}x^{\gamma \beta-1}e^{-(x/\alpha)^\gamma}; x \in (0, \infty)\)</pdf>
+    </distribution>
+    
+    <distribution id="Standard Wald">
+      <!--Everything is the same as Wald-->
+      <name>Standard Wald distribution</name>
+      <type>continuous</type>
+      <model>The Wald distribution governs the time that Brownian Motion with positive drift reaches a fixed positive value.</model>
+      <parameter>\(\mu \in (0, \infty)\), the mean</parameter>
+      <parameter>\(\lambda \in (0, \infty)\), the shape parameter</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x)=\sqrt{\frac{\lambda}{2\pi x^3}}e^{-\frac{\lambda}{2x}(x-1)^2}\)</pdf>
+    </distribution>
+    
+    <distribution id="Makeham">
+      <name>Makeham distribution</name>
+      <name>Gompertz–Makeham law of mortality</name>
+      <type>continuous</type>
+      <model>The Gompertz–Makeham law states that the death rate is the sum of an age-independent component and an age-dependent component, which increases exponentially with age.</model>
+      <parameter>\(\gamma \in (0, \infty)\)</parameter>
+      <parameter>\(\delta \in (0, \infty)\)</parameter>
+      <parameter>\(\kappa \in (0, \infty)\)</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x) = (\gamma + \delta\kappa^x)exp(-\gamma x-\frac{\delta(\kappa^x-1)}{log(\kappa)})\)</pdf>
+    </distribution>
+    
+    <distribution id="HypoExponential">
+      <name>HypoExponential distribution</name>
+      <name>generalized Erlang distribution</name>
+      <type>continuous</type>
+      <model>The hypoexponential distribution has a coefficient variation less than one, compared to the hyperexponential distribution which has a coefficient variation greater than one and the exponential distribution which has a coefficient variation of one.</model>
+      <parameter>\(\alpha_1,...,\alpha_n \in (0, \infty), \alpha_i \neq \alpha_j for i \neq j\) </parameter>
+      <support>\([0, \infty)\)</support>
+      <pdf>\(f(x) = \sum_{i=1}^{n}(\alpha_i)exp(-x/\alpha_i)(\prod_{j=1,j\neq i}^{n}\frac{\alpha_i}{\alpha_i-\alpha_j})\)</pdf>
+    </distribution>
+    
+    <distribution id="Doubly Noncentral t">
+      <!--formula not given for this distribution-->
+      <name>Doubly Noncentral t distribution</name>
+      <type>continuous</type>
+      <model>The doubly noncentral t distribution is an extended version of the singly noncentral t distribution in that it has two noncentrality parameters instead of just one.</model>
+      <history>See http://onlinelibrary.wiley.com/doi/10.1111/j.1467-842X.1969.tb00102.x/pdf </history>
+    </distribution>
+    
+    <distribution id="HyperExponential">
+      <name>HyperExponential distribution</name>
+      <type>continuous</type>
+      <model>The hyperexponential distribution has a coefficient variation greater than one, compared to the hypoexponential distribution which has a coefficient variation less than one and the exponential distribution which has a coefficient variation of one.</model>
+      <parameter>\(\alpha_1,...,\alpha_n \in (0, \infty), \alpha_i \neq \alpha_j for i \neq j\)</parameter>
+      <parameter>\(p_i &gt; 0, \sum_{i=1}^{n} p_i = 1\)</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x) = \sum_{i=1}^{n}\frac{p_i}{\alpha_i}e^{-x/\alpha_i}\)</pdf>
+    </distribution>
+    
+    <distribution id="Muth">
+      <!--can't find a model description-->
+      <name>Muth distribution</name>
+      <type>continuous</type>
+      <model>The Muth distribution is related to reliability models. It has mostly
+      a theoretical interest. Muth distribution has two basic properties: (i) the
+      mode of this random model is a function involving the golden ratio and (ii)
+      the second non-central moment can be expressed in terms of the exponential
+      integral function. The moments of higher order cannot be expressed in a simple way.
+      The Muth distribution does not have the variate generation property for
+      simulation purposes. Its quantile function can be expressed in closed form in 
+      terms of the negative branch of the Lambert W function. The limit distributions
+      of the maxima and minima of the Muth distribution are the Gumbel and Weibull
+      distributions, respectively.</model>
+      <parameter>\(\kappa \in [0, 1]\), the shape parameter</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x) = (e^{\kappa x}-\kappa)e^{-(1/\kappa)e^{\kappa x}+\kappa x+1/\kappa}\)</pdf>
+    </distribution>
+    
+    <distribution id="Error">
+      <name>generalized error distribution</name>
+      <name>generalized normal distribution</name>
+      <name>generalized Gaussian distribution</name>
+      <name>exponential power distribution</name>
+      <type>continuous</type>
+      <model>The error distribution is a parametric family of symmetric distributions. It adds a shape parameter to the normal distribution.</model>
+      <parameter>\(a \in (-\infty, \infty)\), the mean</parameter>
+      <parameter>\(b \in (0, \infty)\), the scale parameter</parameter>
+      <parameter>\(c \in (0, \infty)\), the shape parameter</parameter>
+      <support>\((-\infty, \infty)\)</support>
+      <pdf>\(f(x) = \frac{exp[-(|x-a|/b)^{2/c}/2]}{b 2^{c/2+1}\Gamma(1+c/2)}\)</pdf>
+    </distribution>
+    
+    <distribution id="Minimax">
+      <name>Minimax distribution</name>
+      <type>continuous</type>
+      <model>The Minimax distribution is an alternative two-parameter distribution of the Beta distribution.</model>
+      <parameter>\(\beta \in (0, \infty)\)</parameter>
+      <parameter>\(\gamma \in (0, \infty)\)</parameter>
+      <support>\((0, 1)\)</support>
+      <pdf>\(f(x) = \beta\gamma x^{\beta-1}(1-x^\beta)^{\gamma-1}\)</pdf>
+    </distribution>
+    
+    <distribution id="Noncentral F">
+      <name>Noncentral F distribution</name>
+      <type>continuous</type>
+      <model>The noncentral F distribution is a generalization of the ordinary F distribution.</model>
+      <parameter>\(\delta \in (0, \infty)\)</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x) = \sum_{i=0}^{\infty}\frac{\Gamma(\frac{2i+n_1+n_2}{2})(n_1/n_2)^{(2i+n_1)/2}x^{(2i+n_1-2)/2}e^{-\delta/2}(\delta/2)^i}{\Gamma(n_2/2)\Gamma(\frac{2i+n_1}{2})i!(1+\frac{n_1}{n_2}x)^{(2i+n_1+n_2)/2}}\)</pdf>
+    </distribution>
+    
+    <distribution id="IDB">
+      <name>Increasing-Decreasing-Bathtub distribution</name>
+      <type>continuous</type>
+      <model>The IDB distribution can be used to model either an increasing, decreasing or bathtub shaped failure rate function, which is a combination of a linearly increasing failure rate and a decreasing failure rate function</model>
+      <parameter>\(\delta \in (0, \infty)\)</parameter>
+      <parameter>\(\kappa \in (0, \infty)\)</parameter>
+      <parameter>\(\gamma \in [0, \infty)\)</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x) = \frac{(1+\kappa x)\delta x+\gamma}{(1+\kappa x)^{\gamma/\kappa+1}}e^{-\delta x^2/2}\)</pdf>
+    </distribution>
+    
+    <distribution id="Benford's law">
+      <name>Benford's law</name>
+      <name>first digit law</name>
+      <type>discrete</type>
+      <model>Benford's law states that in lists of numbers from many (but not all) real-life sources of data, the leading digit is distributed in a specific, non-uniform way.</model>
+      <parameter>\(d \in {1,...,9}\)</parameter>
+      <parameter>\(b = 10\), the log base</parameter>
+      <support>\((0, 1)\)</support>
+      <pdf>\(P(d) = \log_b(d + 1)- \log_b(d) = \log_b(\frac{d + 1}{d})\)</pdf>
+    </distribution>
+    
+    <distribution id="Standard Triangular">
+      <name>Standard Triangular distribution</name>
+      <type>continuous</type>
+      <model>The standard triangular distribution is a special case of the triangular distribution where \(a=-1, b=1, m=0\).</model>
+      <parameter>none</parameter>
+      <support>\([-1, 1]\)</support>
+      <pdf>\(f(x) = \begin{cases} x+1, -1\lt x\lt 0 \\ 1-x, 0 \leq x\lt 1 \end{cases}\)</pdf>
+    </distribution>
+    
+    <distribution id="Doubly Noncentral F">
+      <name>Doubly Noncentral F distribution</name>
+      <type>continuous</type>
+      <model>The doubly noncentral F distribution is an extended version of the singly noncentral F distribution in that it has two noncentrality parameters instead of just one.</model>
+      <parameter>\(\delta \in (0, \infty)\)</parameter>
+      <parameter>\(\gamma \in (0, \infty)\)</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x)= \sum_{j=0}^{\infty}\sum_{k=0}^{\infty}[\frac{e^{-\delta/2}(\frac{1}{2}\delta)^j}{j!}][\frac{e^{-\gamma/2}(\frac{1}{2}\gamma)^k}{k!}]\times n_1^{(n_1/2)+j}n_2^{(n_2/2)+k}x^{(n_1/2)+j-1}\times (n_2+n_1 x)^{-\frac{1}{2}(n_1+n_2)-j-k}\times [B(\frac{1}{2}n_1+j,\frac{1}{2}n_2+k)]^{-1}\)</pdf>
+    </distribution>
+    
+    <distribution id="Half Circle">
+      <name>Wigner semicircle distribution</name>
+      <name>Half Circle distribution</name>
+      <type>continuous</type>
+      <model>The Wigner semicircle distribution arises as the limiting distribution of eigenvalues of many random symmetric matrices as the size of the matrix approaches infinity.</model>
+      <parameter>\(r \in (0, \infty)\), the radius</parameter>
+      <support>\([-r, r]\)</support>
+      <pdf>\(f(x)={2\sqrt{r^2 - x^2}\over \pi r^2 }, \forall x \in [-r , r]\)</pdf>
+    </distribution>
+    
+    <distribution id="TSP">
+      <name>Two-Sided Power distribution</name>
+      <type>continuous</type>
+      <model>The two-sided power distribution is an alternative to the triangular distribution, allowing for a nonlinear distribution. Triangular and uniform distributions are special cases of the two-sided power distribution.</model>
+      <parameter>\(n \in (0, \infty)\)</parameter>
+      <parameter>\(a \in (-\infty, \infty)\)</parameter>
+      <parameter>\(b \in (a, \infty)\)</parameter>
+      <parameter>\(m=(b-a)\theta+a\)</parameter>
+      <support>\((a, b)\)</support>
+      <pdf>\(f(x) = \begin{cases} \frac{n}{b-a}(\frac{x-a}{m-a})^{n-1}, a\lt x\le m \\  \frac{n}{b-a}(\frac{b-x}{b-m})^{n-1}, m\le x\lt b \end{cases}\)</pdf>
+    </distribution>
+    
+    <distribution id="Extreme Value">
+      <name>Extreme Value Type I distribution</name>
+      <name>Gumbel distribution</name>
+      <type>continuous</type>
+      <model>The Extreme Value distribution is the limiting distribution of the minimum of a large number of unbounded identically distributed random variables.</model>
+      <parameter>\(\alpha \in (0, \infty)\)</parameter>
+      <parameter>\(\beta \in (0, \infty)\)</parameter>
+      <support>\((-\infty, \infty)\)</support>
+      <pdf>\(f(x)=(\beta/\alpha)e^{x\beta-e^{x\beta}/\alpha}\)</pdf>
+    </distribution>
+    
+    <distribution id="Lomax">
+      <name>Lomax distribution</name>
+      <name>Pareto Type II distribution</name>
+      <type>continuous</type>
+      <model>The Lomax distribution is essentially a Pareto distribution that has been shifted so that its support begins at zero.</model>
+      <parameter>\(\kappa \in (0, \infty)\), the shape parameter</parameter>
+      <parameter>\(\lambda \in (0, \infty)\), the scale parameter</parameter>
+      <support>\([0, \infty)\)</support>
+      <pdf>\(f(x)=\frac{\lambda \kappa}{(1+\lambda x)^{\kappa+1}}\)</pdf>
+    </distribution>
+    
+    <distribution id="Generalized Pareto">
+      <name>Generalized Pareto distribution</name>
+      <type>continuous</type>
+      <model>The generalized Pareto distribution allows a continuous range of possible shapes that includes both the exponential and Pareto distributions as special cases. </model>
+      <parameter>\(\kappa \in (-\infty, \infty)\), the shape parameter</parameter>
+      <parameter>\(\sigma \in (0, \infty)\), the scale parameter</parameter>
+      <parameter>\(\mu \in (0, \infty)\), the mean</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x)=\frac{1}{\sigma}(1+\kappa \frac{(x-\mu)}{\sigma})^{-1-\frac{1}{\kappa}}\)</pdf>
+    </distribution>
+    
+    <distribution id="Kolmogorov-Smirnov">
+      <name>Kolmogorov-Smirnov test</name>
+      <name>Kolmogorov distribution</name>
+      <type>continuous</type>
+      <model>The Kolmogorov-Smirnov test can be modified to serve as a goodness of fit test.</model>
+      <parameter>none</parameter>
+      <support>\((0, \infty)\)</support>
+      <pdf>\(f(x)=1-2[\exp{-x^2}-\exp{-4 x^2}+\exp{-9 x^2}-\exp{-16 x^2}+...]\)</pdf>
+    </distribution>
 </distributions>
 
 <relations>
@@ -2478,6 +2696,353 @@
 	<statement>If \(X\) has the Weibull distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(Y = \left(\frac{X}{b}\right)^k\) has the standard exponential distribution.</statement>
 	<type>transformation</type>
 </relation>
+
+    <relation id="General Normal/Standard Normal">
+      <from>General Normal distribution</from>
+      <to>Standard Normal distribution</to>
+      <statement>The general normal distribution with \(\mu=0\) and \(\sigma^2=1\) is called the standard normal</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Student's t/Standard Normal">
+      <from>Student's t distribution</from>
+      <to>Standard Normal distribution</to>
+      <statement>As \(n\longrightarrow\infty\), the t-distribution approaches the normal distribution with mean 0 and variance 1</statement>
+      <type>limiting</type>
+    </relation>
+    
+    <relation id="Fisher's F/Student's T">
+      <from>Fisher's F distribution</from>
+      <to>Student's t distribution</to>
+      <statement>The square root of a Fisher's F distribution is a Student's t distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Binomial/General Normal">
+      <from>Binomial distribution</from>
+      <to>General Normal distribution</to>
+      <statement>If n is large enough, then the skew of the distribution is not too great. In this case, if a suitable continuity correction is used, then an excellent approximation to \(B(n, p)\) is given by the normal distribution \(N(np, np(1-p))\) as \(n \rightarrow \infty\)</statement>
+      <type>limiting</type>
+    </relation>
+    
+    <relation id="Erlang/Chi-Square">
+      <from>Erlang distribution</from>
+      <to>Chi-Square distribution</to>
+      <statement>When the scale parameter \(\mu\) equals 2, then the Erlang distribution simplifies to the chi-square distribution with \(2k\) degrees of freedom</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Noncentral Student's t/Normal">
+      <from>Noncentral Student's t distribution</from>
+      <to>Normal distribution</to>
+      <statement>If \(T\) is noncentral t-distributed with \(\nu\) degrees of freedom and noncentrality parameter \(\mu\) and \(Z=\lim_{\nu\to\infty}T\), then \(Z\) has a normal distribution with mean \(\mu\) and unit variance</statement>
+      <type>limiting</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Pareto">
+      <!--same as continuous-uniform/Pareto-->
+      <from>Standard Uniform distribution</from>
+      <to>Pareto distribution</to>
+      <statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\beta \in (0, \infty)\) then \(\frac{\mu}{(1 - X)^{1/\beta}}\) has the Pareto distribution with location parameter \(\mu\) and shape parameter \(\beta\).</statement>
+      <type>nonlinear transformation</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Exponential">
+      <!--same as continuous-uniform/exponential-->
+      <from>Standard Uniform distribution</from>
+      <to>Exponential distribution</to>
+      <statement>If \(X\) has the standard uniform distribution and \(\beta \in (0, \infty)\), then \(-\beta \ln(1 - X)\) has the exponential distribution with scale parameter \(\beta\).</statement>
+      <type>nonlinear transformation</type>
+    </relation>
+    
+    <relation id="Zipf/Discrete Uniform">
+      <from>Zipf distribution</from>
+      <to>Discrete Uniform distribution</to>
+      <statement>The discrete uniform distribution is a special case of the Zipf distribution where \(a=0, a=1, b=n\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Fisher-Tippett/Gumbel">
+      <from>Fisher-Tippett distribution</from>
+      <to>Gumbel distribution</to>
+      <statement>The Gumbel distribution is a particular case of the Fisher-Tippett distribution where \(\mu=0, \beta=1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Log-Normal/Gibrat's">
+      <from>Log-Normal distribution</from>
+      <to>Gibrat's distribution</to>
+      <statement>Gibrat's law is a special case of the log-normal distribution where</statement>
+      <type>special case \(\mu=0, x=1\)</type>
+    </relation>
+    
+    <relation id="Standard Cauchy/Cauchy">
+      <from>Standard Cauchy distribution</from>
+      <to>Cauchy distribution</to>
+      <statement>If \(X\) is a standard Cauchy distribution, then \(Y = x_0 + \gamma X\) is a Cauchy distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Multinomial/Binomial">
+      <from>Multinomial distribution</from>
+      <to>Binomial distribution</to>
+      <statement>When \(k=2\), the multinomial distribution is the binomial distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Power series/Pascal">
+      <from>Power series distribution</from>
+      <to>Pascal distribution</to>
+      <statement>The power series\(c, (A(c))\) distribution becomes a Pascal distribution when \(A(c)=(1-c)^{-x}, c=1-p\)</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Poisson/Gamma Poisson">
+      <from>Poisson distribution</from>
+      <to>Gamma Poisson distribution</to>
+      <statement>Let \(\mu \sim Gamma(\alpha, \beta)\) denote that \(\mu\) is distributed 
+      according to the Gamma density g parameterized in terms of a shape parameter 
+      \(\alpha\) and an inverse scale parameter \(\beta\): \(g(\mu \mid \alpha, \beta) =
+       \frac{\beta^{\alpha}}{\Gamma(\alpha)} \mu^{\alpha-1} e^{-\beta \mu}, \mu&gt;0\). 
+       Then, given the same sample of n measured values \(k_i\) as before, and a prior of
+       \(Gamma(\alpha, \beta)\), the posterior distribution is 
+       \(\mu \sim Gamma(\alpha + \sum_{i=1}^n k_i, \beta + n)\). 
+       The posterior predictive distribution of additional data is a Gamma-Poisson 
+       distribution.</statement>
+      <type>Bayesian</type>
+    </relation>
+    
+    <relation id="Rectangular/Beta-Binomial">
+      <from>Rectangular distribution</from>
+      <to>Beta-Binomial distribution</to>
+      <statement>For \(a=b=1)\), the rectangular distribution reduces to the beta-binomial distribution as a special case</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Zipf/Zeta">
+      <from>Zipf distribution</from>
+      <to>Zeta distribution</to>
+      <statement>The zeta distribution is equivalent to the Zipf distribution for infinite N. </statement>
+      <type>limiting</type>
+    </relation>
+    
+    <relation id="Power Series/Poisson">
+      <from>Power Series distribution</from>
+      <to>Poisson distribution</to>
+      <statement>The power series\((c, A(c))\) distribution becomes a Poisson distribution when \(\mu=c, A(c)=e^c\) </statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Pascal/Poisson">
+      <from>Pascal distribution</from>
+      <to>Poisson distribution</to>
+      <statement>Consider a sequence of negative binomial distributions where the stopping
+      parameter n goes to infinity, whereas the probability of success in each trial, 
+      p, goes to zero in such a way as to keep the mean of the distribution constant. 
+      Denoting this mean \(\mu\), the parameter p will have to be 
+      \(\mu = r \frac{p}{1-p} \rightarrow p = \frac{\mu}{r+\mu}\). Then \(Poisson(\mu) =
+      \lim_{n \to \infty} Pascal(n, \frac{\mu}{\mu+n})\).</statement>
+      <type>transformation, limiting</type>
+    </relation>
+    
+    <relation id="Negative Hypergeometric/Binomial">
+      <from>Negative Hypergeometric distribution</from>
+      <to>Binomial distribution</to>
+      <statement>As \(n_3\to\infty, n_1\to\infty\) and letting \(p=n_1/n_3, n_2=n\), the negative hypergeometric\((n_1, n_2, n_3)\) distribution becomes a binomial\((n, p)\) distribution</statement>
+      <type>transformation, limiting</type>
+    </relation>
+    
+    <relation id="Pascal/Geometric">
+      <from>Pascal distribution</from>
+      <to>Geometric distribution</to>
+      <statement>The geometric distribution is a special case of the Pascal distribution where \(n=1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Discrete Weibull/Geometric">
+      <from>Discrete Weibull distribution</from>
+      <to>Geometric distribution</to>
+      <statement>The geometric distribution is a particular case of the discrete Weibull distribution where \(\beta=1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Normal/Chi-Square">
+      <from>Normal distribution</from>
+      <to>Chi-Square distribution</to>
+      <statement>If \(X_i \sim Normal(\mu, \sigma^2)\), with \(i=1,...,k\) independent
+      random variables, then \(\sum_{i=1}^{k} (\frac{X_i-\mu}{\sigma})^2\) is a chi-sqaure
+      distribution.</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Normal/Gamma-Normal">
+      <from>Normal distribution</from>
+      <to>Gamma-Normal distribution</to>
+      <statement>When the \(\sigma\) in the normal distribution is Inverted gamma\((\alpha, \beta)\), the normal distribution becomes a gamma-normal\(\mu, \alpha, \beta)\) distribution</statement>
+      <type>Bayesian</type>
+    </relation>
+    
+    <relation id="Inverse Gaussian/Standard Normal">
+      <from>Inverse Gaussian distribution</from>
+      <to>Standard Normal distribution</to>
+      <statement>As \(\lambda \to \infty\), the inverse Gaussian distribution becomes more like a standard normal (Gaussian) distribution</statement>
+      <type>limiting</type>
+    </relation>
+    
+    <relation id="Gamma/Log Gamma">
+      <from>Gamma distribution</from>
+      <to>Log Gamma distribution</to>
+      <statement>If a random variable \(X\) is gamma-distributed with scale \(\alpha\) and shape \(\beta\), then \(Y = log X\) is log gamma-distributed.</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Generalized Gamma/Gamma">
+      <from>Generalized Gamma distribution</from>
+      <to>Gamma distribution</to>
+      <statement>The gamma distribution is a special case of the generalized gamma distribution where \(\gamma=1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Inverse Gaussian/Chi-Square">
+      <from>Inverse Gaussian distribution</from>
+      <to>Chi-Square distribution</to>
+      <statement>If a random variable \(X\) is inverse Gaussian-distributed with mean \(\mu\) and shape parameter \(\lambda\), the \(Y = \lambda(X-\mu)^2/(\mu^2 X)\) has a chi-square distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Exponential/Chi-Square">
+      <from>Exponential distribution</from>
+      <to>Chi-Square distribution</to>
+      <statement>If \(X \sim Exponential(\lambda=1/2)\), then \(X \sim \chi_{2}^{2}\) has a chi-square distribution with 2 degrees of freedom</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Chi-Square/Erlang">
+      <from>Chi-Square distribution</from>
+      <to>Erlang distribution</to>
+      <statement>If \(X \sim \chi^{2}(k)\) with even \(k\), then \(X\) is Erlang distributed with shape parameter \(k/2\) and scale parameter \(1/2\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Cauchy/Arctangent">
+      <from>Cauchy distribution</from>
+      <to>Arctangent distribution</to>
+      <statement>The derivative of the arctangent function gives the formula of the Cauchy distribution. Therefore, the arctangent is called the Cauchy cumulative distribution</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Exponential/Hypoexponential">
+      <from>Exponential distribution</from>
+      <to>Hypoexponential distribution</to>
+      <statement>The hypoexponential distribution is the distribution of a general sum (\(\sum X_i)\) of exponential random variables. Its coefficient of variation is less than one, compared to the exponential distribution, whose coefficient of variation is one</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Makeham/Gompertz">
+      <from>Makeham distribution</from>
+      <to>Gompertz distribution</to>
+      <statement>The Gompertz distribution is a special case of the Makeham distribution where \(\gamma=0\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Exponential/F">
+      <from>Exponential distribution</from>
+      <to>F distribution</to>
+      <statement>If \(X_1, X_2\) are two independent random variables with exponential distribution with \(\alpha=1\), then \(Y=X_1/X_2\) is an F distribution</statement>
+      <type>special case, transformation</type>
+    </relation>
+    
+    <relation id="Exponential/Hyperexponential">
+      <from>Exponential distribution</from>
+      <to>Hyperexponential distribution</to>
+      <statement>The hyperexponential distribution is the distribution whose density is a weighted sum of exponential densities. Its coefficient of variation is greater than one, compared to the exponential distribution, whose coefficient of variation is one</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="IDB/Exponential">
+      <from>IDB distribution</from>
+      <to>Exponential distribution</to>
+      <statement>The exponential distribution is a special case of the IDB distribution where \(\delta=\kappa \to 0\) in the IDB function and \(\alpha=1/ \gamma\) in the exponential function</statement>
+      <type>special case, limiting</type>
+    </relation>
+    
+    <relation id="Muth/Exponential">
+      <from>Muth distribution</from>
+      <to>Exponential distribution</to>
+      <statement>The exponential distribution is a particular case of the Muth distribution where \(\alpha=1\) in the exponential function and \(\kappa \to 0\) in the Muth function</statement>
+      <type>special case, limiting</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Exponential Power">
+      <from>Standard Uniform distribution</from>
+      <to>Exponential Power distribution</to>
+      <statement>If \(X\) has a standard uniform distribution, then \(Y=[log(1-log(1-X))/\gamma]^{1/\kappa}\) has an exponential power distribution with parameters \(\lambda\) and \(\kappa\)</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Laplace/Error">
+      <from>Laplace distribution</from>
+      <to>Error distribution</to>
+      <statement>The error distribution is a special case of Laplace distribution where \(\alpha_1=\alpha_2\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Standard Triangular">
+      <from>Standard Uniform distribution</from>
+      <to>Standard Triangular distribution</to>
+      <statement>If \(X_1, X_2\) are two independent random variables with standard uniform distribution, then \(X = X_1-X_2\) is a standard triangular distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Standard Power">
+      <from>Standard Uniform distribution</from>
+      <to>Standard Power distribution</to>
+      <statement>If X is and independent random variable with standard uniform distribution, then \(X^{1/\beta}\) is a standard power distribution</statement>
+      <type>transformation</type>
+    </relation>
+    
+    <relation id="Standard Uniform/Standard Power">
+      <from>Standard Uniform distribution</from>
+      <to>Standard Power distribution</to>
+      <statement>If \(X\) is a standard uniform distribution, then \(X_(n)\) is a standard power distribution</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="IDB/Rayleigh">
+      <from>IDB distribution</from>
+      <to>Rayleigh distribution</to>
+      <statement>The Rayleigh distribution is a special case of the IDB distribution where \(\delta=2/\alpha, \gamma=0\)</statement>
+      <type>special case, transformation</type>
+    </relation>
+    
+    <relation id="Weibull/Rayleigh">
+      <from>Weibull distribution</from>
+      <to>Rayleigh distribution</to>
+      <statement>The Rayleigh distribution is a special case of the Weibull distribution where \(\beta=1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Triangular/Standard Triangular">
+      <from>Triangular distribution</from>
+      <to>Standard Triangular distribution</to>
+      <statement>The standard triangular distribution is a special case of the triangular distribution where \(a=-1, b=1, m=0\).</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Log-Logistic/Lomax">
+      <from>Log-Logistic distribution</from>
+      <to>Lomax distribution</to>
+      <statement>The Lomax distribution is a special case of the Log-logistic distribution where \(\kappa = 1\)</statement>
+      <type>special case</type>
+    </relation>
+    
+    <relation id="Log-Logistic/Logistic">
+      <from>Log-Logistic distribution</from>
+      <to>Logistic distribution</to>
+      <statement>If X has a log-logistic distribution with scale parameter \(\alpha\) and shape parameter \(\beta\) then \(Y = log(X)\) has a logistic distribution with location parameter \(log(\alpha)\) and scale parameter \(1 / \beta\).</statement>
+      <type>transformation</type>
+    </relation>
+
 </relations>
 
 <references>
