@@ -9,21 +9,20 @@
 <head>
   	<title>Distributome.org</title>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  	<meta name="verify-v1"  content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
   	<meta name="description" content="Probability and Statistics Distributions Resource - Distributome">
-  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Java Applets">
+  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Applications">
   	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
   
   	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
   	<link rel="shortcut icon" href="../images/favicon.ico">
-  
+	
   	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
   	
   	<!-- 	To Do: Replace the simple list of nodes and edges:
   			http://distributome.org/js/scripts/distributome.js),
 			By the real Distributome.xml DB: http://distributome.org/js/Distributome.xml
   	 -->
-  	<script type="text/javascript" src="scripts/distributome1.js"></script>
+  	<script type="text/javascript" src="scripts/distributome.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.js"></script>
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
 
@@ -96,10 +95,20 @@
 			filter: alpha(opacity=50); /* IE */
 		}
 	</style>
+	<script type="text/javascript">
+		function isKeyPressed(event){
+			if (event.shiftKey==1) {
+			  _shiftKey = true;
+			}else{
+			  _shiftKey = false;
+			}
+		}
+	</script>
+	
 </head>
 
 
-<body>
+<body onmousedown="isKeyPressed(event)">
 
 
 <div id="wrapper-menu-top">
@@ -162,7 +171,7 @@
 						<option value="neighbors">Neighbors</option>
 						<option value="parent">Show Parent</option>
 						<option value="children">Show Children</option>
-						<option value="parentChildren">Parents and Children</option>
+						<option value="parentchildren">Parents and Children</option>
 					</select>
 				</form>
 			</td>
@@ -210,7 +219,7 @@
 					process: http://vis.stanford.edu/protovis/jsdoc/symbols/pv.Layout.Network.html
   				 -->
 				<button type="button" id="resetButton" tabindex="4" 
-					title="Reset View" onclick="resetNavigator();">Reset
+					title="Reset View" onclick="resetPage();">Reset
 				</button>
 			</td>
 		</tr>
@@ -228,10 +237,16 @@
 				auto-adjust to the "LeftPanel" panel size that the graph is embedded in!  
 			***/
 		try{
-			var w = document.body.clientWidth-200,
+			/*var w = document.body.clientWidth-200,
   				h = document.body.clientHeight-200,
   				colors = pv.Colors.category10();
-
+				*/
+			var leftPanelWidth = document.getElementById('LeftPanel').style.width;
+			var leftPanelHeight = document.getElementById('LeftPanel').style.height;
+			var w =	leftPanelWidth.substring(0,leftPanelWidth.indexOf('px')),
+				h = leftPanelHeight.substring(0,leftPanelHeight.indexOf('px')),
+				colors = pv.Colors.category10();
+			
 			var vis = new pv.Panel()
     			.width(w)
     			.height(h)
@@ -265,7 +280,9 @@
 			force.node.add(pv.Dot)
 				.bottom(0)
 				.size(function(d) { return d.selected?(d.linkDegree + 15) * Math.pow(this.scale, -1.5):(d.linkDegree + 4) * Math.pow(this.scale, -1.5)})
-				.fillStyle(function(d) d.selected ? "red" : colors(d.group))
+				.fillStyle(function(d) getColor(d))
+				//.fillStyle(function(d) d.selected == true ? "red" : colors(d.group))
+				//.fillStyle(function(d) d.selected ? "red" : colors(d.group))
 				.strokeStyle(function() this.fillStyle().darker())
 				.lineWidth(1)
 				//.title(function(d) d.nodeName)
@@ -394,11 +411,15 @@ $().ready(function() {
 	function resetNavigator(){
 		resetView();
 		resetNodesEdges();
-		//force = vis.add(pv.Layout.Force);
-		force.reset();
+		vis.render();
 	}
 	
 	function resetNodesEdges(){
+		resetNodes();
+		resetEdges();
+	}
+	
+	function resetNodes(){
 		var classes = pv.nodes(distributome.nodes);		
 		classes.slice(1).forEach(function(d) {
 			var i = 5;
@@ -407,26 +428,27 @@ $().ready(function() {
 			if (isNaN(d.x)) d.x = w / 2 + 40 * Math.random() - 20;
 	    	if (isNaN(d.y)) d.y = h / 2 + 40 * Math.random() - 20;
 		});
+	}
+	
+	function resetEdges(){
 		var classes = pv.nodes(distributome.edges);		
 		classes.slice(1).forEach(function(d) {
 			d.nodeValue.selected = false;
 		});
-		
 	}
-	function protovisRender(){
-		resetVariables();
-		var classes = pv.nodes(distributome.nodes);		
+		
+	function getSelectedNodes(){
+		var classes = pv.nodes(distributome.nodes);	
+		var selectedNodes = new Array();
 		classes.slice(1).forEach(function(d) {
-			document.write(d.nodeValue.selected);
+			if(d.nodeValue.selected){
+				selectedNodes.push(getDistributionName(d.nodeValue.nodeName));
+			}
 		});
-		var classes = pv.nodes(distributome.edges);		
-		classes.slice(1).forEach(function(d) {
-			document.write('edges'+d.nodeValue.selected);
-		});
-		force = vis.add(pv.Layout.Force);
-		force.reset();
+		return selectedNodes;
 	}
 </script>
+
 
 <!-- Start of StatCounter Code -->
 <script type="text/javascript">
