@@ -6,8 +6,6 @@ distributome.references = new Array ();
 var distributomeNodes = new Array();
 var referenceNodes = new Array();
 var DistributomeXML_Objects;
-var selectedNode = null;
-var selectedEdge = null;	
 var xmlDoc;	
 
 var relationStrength = new Array();
@@ -39,10 +37,27 @@ var group = new Array();
 group["continuous"] = 2;
 group["discrete"] = 3;
 
+
+function getColor(d){
+	if(d.selected == 'yellow'){
+		return "yellow";
+	}else if(d.selected == 'green'){
+		return "green";
+	}else if(d.selected){
+		return "red";
+	}
+	else return colors(d.group);
+}
+
+/*************** Reset Distributome Page **************/
+function resetPage(){
+	resetNavigator();
+	resetDropDown();
+}
+	
 /*************** Reset variables **************/
 function resetVariables(){
-	selectedNode = null;
-	selectedEdge = null;
+	resetNodesEdges();
 	//Default href for calculator
 	document.getElementById('distributome.calculator').href = './calc/NormalCalculator.html';
 }
@@ -50,12 +65,27 @@ function resetVariables(){
 /*************** Reset search text **************/
 function resetText(){
 	document.getElementById('distributome.text').value = '';
+	document.getElementById('distributome.referencePanel').innerHTML = '';
+	document.getElementById('distributome.propertiesPannel').innerHTML = '';	
+	document.getElementById('distributome.relationPannel').innerHTML = '';
+}
+
+function resetDropDown(){
+	resetDropDownSelectedValue('distributome.edgeTypeAction');
+	resetDropDownSelectedValue('distributome.nodeTypeAction');
+	resetDropDownSelectedValue('distributome.neighborAction');
 }
 
 /*************** Reset view **************/
 function resetView(){
 	resetVariables();
 	resetText();
+}
+
+/*************** Reset the drop down **************/
+function resetDropDownSelectedValue(dropDownID){
+	var dropDown =document.getElementById(dropDownID);
+	dropDown.options[0].selected = true;
 }
 
 /*************** Fetch group information for node **************/
@@ -81,16 +111,16 @@ function getNodeIndex(nodeName){
 	return (distributomeNodes[nodeName] != undefined)?distributomeNodes[nodeName]:0;
 }
 
+/*************** Apply Math Jax **************/
 function renderMath(){
 	MathJax.Hub.Typeset();
 }
 
 /*************** Fetch node properties **************/
 function getNodeProperties(index, nodeName){
-	if(selectedNode!=null){
-		distributome.nodes[selectedNode].selected = false;
+	if(!_shiftKey){
+		resetNodes();
 	}
-	selectedNode = index;
 	distributome.nodes[index].selected = true;
 	var html = new Array();
 	html.push("<b><u>Distribution Properties</u></b> <br />");
@@ -107,6 +137,7 @@ function getNodeProperties(index, nodeName){
 	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
 }
 
+/*************** Get the reference of the nodes wrt browser **************/
 function getObjectReferenceNumber(object){
 	var browser = navigator.appName;
 	if(browser == "Microsoft Internet Explorer"){
@@ -193,43 +224,49 @@ function search(searchType, indexType, type){
 	}
 }
 
+/*************** Function to fetch the parents/children of the selected nodes **************/
 function neighborsFetch(){
 	var type = getDropDownSelectedValue('distributome.neighborAction');
-	
+	if(type == 'neighbors') return;
+	var selectedNodes = getSelectedNodes();
+	parentChildSearch(type, selectedNodes);
 }
 
-/////TODO finish the parent child dropdown
-function parentChildSearch(type){
+/*************** Function to search the parents/children of the selected nodes in the relations **************/
+function parentChildSearch(type, selectedNodes){
 	var i= getObjectReferenceNumber("relation");
 	var indexType = 7;
 	if (DistributomeXML_Objects[i].nodeType==1) {
 		var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
-		var currentNodeIndex = 0;
 		for (j=0, node_cnt=0;j<Level1Prop.length;j++) {
 			var k_corr=0;					
 			var nodes = xmlDoc.getElementsByTagName(Level1Prop[i].nodeName);
 			if (currLevel1Prop.nodeType==1) {
 				if(node_cnt<nodes.length) {
 					Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].childNodes;
-					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].firstChild;
-					for (k=0;k<Level2Prop.length;k++) {
-						try {
-							if (currLevel2Prop.nodeType==1) {
-								var value = trim(currLevel2Prop.childNodes[0].nodeValue);
-								if (currLevel2Prop.nodeName == "type" && value == type) {
-									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = true;
-									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = true; 
-								}else if (currLevel2Prop.nodeName == "type" && value != type) {
-									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = false;
-									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = false;
+					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('from')[0]; //get from here
+					currLevel2Prop1=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('to')[0]; //get to node here
+					try {
+						if (currLevel2Prop.nodeType==1) {
+							var fromValue = getDistributionName(currLevel2Prop.childNodes[0].nodeValue);
+							var toValue = getDistributionName(currLevel2Prop1.childNodes[0].nodeValue);
+							for(var values=0;values<selectedNodes.length;values++){
+								if(fromValue == selectedNodes[values]){
+									if(type.indexOf('children')!=-1){
+										distributome.nodes[getNodeIndex(toValue)].selected = 'yellow'; //child 
+										//Take care of multiple from and to
+									}
 								}
-							} else k_corr++;
-							currLevel2Prop=currLevel2Prop.nextSibling;
-						} catch (err) {
-						}
+								if(toValue == selectedNodes[values]){
+									if(type.indexOf('parent')!=-1){
+										distributome.nodes[getNodeIndex(fromValue)].selected = 'green'; //child
+									}
+								}
+							}
+						} 
+					} catch (err) {
 					}
-					currentNodeIndex++;
 					node_cnt++;
 				}
 			}else currLevel1Prop=currLevel1Prop.nextSibling;
@@ -255,10 +292,9 @@ function getReferences(index){
 
 /*************** Fetch relation information of an edge **************/
 function getRelationProperties(nodeName, linkIndex){
-	if(selectedEdge != null){
-		distributome.edges[selectedEdge].selected = true;
+	if(!_shiftKey){
+		resetEdges();
 	}
-	selectedEdge = linkIndex;
 	distributome.edges[linkIndex].selected = true;
 	var html = new Array();;
 	html.push("<b><u>Inter-Distribution Relations</u></b> <br />");
@@ -291,15 +327,19 @@ function trimSpecialCharacters(inputString) {
 		inputString = inputString.substring(0,index-1);
 	inputString = inputString.replace(/[\s\xA0]+/g,''); 
 	inputString = inputString.replace(/[-]/g,'');
+	inputString = inputString.replace(/\'/g,'');
 	return inputString; 
 }
 
 /*************** Node Action **************/
 function nodeTypeInfoFetch(){
 	var type = getDropDownSelectedValue('distributome.nodeTypeAction');
+	if(type == 'distributionType') return;
+	resetNavigator();
 	search("node", 1, type);
 }
 
+/*************** Get the drop down selected value **************/
 function getDropDownSelectedValue(id){
 	var dropDown = document.getElementById(id);
 	return dropDown.options[dropDown.selectedIndex].value;	
@@ -308,9 +348,10 @@ function getDropDownSelectedValue(id){
 /*************** Edge Action **************/
 function edgeTypeInfoFetch(){
 	var type = getDropDownSelectedValue('distributome.edgeTypeAction');
+	if(type == 'relationType') return;
+	resetNavigator();
 	search("relation", 7, type);
 }
-
 
 /*************** Function to traverse the XML during initialization and search **************/
 function traverseXML(searchFlag, text){
@@ -344,7 +385,8 @@ function traverseXML(searchFlag, text){
 								if (currLevel2Prop.nodeType==1) {
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 									if(searchFlag){
-										if(value.indexOf(text)!=-1) distributome.nodes[currentNodeIndex].selected = true; 
+										var regex = new RegExp(trimSpecialCharacters(text),"i");
+										if(trimSpecialCharacters(value).search(regex)!=-1) distributome.nodes[currentNodeIndex].selected = true; 
 									}else{
 										//Process only level=3 element nodes (type 1)
 										if (currLevel2Prop.nodeName == "name" && !nameFlag) {
@@ -389,7 +431,8 @@ function traverseXML(searchFlag, text){
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 									//Process only level=3 element nodes (type 1)
 									if(searchFlag){
-										if(value.indexOf(text)!=-1) distributome.edges[currentEdgeIndex].selected = true; 
+										var regex = new RegExp(trimSpecialCharacters(text),"i");
+										if(trimSpecialCharacters(value).search(regex)!=-1) distributome.edges[currentEdgeIndex].selected = true; 
 									}else{
 										if (currLevel2Prop.nodeName == "from") {
 											distributome.edges[currentEdgeIndex].source = getNodeIndex(getDistributionName(value));
