@@ -10,7 +10,7 @@
   	<title>Distributome.org</title>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<meta name="description" content="Probability and Statistics Distributions Resource - Distributome">
-  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Applications">
+  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Application">
   	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
   
   	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
@@ -18,10 +18,6 @@
 	
   	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
   	
-  	<!-- 	To Do: Replace the simple list of nodes and edges:
-  			http://distributome.org/js/scripts/distributome.js),
-			By the real Distributome.xml DB: http://distributome.org/js/Distributome.xml
-  	 -->
   	<script type="text/javascript" src="scripts/distributome.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.js"></script>
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
@@ -115,7 +111,7 @@
 <div id="menu-top">
 	<ul>
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
+  		<li><span> Tools</span><span> Â»</span></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="http://www.SOCR.ucla.edu" title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
   		<li><a href="http://www.math.uah.edu/stat/" title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
@@ -222,6 +218,16 @@
 					title="Reset View" onclick="resetPage();">Reset
 				</button>
 			</td>
+			<td class="tool">
+						<button type="button" id="resetButton" tabindex="4" 
+							title="Reset View" onclick="graphRestart();">Restart
+						</button>
+					</td>
+					<td class="tool">
+						<button type="button" id="resetButton" tabindex="4" 
+							title="Reset View" onclick="graphPause();">Pause
+						</button>
+					</td>
 		</tr>
 	</table>
 </center>
@@ -446,6 +452,14 @@ $().ready(function() {
 			}
 		});
 		return selectedNodes;
+	}
+	
+	function graphPause(){
+		force.stop();
+	}
+	
+	function graphRestart(){
+		force.start();
 	}
 </script>
 
