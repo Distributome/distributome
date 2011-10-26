@@ -135,6 +135,7 @@ function getNodeProperties(index, nodeName){
 	var firstChar = nodeName.substring(0,1).toUpperCase();
 	nodeName = nodeName.substring(1); //Is it camel case or only first letter Upper Case?
 	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
+	vis.render();
 }
 
 /*************** Get the reference of the nodes wrt browser **************/
@@ -230,6 +231,7 @@ function neighborsFetch(){
 	if(type == 'neighbors') return;
 	var selectedNodes = getSelectedNodes();
 	parentChildSearch(type, selectedNodes);
+	vis.render();
 }
 
 /*************** Function to search the parents/children of the selected nodes in the relations **************/
@@ -280,6 +282,7 @@ function textSearch(){
 	resetNodesEdges();
 	var searchString = document.getElementById('distributome.text').value;
 	traverseXML(true, searchString);
+	vis.render();
 }
 
 /*************** Fetch References from the XML **************/
@@ -305,6 +308,7 @@ function getRelationProperties(nodeName, linkIndex){
 	if(referenceName!=null)
 		getReferences(referenceNodes[referenceName]);
 	renderMath();
+	vis.render();
 }
 
 /******* Remove the starting and leading White Spaces *******/
@@ -337,6 +341,7 @@ function nodeTypeInfoFetch(){
 	if(type == 'distributionType') return;
 	resetNavigator();
 	search("node", 1, type);
+	vis.render();
 }
 
 /*************** Get the drop down selected value **************/
@@ -351,6 +356,7 @@ function edgeTypeInfoFetch(){
 	if(type == 'relationType') return;
 	resetNavigator();
 	search("relation", 7, type);
+	vis.render();
 }
 
 /*************** Function to traverse the XML during initialization and search **************/
@@ -533,5 +539,4 @@ function createAjaxRequest(){
 			DistributomeXML_Objects=xmlDoc.childNodes;
 		}
 		traverseXML(false);
-		
 }
