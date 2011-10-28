@@ -1426,7 +1426,7 @@
 	<name>standard continuous uniform distribution</name>
 	<name>standard uniform distribtion</name>
 	<type>continuous</type>
-	<model>The standard continuous uniform distribution is a special case of hte (general)
+	<model>The standard continuous uniform distribution is a special case of the (general)
 	continuous uniform distribution defined on [0 , 1].</model>
 	<support>\(\{0, 1\}\)</support>
 	<pdf>\(\begin{cases}
