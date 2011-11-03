@@ -7,6 +7,8 @@ var distributomeNodes = new Array();
 var referenceNodes = new Array();
 var DistributomeXML_Objects;
 var xmlDoc;	
+var force = null;
+var maxLinkDegree = 1;
 
 var relationStrength = new Array();
 relationStrength["convolution"] = 2;
@@ -39,6 +41,7 @@ group["discrete"] = 3;
 
 
 function getColor(d){
+	maxLinkDegree = (maxLinkDegree>d.linkDegree)?maxLinkDegree:d.linkDegree;
 	if(d.selected == 'yellow'){
 		return "yellow";
 	}else if(d.selected == 'green'){
@@ -65,9 +68,9 @@ function resetVariables(){
 /*************** Reset search text **************/
 function resetText(){
 	document.getElementById('distributome.text').value = '';
-	document.getElementById('distributome.referencePanel').innerHTML = '';
-	document.getElementById('distributome.propertiesPannel').innerHTML = '';	
-	document.getElementById('distributome.relationPannel').innerHTML = '';
+	document.getElementById('distributome.referencePanel').innerHTML = '<b><u>Distribution Referencies</u></b>';
+	document.getElementById('distributome.propertiesPannel').innerHTML = '<b><u>Distribution Properties</u></b>';	
+	document.getElementById('distributome.relationPannel').innerHTML = '<b><u>Distribution Relations</u></b>';
 }
 
 function resetDropDown(){
@@ -116,6 +119,18 @@ function renderMath(){
 	MathJax.Hub.Typeset();
 }
 
+function getLinkColor(d,l){
+	//return l.selected?'red':'rgb(170,170,170)';
+	if(l.selected == 'yellow'){
+		return "yellow";
+	}else if(l.selected == 'green'){
+		return "green";
+	}else if(l.selected){
+		return "red";
+	}
+	else return 'rgb(170,170,170)';
+}
+
 /*************** Fetch node properties **************/
 function getNodeProperties(index, nodeName){
 	if(!_shiftKey){
@@ -123,13 +138,14 @@ function getNodeProperties(index, nodeName){
 	}
 	distributome.nodes[index].selected = true;
 	var html = new Array();
-	html.push("<b><u>Distribution Properties</u></b> <br />");
+	html.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, index, true);
 	html.push(parserOutput[0]);
 	var referenceName= parserOutput[1];
 	document.getElementById('distributome.propertiesPannel').innerHTML = html.join('');	
 	if(referenceName !=null)
 		getReferences(referenceNodes[referenceName]);
+	else getReferences(false);
 	renderMath();
 	nodeName = trimSpecialCharacters(nodeName);
 	var firstChar = nodeName.substring(0,1).toUpperCase();
@@ -165,6 +181,7 @@ function XMLParser(i, nodeNameIndex, index, reference){
 		var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].firstChild;
 		
 		var k_corr=0;
+		var nameText = ''; var nameFlag = true;
 		for (k=0;k<Level2Prop.length;k++) {
 			try {
 				if (currLevel2Prop.nodeType==1) {
@@ -174,9 +191,23 @@ function XMLParser(i, nodeNameIndex, index, reference){
 							referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
 						}
 					}
-					html.push(trim(currLevel2Prop.nodeName)+": "+
-							trim(currLevel2Prop.childNodes[0].nodeValue));
-					html.push("<br />");
+					if(currLevel2Prop.nodeName == 'name' && nameFlag){
+						if(nameText == ''){
+							nameText = '<b>'+trim(currLevel2Prop.nodeName)+"</b>: "+
+							trim(currLevel2Prop.childNodes[0].nodeValue);
+						}else{
+							nameText = nameText+ ', '+trim(currLevel2Prop.childNodes[0].nodeValue);
+						}
+					}else{
+						if(nameFlag){
+							html.push('<div style="padding-left:3px">'+nameText+'</div>');
+							html.push("<div style='height:5px'></div>");
+						}
+						nameFlag = false;
+						html.push('<div style="padding-left:3px"><b>'+trim(currLevel2Prop.nodeName)+"</b>: "+
+							trim(currLevel2Prop.childNodes[0].nodeValue)+'</div>');
+						html.push("<div style='height:5px'></div>");
+					}
 				} else k_corr++;
 				currLevel2Prop=currLevel2Prop.nextSibling;
 			} catch (err) {
@@ -234,6 +265,17 @@ function neighborsFetch(){
 	vis.render();
 }
 
+
+function connectedNodesFetch(){
+	var type = getDropDownSelectedValue('distributome.connectedNodesAction');
+	if(type == 'connectivity') resetNavigator();
+	if(type == 'mostConnected') highlightConnectedNodes(1);
+	else if(type == 'connected') highlightConnectedNodes(2);
+	else if(type == 'sparselyConnected') highlightConnectedNodes(3);
+	vis.render();
+}
+
+
 /*************** Function to search the parents/children of the selected nodes in the relations **************/
 function parentChildSearch(type, selectedNodes){
 	var i= getObjectReferenceNumber("relation");
@@ -258,11 +300,13 @@ function parentChildSearch(type, selectedNodes){
 									if(type.indexOf('children')!=-1){
 										distributome.nodes[getNodeIndex(toValue)].selected = 'yellow'; //child 
 										//Take care of multiple from and to
+										distributome.edges[node_cnt].selected = 'yellow';
 									}
 								}
 								if(toValue == selectedNodes[values]){
 									if(type.indexOf('parent')!=-1){
-										distributome.nodes[getNodeIndex(fromValue)].selected = 'green'; //child
+										distributome.nodes[getNodeIndex(fromValue)].selected = 'green'; //parent
+										distributome.edges[node_cnt].selected = 'green';
 									}
 								}
 							}
@@ -288,8 +332,10 @@ function textSearch(){
 /*************** Fetch References from the XML **************/
 function getReferences(index){
 	var html = new Array();
-	html.push("<b><u>Distribution Referencies</u></b> <br />");
-	html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false)[0]);
+	html.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	if(index){
+		html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false)[0]);
+	}
 	document.getElementById('distributome.referencePanel').innerHTML = html.join('');
 }
 
@@ -300,13 +346,14 @@ function getRelationProperties(nodeName, linkIndex){
 	}
 	distributome.edges[linkIndex].selected = true;
 	var html = new Array();;
-	html.push("<b><u>Inter-Distribution Relations</u></b> <br />");
+	html.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true);
 	html.push(parserOutput[0]);
 	var referenceName = parserOutput[1];
 	document.getElementById('distributome.relationPannel').innerHTML = html.join('');
 	if(referenceName!=null)
 		getReferences(referenceNodes[referenceName]);
+	else getReferences(false);
 	renderMath();
 	vis.render();
 }
@@ -333,6 +380,16 @@ function trimSpecialCharacters(inputString) {
 	inputString = inputString.replace(/[-]/g,'');
 	inputString = inputString.replace(/\'/g,'');
 	return inputString; 
+}
+
+function trimDistribution(inputString){
+	if(typeof inputString != "string"){
+		return inputString; 
+	}
+	var index = inputString.indexOf("dist");
+	if(index!=-1)
+		inputString = inputString.substring(0,index-2);
+	return inputString;
 }
 
 /*************** Node Action **************/
