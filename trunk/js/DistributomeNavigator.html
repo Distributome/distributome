@@ -1,28 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+
 <!-- 	This Distributome Project HTML5 source file contains "To Do" segments clearly identifying
 		portions of the code that need to be modified to complete the functionality of the
 		Distributome Navigator: http://distributome.org/js/DistributomeNavigator.html 
 -->
-  <title>Distributome.org</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="description"
- content="Probability and Statistics Distributions Resource - Distributome">
-  <meta name="keywords"
- content="Probability Statistics Distributions Resource Distributome Web Application">
-  <meta name="author" content="Ivo Dinov - http://www.Distributome.org">
-  <link rel="stylesheet" type="text/css"
- href="../images/Distributome_style.css">
-  <link rel="shortcut icon" href="../images/favicon.ico">
-  <script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
-  <script type="text/javascript" src="scripts/distributome.js"></script>
-  <script type="text/javascript" src="./scripts/jquery.js"></script>
-  <script type="text/javascript" src="./scripts/splitter.js"></script><!-- MathJax LaTeX/TeX Typesetting scripts -->
-  <script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+<head>
+  	<title>Distributome.org</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<meta name="description" content="Probability and Statistics Distributions Resource - Distributome">
+  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Application">
+  	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
+  
+  	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
+  	<link rel="shortcut icon" href="../images/favicon.ico">
+	
+  	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
+  	
+  	<script type="text/javascript" src="scripts/distributome.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.js"></script>
+	<script type="text/javascript" src="./scripts/splitter.js"></script>
+
+	<!-- MathJax LaTeX/TeX Typesetting scripts -->
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	</script>
-  <script> 
+	
+	<script> 
   		MathJax.Hub.Config({
   			TeX: {
     			Macros: {
@@ -35,14 +39,16 @@
   			}
 		}); 
   	</script>
-  <script type="text/x-mathjax-config">
+  	<script type="text/x-mathjax-config">
   		MathJax.Hub.Config({
     		extensions: ["tex2jax.js"],
     		jax: ["input/TeX","output/HTML-CSS"],
     		tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
   		});
-  	</script><!-- End of MathJax LaTeX/TeX Typesetting scripts -->
-  <style type="text/css" media="all">
+  	</script>
+	<!-- End of MathJax LaTeX/TeX Typesetting scripts -->
+	
+  	<style type="text/css" media="all">
 		html, body {
 			margin: 0;			/* Remove body margin/padding */
 			padding: 0;
@@ -85,7 +91,7 @@
 			filter: alpha(opacity=50); /* IE */
 		}
 	</style>
-  <script type="text/javascript">
+	<script type="text/javascript">
 		function isKeyPressed(event){
 			if (event.shiftKey==1) {
 			  _shiftKey = true;
@@ -94,121 +100,154 @@
 			}
 		}
 	</script>
+	
 </head>
+
+
 <body onmousedown="isKeyPressed(event)">
+
+
 <div id="wrapper-menu-top">
 <div id="menu-top">
-<ul>
-  <li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  <li><span> Tools</span><span> »</span></li>
-  <li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
-  <li><a href="http://www.SOCR.ucla.edu"
- title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
-  <li><a href="http://www.math.uah.edu/stat/"
- title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
-  <li><a href="http://mbi.osu.edu/"
- title="OSU Mathematical Biosciences Institute"><span>OSU Bioscience</span></a></li>
-  <li><a href="http://www.distributome.org/Navigator.html"
- title="Interactive Distributome Navigator"><span>Navigator (Java)</span></a></li>
-  <li><a href="http://www.distributome.org/DistributomeEditor.html"
- title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
-</ul>
+	<ul>
+  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+  		<li><span> Tools</span><span> »</span></li>
+  		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
+  		<li><a href="http://www.SOCR.ucla.edu" title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
+  		<li><a href="http://www.math.uah.edu/stat/" title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
+  		<li><a href="http://mbi.osu.edu/" title="OSU Mathematical Biosciences Institute"><span>OSU Bioscience</span></a></li>
+  		
+  		<li><a href="http://www.distributome.org/Navigator.html" title="Interactive Distributome Navigator"><span>Navigator (Java)</span></a></li>
+  		<li><a href="http://www.distributome.org/DistributomeEditor.html" title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+	</ul>
 </div>
+
 <!--menu-top--></div>
+
 <!--wrapper-menu-top-->
 <div id="wrapper-header">
-<div id="header">
-<div id="wrapper-header2">
-<div id="wrapper-header3">
-<h1>
-<center>Distributome - An Interactive Web-based Resource for
-Probability Distributions</center>
-</h1>
+	<div id="header">
+	<div id="wrapper-header2">
+	<div id="wrapper-header3">
+		<h1> <center>Distributome - An Interactive Web-based Resource for Probability Distributions</center>
+	</h1>
+	</div>
+	</div>
+	</div>
 </div>
-</div>
-</div>
-</div>
+
 <div style="text-align: justify;" id="content">
-<center><!-- Controls Panel --><!-- To Do: Provide and enable the Control-Panel functionalities included in the list below.
+
+<center>
+  	<!-- Controls Panel -->
+  	<!-- To Do: Provide and enable the Control-Panel functionalities included in the list below.
   		FOr all of these functions, we need to have parsed the Distributome.xml DB, see above,
   		and have constructed the ProtoVOs Graph from this XML hierarchy, see the Distributome.xsd
   		file: http://distributome.org/js/Distributome.xsd
   	-->
-<table class="toolbar" style="">
-  <tbody>
-    <tr>
-<!-- Search Area --> <td class="tool"><!-- Search for a node (distributon) or edge (relation) by keyword(s).
+  	<table class="toolbar" style="width=90%">
+	<tr>
+  		<!-- Search Area -->
+  			<td class="tool">
+  				<!-- Search for a node (distributon) or edge (relation) by keyword(s).
   					Highlight best matches
-  				 --><!--<input type="text" style="width:50px;height:20px"/>--> <label
- id="search" for="search"></label> <input id="distributome.text"
- name="s" size="34"
- onkeydown="Javascript: if (event.keyCode==13) textSearch();"
- placeholder="Find distributions or relations" type="search"> </td>
-<!--Neighbors Selector --> <td class="tool"><!-- Having a Distribution (node) selected by the user, highlight node neighbors,
+  				 -->
+				<!--<input type="text" style="width:50px;height:20px"/>-->
+				<label id="search" for="search"></label>
+				<input id="distributome.text" name="s" size="34" type="search" onKeydown="Javascript: if (event.keyCode==13) textSearch();" placeholder="Find distributions or relations" />
+			</td>
+
+  		<!--Neighbors Selector --> 
+  			<td class="tool">
+  				<!-- Having a Distribution (node) selected by the user, highlight node neighbors,
   					parents, children, or both - parents and children (of a chosen distribution)
   				 -->
-      <form action="NeughborAction">
-        <select name="Neighbors" id="distributome.neighborAction"
- onchange="neighborsFetch();">
-        <option value="neighbors">Neighbors</option>
-        <option value="parent">Show Parent</option>
-        <option value="children">Show Children</option>
-        <option value="parentchildren">Parents and Children</option>
-        </select>
-      </form>
-      </td>
-<!-- Node-Type Selector --> <td class="tool">
-      <form action="NodeTypeAction"><!-- Get the type of a node (distribution) and highlight all nodes of this type.
+  				<form action="NeughborAction">
+					<select name="Neighbors" id="distributome.neighborAction" onchange="neighborsFetch();">
+						<option value="neighbors">Neighbors</option>
+						<option value="parent">Show Parent</option>
+						<option value="children">Show Children</option>
+						<option value="parentchildren">Parents and Children</option>
+					</select>
+				</form>
+			</td>
+
+  		<!-- Node-Type Selector -->
+ 			<td class="tool">
+ 				<form action="NodeTypeAction">
+ 					<!-- Get the type of a node (distribution) and highlight all nodes of this type.
   				 	-->
-        <select name="NodeType" id="distributome.nodeTypeAction"
- onchange="nodeTypeInfoFetch();">
-        <option value="distributionType">Distribution Type</option>
-        <option value="convolution">Convolution</option>
-        <option value="memoryless">Memoryless</option>
-        <option value="inverse">Inverse</option>
-        <option value="linearCombination">Linear Combination</option>
-        <option value="maximum">Maximum</option>
-        <option value="minimum">Minimum</option>
-        <option value="discrete">Discrete</option>
-        <option value="continuous">Continuous</option>
-        </select>
-      </form>
-      </td>
-<!-- Edge-Type Selector --> <td class="tool">
-      <form action="EdgeTypeAction"><!-- Get the type of an edge (relation) and highlight all edges of this type.
+					<select name="NodeType" id="distributome.nodeTypeAction" onchange="nodeTypeInfoFetch();">
+						<option value="distributionType">Distribution Type</option>
+						<option value="convolution">Convolution</option>
+						<option value="memoryless">Memoryless</option>
+						<option value="inverse">Inverse</option>
+						<option value="linearCombination">Linear Combination</option>
+						<option value="maximum">Maximum</option>
+						<option value="minimum">Minimum</option>
+						<option value="discrete">Discrete</option>
+						<option value="continuous">Continuous</option>
+					</select>
+				</form>
+			</td>
+
+		<!-- Edge-Type Selector -->
+			<td class="tool">
+				<form action="EdgeTypeAction" >
+					<!-- Get the type of an edge (relation) and highlight all edges of this type.
  						Note that all edges are directional!
   				 	-->
-        <select name="EdgeType" id="distributome.edgeTypeAction"
- onchange="edgeTypeInfoFetch();">
-        <option value="relationType">Relation Type</option>
-        <option value="special case">Special Case</option>
-        <option value="transform">Transform</option>
-        <option value="limiting">Limiting</option>
-        <option value="transformation">Transformation</option>
-        <option value="bayesian">Bayesian</option>
-        </select>
-      </form>
-      </td>
-<!-- Reset Navigator --> <td class="tool"><!-- Reset the Distributome Graph Navigator (reset zoom, location (pan),
+					<select name="EdgeType" id="distributome.edgeTypeAction" onchange="edgeTypeInfoFetch();">
+						<option value="relationType">Relation Type</option>
+						<option value="special case">Special Case</option>
+						<option value="transform">Transform</option>
+						<option value="limiting">Limiting</option>
+						<option value="transformation">Transformation</option>
+						<option value="bayesian">Bayesian</option>
+					</select>
+				</form>
+			</td>
+			<td class="tool">
+				<form action="ConnectedNodesAction" >
+					<select name="ConnectedNodes" id="distributome.connectedNodesAction" onchange="connectedNodesFetch();">
+						<option value="connectivity">Connected Nodes</option>
+						<option value="mostConnected">Most Connected</option>
+						<option value="connected">Connected</option>
+						<option value="sparselyConnected">Sparsely Connected</option>
+					</select>
+				</form>
+			</td>
+			<!-- Reset Navigator -->
+			<td class="tool">
+				<!-- Reset the Distributome Graph Navigator (reset zoom, location (pan),
 					give new random coordinates of all nodes and start Protovis relaxation
 					process: http://vis.stanford.edu/protovis/jsdoc/symbols/pv.Layout.Network.html
-  				 --> <button
- type="button" id="resetButton" tabindex="4" title="Reset View"
- onclick="resetPage();">Reset </button> </td>
-      <td class="tool"> <button type="button" id="resetButton"
- tabindex="4" title="Reset View" onclick="graphRestart();">Restart </button>
-      </td>
-      <td class="tool"> <button type="button" id="resetButton"
- tabindex="4" title="Reset View" onclick="graphPause();">Pause </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  				 -->
+				<button type="button" id="resetButton" tabindex="4" 
+					title="Reset View" onclick="resetPage();">Reset
+				</button>
+			</td>
+			<td class="tool">
+						<button type="button" id="resetButton" tabindex="4" 
+							title="Restart View" onclick="graphRestart();">Restart
+						</button>
+					</td>
+					<td class="tool">
+						<button type="button" id="resetButton" tabindex="4" 
+							title="Pause View" onclick="graphPause();">Pause
+						</button>
+					</td>
+		</tr>
+	</table>
 </center>
+
 <!-- #MainSplitPaneObject -->
-<div id="MainSplitPaneObject"><!-- Main Distributome JS Graphical Navigator -->
-<div id="LeftPanel"><!-- center -->
-<script type="text/javascript+protovis">
+<div id="MainSplitPaneObject">
+
+  	<!-- Main Distributome JS Graphical Navigator -->
+  	<div id="LeftPanel"> 
+		<!-- center -->
+		<script type="text/javascript+protovis">
 			/**	To Do: Make the height and width of the Graph panel 
 				auto-adjust to the "LeftPanel" panel size that the graph is embedded in!  
 			***/
@@ -240,7 +279,7 @@ Probability Distributions</center>
 					 size unchanged!
 				****/
 
-			var force = vis.add(pv.Layout.Force)
+			force = vis.add(pv.Layout.Force)
     			.nodes(distributome.nodes)
     			.links(distributome.edges)
 				.springConstant(0.05)
@@ -250,7 +289,7 @@ Probability Distributions</center>
 		
 			force.link.add(pv.Line)
 				.cursor("pointer")
-				.strokeStyle(function(d,l) { return l.selected?'red':'rgb(170,170,170)'})
+				.strokeStyle(function(d,l) getLinkColor(d,l))
 				.event("click", function (d, l) getRelationProperties(d.nodeName, l.index));
 
 			force.node.add(pv.Dot)
@@ -274,11 +313,13 @@ Probability Distributions</center>
 		}catch(e){
 		}
 		</script>
-<!--  /center --> </div>
-<!-- Left Pane -->
-<div id="RightSide_Splitter1">
-<div class="Top Pane" id="distributome.propertiesPannel"><!-- Get the Distribution Properties from Distributome.xml -->
-<script type="text/javascript">
+		<!--  /center -->
+  	</div> 	<!-- Left Pane -->	
+
+    <div id="RightSide_Splitter1"> 
+ 
+	<div class="Top Pane" id="distributome.propertiesPannel" style="line-height:16px;">		<!-- Get the Distribution Properties from Distributome.xml -->
+		<script type="text/javascript">
 			/****	To Do:
 				Make the content of 3 panels below (Distirbution-proprties, edge properties
 				and references/citations, exclude "Middle Pane 1") present the info related 
@@ -294,42 +335,45 @@ Probability Distributions</center>
 			*****/
 			
 		</script>
-<b><u>Distribution Properties</u></b> <br>
+		<b><u>Distribution Properties</u></b> <br />
+	</div>
+	
+	<div id="RightSide_Splitter2">
+		<div class="Middle Pane 1" style="line-height:20px">
+			<b><u>Distribution Actions</u></b>
+			<ul> 
+				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator" id="distributome.calculator">Calculator</a></li>
+				<li><a href="./exp/PoissonExperiment.html" target="_blank" title="Run Virtual Distribution Experiment">Experiment</a></li>
+				<li><a href="./sim/NormalSimulation.html" target="_blank" title="Distribution Sampling and Simulation">Simulation</a></li>
+				<li><a href="./Distributome.xml.html" target="_blank" title="Render the entire Distributome Database as a web-page">Distributome DB HTML View</a></li>
+			</ul>
+		</div>
+
+		<div id="RightSide_Splitter3">
+			<div class="Middle Pane 2" id="distributome.relationPannel" style="line-height:18px"> <!-- Get the Inter-Distribution Relation Properties from Distributome.xml -->
+				<b><u>Inter-Distribution Relations</u></b> <br />
+			</div>
+
+			<div class="Bottom Pane" id="distributome.referencePanel" style="line-height:18px"> <!-- Get the References from Distributome.xml -->
+				<b><u>Distribution Referencies</u></b> <br />
+			</div>
+		</div>
+	</div>
+  </div> 
+  
+</div> <!-- #MainSplitPaneObject -->
+
+
+</center>
 </div>
-<div id="RightSide_Splitter2">
-<div class="Middle Pane 1"> <b><u>Distribution Actions</u></b> <br>
-<ul>
-  <li><a href="./calc/NormalCalculator.html" target="_blank"
- title="Interactive Distribution Calculator"
- id="distributome.calculator">Calculator</a></li>
-  <li><a href="./exp/PoissonExperiment.html" target="_blank"
- title="Run Virtual Distribution Experiment">Experiment</a></li>
-  <li><a href="./sim/NormalSimulation.html" target="_blank"
- title="Distribution Sampling and Simulation">Simulation</a></li>
-  <li><a href="./Distributome.xml.html" target="_blank"
- title="Render the entire Distributome Database as a web-page">Distributome
-DB HTML View</a></li>
-</ul>
-</div>
-<div id="RightSide_Splitter3">
-<div class="Middle Pane 2" id="distributome.relationPannel"><!-- Get the Inter-Distribution Relation Properties from Distributome.xml --> <b><u>Inter-Distribution
-Relations</u></b> <br>
-</div>
-<div class="Bottom Pane" id="distributome.referencePanel"><!-- Get the References from Distributome.xml --> <b><u>Distribution
-Referencies</u></b> <br>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- #MainSplitPaneObject --></div>
+
 <div id="wrapper-footer">
-<div id="footer">Visitor number <img
- src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
- align="middle" border="0" height="20" hspace="4" vspace="2" width="60">
-| 2011 | <a href="http://www.Distributome.org">www.Distributome.org</a>
+	<div id="footer">Visitor number <img src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
+ 		align="middle" border="0" height="20" hspace="4" vspace="2" width="60">
+		| 2011 | <a href="http://www.Distributome.org">www.Distributome.org</a>
+	</div>
 </div>
-</div>
+
 <!-- Splitter JavaScript Functions -->
 <script type="text/javascript">
 $().ready(function() {
@@ -377,6 +421,7 @@ $().ready(function() {
 	$("#RightSide_Splitter3").trigger("resize");
 	});
 </script>
+
 <script type="text/javascript+protovis">
 	function resetNavigator(){
 		resetView();
@@ -418,6 +463,24 @@ $().ready(function() {
 		return selectedNodes;
 	}
 	
+	function highlightConnectedNodes(type){
+		var degree1 = (1/3) * maxLinkDegree;
+		var degree2 = (2/3) * maxLinkDegree;
+		var classes = pv.nodes(distributome.nodes);	
+		classes.slice(1).forEach(function(d) {
+			if(type == 3){
+				if(d.nodeValue.linkDegree < degree1) d.nodeValue.selected = true;
+				else d.nodeValue.selected = false;
+			}else if(type == 2){
+				if(d.nodeValue.linkDegree >= degree1 && d.nodeValue.linkDegree < degree2) d.nodeValue.selected = true;
+				else d.nodeValue.selected = false;
+			}else{
+				if(d.nodeValue.linkDegree >= degree2) d.nodeValue.selected = true;
+				else d.nodeValue.selected = false;
+			}
+		});
+	}
+	
 	function graphPause(){
 		force.stop();
 	}
@@ -425,7 +488,24 @@ $().ready(function() {
 	function graphRestart(){
 		force.start();
 	}
-</script><!-- Start of StatCounter Code -->
+	
+	function resizeDistributome(){
+		force.nodes(distributome.nodes);
+		//force.links(distributome.links);
+		force.reset();
+		vis.render();
+		var leftPanelWidth = document.getElementById('LeftPanel').style.width;
+			var leftPanelHeight = document.getElementById('LeftPanel').style.height;
+			var w =	leftPanelWidth.substring(0,leftPanelWidth.indexOf('px')),
+				h = leftPanelHeight.substring(0,leftPanelHeight.indexOf('px'));
+				vis.width(w);
+				vis.height(h);
+				vis.render();
+	}
+</script>
+
+
+<!-- Start of StatCounter Code -->
 <script type="text/javascript">
 	var sc_project=5714596; 
 	var sc_invisible=1; 
@@ -433,11 +513,12 @@ $().ready(function() {
 	var sc_click_stat=1; 
 	var sc_security="038e9ac4"; 
 </script>
-<script type="text/javascript"
- src="http://www.statcounter.com/counter/counter.js"></script><!-- End of StatCounter Code -->
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<!-- End of StatCounter Code -->
+
 <!-- GoogleAnalytics -->
-<script src="http://www.google-analytics.com/urchin.js"
- type="text/javascript"> </script>
-<script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker(); </script><!-- End of GoogleAnalytics Code -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> </script>
+<script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker(); </script>
+<!-- End of GoogleAnalytics Code -->
 </body>
 </html>
