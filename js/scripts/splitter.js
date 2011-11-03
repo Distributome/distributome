@@ -55,16 +55,16 @@
 				resplit(newPos);
 		}
 		function endSplitMouse(evt) {
-			bar.removeClass(opts.activeClass);
-			var newPos = A._posSplit+evt[opts.eventPos];
-			if ( opts.outline ) {
-				zombie.remove(); zombie = null;
-				resplit(newPos);
-			}
-			panes.css("-webkit-user-select", "text");	// let Safari select text again
 			$(document)
 				.unbind("mousemove", doSplitMouse)
 				.unbind("mouseup", endSplitMouse);
+			bar.removeClass(opts.activeClass);
+			var newPos = A._posSplit+evt[opts.eventPos];
+			if ( opts.outline ) {
+				if(zombie) zombie.remove(); zombie = null;
+				resplit(newPos);
+			}
+			panes.css("-webkit-user-select", "text");	// let Safari select text again
 		}
 		function resplit(newPos) {
 			// Constrain new splitbar position to fit pane size limits
@@ -196,6 +196,7 @@
 
 		// Resize event handler; triggered immediately to set initial position
 		splitter.bind("resize", function(e, size){
+			if(force) resizeDistributome();
 			// Custom events bubble in jQuery 1.3; don't get into a Yo Dawg
 			if ( e.target != this ) return;
 			// Determine new width/height of splitter container
