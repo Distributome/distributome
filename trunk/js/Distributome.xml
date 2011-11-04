@@ -304,6 +304,7 @@
 	<family>exponential </family>
 	<family>scale</family>
 	<history>The exponential distribution was named by Karl Pearson in 1895.</history>
+	<cite>Siegrist 2007</cite>
 </distribution>
 
 <distribution id="exponential-logarithmic">
@@ -398,6 +399,7 @@
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 	<family>scale </family>
 	<family>exponential</family>
+	<cite>Siegrist 2007</cite>
 </distribution>
 
 <distribution id="geometric">
