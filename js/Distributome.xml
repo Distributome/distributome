@@ -3852,9 +3852,9 @@
 	<url>http://papers.ssrn.com/sol3/papers.cfm?abstract_id=5735</url>
 </reference>
 <reference id="Shoukri Mian Tracy 1988" type="article">
-	<auhtor>Shoukri, M.M.</auhtor>
-	<auhtor>Mian, I.U.M.</auhtor>
-	<auhtor>Tracy, D.S.</auhtor>
+	<author>Shoukri, M.M.</author>
+	<author>Mian, I.U.M.</author>
+	<author>Tracy, D.S.</author>
 	<title> Sampling Properties of Estimators of the Log-Logistic Distribution with Application to Canadian Precipitation Data</title>
 	<journal> The Canadian Journal of Statistics </journal>
 	<year>1988</year>
