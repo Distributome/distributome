@@ -9,6 +9,7 @@ var DistributomeXML_Objects;
 var xmlDoc;	
 var force = null;
 var maxLinkDegree = 1;
+var presetNodes = null;
 
 var relationStrength = new Array();
 relationStrength["convolution"] = 2;
@@ -61,6 +62,7 @@ function resetPage(){
 /*************** Reset variables **************/
 function resetVariables(){
 	resetNodesEdges();
+	presetNodes = null;
 	//Default href for calculator
 	document.getElementById('distributome.calculator').href = './calc/NormalCalculator.html';
 }
@@ -135,6 +137,7 @@ function getLinkColor(d,l){
 function getNodeProperties(index, nodeName){
 	if(!_shiftKey){
 		resetNodes();
+		presetNodes = null;
 	}
 	distributome.nodes[index].selected = true;
 	var html = new Array();
@@ -181,7 +184,7 @@ function XMLParser(i, nodeNameIndex, index, reference){
 		var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].firstChild;
 		
 		var k_corr=0;
-		var nameText = ''; var nameFlag = true;
+		var nameText = ''; var nameFlag = true; var typeFlag = false; var typeText = '';
 		for (k=0;k<Level2Prop.length;k++) {
 			try {
 				if (currLevel2Prop.nodeType==1) {
@@ -198,12 +201,25 @@ function XMLParser(i, nodeNameIndex, index, reference){
 						}else{
 							nameText = nameText+ ', '+trim(currLevel2Prop.childNodes[0].nodeValue);
 						}
+					}else if(currLevel2Prop.nodeName == 'type'){
+						if(typeText == ''){
+							typeText = '<b>'+trim(currLevel2Prop.nodeName)+"</b>: "+
+							trim(currLevel2Prop.childNodes[0].nodeValue);
+						}else{
+							typeText = typeText+ ', '+trim(currLevel2Prop.childNodes[0].nodeValue);
+						}
+						typeFlag = true;
 					}else{
 						if(nameFlag){
 							html.push('<div style="padding-left:3px">'+nameText+'</div>');
 							html.push("<div style='height:5px'></div>");
 						}
 						nameFlag = false;
+						if(typeFlag){
+							html.push('<div style="padding-left:3px">'+typeText+'</div>');
+							html.push("<div style='height:5px'></div>");
+						}
+						typeFlag = false;
 						html.push('<div style="padding-left:3px"><b>'+trim(currLevel2Prop.nodeName)+"</b>: "+
 							trim(currLevel2Prop.childNodes[0].nodeValue)+'</div>');
 						html.push("<div style='height:5px'></div>");
@@ -213,6 +229,10 @@ function XMLParser(i, nodeNameIndex, index, reference){
 			} catch (err) {
 				html.push("Empty tag" + currLevel2Prop.nodeValue + "<br />");
 			}
+		}
+		if(typeFlag){	//handling the border case when type occurs last
+			html.push('<div style="padding-left:3px">'+typeText+'</div>');
+			html.push("<div style='height:5px'></div>");
 		}
 	}
 	return new Array(html.join(''), referenceName);
@@ -261,7 +281,13 @@ function neighborsFetch(){
 	var type = getDropDownSelectedValue('distributome.neighborAction');
 	if(type == 'neighbors') return;
 	var selectedNodes = getSelectedNodes();
-	parentChildSearch(type, selectedNodes);
+	if(presetNodes == null || presetNodes.length == 0) presetNodes = selectedNodes;
+	/*** alert(presetNodes.length);
+	for(var i=0;i<presetNodes.length;i++){
+		alert(presetNodes[i]);
+	} ****/
+	
+	parentChildSearch(type, presetNodes);
 	vis.render();
 }
 
@@ -329,6 +355,70 @@ function textSearch(){
 	vis.render();
 }
 
+/*************** Function invoked on enter of the input box for search **************/
+function displayXmlText(displayAll){
+	if(!displayAll){
+		var searchString = document.getElementById('distributome.xmltext').value;
+		traverseXML(true, searchString);
+	}
+	var parserOutput;
+	var referenceName;
+	var reference = false;
+	var nodehtml = new Array();
+	var referencehtml = new Array();
+	var relationhtml = new Array();
+	nodehtml.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
+	relationhtml.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
+	referencehtml.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	var display = true;
+	for(var i=0; i< distributome.nodes.length; i++){
+		if(!displayAll){
+			if(distributome.nodes[i].selected){
+				display = true;
+			}else display = false;
+		}
+		if(display){
+			nodehtml.push("<b>distribution:</b> <div style='padding-left:7px'>");
+			parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, i, true);
+			nodehtml.push(parserOutput[0]);
+			referenceName= parserOutput[1];
+			if(referenceName !=null){
+				if(!reference) reference = true;
+				referencehtml.push("<b>reference:</b> <div style='padding-left:7px'>");
+				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false)[0]);
+				referencehtml.push("</div>");
+			}
+			nodehtml.push("</div>");
+		}
+	}
+	display = true;
+	for(var i=0; i<distributome.edges.length; i++){
+		if(!displayAll){
+			if(distributome.edges[i].selected){
+				display = true;
+			}else display = false;
+		}
+		if(display){
+			relationhtml.push("<b>relation:</b> <div style='padding-left:7px'>");
+			parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, i, true);
+			relationhtml.push(parserOutput[0]);
+			referenceName= parserOutput[1];
+			if(referenceName !=null){
+				if(!reference) reference = true;
+				referencehtml.push("<b>reference:</b> <div style='padding-left:7px'>");
+				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false)[0]);
+				referencehtml.push("</div>");
+			}
+			relationhtml.push("</div>");
+		}
+	}
+	
+	document.getElementById('distributome.xmlParse').innerHTML = nodehtml.join('')+"<div style='height:15px'></div>"+relationhtml.join('');
+	if(reference)
+		document.getElementById('distributome.xmlParse').innerHTML += "<div style='height:15px'></div>"+referencehtml.join('');	
+	renderMath();
+}
+
 /*************** Fetch References from the XML **************/
 function getReferences(index){
 	var html = new Array();
@@ -388,7 +478,7 @@ function trimDistribution(inputString){
 	}
 	var index = inputString.indexOf("dist");
 	if(index!=-1)
-		inputString = inputString.substring(0,index-2);
+		inputString = inputString.substring(0,index-1);
 	return inputString;
 }
 
@@ -454,7 +544,7 @@ function traverseXML(searchFlag, text){
 										//Process only level=3 element nodes (type 1)
 										if (currLevel2Prop.nodeName == "name" && !nameFlag) {
 											nameFlag = true;
-											distributome.nodes[currentNodeIndex].nodeName = value;
+											distributome.nodes[currentNodeIndex].nodeName = trimDistribution(value);
 											distributomeNodes[getDistributionName(value)] = currentNodeIndex;
 										} else if(currLevel2Prop.nodeName == "name" && nameFlag){
 											distributomeNodes[getDistributionName(value)] = currentNodeIndex;
