@@ -111,7 +111,7 @@
 <div id="menu-top">
 	<ul>
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
+  		<li><span> Tools »</span></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="../docs.html" title="Distributome Technical Documentation"><span>Tech Docs</span></a></li>
   		<li><a href="http://www.SOCR.ucla.edu" title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
@@ -471,10 +471,10 @@ $().ready(function() {
 				if(d.nodeValue.linkDegree < degree1) d.nodeValue.selected = true;
 				else d.nodeValue.selected = false;
 			}else if(type == 2){
-				if(d.nodeValue.linkDegree >= degree1 && d.nodeValue.linkDegree < degree2) d.nodeValue.selected = true;
+				if(d.nodeValue.linkDegree < degree2) d.nodeValue.selected = true;
 				else d.nodeValue.selected = false;
 			}else{
-				if(d.nodeValue.linkDegree >= degree2) d.nodeValue.selected = true;
+				if(d.nodeValue.linkDegree < maxLinkDegree) d.nodeValue.selected = true;
 				else d.nodeValue.selected = false;
 			}
 		});
@@ -490,16 +490,15 @@ $().ready(function() {
 	
 	function resizeDistributome(){
 		force.nodes(distributome.nodes);
-		//force.links(distributome.links);
 		force.reset();
-		vis.render();
 		var leftPanelWidth = document.getElementById('LeftPanel').style.width;
-			var leftPanelHeight = document.getElementById('LeftPanel').style.height;
-			var w =	leftPanelWidth.substring(0,leftPanelWidth.indexOf('px')),
-				h = leftPanelHeight.substring(0,leftPanelHeight.indexOf('px'));
-				vis.width(w);
-				vis.height(h);
-				vis.render();
+		var leftPanelHeight = document.getElementById('LeftPanel').style.height;
+		var w =	leftPanelWidth.substring(0,leftPanelWidth.indexOf('px')),
+			h = leftPanelHeight.substring(0,leftPanelHeight.indexOf('px'));
+		vis.width(w);
+		vis.height(h);
+		vis.render();
+		graphPause();
 	}
 </script>
 
