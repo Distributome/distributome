@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?> 
+  <jnlp
+  codebase="http://www.socr.ucla.edu/distributome/jars/" 
+  href="DistributomeNavigator.jnlp"> 
+    <information> 
+       <title>Distributome Navigator</title> 
+       <vendor>Distributome</vendor> 
+       <description>Distributome Navigator</description> 
+       <description kind="short">Distributome Navigator</description> 
+       <offline-allowed/> 
+     </information> 
+     <resources> 
+       <j2se version="1.5"/> 
+       <jar href="SOCR_distributome.jar"/> 
+     </resources> 
+    <applet-desc 
+      documentBase="http://www.distributome.org/jars/" 
+      name="Distributome Navigator" 
+      main-class="org.distributome.TGViewerApplet" 
+      width="1500" 
+      height="900"> 
+     </applet-desc>
+</jnlp>

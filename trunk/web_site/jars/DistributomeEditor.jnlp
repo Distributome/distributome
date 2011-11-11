@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?> 
+  <jnlp
+  codebase="http://www.socr.ucla.edu/distributome/jars/" 
+  href="DistributomeEditor.jnlp"> 
+    <information> 
+       <title>DistributomeEditor</title> 
+       <vendor>Distributome</vendor> 
+       <description>Distributome Editor</description> 
+       <description kind="short">DistributomeEditor</description> 
+       <offline-allowed/> 
+     </information> 
+     <resources> 
+       <j2se version="1.5"/> 
+       <jar href="SOCR_distributome.jar"/> 
+     </resources> 
+    <applet-desc 
+      documentBase="http://www.distributome.org/jars/" 
+      name="DistributomeEditor" 
+      main-class="org.distributome.TGEditorApplet" 
+      width="1500" 
+      height="900"> 
+     </applet-desc>
+</jnlp>
