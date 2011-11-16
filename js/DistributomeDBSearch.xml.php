@@ -47,9 +47,16 @@
   		}
 	}); 
   </script>
-  <meta http-equiv="REFRESH" content="0;url=http://www.distributome.org/js/DistributomeDBSearch.xml.php">
 </head>
-<body>
+<?php 
+if(isset($_GET['s']) && strlen($_GET['s'])>0) {	
+	$query = $_GET['s'];		
+	echo "<body onload=\"displayXmlText(false);\">\n";
+} else {
+	echo "<body>\n";
+}
+?>
+		
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     extensions: ["tex2jax.js"],
@@ -95,10 +102,15 @@
   		<!-- Search Area -->
   			<td class="tool">
   				<label id="search" for="search"></label>
+  				<form name="searchForm" action="DistributomeDBSearch.xml.php" method="GET">
 				<input id="distributome.xmltext" name="s" size="50" 
-					type="search" onKeydown="Javascript: if (event.keyCode==13) 
-						displayXmlText(false);" 
+				<?php 
+				if(isset($query))
+					echo " value=\"$query\" "; 
+				?>
+					type="search" 
 						placeholder="Keyword Search for distributions or relations ..." />
+				</form>
 			</td>
 	</tr></table>
 </center>
@@ -114,6 +126,7 @@
  src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
  align="middle" border="0" height="20" hspace="4" vspace="2" width="60">
 | 2011 | <a href="http://www.Distributome.org">www.Distributome.org</a>
+
 </div>
 </div>
 <!-- Start of StatCounter Code -->
