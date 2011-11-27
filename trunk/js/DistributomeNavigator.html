@@ -111,7 +111,7 @@
 <div id="menu-top">
 	<ul>
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools »</span></li>
+  		<li><span> Tools</span><span> »</span></li>
   		<li><a href="./DistributomeDBSearch.xml.html" title="Keyword Search the Distributome Meta-data"><span>DB Search</span></a></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="../docs.html" title="Distributome Technical Documentation"><span>Tech Docs</span></a></li>
@@ -287,17 +287,32 @@
 				.springLength(200)
 				.bound(true); 
 		
-			force.link.add(pv.Line)
-				.cursor("pointer")
-				.strokeStyle(function(d,l) getLinkColor(d,l))
-				.event("click", function (d, l) getRelationProperties(d.nodeName, l.index));
+			var linky = force.link.add(pv.Line)
+						.cursor("pointer")
+						//.fillStyle("#696969")
+						.strokeStyle(function(d,l) getLinkColor(d,l))
+						.event("click", function (d, l) getRelationProperties(d.nodeName, l.index));
+			
+			linky.add(pv.Dot)
+				.data(function(l) { if(l.target == l.source) return [{x:0,y:0}];
+				nodecalc = Math.sqrt((l.targetNode.linkDegree*15)/Math.PI)*2; 
+				return [{ 
+					x: l.targetNode.x - nodecalc * Math.cos(Math.atan2(l.targetNode.y - l.sourceNode.y, l.targetNode.x - l.sourceNode.x)), 
+					y: l.targetNode.y - nodecalc * Math.sin(Math.atan2(l.targetNode.y - l.sourceNode.y, l.targetNode.x - l.sourceNode.x)) 
+				}];
+				}) 
+				.angle(function (n,l) Math.atan2(l.targetNode.y - l.sourceNode.y, l.targetNode.x - l.sourceNode.x) - Math.PI/2) 
+				.shape("triangle") 
+				.strokeStyle("#C0C0C0")
+				.fillStyle("#C0C0C0")
+				.size(3)
+				.visible(true);
+
 
 			force.node.add(pv.Dot)
 				.bottom(0)
 				.size(function(d) { return d.selected?(d.linkDegree + 15) * Math.pow(this.scale, -1.5):(d.linkDegree + 4) * Math.pow(this.scale, -1.5)})
 				.fillStyle(function(d) getColor(d))
-				//.fillStyle(function(d) d.selected == true ? "red" : colors(d.group))
-				//.fillStyle(function(d) d.selected ? "red" : colors(d.group))
 				.strokeStyle(function() this.fillStyle().darker())
 				.lineWidth(1)
 				//.title(function(d) d.nodeName)

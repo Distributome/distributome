@@ -69,8 +69,11 @@ function trimSpecialCharacters(inputString) {
 		return inputString; 
 	}
 	var index = inputString.indexOf("dist");
-	if(index!=-1)
-		inputString = inputString.substring(0,index-1);
+	if(index!=-1){
+		var startString = inputString.substring(0,index-1);
+		var endString = inputString.substring(index+12);
+		inputString = startString.concat(endString);
+	}
 	inputString = inputString.replace(/[\s\xA0]+/g,''); 
 	inputString = inputString.replace(/[-]/g,'');
 	inputString = inputString.replace(/\'/g,'');
@@ -113,8 +116,9 @@ function renderMath(){
 
 
 /*************** Get node index for the distribution name **************/
-function getNodeIndex(nodeName){
-	return (distributomeNodes[nodeName] != undefined)?distributomeNodes[nodeName]:0;
+function getNodeIndex(nodesArray, nodeName){
+	return (nodesArray[nodeName] != undefined)?nodesArray[nodeName]:0;
+	//return (distributomeNodes[nodeName] != undefined)?distributomeNodes[nodeName]:0;
 }
 
 /*************** Get the reference of the nodes wrt browser **************/
@@ -205,6 +209,11 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 	var currentEdgeIndex=0;
 	var currentReferencesIndex=0;
 
+	if(searchFlag){
+		var andIndex = text.indexOf('AND');
+		var orIndex = text.indexOf('OR');
+	}
+	
 	/*** For each of the 3 main Distirbutome.xml classes of objects (1=distirbutions, 3=relations, 5-references ***/
 	for (i=0;i<XML_Objects.length;i++) {
 		var j_corr=0;
@@ -226,21 +235,62 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
 						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
 						var nameFlag = false;
+						var andRegex = false;
+						var orRegex = false;
 						for (k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 									if(searchFlag){
-										var regex = new RegExp(trimSpecialCharacters(text),"i");
-										if(trimSpecialCharacters(value).search(regex)!=-1) nodes[currentNodeIndex].selected = true; 
+										if(orIndex!=-1){
+											var orText2 = text.substring(orIndex+3);
+											var orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
+											if(andIndex !=-1 && andIndex<orIndex){
+												if(trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
+											}else{
+												var orText1 = text.substring(0, orIndex-1);
+												var orText1Regex = new RegExp(trimSpecialCharacters(orText1),"i");
+												if(andIndex!=-1){
+													orText2 = text.substring(orIndex+3, andIndex-1);
+													orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
+												}
+												if(trimSpecialCharacters(value).search(orText1Regex)!=-1 || trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
+											}
+										}
+										if(andIndex!=-1){
+											var andText2 = text.substring(andIndex+4);
+											var andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
+											
+											if(orIndex!=-1 && orIndex<andIndex){
+												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
+											}else{
+												var andText1 = text.substring(0, andIndex-1);
+												//alert(andText1);
+												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
+												if(orIndex!=-1){
+													andText2 = text.substring(andIndex+4, orIndex-1);
+													andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
+												}
+												if(trimSpecialCharacters(value).search(andText1Regex)!=-1 && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
+											}
+										}
+										if(orIndex!=-1 && andIndex!=-1){
+											if(orRegex && andRegex) nodes[currentNodeIndex].selected = true;
+										}else if(orIndex!=-1){
+											if(orRegex)nodes[currentNodeIndex].selected = true;
+										}else if(andIndex!=-1){
+											if(andRegex) nodes[currentNodeIndex].selected = true;
+										}
 									}else{
 										//Process only level=3 element nodes (type 1)
 										if (currLevel2Prop.nodeName == "name" && !nameFlag) {
 											nameFlag = true;
 											nodes[currentNodeIndex].nodeName = trimDistribution(value);
 											nodesArray[getDistributionName(value)] = currentNodeIndex;
+											nodesArray[currentNodeIndex] = getDistributionName(value);
 										} else if(currLevel2Prop.nodeName == "name" && nameFlag){
 											nodesArray[getDistributionName(value)] = currentNodeIndex;
+											nodesArray[currentNodeIndex] = nodesArray[currentNodeIndex]+ ","+getDistributionName(value);
 										}else if (currLevel2Prop.nodeName == "type") {
 											nodes[currentNodeIndex].group = getGroup(value.toLowerCase());
 										}
@@ -262,30 +312,113 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 							{source:1, target:0, value:2},
 					 ]
 				***/	
+				var totalEdges = xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].getElementsByTagName('relation').length;
 				for (j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;	
 					
 					if (currLevel1Prop.nodeType==1) {
-						if(!searchFlag) edges[currentEdgeIndex] = new Object();
+						if(!searchFlag){
+							edges[currentEdgeIndex] = new Object();
+							var to = false;
+							var from = false;
+							var fromValue, toValue;
+							var fromNodes = xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].getElementsByTagName('from');
+							var toNodes = xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].getElementsByTagName('to');
+							var extraNodeIterator = 0;
+							var totalExtraNodes = 0;
+							if(toNodes.length > 1)
+								totalExtraNodes = toNodes.length-1;
+							else if(fromNodes.length > 1)
+								totalExtraNodes = fromNodes.length-1;
+							for(var temp =0; temp<totalExtraNodes; temp++){
+								edges[totalEdges+temp] = new Object();
+							}
+						}
 						
 						Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].childNodes;
 						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
-						
+						var andRegex = false;
+						var orRegex = false;
 						for (k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 									//Process only level=3 element nodes (type 1)
-									if(searchFlag){
-										var regex = new RegExp(trimSpecialCharacters(text),"i");
-										if(trimSpecialCharacters(value).search(regex)!=-1) edges[currentEdgeIndex].selected = true; 
+									if(searchFlag){ //Check search
+										if(orIndex!=-1){
+											var orText2 = text.substring(orIndex+3);
+											var orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
+											if(andIndex !=-1 && andIndex<orIndex){
+												if(trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
+											}else{
+												var orText1 = text.substring(0, orIndex-1);
+												var orText1Regex = new RegExp(trimSpecialCharacters(orText1),"i");
+												if(andIndex!=-1){
+													orText2 = text.substring(orIndex+3, andIndex-1);
+													orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
+												}
+												if(trimSpecialCharacters(value).search(orText1Regex)!=-1 || trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
+											}
+										}
+										if(andIndex!=-1){
+											var andText2 = text.substring(andIndex+4);
+											var andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
+											
+											if(orIndex!=-1 && orIndex<andIndex){
+												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
+											}else{
+												var andText1 = text.substring(0, andIndex-1);
+												//alert(andText1);
+												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
+												if(orIndex!=-1){
+													andText2 = text.substring(andIndex+4, orIndex-1);
+													andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
+												}
+												if(trimSpecialCharacters(value).search(andText1Regex)!=-1 && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
+											}
+										}
+										if(orIndex!=-1 && andIndex!=-1){
+											if(orRegex && andRegex) edges[currentEdgeIndex].selected = true; 
+										}else if(orIndex!=-1){
+											if(orRegex) edges[currentEdgeIndex].selected = true; 
+										}else if(andIndex!=-1){
+											if(andRegex) edges[currentEdgeIndex].selected = true; 
+										}
 									}else{
 										if (currLevel2Prop.nodeName == "from") {
-											edges[currentEdgeIndex].source = getNodeIndex(getDistributionName(value));
+											var fromValue = getNodeIndex(nodesArray, getDistributionName(value));
+											if(!from)
+												edges[currentEdgeIndex].source = fromValue;
+											else{
+												edges[totalEdges+extraNodeIterator].source = fromValue;	
+											}
+											if(toNodes.length >1){
+												for(var extraNodes=0; extraNodes<toNodes.length-1; extraNodes++){
+													edges[totalEdges+extraNodes].source = fromValue;
+												}
+											}
+											from = true;
 										} else if (currLevel2Prop.nodeName == "to") {
-											edges[currentEdgeIndex].target = getNodeIndex(getDistributionName(value));
+											var toValue = getNodeIndex(nodesArray, getDistributionName(value));
+											if(!to)
+												edges[currentEdgeIndex].target = toValue;
+											else{
+												edges[totalEdges+extraNodeIterator].target = toValue;
+											}
+											if(fromNodes.length >1){
+												for(var extraNodes=0; extraNodes<fromNodes.length-1; extraNodes++){	
+													edges[totalEdges+extraNodes].target = toValue;
+												}
+											}
+											to = true;
 										} else if (currLevel2Prop.nodeName == "type") {
-											edges[currentEdgeIndex].value = getRelationStrength(value.toLowerCase());
+											var type = getRelationStrength(value.toLowerCase());
+											edges[currentEdgeIndex].value = type;
+											if(totalExtraNodes > 0){
+												for(var extraNodes =0; extraNodes<totalExtraNodes; extraNodes++){
+													edges[totalEdges+extraNodes].value = type;
+												}
+											}
 										}
 										edges[currentEdgeIndex].index = currentEdgeIndex;
 									}
@@ -294,7 +427,14 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 							} catch (err) {
 							}
 						}
-						if(!searchFlag)	edges[currentEdgeIndex].selected = false;
+						if(!searchFlag){
+							edges[currentEdgeIndex].selected = false;
+							if(totalExtraNodes > 0){
+								edges[currentEdgeIndex].extra = totalEdges+","+totalExtraNodes;
+								extraNodeIterator++;
+							}
+							totalEdges = totalEdges+ totalExtraNodes;
+						}
 						currentEdgeIndex++;
 					} else j_corr++;
 				currLevel1Prop=currLevel1Prop.nextSibling;
