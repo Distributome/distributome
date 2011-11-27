@@ -143,10 +143,7 @@ function neighborsFetch(){
 	if(type == 'neighbors') return;
 	var selectedNodes = getSelectedNodes();
 	if(presetNodes == null || presetNodes.length == 0) presetNodes = selectedNodes;
-	//resetNodesEdges();
-	//for(var i=0; i< selectedNodes.length;i++){
-		
-	//}
+	resetNodesEdges();
 	parentChildSearch(type, presetNodes);
 	vis.render();
 }
@@ -175,28 +172,61 @@ function parentChildSearch(type, selectedNodes){
 			if (currLevel1Prop.nodeType==1) {
 				if(node_cnt<nodes.length) {
 					Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].childNodes;
-					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('from')[0]; //get from here
-					currLevel2Prop1=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('to')[0]; //get to node here
+					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('from'); //get from here
+					currLevel2Prop1=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].getElementsByTagName('to'); //get to node here
 					try {
-						if (currLevel2Prop.nodeType==1) {
-							var fromValue = getDistributionName(currLevel2Prop.childNodes[0].nodeValue);
-							var toValue = getDistributionName(currLevel2Prop1.childNodes[0].nodeValue);
+						//if (currLevel2Prop.nodeType==1) {
 							for(var values=0;values<selectedNodes.length;values++){
-								if(fromValue == selectedNodes[values]){
-									if(type.indexOf('children')!=-1){
-										distributome.nodes[getNodeIndex(toValue)].selected = 'yellow'; //child 
-										//Take care of multiple from and to
-										distributome.edges[node_cnt].selected = 'yellow';
+								var nodeIndex = distributomeNodes[selectedNodes[values]];
+								distributome.nodes[getNodeIndex(distributomeNodes,selectedNodes[values])].selected = 'red'; //selected Node
+								var nodeNames = distributomeNodes[nodeIndex].split(","); //done for different names for a particular node
+								//alert(distributomeNodes[nodeIndex]);
+								for(var nodeNameTraverse=0; nodeNameTraverse<nodeNames.length; nodeNameTraverse++){
+									for(var fromNodes=0;fromNodes<currLevel2Prop.length;fromNodes++){
+										var fromValue = getDistributionName(currLevel2Prop[fromNodes].childNodes[0].nodeValue);
+										if(fromValue == nodeNames[nodeNameTraverse]){
+											if(type.indexOf('children')!=-1){
+												for(var toNodes=0;toNodes<currLevel2Prop1.length;toNodes++){
+													var toValue = getDistributionName(currLevel2Prop1[toNodes].childNodes[0].nodeValue);
+													distributome.nodes[getNodeIndex(distributomeNodes,toValue)].selected = 'yellow'; //child 
+												}
+												//Take care of multiple from and to
+												distributome.edges[node_cnt].selected = 'yellow';
+												if(distributome.edges[node_cnt].extra){
+													var totalExtra = distributome.edges[node_cnt].extra.split(",");
+													var startPoint = totalExtra[0];
+													var endPoint = totalExtra[1];
+													for(var extraNodes=startPoint;extraNodes<endPoint;extraNodes++){
+														distributome.edges[extraNodes].selected = 'yellow';
+													}
+												}
+											}
+										}
 									}
-								}
-								if(toValue == selectedNodes[values]){
-									if(type.indexOf('parent')!=-1){
-										distributome.nodes[getNodeIndex(fromValue)].selected = 'green'; //parent
-										distributome.edges[node_cnt].selected = 'green';
+									for(var toNodes=0;toNodes<currLevel2Prop1.length;toNodes++){
+										var toValue = getDistributionName(currLevel2Prop1[toNodes].childNodes[0].nodeValue);		
+										if(toValue == nodeNames[nodeNameTraverse]){
+											if(type.indexOf('parent')!=-1){
+												for(var fromNodes=0;fromNodes<currLevel2Prop.length;fromNodes++){
+													var fromValue = getDistributionName(currLevel2Prop[fromNodes].childNodes[0].nodeValue);
+													distributome.nodes[getNodeIndex(distributomeNodes, fromValue)].selected = 'green'; //parent
+												}
+												distributome.edges[node_cnt].selected = 'green';
+												alert(distributome.edges[node_cnt].source+"source target"+distributome.edges[node_cnt].target);
+												if(distributome.edges[node_cnt].extra){
+													var totalExtra = distributome.edges[node_cnt].extra.split(",");
+													var startPoint = totalExtra[0];
+													var endPoint = totalExtra[1];
+													for(var extraNodes=startPoint;extraNodes<endPoint;extraNodes++){
+														distributome.edges[extraNodes].selected = 'green';
+													}
+												}
+											}
+										}
 									}
 								}
 							}
-						} 
+						//} 
 					} catch (err) {
 					}
 					node_cnt++;
@@ -211,7 +241,6 @@ function textSearch(){
 	resetVariables();
 	resetNodesEdges();
 	var searchString = document.getElementById('distributome.text').value;
-	//traverseXML(true, searchString);
 	traverseXML(true, searchString, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
 	vis.render();
 }
@@ -285,4 +314,14 @@ function edgeTypeInfoFetch(){
 			DistributomeXML_Objects=xmlDoc.childNodes;
 		}
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
+		//alert(distributome.nodes.length);
+		/*for(var i =0; i<distributome.nodes.length; i++){
+			var value = distributome.nodes[i].nodeName;
+			document.write(value+"index"+distributomeNodes[getDistributionName(value)]+"\n");
+		}
+		
+		for(var i =0; i<distributome.edges.length; i++){
+			document.write("source:"+distributomeNodes[distributome.edges[i].source]+",target:"+distributomeNodes[distributome.edges[i].target]+",value:"+distributome.edges[i].value+",extra:"+distributome.edges[i].extra+"</br>");
+		}
+		*/
 }
