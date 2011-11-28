@@ -175,7 +175,7 @@
 	<cdf>\(F(x) = \frac{1}{\Gamma(n/2)} \gamma(x/2; n/2)\) where \(\gamma\) is the lower incomplete gamma function</cdf>
 	<qf>\(Q(p) = F^{-1}(p), \; p \in [0, 1)\) where \(F\) is the distribution function</qf>
 	<mgf>\(M(t) = \frac{1}{(1 - 2 t)^{n/2}}, \; t \in (-\infty, \frac{1}{2})\)</mgf>
-	<cf>\(\frac{1}{(1 - 2 i t^{n/2}}) \; t \in (-\infty, \infty)\)</cf>
+	<cf>\(\frac{1}{(1 - 2 i t^{n/2})}, \; t \in (-\infty, \infty)\)</cf>
 	<mean>\(n\)</mean>
 	<variance>\(2 n\)</variance>
 	<skew>\(\sqrt{8/n}\)</skew>
