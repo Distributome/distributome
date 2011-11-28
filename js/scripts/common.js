@@ -212,6 +212,21 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 	if(searchFlag){
 		var andIndex = text.indexOf('AND');
 		var orIndex = text.indexOf('OR');
+		var notIndex = text.indexOf('NOT');
+		if(notIndex!=-1){
+			var splitText = text.split(" ");
+			var newText = '';
+			var notArrayIndex = -1;
+			for(var splitArray =0; splitArray<splitText.length;splitArray++){
+				if(splitText[splitArray] != "NOT"){
+					newText = newText+" "+splitText[splitArray];
+				}else{
+					var notText = splitText[splitArray+1]
+					splitArray++;
+				}
+			}
+			text = newText;
+		}
 	}
 	
 	/*** For each of the 3 main Distirbutome.xml classes of objects (1=distirbutions, 3=relations, 5-references ***/
@@ -282,6 +297,10 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 										}else{
 											var regex = new RegExp(trimSpecialCharacters(text),"i");
 											if(trimSpecialCharacters(value).search(regex)!=-1) nodes[currentNodeIndex].selected = true; 
+										}
+										if(notIndex!=-1){
+											var notRegex = new RegExp(trimSpecialCharacters(notText),"i");
+											if(nodes[currentNodeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1) nodes[currentNodeIndex].selected = false; 
 										}
 									}else{
 										//Process only level=3 element nodes (type 1)
@@ -387,6 +406,11 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 										}else{
 											var regex = new RegExp(trimSpecialCharacters(text),"i");
 											if(trimSpecialCharacters(value).search(regex)!=-1) edges[currentEdgeIndex].selected = true; 
+										}
+										
+										if(notIndex!=-1){
+											var notRegex = new RegExp(trimSpecialCharacters(notText),"i");
+											if(edges[currentEdgeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1) edges[currentEdgeIndex].selected = false; 
 										}
 									}else{
 										if (currLevel2Prop.nodeName == "from") {
