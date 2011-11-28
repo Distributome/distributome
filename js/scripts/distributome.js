@@ -180,7 +180,6 @@ function parentChildSearch(type, selectedNodes){
 								var nodeIndex = distributomeNodes[selectedNodes[values]];
 								distributome.nodes[getNodeIndex(distributomeNodes,selectedNodes[values])].selected = 'red'; //selected Node
 								var nodeNames = distributomeNodes[nodeIndex].split(","); //done for different names for a particular node
-								//alert(distributomeNodes[nodeIndex]);
 								for(var nodeNameTraverse=0; nodeNameTraverse<nodeNames.length; nodeNameTraverse++){
 									for(var fromNodes=0;fromNodes<currLevel2Prop.length;fromNodes++){
 										var fromValue = getDistributionName(currLevel2Prop[fromNodes].childNodes[0].nodeValue);
@@ -212,7 +211,6 @@ function parentChildSearch(type, selectedNodes){
 													distributome.nodes[getNodeIndex(distributomeNodes, fromValue)].selected = 'green'; //parent
 												}
 												distributome.edges[node_cnt].selected = 'green';
-												alert(distributome.edges[node_cnt].source+"source target"+distributome.edges[node_cnt].target);
 												if(distributome.edges[node_cnt].extra){
 													var totalExtra = distributome.edges[node_cnt].extra.split(",");
 													var startPoint = totalExtra[0];
@@ -314,14 +312,4 @@ function edgeTypeInfoFetch(){
 			DistributomeXML_Objects=xmlDoc.childNodes;
 		}
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
-		//alert(distributome.nodes.length);
-		/*for(var i =0; i<distributome.nodes.length; i++){
-			var value = distributome.nodes[i].nodeName;
-			document.write(value+"index"+distributomeNodes[getDistributionName(value)]+"\n");
-		}
-		
-		for(var i =0; i<distributome.edges.length; i++){
-			document.write("source:"+distributomeNodes[distributome.edges[i].source]+",target:"+distributomeNodes[distributome.edges[i].target]+",value:"+distributome.edges[i].value+",extra:"+distributome.edges[i].extra+"</br>");
-		}
-		*/
 }

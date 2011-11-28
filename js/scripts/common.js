@@ -265,7 +265,6 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
 											}else{
 												var andText1 = text.substring(0, andIndex-1);
-												//alert(andText1);
 												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
 												if(orIndex!=-1){
 													andText2 = text.substring(andIndex+4, orIndex-1);
@@ -280,6 +279,9 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 											if(orRegex)nodes[currentNodeIndex].selected = true;
 										}else if(andIndex!=-1){
 											if(andRegex) nodes[currentNodeIndex].selected = true;
+										}else{
+											var regex = new RegExp(trimSpecialCharacters(text),"i");
+											if(trimSpecialCharacters(value).search(regex)!=-1) nodes[currentNodeIndex].selected = true; 
 										}
 									}else{
 										//Process only level=3 element nodes (type 1)
@@ -368,7 +370,6 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
 											}else{
 												var andText1 = text.substring(0, andIndex-1);
-												//alert(andText1);
 												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
 												if(orIndex!=-1){
 													andText2 = text.substring(andIndex+4, orIndex-1);
@@ -383,6 +384,9 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 											if(orRegex) edges[currentEdgeIndex].selected = true; 
 										}else if(andIndex!=-1){
 											if(andRegex) edges[currentEdgeIndex].selected = true; 
+										}else{
+											var regex = new RegExp(trimSpecialCharacters(text),"i");
+											if(trimSpecialCharacters(value).search(regex)!=-1) edges[currentEdgeIndex].selected = true; 
 										}
 									}else{
 										if (currLevel2Prop.nodeName == "from") {
