@@ -143,10 +143,10 @@
 	<parameter>\(\alpha \in (-\infty, \infty)\). the location parameter</parameter>
 	<parameter>\(\beta \in (0, \infty)\), the scale parameter</parameter>
 	<support>\((-\infty, \infty)\)</support>
-	<pdf>\(f(x) = \frac{1}{\pi} \frac{\beta}{(x - \alpha)^2 + \beta^2}, \; x \in (-\infty, i\infty)\)</pdf>
+	<pdf>\(f(x) = \frac{1}{\pi} \frac{\beta}{(x - \alpha)^2 + \beta^2}, \; x \in (-\infty, \infty)\)</pdf>
 	<mode>\(\alpha\)</mode>
 	<cdf>\(F(x) = \frac{1}{2} + \frac{1}{\pi} \arctan \left(\frac{x - \alpha}{\beta} \right),  \; x \in (-\infty, \infty)\)</cdf>
-	<qf>\(Q(p) = F^{-1}(p) = \alpha + \beta \tan \left(\pi (p - \frac{1}{2} \right), \; p \in (0, 1)\)</qf>
+	<qf>\(Q(p) = F^{-1}(p) = \alpha + \beta \tan \left(\pi (p - \frac{1}{2}) \right), \; p \in (0, 1)\)</qf>
 	<mgf>Does not exist</mgf>
 	<cf>\(\varphi(t) = \exp(\alpha i t - \beta |t|), \; t \in (-\infty, \infty)\)</cf>
 	<mean>Does not exist</mean>
