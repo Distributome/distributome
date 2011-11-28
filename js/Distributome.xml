@@ -153,7 +153,7 @@
 	<variance>Does not exist</variance>
 	<skew>Does not exist</skew>
 	<kurt>Does not exist</kurt>
-	<entropy>\(\ln (4 \pi \beta\)</entropy>
+	<entropy>\(\ln (4 \pi \beta ) \)</entropy>
 	<median>\(\alpha\)</median>
 	<q1>\(\alpha - \beta\)</q1>
 	<q3>\(\alpha + \beta\)</q3>
