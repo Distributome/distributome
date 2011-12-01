@@ -52,6 +52,41 @@ function createAjaxRequest(){
 	return xmlHttp;
 }
 
+/***** Logging ******/
+var globalDebugFlag = false;
+function log(message){
+	if(!globalDebugFlag)
+		return;
+    if(!log.window_ || log.window_.closed){
+        var win = window.open("", "Logger", "width=400,height=200,scrollbars=yes,resizable=yes,status=no,location=no,menubar=no,toolbar=no");
+        if (!win) return;
+        var doc = win.document;
+        doc.write("<html><head><title>Debug Log</title></head>" +
+                  "<body></body></html>");
+        doc.close();
+        log.window_ = win;
+    }
+    var logLine = log.window_.document.createElement("div");
+    logLine.appendChild(log.window_.document.createTextNode(message));
+    log.window_.document.body.appendChild(logLine);
+}
+
+/****** Get URL parameters ******/
+function getURLParameters(){
+	var sURL = window.document.URL.toString();	
+	if (sURL.indexOf("?") > 0){
+		var arrParams = sURL.split("?");
+		urlParamString = arrParams[1];
+		var arrURLParams = arrParams[1].split("&");				
+		for (var i=0;i<arrURLParams.length;i++){
+			var sParam =  arrURLParams[i].split("=");
+			if(sParam[0]=='debug'){
+				if(sParam[1]=='true')
+					globalDebugFlag = true;
+			}
+		}
+	}
+}
 
 /******* Remove the starting and leading White Spaces *******/
 function trim(inputString) {
@@ -210,6 +245,29 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 	var currentReferencesIndex=0;
 
 	if(searchFlag){
+		//remove extra white spaces first
+		var splitText = text.split(" ");
+		var newText = '';
+		for(var splitArray =0; splitArray<splitText.length;splitArray++){
+			if(splitText[splitArray] == "") continue;
+			if(splitText[splitArray] == "NOT" || splitText[splitArray] == "OR" || splitText[splitArray] == "AND"){
+				var next = splitArray+1;
+				while(next<splitText.length && splitText[next] == "") next++;
+				if(next<splitText.length){
+					if(splitText[next] == "NOT" || splitText[next] == "OR" || splitText[next] == "AND"){
+							log("Improper search string '"+ text+"'");
+							continue;
+					}
+				}else{
+					break;
+				}
+				newText = newText+" "+splitText[splitArray];
+				splitArray = next-1;
+			}else{
+				newText = newText+" "+splitText[splitArray];
+			}
+		}
+		text = newText;
 		var andIndex = text.indexOf('AND');
 		var orIndex = text.indexOf('OR');
 		var notIndex = text.indexOf('NOT');
@@ -300,7 +358,10 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 										}
 										if(notIndex!=-1){
 											var notRegex = new RegExp(trimSpecialCharacters(notText),"i");
-											if(nodes[currentNodeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1) nodes[currentNodeIndex].selected = false; 
+											if(nodes[currentNodeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1){
+												nodes[currentNodeIndex].selected = false; 
+												break;
+											}
 										}
 									}else{
 										//Process only level=3 element nodes (type 1)
@@ -410,7 +471,10 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 										
 										if(notIndex!=-1){
 											var notRegex = new RegExp(trimSpecialCharacters(notText),"i");
-											if(edges[currentEdgeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1) edges[currentEdgeIndex].selected = false; 
+											if(edges[currentEdgeIndex].selected && trimSpecialCharacters(value).search(notRegex)!=-1){
+												edges[currentEdgeIndex].selected = false; 
+												break;
+											}
 										}
 									}else{
 										if (currLevel2Prop.nodeName == "from") {
