@@ -84,7 +84,7 @@ function displayXmlText(displayAll){
 
 
 {		
-		
+		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
