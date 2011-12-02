@@ -20,6 +20,7 @@
   </script>
   <script type="text/javascript" src="scripts/common.js"></script>
   <script type="text/javascript" src="scripts/distributomeDBSearch.js"></script>
+  <script type="text/javascript" src="scripts/slider.js"></script>
   
   <style>
 	h1 {text-align:center}
@@ -31,6 +32,11 @@
   		border-top: 3px solid #666666;
   		border-bottom: 2px solid #999999;
   }
+  #slider {width:95%;}
+	.header {width:95%; height:15px; border:2px solid #9ac1c9; padding:8px; font-weight:bold; margin-top:5px; cursor:pointer; background:url(images/searchHeader.gif)}
+	.header:hover {background:url(images/searchHeaderOver.gif)}
+	.content {overflow:none}
+	.text {width:94%; border:2px solid #9ac1c9; border-top:none; padding:15px; overflow:auto}
   </style>
   
   <script> 
@@ -47,7 +53,9 @@
   		}
 	}); 
   </script>
-  <meta http-equiv="REFRESH" content="0;url=http://www.distributome.org/js/DistributomeDBSearch.xml.php">
+
+     <meta http-equiv="REFRESH" content="0;url=http://www.distributome.org/js/DistributomeDBSearch.xml.php">
+
 </head>
 <body>
 <script type="text/x-mathjax-config">
@@ -101,10 +109,28 @@
 						placeholder="Keyword Search for distributions or relations ..." />
 			</td>
 	</tr></table>
+
+
+
+<div id="slider" style="display:none">
+  <div class="header" id="one-header">Distribution Properties</div>
+  <div class="content" id="one-content">
+    <div class="text" id="distributome.search.distributions" align="left">
+    </div>
+  </div>
+  <div class="header" id="two-header">Inter-Distribution Relations</div>
+  <div class="content" id="two-content">
+    <div class="text" id="distributome.search.relations" align="left">
+    </div>
+  </div>
+  <div class="header" id="three-header">References</div>
+  <div class="content" id="three-content">
+    <div class="text" id="distributome.search.references" align="left">
+    </div>
+  </div>
+</div>
+
 </center>
-
-
-<div id="distributome.xmlParse" style="width:100%;height:100%"></div>
 
 <!-- script type="text/javascript"> displayXmlText(false);
 </script-->
