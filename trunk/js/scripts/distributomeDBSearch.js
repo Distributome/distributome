@@ -6,6 +6,7 @@ distributomeDBSearch.references = new Array ();
 var distributomeDBSearchNodes = new Array();
 var referenceDBSearchNodes = new Array();
 var DistributomeDBSearchXML_Objects;
+var divHeight;
 
 function refreshNodes(){
 	for(var i=0; i<distributomeDBSearch.nodes.length; i++){
@@ -21,7 +22,6 @@ function displayXmlText(displayAll){
 	refreshNodes();
 	if(!displayAll){
 		var searchString = document.getElementById('distributome.xmltext').value;
-		//traverseXML(true, searchString);
 		traverseXML(true, searchString, DistributomeDBSearchXML_Objects, distributomeDBSearch.nodes, distributomeDBSearch.edges, distributomeDBSearch.references, distributomeDBSearchNodes, referenceDBSearchNodes);
 	}
 	var parserOutput;
@@ -30,9 +30,10 @@ function displayXmlText(displayAll){
 	var nodehtml = new Array();
 	var referencehtml = new Array();
 	var relationhtml = new Array();
-	nodehtml.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
+	/*nodehtml.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	relationhtml.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
 	referencehtml.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	*/
 	var display = true;
 	for(var i=0; i< distributomeDBSearch.nodes.length; i++){
 		if(!displayAll){
@@ -41,13 +42,13 @@ function displayXmlText(displayAll){
 			}else display = false;
 		}
 		if(display){
-			nodehtml.push("<b>distribution:</b> <div style='padding-left:7px'>");
+			nodehtml.push("<b>distribution:</b> <div style='padding-left:5px'>");
 			parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, i, true, DistributomeDBSearchXML_Objects);
 			nodehtml.push(parserOutput[0]);
 			referenceName= parserOutput[1];
 			if(referenceName !=null){
 				if(!reference) reference = true;
-				referencehtml.push("<b>reference:</b> <div style='padding-left:7px'>");
+				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
 				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
 				referencehtml.push("</div>");
 			}
@@ -62,13 +63,13 @@ function displayXmlText(displayAll){
 			}else display = false;
 		}
 		if(display){
-			relationhtml.push("<b>relation:</b> <div style='padding-left:7px'>");
+			relationhtml.push("<b>relation:</b> <div style='padding-left:5px'>");
 			parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, i, true, DistributomeDBSearchXML_Objects);
 			relationhtml.push(parserOutput[0]);
 			referenceName= parserOutput[1];
 			if(referenceName !=null){
 				if(!reference) reference = true;
-				referencehtml.push("<b>reference:</b> <div style='padding-left:7px'>");
+				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
 				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
 				referencehtml.push("</div>");
 			}
@@ -76,9 +77,22 @@ function displayXmlText(displayAll){
 		}
 	}
 	
-	document.getElementById('distributome.xmlParse').innerHTML = nodehtml.join('')+"<div style='height:15px'></div>"+relationhtml.join('');
+	if(divHeight == undefined) divHeight = document.body.clientHeight+50;
+	document.getElementById('distributome.search.distributions').style.height = Math.floor(divHeight)+'px';
+	document.getElementById('distributome.search.relations').style.height = Math.floor(divHeight)+'px';
+	document.getElementById('distributome.search.references').style.height = Math.floor(divHeight)+'px';
+	
+	var regex = new RegExp("<div style='height:5px'></div>","g");
+	document.getElementById('distributome.search.distributions').innerHTML = nodehtml.join('').replace(regex,'');
+	document.getElementById('distributome.search.relations').innerHTML = relationhtml.join('').replace(regex,'');
+	if(reference)
+	document.getElementById('distributome.search.references').innerHTML = referencehtml.join('').replace(regex,'');
+	/*document.getElementById('distributome.xmlParse').innerHTML = nodehtml.join('')+"<div style='height:15px'></div>"+relationhtml.join('');
 	if(reference)
 		document.getElementById('distributome.xmlParse').innerHTML += "<div style='height:15px'></div>"+referencehtml.join('');	
+	*/
+	document.getElementById('slider').style.display = 'block';
+	slider.init('slider',1);
 	renderMath();
 }
 
