@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-stylesheet href="Distributome.css" type="text/css"?>
+<?xml-stylesheet href="../images/Distributome_style.css" type="text/css"?>
 
 <distributome_pref version="1.0" 
 	xmlns="http://www.distributome.org" 
@@ -36,7 +36,7 @@
 		<name>Continuous Uniform</name>
 		<name>Cauchy</name>
 		<name>Pareto</name>
-		<name>Student’s T</name>
+		<name>Students T</name>
 		<name>Standard Normal</name>
 		<name>Chi-square</name>
 		<name>F-distribution</name>
@@ -62,3 +62,5 @@
 	</hierarchy_level>
 
 </distributome_ontology>
+
+</distributome_pref>
