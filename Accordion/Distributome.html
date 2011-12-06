@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+
+	<title>Probability Distributome Project: www.Distributome.org</title>
+
+	<link rel="stylesheet" type="text/css" href="images/layout-default-latest.css" />
+	<link rel="stylesheet" type="text/css" href="images/jquery.ui.all.css" />
+	<!-- CUSTOMIZE/OVERRIDE THE DEFAULT CSS -->
+	<style type="text/css">
+             
+	/* remove padding and scrolling from elements that contain an Accordion OR a content-div */
+	.ui-layout-center ,	/* has content-div */
+	.ui-layout-west ,	/* has Accordion */
+	.ui-layout-west .ui-layout-content { /* content-div has Accordion */
+		padding: 0;
+		overflow: hidden;
+	}
+	.ui-layout-east ,	/* has content-div ... */
+	.ui-layout-east .ui-layout-content { /* content-div has Accordion */
+		padding: 0;
+		overflow: hidden;
+	}
+	.ui-layout-center P.ui-layout-content {
+		line-height:	1.4em;
+		margin:			0; /* remove top/bottom margins from <P> used as content-div */
+	}
+	h3, h4 { /* Headers & Footer in Center & East panes */
+		font-size:		1.1em;
+		background:		#EEF;
+		border:			1px solid #BBB;
+		border-width:	0 0 1px;
+		padding:		7px 10px;
+		margin:			0;
+	}
+	.ui-layout-east h4 { /* Footer in East-pane */
+		font-size:		0.9em;
+		font-weight:	normal;
+		border-width:	1px 0 0;
+	}
+	</style>
+
+	<!-- REQUIRED scripts for layout widget -->
+	<script type="text/javascript" src="scripts/jquery-latest.js"></script>
+	<script type="text/javascript" src="scripts/jquery-ui-latest.js"></script>
+	<script type="text/javascript" src="scripts/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="scripts/jquery.layout.resizePaneAccordions-1.0.js"></script>
+
+    <script type="text/javascript" src="scripts/themeswitchertool.js"></script> 
+	<script type="text/javascript" src="scripts/debug.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready( function() {
+
+		myLayout = $('body').layout({
+			west__size:			300
+		,	east__size:			300
+			// RESIZE Accordion widget when panes resize
+		,	west__onresize:		$.layout.callbacks.resizePaneAccordions
+		,	east__onresize:		$.layout.callbacks.resizePaneAccordions
+		});
+
+		// ACCORDION - in the West pane
+		$("#accordion1").accordion({
+			fillSpace:	true
+			,	active:		0
+		});
+		
+		// ACCORDION - in the East pane - in a 'content-div'
+		$("#accordion2").accordion({
+			fillSpace:	true
+		,	active:		1
+		});
+
+
+		// THEME SWITCHER
+		addThemeSwitcher('.ui-layout-north',{ top: '12px', right: '5px' });
+		// if a new theme is applied, it could change the height of some content,
+		// so call resizeAll to 'correct' any header/footer heights affected
+		// NOTE: this is only necessary because we are changing CSS *AFTER LOADING* using themeSwitcher
+		setTimeout( myLayout.resizeAll, 1000 ); /* allow time for browser to re-render with new theme */
+
+	});
+	</script>
+
+</head>
+<body>
+
+<div class="ui-layout-north ui-widget-content" 
+	style="background-image: url(http://distributome.org/images/DistributomeHeadBanner.png);
+	background-repeat:repeat-x;">
+	<!-- style="display: none;"  -->
+
+	<div style="float: right; margin-right: 160px;">
+		<button onClick="resizeWidgets()">Resize</button> &nbsp;
+		<button onClick="removeUITheme(); myLayout.resizeAll()">Remove Theme</button>
+	</div>
+	Probability Distributome Project
+</div>
+
+<div class="ui-layout-south ui-widget-content ui-state-error" style="display: none;"> 
+   <center> Distributome Visitor number <img 
+	src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
+	align="middle" border="0" height="20" hspace="4" vspace="2" width="60"></img> | 2011 | 
+	<a href="http://www.Distributome.org">www.Distributome.org</a>
+   </center>
+</div>
+
+<div class="ui-layout-center" style="display: none;"> 
+	<h3 class="ui-widget-header">Center Pane (Dynamically changing Title!)</h3>
+	<p class="ui-layout-content ui-widget-content">
+		<b>This is the Main Distributome Navigator Panel - all user-choices and selections 
+			are displayed in this main panel which can be maximized and minimizes, as necessary.
+		</b>
+	</p>
+</div>
+
+<div class="ui-layout-west" style="display: none;">
+	<h3 class="ui-widget-header">Web-Site Navigator</h3>
+	<div class="ui-layout-content">
+		<div id="accordion1" class="basic">
+
+			<h3><a href="#">Home</a></h3>
+			<div>
+				<h5>Distributome Project</h5>
+				<p>Display Distributome Main Page Overview</p>
+			</div>
+
+			<h3><a href="#">About</a></h3>
+			<div>
+				<h5>About Distributome</h5>
+				<p>About page Overview</p>
+			</div>
+			
+			<h3><a href="#">Search</a></h3>
+			<div>
+				<p>Distributome Search</p>
+				<ul>
+					<li>Search Distributome Main page (www.Distributome.org)</li>
+					<li>Search Distributome Wiki pages (http://wiki.stat.ucla.edu/distributome)</li>
+					<li>Search Distributome Database XML meta data (http://distributome.org/js/DistributomeDBSearch.xml.html)</li>
+				</ul>
+			</div>
+			
+			<h3><a href="#">Navigator</a></h3>
+			<div>
+				<h5>Distributome Navigator</h5>
+				<p>Navigator Overview</p>
+			</div>
+		</div>		
+	</div>
+</div>
+
+<div class="ui-layout-east" style="display: none;">
+	<h3 class="ui-widget-header">Navigator Results</h3>
+
+	<div class="ui-layout-content">
+		<div id="accordion2" class="basic">
+
+			<h3><a href="#">Distributions</a></h3>
+			<div>
+				<p>This displays the distribution meta-data for choices made by the user 
+				interacting with the Navigator 
+				(e.g., selecting a node shoudl show all distribution properties).</p>
+			</div>
+
+			<h3><a href="#">Distribution Actions</a></h3>
+			<div>
+				<ul>
+					<li>Calculator</li>
+					<li>Experiment</li>
+					<li>Simulation</li>
+					<li>Distributome DB HTML View</li>
+				</ul>
+			</div>
+
+			<h3><a href="#">Inter-Distribution Relations</a></h3>
+			<div>
+				<p>Display the meta-data about selected edges - relations between 
+					probability distributions.</p>
+			</div>
+
+			<h3><a href="#">Referencies</a></h3>
+			<div>
+				<p>Display appropriate URL and publication references.</p>
+			</div>
+		</div>
+	</div>
+
+	<h4 class="ui-widget-content ui-state-hover">Contact Distributome 
+		<a href="http://www.Distributome.org/images/Distributome_Email.gif">
+			<img alt="" src="http://www.Distributome.org/images/Distributome_Email.gif"
+			style="border: 0px solid ; width: 180px; height: 28px;">
+		</a></h4>
+</div>
+
+</body>
+</html> 
