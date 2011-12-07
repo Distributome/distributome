@@ -76,8 +76,11 @@ function displayXmlText(displayAll){
 			relationhtml.push("</div>");
 		}
 	}
-	
-	if(divHeight == undefined) divHeight = document.body.clientHeight+50;
+	var initial = false;
+	if(divHeight == undefined){
+		divHeight = document.body.clientHeight+50;
+		initial = true;
+	}
 	document.getElementById('distributome.search.distributions').style.height = Math.floor(divHeight)+'px';
 	document.getElementById('distributome.search.relations').style.height = Math.floor(divHeight)+'px';
 	document.getElementById('distributome.search.references').style.height = Math.floor(divHeight)+'px';
@@ -92,7 +95,7 @@ function displayXmlText(displayAll){
 		document.getElementById('distributome.xmlParse').innerHTML += "<div style='height:15px'></div>"+referencehtml.join('');	
 	*/
 	document.getElementById('slider').style.display = 'block';
-	slider.init('slider',1);
+	if(initial) slider.init('slider',1);
 	renderMath();
 }
 
