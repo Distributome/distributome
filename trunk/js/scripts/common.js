@@ -246,42 +246,40 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 
 	if(searchFlag){
 		//remove extra white spaces first
-		var originalText = text.split(" ");
-		var splitText = text.toLowerCase().split(" ");
+		var splitText = text.split(" ");
 		var newText = '';
 		for(var splitArray =0; splitArray<splitText.length;splitArray++){
 			if(splitText[splitArray] == "") continue;
-			if(splitText[splitArray] == "not" || splitText[splitArray] == "or" || splitText[splitArray] == "and"){
+			if(splitText[splitArray] == "NOT" || splitText[splitArray] == "OR" || splitText[splitArray] == "AND"){
 				var next = splitArray+1;
 				while(next<splitText.length && splitText[next] == "") next++;
 				if(next<splitText.length){
-					if(splitText[next] == "not" || splitText[next] == "or" || splitText[next] == "and"){
+					if(splitText[next] == "NOT" || splitText[next] == "OR" || splitText[next] == "AND"){
 							log("Improper search string '"+ text+"'");
 							continue;
 					}
 				}else{
 					break;
 				}
-				newText = newText+" "+originalText[splitArray];
+				newText = newText+" "+splitText[splitArray];
 				splitArray = next-1;
 			}else{
-				newText = newText+" "+originalText[splitArray];
+				newText = newText+" "+splitText[splitArray];
 			}
 		}
 		text = newText;
-		var andIndex = text.toLowerCase().indexOf(' and ');
-		var orIndex = text.toLowerCase().indexOf(' or ');
-		var notIndex = text.toLowerCase().indexOf(' not ');
+		var andIndex = text.indexOf('AND');
+		var orIndex = text.indexOf('OR');
+		var notIndex = text.indexOf('NOT');
 		if(notIndex!=-1){
-			var originalText = text.split(" ");
-			var splitText = text.toLowerCase.split(" ");
+			var splitText = text.split(" ");
 			var newText = '';
 			var notArrayIndex = -1;
 			for(var splitArray =0; splitArray<splitText.length;splitArray++){
-				if(splitText[splitArray] != "not"){
-					newText = newText+" "+originalText[splitArray];
+				if(splitText[splitArray] != "NOT"){
+					newText = newText+" "+splitText[splitArray];
 				}else{
-					var notText = originalText[splitArray+1]
+					var notText = splitText[splitArray+1]
 					splitArray++;
 				}
 			}
@@ -318,31 +316,31 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 									if(searchFlag){
 										if(orIndex!=-1){
-											var orText2 = text.substring(orIndex+1+3);//extra 1 for the space
+											var orText2 = text.substring(orIndex+3);
 											var orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
 											if(andIndex !=-1 && andIndex<orIndex){
 												if(trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
 											}else{
-												var orText1 = text.substring(0, orIndex-1+1);
+												var orText1 = text.substring(0, orIndex-1);
 												var orText1Regex = new RegExp(trimSpecialCharacters(orText1),"i");
 												if(andIndex!=-1){
-													orText2 = text.substring(orIndex+3+1, andIndex-1+1);
+													orText2 = text.substring(orIndex+3, andIndex-1);
 													orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
 												}
 												if(trimSpecialCharacters(value).search(orText1Regex)!=-1 || trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
 											}
 										}
 										if(andIndex!=-1){
-											var andText2 = text.substring(andIndex+4+1);
+											var andText2 = text.substring(andIndex+4);
 											var andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
 											
 											if(orIndex!=-1 && orIndex<andIndex){
 												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
 											}else{
-												var andText1 = text.substring(0, andIndex-1+1);
+												var andText1 = text.substring(0, andIndex-1);
 												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
 												if(orIndex!=-1){
-													andText2 = text.substring(andIndex+4+1, orIndex-1+1);
+													andText2 = text.substring(andIndex+4, orIndex-1);
 													andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
 												}
 												if(trimSpecialCharacters(value).search(andText1Regex)!=-1 && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
@@ -430,31 +428,31 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 									//Process only level=3 element nodes (type 1)
 									if(searchFlag){ //Check search
 										if(orIndex!=-1){
-											var orText2 = text.substring(orIndex+3+1);
+											var orText2 = text.substring(orIndex+3);
 											var orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
 											if(andIndex !=-1 && andIndex<orIndex){
 												if(trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
 											}else{
-												var orText1 = text.substring(0, orIndex-1+1);
+												var orText1 = text.substring(0, orIndex-1);
 												var orText1Regex = new RegExp(trimSpecialCharacters(orText1),"i");
 												if(andIndex!=-1){
-													orText2 = text.substring(orIndex+3+1, andIndex-1+1);
+													orText2 = text.substring(orIndex+3, andIndex-1);
 													orText2Regex = new RegExp(trimSpecialCharacters(orText2),"i");
 												}
 												if(trimSpecialCharacters(value).search(orText1Regex)!=-1 || trimSpecialCharacters(value).search(orText2Regex)!=-1) orRegex = true;
 											}
 										}
 										if(andIndex!=-1){
-											var andText2 = text.substring(andIndex+4+1);
+											var andText2 = text.substring(andIndex+4);
 											var andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
 											
 											if(orIndex!=-1 && orIndex<andIndex){
 												if(orRegex && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
 											}else{
-												var andText1 = text.substring(0, andIndex-1+1);
+												var andText1 = text.substring(0, andIndex-1);
 												var andText1Regex = new RegExp(trimSpecialCharacters(andText1),"i");
 												if(orIndex!=-1){
-													andText2 = text.substring(andIndex+4+1, orIndex-1+1);
+													andText2 = text.substring(andIndex+4, orIndex-1);
 													andText2Regex = new RegExp(trimSpecialCharacters(andText2),"i");
 												}
 												if(trimSpecialCharacters(value).search(andText1Regex)!=-1 && trimSpecialCharacters(value).search(andText2Regex)!=-1) andRegex = true;
