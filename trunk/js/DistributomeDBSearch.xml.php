@@ -84,6 +84,7 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
   		<li><a href="http://www.math.uah.edu/stat/" title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
   		<li><a href="http://mbi.osu.edu/" title="OSU Mathematical Biosciences Institute"><span>OSU Bioscience</span></a></li> 		
   		<li><a href="../legacy.html" title="Legacy Distributome Java Resources"><span>Legacy Resources</span></a></li>
+   		<li><a href="../blog" title="Distributome Blog"><span>Blog</span></a></li>
 	</ul>
 </div>
 <!--menu-top--></div>
