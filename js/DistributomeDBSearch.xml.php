@@ -33,8 +33,8 @@
   		border-bottom: 2px solid #999999;
   }
   #slider {width:95%;}
-	.header {width:95%; height:15px; border:2px solid #9ac1c9; padding:8px; font-weight:bold; margin-top:5px; cursor:pointer; background:url(images/searchHeader.gif)}
-	.header:hover {background:url(images/searchHeaderOver.gif)}
+	.header {width:95%; height:15px; border:2px solid #9ac1c9; padding:8px; font-weight:bold; margin-top:5px; cursor:pointer; background:url(images/header.gif)}
+	.header:hover {background:url(images/header_over.gif)}
 	.content {overflow:none}
 	.text {width:94%; border:2px solid #9ac1c9; border-top:none; padding:15px; overflow:auto}
   </style>
@@ -55,6 +55,10 @@
   </script>
 </head>
 <?php 
+$debug = 'false';
+if(isset($_GET['debug']) && strlen($_GET['debug'])>0){
+	$debug = $_GET['debug'];
+}
 if(isset($_GET['s']) && strlen($_GET['s'])>0) {	
 	$query = $_GET['s'];		
 	echo "<body onload=\"displayXmlText(false);\">\n";
@@ -110,6 +114,12 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
   			<td class="tool">
   				<label id="search" for="search"></label>
   				<form name="searchForm" action="DistributomeDBSearch.xml.php" method="GET">
+				<form name="searchForm" action="DistributomeDBSearch.xml.php" method="GET">
+				<input type="hidden" name="debug"
+				<?php 
+					echo " value=\"$debug\" "; 
+				?>	
+				>
 				<input id="distributome.xmltext" name="s" size="50" 
 				<?php 
 				if(isset($query))
