@@ -24,10 +24,10 @@ function getColor(d){
 	if(connectivity){
 		if(connectivity == "top_hierarchy"){
 			if(d.selected == "top_hierarchy") return colors(d.group);
-			else return "pv.hsla(0, 100%, 50%, 0.2)";
+			else return "pv.hsla(0, 100%, 50%, 0.1)";
 		}else if(connectivity == "middle_hierarchy"){
 			if(d.selected == "top_hierarchy" || d.selected == "middle_hierarchy") return colors(d.group);
-			else return "pv.hsla(0, 100%, 50%, 0.2)";
+			else return "pv.hsla(0, 100%, 50%, 0.1)";
 		}
 	}
 	else return colors(d.group);
@@ -51,10 +51,10 @@ function getArrowColor(d,l){
 	if(connectivity){
 		if(connectivity == "top_hierarchy"){
 			if(distributome.nodes[l.source].selected == "top_hierarchy" && distributome.nodes[l.target].selected == "top_hierarchy") return '#C0C0C0';
-			else return "pv.hsla(0, 0%, 63%, 0.2)";
+			else return "pv.hsla(0, 0%, 63%, 0.1)";
 		}else if(connectivity == "middle_hierarchy"){
 			if(distributome.nodes[l.source].selected && distributome.nodes[l.target].selected) return '#C0C0C0';
-			else return "pv.hsla(0, 0%, 63%, 0.2)";
+			else return "pv.hsla(0, 0%, 63%, 0.1)";
 		}
 	}
 	return "#C0C0C0";
@@ -128,13 +128,13 @@ function getLinkColor(d,l){
 				l.selected = 'top_hierarchy';
 				return 'rgb(170,170,170)';
 			}
-			else return "pv.hsla(0, 0%, 63%, 0.2)";
+			else return "pv.hsla(0, 0%, 63%, 0.1)";
 		}else if(connectivity == "middle_hierarchy"){
 			if(distributome.nodes[l.source].selected && distributome.nodes[l.target].selected){
 				l.selected = 'middle_hierarchy';
 				return 'rgb(170,170,170)';
 			}
-			else return "pv.hsla(0, 0%, 63%, 0.2)";
+			else return "pv.hsla(0, 0%, 63%, 0.1)";
 		}
 	}
 	else return 'rgb(170,170,170)';
@@ -431,7 +431,7 @@ function updateNodeColor(ontologyArray, level){
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
 		
 		xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.pref.xml",false);
+		xmlhttp.open("GET","Distributome.xml.pref",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
