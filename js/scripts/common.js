@@ -184,7 +184,7 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 		
 		var k_corr=0;
 		var nameText = ''; var nameFlag = true; var typeFlag = false; var typeText = '';
-		for (k=0;k<Level2Prop.length;k++) {
+		for (var k=0;k<Level2Prop.length;k++) {
 			try {
 				if (currLevel2Prop.nodeType==1) {
 					//Process only level=3 element nodes (type 1)
@@ -239,7 +239,7 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 
 
 /*************** Function to traverse the XML during initialization and search **************/
-function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, nodesArray, referenceArray){
+function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, nodesArray, referenceArray, connectivity){
 	var currentNodeIndex=0;
 	var currentEdgeIndex=0;
 	var currentReferencesIndex=0;
@@ -290,7 +290,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 	}
 	
 	/*** For each of the 3 main Distirbutome.xml classes of objects (1=distirbutions, 3=relations, 5-references ***/
-	for (i=0;i<XML_Objects.length;i++) {
+	for (var i=0;i<XML_Objects.length;i++) {
 		var j_corr=0;
 		if (XML_Objects[i].nodeType==1) {
 			//Process only level=1 element nodes (type 1) 
@@ -302,7 +302,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 				 ]
 				 ***/
 				
-				for (j=0;j<Level1Prop.length;j++) {
+				for (var j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;					
 					if (currLevel1Prop.nodeType==1) {
 						if(!searchFlag) nodes[currentNodeIndex] = new Object();
@@ -312,7 +312,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 						var nameFlag = false;
 						var andRegex = false;
 						var orRegex = false;
-						for (k=0;k<Level2Prop.length;k++) {
+						for (var k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
@@ -349,14 +349,34 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 											}
 										}
 										if(orIndex!=-1 && andIndex!=-1){
-											if(orRegex && andRegex) nodes[currentNodeIndex].selected = true;
+											if(orRegex && andRegex) {
+												if(connectivity){
+													if(nodes[currentNodeIndex].selected)
+														nodes[currentNodeIndex].selected = 'red';
+												}else nodes[currentNodeIndex].selected = 'red';
+											}
 										}else if(orIndex!=-1){
-											if(orRegex)nodes[currentNodeIndex].selected = true;
+											if(orRegex){
+												if(connectivity){
+													if(nodes[currentNodeIndex].selected)
+														nodes[currentNodeIndex].selected = 'red';
+												}else nodes[currentNodeIndex].selected = 'red';
+											}
 										}else if(andIndex!=-1){
-											if(andRegex) nodes[currentNodeIndex].selected = true;
+											if(andRegex) {
+												if(connectivity){
+													if(nodes[currentNodeIndex].selected)
+														nodes[currentNodeIndex].selected = 'red';
+												}else nodes[currentNodeIndex].selected = 'red';
+											}
 										}else{
 											var regex = new RegExp(trimSpecialCharacters(text),"i");
-											if(trimSpecialCharacters(value).search(regex)!=-1) nodes[currentNodeIndex].selected = true; 
+											if(trimSpecialCharacters(value).search(regex)!=-1) {
+												if(connectivity){
+													if(nodes[currentNodeIndex].selected)
+														nodes[currentNodeIndex].selected = 'red';	
+												}else nodes[currentNodeIndex].selected = 'red';
+											}
 										}
 										if(notIndex!=-1){
 											var notRegex = new RegExp(trimSpecialCharacters(notText),"i");
@@ -397,7 +417,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 					 ]
 				***/	
 				var totalEdges = xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].getElementsByTagName('relation').length;
-				for (j=0;j<Level1Prop.length;j++) {
+				for (var j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;	
 					
 					if (currLevel1Prop.nodeType==1) {
@@ -423,7 +443,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 						currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr].firstChild;
 						var andRegex = false;
 						var orRegex = false;
-						for (k=0;k<Level2Prop.length;k++) {
+						for (var k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
 									var value = trim(currLevel2Prop.childNodes[0].nodeValue);
@@ -461,14 +481,34 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 											}
 										}
 										if(orIndex!=-1 && andIndex!=-1){
-											if(orRegex && andRegex) edges[currentEdgeIndex].selected = true; 
+											if(orRegex && andRegex) {
+												if(connectivity){
+													if(edges[currentEdgeIndex].selected)
+														edges[currentEdgeIndex].selected = 'red';
+												}else edges[currentEdgeIndex].selected = 'red';
+											}
 										}else if(orIndex!=-1){
-											if(orRegex) edges[currentEdgeIndex].selected = true; 
+											if(orRegex) {
+												if(connectivity){
+													if(edges[currentEdgeIndex].selected)
+														edges[currentEdgeIndex].selected = 'red';
+												}else edges[currentEdgeIndex].selected = 'red';
+											}
 										}else if(andIndex!=-1){
-											if(andRegex) edges[currentEdgeIndex].selected = true; 
+											if(andRegex) {
+												if(connectivity){
+													if(edges[currentEdgeIndex].selected)
+														edges[currentEdgeIndex].selected = 'red';
+												}else edges[currentEdgeIndex].selected = 'red';
+											}
 										}else{
 											var regex = new RegExp(trimSpecialCharacters(text),"i");
-											if(trimSpecialCharacters(value).search(regex)!=-1) edges[currentEdgeIndex].selected = true; 
+											if(trimSpecialCharacters(value).search(regex)!=-1) {
+												if(connectivity){
+													if(edges[currentEdgeIndex].selected)
+														edges[currentEdgeIndex].selected = 'red';
+												}else edges[currentEdgeIndex].selected = 'red';
+											}
 										}
 										
 										if(notIndex!=-1){
@@ -536,7 +576,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 				// end for relations
 			
 			} else 	if (Level1Prop[i] && Level1Prop[i].nodeName == 'reference' & !searchFlag)	{ // for references, citations
-				for (j=0;j<Level1Prop.length;j++) {
+				for (var j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;					
 					if (currLevel1Prop.nodeType==1) {
 						references[currentReferencesIndex] = new Object();
@@ -545,7 +585,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 						nodeParent = xmlDoc.getElementsByTagName(Level1Prop[j].nodeName)[j-j_corr];
 						currLevel2Prop=nodeParent.firstChild;
 						referenceArray[trim(nodeParent.attributes.getNamedItem("id").value)] = currentReferencesIndex;
-						for (k=0;k<Level2Prop.length;k++) {
+						for (var k=0;k<Level2Prop.length;k++) {
 							try {
 								if (currLevel2Prop.nodeType==1) {
 									

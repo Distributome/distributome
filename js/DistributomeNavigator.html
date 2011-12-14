@@ -111,7 +111,7 @@
 <div id="menu-top">
 	<ul>
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
+  		<li><span> Tools</span><span> Â»</span></li>
   		<li><a href="./DistributomeDBSearch.xml.html" title="Keyword Search the Distributome Meta-data"><span>DB Search</span></a></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="../docs.html" title="Distributome Technical Documentation"><span>Tech Docs</span></a></li>
@@ -210,11 +210,11 @@
 			</td>
 			<td class="tool">
 				<form action="ConnectedNodesAction" >
-					<select name="ConnectedNodes" id="distributome.connectedNodesAction" onchange="connectedNodesFetch();">
-						<option value="connectivity">Connected Nodes</option>
-						<option value="mostConnected">Most Connected</option>
-						<option value="connected">Connected</option>
-						<option value="sparselyConnected">Sparsely Connected</option>
+					<select name="ConnectedNodes" id="distributome.connectedNodesAction" onchange="resetView();connectedNodesFetch();">
+						<option value="connectivity">Display Ontology</option>
+						<option value="mostConnected">Top Level</option>
+						<option value="connected">Middle Level</option>
+						<option value="sparselyConnected">All</option>
 					</select>
 				</form>
 			</td>
@@ -304,26 +304,31 @@
 				}) 
 				.angle(function (n,l) Math.atan2(l.targetNode.y - l.sourceNode.y, l.targetNode.x - l.sourceNode.x) - Math.PI/2) 
 				.shape("triangle") 
-				.strokeStyle("#C0C0C0")
-				.fillStyle("#C0C0C0")
-				.size(3)
+				.strokeStyle(function(d,l) getArrowColor(d,l))
+				.fillStyle(function(d,l) getArrowColor(d,l))
+				.size( function(d,l) getArrowSize(d,l))
 				.visible(true);
 
 
-			force.node.add(pv.Dot)
+	var dnodes = force.node.add(pv.Dot)
 				.bottom(0)
 				.size(function(d) { return d.selected?(d.linkDegree + 15) * Math.pow(this.scale, -1.5):(d.linkDegree + 4) * Math.pow(this.scale, -1.5)})
 				.fillStyle(function(d) getColor(d))
+				//.fillStyle(pv.hsl(225, 0.5, 0.5, 0.5))
 				.strokeStyle(function() this.fillStyle().darker())
 				.lineWidth(1)
 				//.title(function(d) d.nodeName)
 				.cursor("pointer")
-				.event("click", function (d) getNodeProperties(this.index, d.nodeName))
+				.event("click", function (d) getNodeProperties(this.index, d.nodeName, d))
 				.event("mousedown", pv.Behavior.drag())
 				.event("drag", force)
 				.anchor("center").add(pv.Label)
-				.text(function(d) d.nodeName )
+				.text(function(d) getText(d) )
 				.font(function(d) d.selected?'bold 10pt sans-serif':'normal 7pt sans-serif');
+			
+			/*dnodes.add(pv.Color)
+				.color('#ddd')
+				.opacity(1);*/
 
 			vis.render();
 		}catch(e){
@@ -334,23 +339,7 @@
 
     <div id="RightSide_Splitter1"> 
  
-	<div class="Top Pane" id="distributome.propertiesPannel" style="line-height:16px;">		<!-- Get the Distribution Properties from Distributome.xml -->
-		<script type="text/javascript">
-			/****	To Do:
-				Make the content of 3 panels below (Distirbution-proprties, edge properties
-				and references/citations, exclude "Middle Pane 1") present the info related 
-				to which node (distribution) or edge (relation) is (or are for multiple 
-				selections) are chosen/selected	by the user. Below only examples illustrating
-				how to retrieve this info from Distributome.xml are shown. 
-				DO we need separate variables/instances for	the 3 different types 
-				(distributions, relations, references) of xmlhttp=new XMLHttpRequest()? 
-				Seems like we need separate variables to prevent mix up in reading/parsing
-				the same file. But do we need to read the same file 3 time - can we just 
-				read/store it's content once as a global variable/object and just reference
-				the content as necessary?
-			*****/
-			
-		</script>
+	<div class="Top Pane" id="distributome.propertiesPannel" style="line-height:16px;">		
 		<b><u>Distribution Properties</u></b> <br />
 	</div>
 	
@@ -472,29 +461,11 @@ $().ready(function() {
 		var classes = pv.nodes(distributome.nodes);	
 		var selectedNodes = new Array();
 		classes.slice(1).forEach(function(d) {
-			if(d.nodeValue.selected){
+			if(d.nodeValue.selected == 'red'){
 				selectedNodes.push(getDistributionName(d.nodeValue.nodeName));
 			}
 		});
 		return selectedNodes;
-	}
-	
-	function highlightConnectedNodes(type){
-		var degree1 = (1/3) * maxLinkDegree;
-		var degree2 = (2/3) * maxLinkDegree;
-		var classes = pv.nodes(distributome.nodes);	
-		classes.slice(1).forEach(function(d) {
-			if(type == 3){
-				if(d.nodeValue.linkDegree < degree1) d.nodeValue.selected = true;
-				else d.nodeValue.selected = false;
-			}else if(type == 2){
-				if(d.nodeValue.linkDegree < degree2) d.nodeValue.selected = true;
-				else d.nodeValue.selected = false;
-			}else{
-				if(d.nodeValue.linkDegree < maxLinkDegree) d.nodeValue.selected = true;
-				else d.nodeValue.selected = false;
-			}
-		});
 	}
 	
 	function graphPause(){
