@@ -125,6 +125,11 @@ function trimDistribution(inputString){
 	return inputString;
 }
 
+function camelize(str){
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+		return letter.toUpperCase();
+	});
+}
 
 /*************** Fetch group information for node **************/
 function getGroup(type){
@@ -389,7 +394,7 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 										//Process only level=3 element nodes (type 1)
 										if (currLevel2Prop.nodeName == "name" && !nameFlag) {
 											nameFlag = true;
-											nodes[currentNodeIndex].nodeName = trimDistribution(value);
+											nodes[currentNodeIndex].nodeName = camelize(trimDistribution(value));
 											nodesArray[getDistributionName(value)] = currentNodeIndex;
 											nodesArray[currentNodeIndex] = getDistributionName(value);
 										} else if(currLevel2Prop.nodeName == "name" && nameFlag){
