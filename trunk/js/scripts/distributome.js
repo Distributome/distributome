@@ -8,19 +8,69 @@ var referenceNodes = new Array();
 var DistributomeXML_Objects;
 var xmlDoc;	
 var force = null;
-var maxLinkDegree = 1;
 var presetNodes = null;
+var topHierarchyArray = new Array();
+var middleHierarchyArray = new Array();
+var connectivity = false;
 
 function getColor(d){
-	maxLinkDegree = (maxLinkDegree>d.linkDegree)?maxLinkDegree:d.linkDegree;
 	if(d.selected == 'yellow'){
 		return "yellow";
 	}else if(d.selected == 'green'){
 		return "green";
-	}else if(d.selected){
+	}else if(d.selected == 'red'){
 		return "red";
 	}
+	if(connectivity){
+		if(connectivity == "top_hierarchy"){
+			if(d.selected == "top_hierarchy") return colors(d.group);
+			else return "pv.hsla(0, 100%, 50%, 0.2)";
+		}else if(connectivity == "middle_hierarchy"){
+			if(d.selected == "top_hierarchy" || d.selected == "middle_hierarchy") return colors(d.group);
+			else return "pv.hsla(0, 100%, 50%, 0.2)";
+		}
+	}
 	else return colors(d.group);
+}
+
+function getText(d){
+	if(connectivity){
+		if(d.selected == "red" || d.selected == "yellow" || d.selected == "green") return d.nodeName;
+		if(connectivity == "top_hierarchy"){
+			if(d.selected == "top_hierarchy") return d.nodeName;
+			else return '';
+		}else if(connectivity == "middle_hierarchy"){
+			if(d.selected == "top_hierarchy" || d.selected == "middle_hierarchy") return d.nodeName;
+			else return '';
+		}
+	}
+	return d.nodeName;
+}
+
+function getArrowColor(d,l){
+	if(connectivity){
+		if(connectivity == "top_hierarchy"){
+			if(distributome.nodes[l.source].selected == "top_hierarchy" && distributome.nodes[l.target].selected == "top_hierarchy") return '#C0C0C0';
+			else return "pv.hsla(0, 0%, 63%, 0.2)";
+		}else if(connectivity == "middle_hierarchy"){
+			if(distributome.nodes[l.source].selected && distributome.nodes[l.target].selected) return '#C0C0C0';
+			else return "pv.hsla(0, 0%, 63%, 0.2)";
+		}
+	}
+	return "#C0C0C0";
+}
+
+function getArrowSize(d,l){
+	if(connectivity){
+		if(connectivity == "top_hierarchy"){
+			if(distributome.nodes[l.source].selected == "top_hierarchy" && distributome.nodes[l.target].selected == "top_hierarchy") return 3;
+			else return 0.5;
+		}else if(connectivity == "middle_hierarchy"){
+			if(distributome.nodes[l.source].selected && distributome.nodes[l.target].selected) return 3;
+			else return 0.5;
+		}
+	}
+	return 3;
 }
 
 /*************** Reset Distributome Page **************/
@@ -33,6 +83,7 @@ function resetPage(){
 function resetVariables(){
 	resetNodesEdges();
 	presetNodes = null;
+	connectivity = false;
 	//Default href for calculator
 	document.getElementById('distributome.calculator').href = './calc/NormalCalculator.html';
 }
@@ -64,24 +115,43 @@ function resetDropDownSelectedValue(dropDownID){
 }
 
 function getLinkColor(d,l){
-	//return l.selected?'red':'rgb(170,170,170)';
 	if(l.selected == 'yellow'){
 		return "yellow";
 	}else if(l.selected == 'green'){
 		return "green";
-	}else if(l.selected){
+	}else if(l.selected == 'red'){
 		return "red";
+	}
+	if(connectivity){
+		if(connectivity == "top_hierarchy"){
+			if((distributome.nodes[l.source].selected && distributome.nodes[l.source].selected != "middle_hierarchy") && (distributome.nodes[l.target].selected && distributome.nodes[l.target].selected != "middle_hierarchy")){
+				l.selected = 'top_hierarchy';
+				return 'rgb(170,170,170)';
+			}
+			else return "pv.hsla(0, 0%, 63%, 0.2)";
+		}else if(connectivity == "middle_hierarchy"){
+			if(distributome.nodes[l.source].selected && distributome.nodes[l.target].selected){
+				l.selected = 'middle_hierarchy';
+				return 'rgb(170,170,170)';
+			}
+			else return "pv.hsla(0, 0%, 63%, 0.2)";
+		}
 	}
 	else return 'rgb(170,170,170)';
 }
 
 /*************** Fetch node properties **************/
-function getNodeProperties(index, nodeName){
+function getNodeProperties(index, nodeName, d){
+	if(connectivity && d.selected != "top_hierarchy" && d.selected != "middle_hierarchy") return;
 	if(!_shiftKey){
 		resetNodes();
 		presetNodes = null;
+		if(connectivity) {
+			resetView();
+			connectedNodesFetch();
+		}
 	}
-	distributome.nodes[index].selected = true;
+	distributome.nodes[index].selected = "red";
 	var html = new Array();
 	html.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, index, true, DistributomeXML_Objects);
@@ -106,20 +176,20 @@ function search(searchType, indexType, type){
 		var Level1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(DistributomeXML_Objects[i].nodeName)[0].firstChild;
 		var currentNodeIndex = 0;
-		for (j=0, node_cnt=0;j<Level1Prop.length;j++) {
+		for (var j=0, node_cnt=0;j<Level1Prop.length;j++) {
 			var k_corr=0;					
 			var nodes = xmlDoc.getElementsByTagName(Level1Prop[i].nodeName);
 			if (currLevel1Prop.nodeType==1) {
 				if(node_cnt<nodes.length) {
 					Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].childNodes;
 					currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[indexType].nodeName)[node_cnt].firstChild;
-					for (k=0;k<Level2Prop.length;k++) {
+					for (var k=0;k<Level2Prop.length;k++) {
 						try {
 							if (currLevel2Prop.nodeType==1) {
 								var value = trim(currLevel2Prop.childNodes[0].nodeValue);
 								if (currLevel2Prop.nodeName == "type" && value == type) {
-									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = true;
-									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = true; 
+									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = "red";
+									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = "red"; 
 								}else if (currLevel2Prop.nodeName == "type" && value != type) {
 									if(searchType == "node") distributome.nodes[currentNodeIndex].selected = false;
 									if(searchType == "relation") distributome.edges[currentNodeIndex].selected = false;
@@ -144,6 +214,7 @@ function neighborsFetch(){
 	var selectedNodes = getSelectedNodes();
 	if(presetNodes == null || presetNodes.length == 0) presetNodes = selectedNodes;
 	resetNodesEdges();
+	if(connectivity) connectedNodesFetch();
 	parentChildSearch(type, presetNodes);
 	vis.render();
 }
@@ -151,10 +222,22 @@ function neighborsFetch(){
 
 function connectedNodesFetch(){
 	var type = getDropDownSelectedValue('distributome.connectedNodesAction');
-	if(type == 'connectivity') resetNavigator();
-	if(type == 'mostConnected') highlightConnectedNodes(1);
-	else if(type == 'connected') highlightConnectedNodes(2);
-	else if(type == 'sparselyConnected') highlightConnectedNodes(3);
+	if(type == 'connectivity'){
+		connectivity = false;
+		resetNavigator();
+		return; 
+	}
+	if(type == 'mostConnected'){
+		connectivity =  "top_hierarchy";
+		updateNodeColor(topHierarchyArray, "top_hierarchy");
+	}else if(type == 'connected'){
+		connectivity =  "middle_hierarchy";
+		updateNodeColor(middleHierarchyArray, "middle_hierarchy");
+		updateNodeColor(topHierarchyArray, "top_hierarchy");
+	}else if(type == 'sparselyConnected'){
+		connectivity = false;
+		resetNodesEdges();
+	}
 	vis.render();
 }
 
@@ -236,10 +319,12 @@ function parentChildSearch(type, selectedNodes){
 
 /*************** Function invoked on enter of the input box for search **************/
 function textSearch(){
-	resetVariables();
-	resetNodesEdges();
+	if(!connectivity){
+		resetVariables();
+		resetNodesEdges();
+	}
 	var searchString = document.getElementById('distributome.text').value;
-	traverseXML(true, searchString, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
+	traverseXML(true, searchString, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes, connectivity);
 	vis.render();
 }
 
@@ -258,7 +343,7 @@ function getRelationProperties(nodeName, linkIndex){
 	if(!_shiftKey){
 		resetEdges();
 	}
-	distributome.edges[linkIndex].selected = true;
+	distributome.edges[linkIndex].selected = "red";
 	var html = new Array();;
 	html.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true, DistributomeXML_Objects);
@@ -296,6 +381,37 @@ function edgeTypeInfoFetch(){
 	vis.render();
 }
 
+function getOntologyOrderArray(ontologyOrder){
+	var ontology = ontologyOrder.getElementsByTagName('distributome_ontology')[0].childNodes;
+	var ontologyArray; var k=0;
+	for (var i=0;i<ontology.length;i++) {
+		if (ontology[i].nodeType==1) {
+			var Level2Prop=ontology[i].childNodes;
+			var level = ontology[i].getAttribute("id");
+			if(level == "top_hierarchy"){
+				ontologyArray = topHierarchyArray;
+				k=0;
+			}else{
+				ontologyArray = middleHierarchyArray;
+				k=0;
+			}
+			for(var j=0;j<Level2Prop.length;j++){
+				if (Level2Prop[j].nodeType==1) {
+					var name = Level2Prop[j].childNodes[0].nodeValue;
+					ontologyArray[k++] = name;
+				}
+			}
+		}
+	}
+}
+
+function updateNodeColor(ontologyArray, level){
+	for(var i=0; i<ontologyArray.length;i++){
+		var nodeIndex = getNodeIndex(distributomeNodes,getDistributionName(ontologyArray[i]));
+		distributome.nodes[nodeIndex].selected = level; //selected Node
+	}
+}
+
 	
 {		
 		getURLParameters();
@@ -311,5 +427,14 @@ function edgeTypeInfoFetch(){
 		}catch(error){
 			DistributomeXML_Objects=xmlDoc.childNodes;
 		}
+		
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
+		
+		xmlhttp=createAjaxRequest();
+		xmlhttp.open("GET","Distributome.pref.xml",false);
+		xmlhttp.send();
+		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
+			xmlhttp.responseXML.load(xmlhttp.responseStream);
+		var ontologyOrder = xmlhttp.responseXML;	
+		getOntologyOrderArray(ontologyOrder);
 }
