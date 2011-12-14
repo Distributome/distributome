@@ -33,8 +33,10 @@
   		border-bottom: 2px solid #999999;
   }
   #slider {width:95%;}
-	.header {width:95%; height:15px; border:2px solid #9ac1c9; padding:8px; font-weight:bold; margin-top:5px; cursor:pointer; background:url(images/header.gif)}
-	.header:hover {background:url(images/header_over.gif)}
+	.header {width:95%; height:15px; border:2px solid #9ac1c9; 
+		padding:8px; font-weight:bold; margin-top:5px; cursor:pointer; 
+		background:url(images/searchHeader.gif)}
+	.header:hover {background:url(images/searchHeaderOver.gif)}
 	.content {overflow:none}
 	.text {width:94%; border:2px solid #9ac1c9; border-top:none; padding:15px; overflow:auto}
   </style>
