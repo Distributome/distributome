@@ -97,9 +97,10 @@ function resetText(){
 }
 
 function resetDropDown(){
-	resetDropDownSelectedValue('distributome.edgeTypeAction');
-	resetDropDownSelectedValue('distributome.nodeTypeAction');
-	resetDropDownSelectedValue('distributome.neighborAction');
+	setDropDownSelectedValue('distributome.edgeTypeAction', 0);
+	setDropDownSelectedValue('distributome.nodeTypeAction', 0);
+	setDropDownSelectedValue('distributome.neighborAction', 0);
+	setDropDownSelectedValue('distributome.connectedNodesAction', 0);
 }
 
 /*************** Reset view **************/
@@ -109,9 +110,9 @@ function resetView(){
 }
 
 /*************** Reset the drop down **************/
-function resetDropDownSelectedValue(dropDownID){
+function setDropDownSelectedValue(dropDownID, value){
 	var dropDown =document.getElementById(dropDownID);
-	dropDown.options[0].selected = true;
+	dropDown.options[value].selected = true;
 }
 
 function getLinkColor(d,l){
