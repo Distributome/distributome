@@ -78,24 +78,29 @@ function displayXmlText(displayAll){
 	}
 	var initial = false;
 	if(divHeight == undefined){
-		divHeight = document.body.clientHeight+50;
+		if(window.innerHeight){
+			divHeight = window.innerHeight;
+		}else if(document.documentElement){
+			divHeight = document.documentElement.clientHeight;
+		}else{
+			divHeight = document.body.clientHeight;
+		}
 		initial = true;
 	}
-	document.getElementById('distributome.search.distributions').style.height = Math.floor(divHeight)+'px';
-	document.getElementById('distributome.search.relations').style.height = Math.floor(divHeight)+'px';
-	document.getElementById('distributome.search.references').style.height = Math.floor(divHeight)+'px';
+	document.getElementById('distributome.search.distributions').style.height = Math.floor(.50*divHeight)+'px';
+	document.getElementById('distributome.search.relations').style.height = Math.floor(.50*divHeight)+'px';
+	document.getElementById('distributome.search.references').style.height = Math.floor(.50*divHeight)+'px';
 	
 	var regex = new RegExp("<div style='height:5px'></div>","g");
 	document.getElementById('distributome.search.distributions').innerHTML = nodehtml.join('').replace(regex,'');
 	document.getElementById('distributome.search.relations').innerHTML = relationhtml.join('').replace(regex,'');
 	if(reference)
 	document.getElementById('distributome.search.references').innerHTML = referencehtml.join('').replace(regex,'');
-	/*document.getElementById('distributome.xmlParse').innerHTML = nodehtml.join('')+"<div style='height:15px'></div>"+relationhtml.join('');
-	if(reference)
-		document.getElementById('distributome.xmlParse').innerHTML += "<div style='height:15px'></div>"+referencehtml.join('');	
-	*/
-	document.getElementById('slider').style.display = 'block';
-	if(initial) slider.init('slider',1);
+	
+	if(initial){
+		document.getElementById('slider').style.display = 'block';
+		slider.init('slider',1);
+	}
 	renderMath();
 }
 
