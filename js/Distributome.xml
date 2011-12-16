@@ -1866,1005 +1866,1005 @@
 </distributions>
 
 <relations>
-<relation id="Bernoulli/binomial">
-	<from>Bernoulli distribution</from>
-	<to>binomial distribution</to>
-	<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in [0, 1]\) then \(Y = \sum_{i = 1}^n X_i\) has the binomial distribution with parameters \(n\) and \(p\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="Bernoulli/binomial">
+		<from>Bernoulli distribution</from>
+		<to>binomial distribution</to>
+		<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in [0, 1]\) then \(Y = \sum_{i = 1}^n X_i\) has the binomial distribution with parameters \(n\) and \(p\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="Bernoulli/geometric">
-	<from>Bernoulli distribution</from>
-	<to>geometric distribution</to>
-	<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in (0, 1)\), then \(Y = \min\{n \in \{1, 2, \ldots\}: X_n = 1\}\) has the geometric distribution with parameter \(p\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="Bernoulli/geometric">
+		<from>Bernoulli distribution</from>
+		<to>geometric distribution</to>
+		<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in (0, 1)\), then \(Y = \min\{n \in \{1, 2, \ldots\}: X_n = 1\}\) has the geometric distribution with parameter \(p\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="Bernoulli/negative-binomial"> 
-	<from>Bernoulli distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, 
+	<relation id="Bernoulli/negative-binomial"> 
+		<from>Bernoulli distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, 
 	each with parameter \(p \in (0, 1)\), 
 	then for \(ki \in \{1, 2, \ldots\}\), \(Y = \min\{n \in \{1, 2, \ldots\}: 
 	\sum_{i=1}^n X_i = k\}\) has the negative binomial distribution with parmeters \(k\) and \(p\).</statement>
-	<type>transformation</type>
-</relation>
+		<type>transformation</type>
+	</relation>
 
-<relation id="Bernoulli/Rademacher">
-	<from>Bernoulli distribution</from>
-	<to>Rademacher distribution</to>
-	<statement>If \(X\) has the Bernoulli distribution with parameter \(\frac{1}{2}\) then \(2 X - 1\) has the Rademacher distribution.</statement>
-	<type>linear transformation</type>
-</relation>
+	<relation id="Bernoulli/Rademacher">
+		<from>Bernoulli distribution</from>
+		<to>Rademacher distribution</to>
+		<statement>If \(X\) has the Bernoulli distribution with parameter \(\frac{1}{2}\) then \(2 X - 1\) has the Rademacher distribution.</statement>
+		<type>linear transformation</type>
+	</relation>
 
-<relation id="beta/arcsine">
-	<from>beta distribution</from>
-	<to>arcsine distribution</to>
-	<statement>The beta distribution with parameters \(\alpha = \frac{1}{2}\) and \(\beta = \frac{1}{2}\) is the arcsine distribution.</statement>
-	<type>special case</type>
-</relation>
+	<relation id="beta/arcsine">
+		<from>beta distribution</from>
+		<to>arcsine distribution</to>
+		<statement>The beta distribution with parameters \(\alpha = \frac{1}{2}\) and \(\beta = \frac{1}{2}\) is the arcsine distribution.</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="beta/standard-uniform">
-	<from>beta distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>The beta distribution with parameters \(\alpha = 1\) and \(\beta = 1\) is the standard uniform distribution.</statement>
-	<type>special case</type>
-</relation>
+	<relation id="beta/standard-uniform">
+		<from>beta distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>The beta distribution with parameters \(\alpha = 1\) and \(\beta = 1\) is the standard uniform distribution.</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="beta/inverse-beta">
-	<from>beta distribution</from>
-	<to>inverse beta distribution</to>
-	<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\), then \(Y = \frac{X}{1 - X}\) has the inverse beta distribution with parameters \(\alpha\) and \(\beta\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="beta/inverse-beta">
+		<from>beta distribution</from>
+		<to>inverse beta distribution</to>
+		<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\), then \(Y = \frac{X}{1 - X}\) has the inverse beta distribution with parameters \(\alpha\) and \(\beta\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="beta/semicirce">
-	<from>beta distribution</from>
-	<to>semicircle distribution</to>
-	<statement>If \(X\) has the beta distribution with parameters \(\alpha = \frac{3}{2}\) and \(\beta = \frac{3}{2}\), and \(r \in (0, \infty)\), then \(Y = r (2 X - 1)\) has the semicircle distribution with parameter \(r\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="beta/semicirce">
+		<from>beta distribution</from>
+		<to>semicircle distribution</to>
+		<statement>If \(X\) has the beta distribution with parameters \(\alpha = \frac{3}{2}\) and \(\beta = \frac{3}{2}\), and \(r \in (0, \infty)\), then \(Y = r (2 X - 1)\) has the semicircle distribution with parameter \(r\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="beta/beta">
-	<from>beta distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(Y = 1 - X\) has the beta distribution with parameters \(\beta\) and \(\alpha\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="beta/beta">
+		<from>beta distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(Y = 1 - X\) has the beta distribution with parameters \(\beta\) and \(\alpha\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="r"> %beta to beta
-	<from>beta distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta = 1\), and \(r \in (0, \infty)\), then \(Y = X^r\) has the beta distribution with parameters \(\frac{\alpha}{r}\) and \(1\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="r"> %beta to beta
+		<from>beta distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta = 1\), and \(r \in (0, \infty)\), then \(Y = X^r\) has the beta distribution with parameters \(\frac{\alpha}{r}\) and \(1\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="beta/Pareto">
-	<from>beta distribution</from>
-	<to>Pareto distribution</to>
-	<statement>If \(X\) has the beta distribution with left parameter \(\alpha \in (0, \infty)\) and right parameter \(1\), then \(Y = \frac{1}{X}\) has the Pareto distribution with shape parameter \(\alpha\).</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="beta/Pareto">
+		<from>beta distribution</from>
+		<to>Pareto distribution</to>
+		<statement>If \(X\) has the beta distribution with left parameter \(\alpha \in (0, \infty)\) and right parameter \(1\), then \(Y = \frac{1}{X}\) has the Pareto distribution with shape parameter \(\alpha\).</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="beta/binomial/beta-binomial">
-	<from>beta distribution</from>
-	<from>binomial distribution</from>
-	<to>beta-binomial distribution</to>
-	<statement>If \(P\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) and if the conditional distribution of \(X\) given \(P = p\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p\), then \(X\) has the beta-binomial distribution with parameters \(n\), \(\alpha\), and \(\beta\).</statement>
-	<type>Conditioning</type>
-</relation>
+	<relation id="beta/binomial/beta-binomial">
+		<from>beta distribution</from>
+		<from>binomial distribution</from>
+		<to>beta-binomial distribution</to>
+		<statement>If \(P\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) and if the conditional distribution of \(X\) given \(P = p\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p\), then \(X\) has the beta-binomial distribution with parameters \(n\), \(\alpha\), and \(\beta\).</statement>
+		<type>Conditioning</type>
+	</relation>
 
-<relation id="binomial/standard-normal"> 
-	<from>binomial distribution</from>
-	<to>standard normal distribution</to>
-	<statement>If \(X_n\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and fixed \(p \in (0, 1)\) then then the distribution of \(Z_n = \frac{X_n - n p}{\sqrt{n p (1 - p)}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
-	<type>central limit theorem</type>
+	<relation id="binomial/standard-normal"> 
+		<from>binomial distribution</from>
+		<to>standard normal distribution</to>
+		<statement>If \(X_n\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and fixed \(p \in (0, 1)\) then then the distribution of \(Z_n = \frac{X_n - n p}{\sqrt{n p (1 - p)}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
+		<type>central limit theorem</type>
 	<cite>Dinov Christou Sanchez 2008</cite>
-</relation>
+	</relation>
 
-<relation id="binomial/Bernoulli">
-	<from>binomial distribution</from>
-	<to>Bernoulli distribution</to>
-	<statement>The binomial distribution with parameters \(n = 1\) and \(p \in [0, 1]\) is the Bernoulli distribution with parameter \(p\).</statement>
-	<type>special case</type>
-</relation>
+	<relation id="binomial/Bernoulli">
+		<from>binomial distribution</from>
+		<to>Bernoulli distribution</to>
+		<statement>The binomial distribution with parameters \(n = 1\) and \(p \in [0, 1]\) is the Bernoulli distribution with parameter \(p\).</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="binomial/binomial">
-	<from>binomial distribution</from>
-	<to>binomial distribution</to>
-	<statement>If \(X\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p \in [0, 1]\); \(Y\) has the binomial distribution with parameters \(m \in \{1, 2, \ldots\}\) and \(p\); and \(X\) and \(Y\) are independent, then \(X + Y\) has the binomial distribution with parameters \(m + n\) and \(p\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="binomial/binomial">
+		<from>binomial distribution</from>
+		<to>binomial distribution</to>
+		<statement>If \(X\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p \in [0, 1]\); \(Y\) has the binomial distribution with parameters \(m \in \{1, 2, \ldots\}\) and \(p\); and \(X\) and \(Y\) are independent, then \(X + Y\) has the binomial distribution with parameters \(m + n\) and \(p\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="binomial/hypergeometric">
-	<from>binomial distribution</from>
-	<to>hypergeometric distribution</to>
-	<statement>Suppose that \(\boldsymbol{X} = (X_1, X_2, \ldots)\) is a Bernoulli trials sequence with parameter \(p \in (0, 1)\). For \(n \in \{1, 2, \ldots\}\) let \(Y_n = \sum_{i=1}^n X_i\), so that \(Y_n\) has the binomial distribution with parameters \(n\) and \(p\). If \(m \lt n\) then the distribution of \(Y_m\) given \(Y_n = k\) is hypergeoemtric with parameters \(m\), \(n\), and \(k\).</statement>
-	<type>Conditional distribution</type>
-</relation>
+	<relation id="binomial/hypergeometric">
+		<from>binomial distribution</from>
+		<to>hypergeometric distribution</to>
+		<statement>Suppose that \(\boldsymbol{X} = (X_1, X_2, \ldots)\) is a Bernoulli trials sequence with parameter \(p \in (0, 1)\). For \(n \in \{1, 2, \ldots\}\) let \(Y_n = \sum_{i=1}^n X_i\), so that \(Y_n\) has the binomial distribution with parameters \(n\) and \(p\). If \(m \lt n\) then the distribution of \(Y_m\) given \(Y_n = k\) is hypergeoemtric with parameters \(m\), \(n\), and \(k\).</statement>
+		<type>Conditional distribution</type>
+	</relation>
 
-<relation id="binomial/Poisson">
-	<from>binomial distribution</from>
-	<to>Poisson distribution</to>
-	<statement>The binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p \in (0, 1)\) converges to the Poisson distribution with parameter \(\lambda \in (0, \infty)\) if \(n \to \infty\), \(p \to 0\), with \(n p \to \lambda\).</statement>
-	<type>parameter limit</type>
-</relation>
+	<relation id="binomial/Poisson">
+		<from>binomial distribution</from>
+		<to>Poisson distribution</to>
+		<statement>The binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p \in (0, 1)\) converges to the Poisson distribution with parameter \(\lambda \in (0, \infty)\) if \(n \to \infty\), \(p \to 0\), with \(n p \to \lambda\).</statement>
+		<type>parameter limit</type>
+	</relation>
 
-<relation id="binomial/negative-binomial">
-	<from>binomial distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>For \(n \in \{1, 2, \ldots\}\), let \(Y_n\) denote the number of successes in the first \(n\) of a sequence of Bernoulli trials, so that \(Y_n\) has the binomial distribution with trial parameter \(n\) and sucess parameter \(p\). Then for \(k \in \{1, 2, \ldots\}\), \(Z_k = \min\{n: Y_n \geq k\} - k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\).</statement>
-	<type>inverse stochastic process</type>
-</relation>
+	<relation id="binomial/negative-binomial">
+		<from>binomial distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>For \(n \in \{1, 2, \ldots\}\), let \(Y_n\) denote the number of successes in the first \(n\) of a sequence of Bernoulli trials, so that \(Y_n\) has the binomial distribution with trial parameter \(n\) and sucess parameter \(p\). Then for \(k \in \{1, 2, \ldots\}\), \(Z_k = \min\{n: Y_n \geq k\} - k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\).</statement>
+		<type>inverse stochastic process</type>
+	</relation>
 
-<relation id="Cauchy/Cauchy.1">
-	<from>Cauchy Distribution</from>
-	<to>Cauchy Distribution</to>
-	<statement>If \(X\) has the Cauchy distribution with location parameter \(\alpha_1 \in (-\infty, \infty)\) and location parameter \(\beta_1 \in (0, \infty)\), \(Y\) has the Cauchy distribution with location parameter \(\alpha_2 \in (-\infty, \infty)\) and scale parameter \(\beta_2 \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Cauchy distribution with location parameter \(\alpha_1 + \alpha_2\) and scale parameter \(\beta_1 + \beta_2\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="Cauchy/Cauchy.1">
+		<from>Cauchy Distribution</from>
+		<to>Cauchy Distribution</to>
+		<statement>If \(X\) has the Cauchy distribution with location parameter \(\alpha_1 \in (-\infty, \infty)\) and location parameter \(\beta_1 \in (0, \infty)\), \(Y\) has the Cauchy distribution with location parameter \(\alpha_2 \in (-\infty, \infty)\) and scale parameter \(\beta_2 \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Cauchy distribution with location parameter \(\alpha_1 + \alpha_2\) and scale parameter \(\beta_1 + \beta_2\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="Cauchy/Cauchy.2">
-	<from>Cauchy distribution </from>
-	<to>Cauchy distribution</to>
-	<statement>If \(X\) has Cauchy distribution with location parameter \(\alpha \in (-\infty, \infty)\) and scale parameter \(\beta \in (0, \infty)\), \(a \in (-\infty, \infty)\) and \(b \in (0, \infty)\), then \(a + b X\) has the Cauchy distribution with location parameter \(a + b \alpha\) and location parameter \(\beta b\).</statement>
-	<type>location-scale transformation</type>
-</relation>
+	<relation id="Cauchy/Cauchy.2">
+		<from>Cauchy distribution </from>
+		<to>Cauchy distribution</to>
+		<statement>If \(X\) has Cauchy distribution with location parameter \(\alpha \in (-\infty, \infty)\) and scale parameter \(\beta \in (0, \infty)\), \(a \in (-\infty, \infty)\) and \(b \in (0, \infty)\), then \(a + b X\) has the Cauchy distribution with location parameter \(a + b \alpha\) and location parameter \(\beta b\).</statement>
+		<type>location-scale transformation</type>
+	</relation>
 
-<relation id="chi-square/chi-square">
-	<from>chi-square distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X\) has the chi-square distribution with \(m \in (0, \infty)\) degrees of freedom; \(Y\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom; and \(X\) and \(Y\) are independent, then \(X + Y\) has the chi-square distribution with \(m + n\) degrees of freedom.</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="chi-square/chi-square">
+		<from>chi-square distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X\) has the chi-square distribution with \(m \in (0, \infty)\) degrees of freedom; \(Y\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom; and \(X\) and \(Y\) are independent, then \(X + Y\) has the chi-square distribution with \(m + n\) degrees of freedom.</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="chi-square/gamma">
-	<from>chi-square distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \(X\) has a chi-square distribution with \(\nu \in \{1, 2, \ldots\}\) degrees of freedom, and \(c \in (0, \infty)\) , then \(Y = c X\) has the gamma distribution with shape parameter \(k = \frac{\nu}{2}\) and scale parameter \(\theta = 2 c\).</statement>
-	<type>scale transformation</type>
-</relation>
+	<relation id="chi-square/gamma">
+		<from>chi-square distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \(X\) has a chi-square distribution with \(\nu \in \{1, 2, \ldots\}\) degrees of freedom, and \(c \in (0, \infty)\) , then \(Y = c X\) has the gamma distribution with shape parameter \(k = \frac{\nu}{2}\) and scale parameter \(\theta = 2 c\).</statement>
+		<type>scale transformation</type>
+	</relation>
 
-<relation id="chi-square/standard-normal">
-	<from>chi-square distribution</from>
-	<to>standard normal distribution</to>
-	<statement>If \(X_n\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then the distribution of \(Z = \frac{X_n - n}{\sqrt{2 n}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
-	<type>central limit theorem</type>
+	<relation id="chi-square/standard-normal">
+		<from>chi-square distribution</from>
+		<to>standard normal distribution</to>
+		<statement>If \(X_n\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then the distribution of \(Z = \frac{X_n - n}{\sqrt{2 n}}\) converges to the standard normal distribution as \(n \to \infty\).</statement>
+		<type>central limit theorem</type>
 	<cite>Dinov Christou Sanchez 2008</cite>
-</relation>
+	</relation>
 
-<relation id="chi-square/F">
-	<from>chi-square distribution</from>
-	<to>F-distribution</to>
-	<statement>If \(U\) has the chi-square distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom; \(V\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom; and \(U\) and \(V\) are independent, then \(X = \frac{U/m}{V/n}\) hs the \(F\)-distribution with \(m\) degrees of freedom in the numerator and \(n\) degrees of freedom in the denominator</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="chi-square/F">
+		<from>chi-square distribution</from>
+		<to>F-distribution</to>
+		<statement>If \(U\) has the chi-square distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom; \(V\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom; and \(U\) and \(V\) are independent, then \(X = \frac{U/m}{V/n}\) hs the \(F\)-distribution with \(m\) degrees of freedom in the numerator and \(n\) degrees of freedom in the denominator</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="chi-square-noncentral/chi-squre"> 
-	<from>non-central chi-square distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X\) has the non-central chi-square distribution with \(\nu \in \{1, 2, \ldots\}\) degrees of freedom and non-centrality parameter \(\lambda = 0\), then \(X\) has a chi-square distribution with \(\nu\) degrees of freedom.</statement>
-	<type>special case</type>
-</relation>
+	<relation id="chi-square-noncentral/chi-squre"> 
+		<from>non-central chi-square distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X\) has the non-central chi-square distribution with \(\nu \in \{1, 2, \ldots\}\) degrees of freedom and non-centrality parameter \(\lambda = 0\), then \(X\) has a chi-square distribution with \(\nu\) degrees of freedom.</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="chi-square/chi">
-	<from>chi-square distribution</from>
-	<to>chi distribution</to>
-	<statement>If \(X\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(\sqrt{X}\) has the chi distribution with \(n\) degrees of freedom.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="chi-square/chi">
+		<from>chi-square distribution</from>
+		<to>chi distribution</to>
+		<statement>If \(X\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(\sqrt{X}\) has the chi distribution with \(n\) degrees of freedom.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="chi-square/standard-normal/student"> 
-	<from>chi-square distribution</from>
-	<from>standard normal distribution</from>
-	<to>Student's t-distribution</to>
-	<statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's's \(t\)-distribution with \(n\) degrees of freedom.</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="chi-square/standard-normal/student"> 
+		<from>chi-square distribution</from>
+		<from>standard normal distribution</from>
+		<to>Student's t-distribution</to>
+		<statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's's \(t\)-distribution with \(n\) degrees of freedom.</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="chi-square/Poisson/Rice">
-	<from>chi-square distribution</from>
-	<from>Poisson distribution</from>
-	<to>Rice distribution</to>
-	<statement>If \(X\) has the Poisson distribution with parameter \(\frac{\nu^2}{2 \sigma^2}\) where \(\nu \in (0, \infty)\) and \(\sigma \in (0, \infty)\), and the conditional distribution of \(Y\) given \(X = x \in \{0, 1, 2, \ldots\}\) is chi-square with \(2 x + 2\) degrees of freedom, then \(\sigma \sqrt{X}\) has the Rice distribution with distance parameter \(\nu\) and scale parameter \(\sigma\).</statement>
-	<type>mixture and transformation</type>
-</relation>
+	<relation id="chi-square/Poisson/Rice">
+		<from>chi-square distribution</from>
+		<from>Poisson distribution</from>
+		<to>Rice distribution</to>
+		<statement>If \(X\) has the Poisson distribution with parameter \(\frac{\nu^2}{2 \sigma^2}\) where \(\nu \in (0, \infty)\) and \(\sigma \in (0, \infty)\), and the conditional distribution of \(Y\) given \(X = x \in \{0, 1, 2, \ldots\}\) is chi-square with \(2 x + 2\) degrees of freedom, then \(\sigma \sqrt{X}\) has the Rice distribution with distance parameter \(\nu\) and scale parameter \(\sigma\).</statement>
+		<type>mixture and transformation</type>
+	</relation>
 
-<relation id="continuous-uniform/continuous-uniform"> 
-	<from>continuous uniform distribution</from>
-	<to>continuous uniform distribution</to>
-	<statement>If \(X\) is uniformly distributed on the interval \([a, b]\) and \(c, d \in (-\infty, \infty)\) with \(c \ne 0\), then \(Y = cX + d\) is uniformly distributed on \([ca + d, cb + d]\) if \(c \gt 0\) or on \([cb + d, ca + d]\) if \(c \lt 0\)</statement>
-	<type>linear transformation</type>
-</relation>
+	<relation id="continuous-uniform/continuous-uniform"> 
+		<from>continuous uniform distribution</from>
+		<to>continuous uniform distribution</to>
+		<statement>If \(X\) is uniformly distributed on the interval \([a, b]\) and \(c, d \in (-\infty, \infty)\) with \(c \ne 0\), then \(Y = cX + d\) is uniformly distributed on \([ca + d, cb + d]\) if \(c \gt 0\) or on \([cb + d, ca + d]\) if \(c \lt 0\)</statement>
+		<type>linear transformation</type>
+	</relation>
 
-<relation id="continuous-uniform/standard-uniform">
-	<from>continuous uniform distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>The continuous uniform distribution on \([0, 1]\) is the standard uniform distribution</statement>
-	<type>special case</type>
-</relation>
+	<relation id="continuous-uniform/standard-uniform">
+		<from>continuous uniform distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>The continuous uniform distribution on \([0, 1]\) is the standard uniform distribution</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="continuous-uniform/triangular">
-	<from>continuous uniform distribution</from>
-	<to>triangular distribution</to>
-	<statement>If \(X\) and \(Y\) are independent and each is uniformly distributed on the interval \([a, b]\), then \(X + Y\) has the triangular distribution with parameters \(a\), \(b\), and \(c = \frac{a+b}{2}\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="continuous-uniform/triangular">
+		<from>continuous uniform distribution</from>
+		<to>triangular distribution</to>
+		<statement>If \(X\) and \(Y\) are independent and each is uniformly distributed on the interval \([a, b]\), then \(X + Y\) has the triangular distribution with parameters \(a\), \(b\), and \(c = \frac{a+b}{2}\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="continuous-uniform/exponential">
-	<from>standard uniform distribtion</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the standard uniform distribution and \(\beta \in (0, \infty)\), then \(-\beta \ln(1 - X)\) has the exponential distribution with scale parameter \(\beta\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="continuous-uniform/exponential">
+		<from>standard uniform distribtion</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the standard uniform distribution and \(\beta \in (0, \infty)\), then \(-\beta \ln(1 - X)\) has the exponential distribution with scale parameter \(\beta\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="continuous-uniform/Pareto">
-	<from>standard uniform distribution</from>
-	<to>Pareto distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\beta \in (0, \infty)\) then \(\frac{\mu}{(1 - X)^{1/\beta}}\) has the Pareto distribution with location parameter \(\mu\) and shape parameter \(\beta\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="continuous-uniform/Pareto">
+		<from>standard uniform distribution</from>
+		<to>Pareto distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\beta \in (0, \infty)\) then \(\frac{\mu}{(1 - X)^{1/\beta}}\) has the Pareto distribution with location parameter \(\mu\) and shape parameter \(\beta\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/beta"> 
-	<from>standard uniform distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the standard uniform distribution and \(\alpha \in (0, \infty)\) then \(X^{1/\alpha}\) has the beta distribution with left parameter \(\alpha\) and right parameter 1.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/beta"> 
+		<from>standard uniform distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the standard uniform distribution and \(\alpha \in (0, \infty)\) then \(X^{1/\alpha}\) has the beta distribution with left parameter \(\alpha\) and right parameter 1.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/standard-Cauchy">
-	<from>standard uniform distribution</from>
-	<to>standard Cauchy distribution</to>
-	<statement>If \(X\) has the standard uniform distribution then \(\tan[\pi(X - \frac{1}{2})]\) has the standard Cauchy distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/standard-Cauchy">
+		<from>standard uniform distribution</from>
+		<to>standard Cauchy distribution</to>
+		<statement>If \(X\) has the standard uniform distribution then \(\tan[\pi(X - \frac{1}{2})]\) has the standard Cauchy distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/arcsine">
-	<from>standard uniform distribution</from>
-	<to>arcsine distribution</to>
-	<statement>If \(X\) has the standard uniform distribution then \(\sin^2(\frac{\pi}{2} X)\) has the arcsine distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/arcsine">
+		<from>standard uniform distribution</from>
+		<to>arcsine distribution</to>
+		<statement>If \(X\) has the standard uniform distribution then \(\sin^2(\frac{\pi}{2} X)\) has the arcsine distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/exponential-logarithmic">
-	<from>standard uniform distribution</from>
-	<to>exponential-logarithmic distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(b \in (0, \infty)\), and \(p \in (0, 1)\) then \(\frac{1}{b}\ln\left(\frac{1 - p}{1 - p^{1 - X}}\right)\) has the exponential-logarithmic distribution with parameters \(b\) and \(p\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/exponential-logarithmic">
+		<from>standard uniform distribution</from>
+		<to>exponential-logarithmic distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(b \in (0, \infty)\), and \(p \in (0, 1)\) then \(\frac{1}{b}\ln\left(\frac{1 - p}{1 - p^{1 - X}}\right)\) has the exponential-logarithmic distribution with parameters \(b\) and \(p\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/geometric">
-	<from>standard uniform distribution</from>
-	<to>geometric distribution</to>
-	<statement>If \(X\) has the standard uniform distribution and \(p \in (0, 1)\) then \(\lceil \frac{\ln(1 - X)}{\ln(1 - p)}\rceil\) has the geometric distribution with parameter \(p\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/geometric">
+		<from>standard uniform distribution</from>
+		<to>geometric distribution</to>
+		<statement>If \(X\) has the standard uniform distribution and \(p \in (0, 1)\) then \(\lceil \frac{\ln(1 - X)}{\ln(1 - p)}\rceil\) has the geometric distribution with parameter \(p\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/Gumbel">
-	<from>standard uniform distribution</from>
-	<to>Gumbel distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\) then \(\mu - \sigma \ln(-\ln(X))\) has the Gumbel distribution with location prarameter \(\mu\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/Gumbel">
+		<from>standard uniform distribution</from>
+		<to>Gumbel distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\) then \(\mu - \sigma \ln(-\ln(X))\) has the Gumbel distribution with location prarameter \(\mu\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/hyperbolic-secant">
-	<from>standard uniform distribution</from>
-	<to>hyperbolic secant distribution</to>
-	<statement>If \(X\) has the standard uniform distribution then \(\frac{2}{\pi} \ln[\tan(\frac{\pi}{2} X)]\) has the hyperbolic secant distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/hyperbolic-secant">
+		<from>standard uniform distribution</from>
+		<to>hyperbolic secant distribution</to>
+		<statement>If \(X\) has the standard uniform distribution then \(\frac{2}{\pi} \ln[\tan(\frac{\pi}{2} X)]\) has the hyperbolic secant distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/Laplace">
-	<from>standard uniform distribution</from>
-	<to>Laplace distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), \(b \in (0, \infty)\), then \(\mu + b \ln(2 \min\{X, 1 - X\})\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(b\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/Laplace">
+		<from>standard uniform distribution</from>
+		<to>Laplace distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), \(b \in (0, \infty)\), then \(\mu + b \ln(2 \min\{X, 1 - X\})\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(b\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/logistic"> 
-	<from>standard uniform distribution</from>
-	<to>logistic distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\), then \(\mu + \sigma \ln\left(\frac{X}{1 - X}\right)\) has the logistic distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/logistic"> 
+		<from>standard uniform distribution</from>
+		<to>logistic distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\), then \(\mu + \sigma \ln\left(\frac{X}{1 - X}\right)\) has the logistic distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/log-logistic">
-	<from>standard uniform distribution</from>
-	<to>log-logistic distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\alpha \in (0, \infty)\), and \(\beta \in (0, \infty)\), then \(\alpha \left(\frac{X}{1 - X}\right)^{1/\beta}\) has the log-logistic distribution with scale parameter \(\alpha\) and shape parameter \(\beta\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/log-logistic">
+		<from>standard uniform distribution</from>
+		<to>log-logistic distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\alpha \in (0, \infty)\), and \(\beta \in (0, \infty)\), then \(\alpha \left(\frac{X}{1 - X}\right)^{1/\beta}\) has the log-logistic distribution with scale parameter \(\alpha\) and shape parameter \(\beta\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/Rayleigh">
-	<from>standard uniform distribution</from>
-	<to>Rayleigh distribution</to>
-	<statement>If \(X\) has the standard uniform distribution and \(\sigma \in (0, \infty)\), then \(\sigma \sqrt{-2 \ln(1 - X)}\) has the Rayleigh distribution with scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/Rayleigh">
+		<from>standard uniform distribution</from>
+		<to>Rayleigh distribution</to>
+		<statement>If \(X\) has the standard uniform distribution and \(\sigma \in (0, \infty)\), then \(\sigma \sqrt{-2 \ln(1 - X)}\) has the Rayleigh distribution with scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/Weibull">
-	<from>standard uniform distribution</from>
-	<to>Weibull distribution</to>
-	<statement>If \(X\) has the standard uniform distribution, \(\sigma \in (0, \infty)\) and \(\alpha \in (0, \infty)\), then \(\sigma (-\ln(1 - X))^{1/\alpha}\) has the Weibull distribution with shape parameter \(\alpha\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="standard-uniform/Weibull">
+		<from>standard uniform distribution</from>
+		<to>Weibull distribution</to>
+		<statement>If \(X\) has the standard uniform distribution, \(\sigma \in (0, \infty)\) and \(\alpha \in (0, \infty)\), then \(\sigma (-\ln(1 - X))^{1/\alpha}\) has the Weibull distribution with shape parameter \(\alpha\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="standard-uniform/Irwin-Hall">
-	<from>standard uniform distribution</from>
-	<to>Irwin-Hall distribution</to>
-	<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the standard uniform distribution, then \(sum_{i=1}^n X_i\) has the Irwin-Hall distribution with parameter \(n\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="standard-uniform/Irwin-Hall">
+		<from>standard uniform distribution</from>
+		<to>Irwin-Hall distribution</to>
+		<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the standard uniform distribution, then \(sum_{i=1}^n X_i\) has the Irwin-Hall distribution with parameter \(n\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="exponential/exponential">
-	<from>exponential distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the exponential distribution with rate parameter \(r \in (0, \infty)\), \(Y\) has the exponential distribution with rate parameter \(s \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(\min\{X, Y\}\) has the exponential distribution with rate parameter \(r + s\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="exponential/exponential">
+		<from>exponential distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the exponential distribution with rate parameter \(r \in (0, \infty)\), \(Y\) has the exponential distribution with rate parameter \(s \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(\min\{X, Y\}\) has the exponential distribution with rate parameter \(r + s\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="exponential/standard-uniform">
-	<from>exponential distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>If \(X\) has the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = e^{-\lambda X}\) has the standard uniform distribution.</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="exponential/standard-uniform">
+		<from>exponential distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>If \(X\) has the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = e^{-\lambda X}\) has the standard uniform distribution.</statement>
+		<type>transformation</type>
+	</relation>
 
-<relation id="exponential/gamma">
-	<from>exponential distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = \sum_{i=1}^n X_i\) has the gamma distribution with shape parameter \(n\) and scale parameter \(\frac{1}{\lambda}\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="exponential/gamma">
+		<from>exponential distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = \sum_{i=1}^n X_i\) has the gamma distribution with shape parameter \(n\) and scale parameter \(\frac{1}{\lambda}\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="exponential/Pareto">
-	<from>exponential distribution</from>
-	<to>Pareto distribution</to>
-	<statement>If \(a \in (0, \infty)\) and \(X\) has the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = a e^X\) has the Pareto distribution with scale parameter \(a\) and shape parameter \(\lambda\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="exponential/Pareto">
+		<from>exponential distribution</from>
+		<to>Pareto distribution</to>
+		<statement>If \(a \in (0, \infty)\) and \(X\) has the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = a e^X\) has the Pareto distribution with scale parameter \(a\) and shape parameter \(\lambda\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="exponential/Weibull"> 
-	<from>exponential distribution</from>
-	<to>Weibull distribution</to>
-	<statement>If \(X\) has the standard exponential distribution, \(k \in (0, \infty)\), and \(b \in (0, \infty)\), then \(Y = b X^{1/k}\) has the Weibull distribution with shape parameter \(k\) and scale parameter \(b\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="exponential/Weibull"> 
+		<from>exponential distribution</from>
+		<to>Weibull distribution</to>
+		<statement>If \(X\) has the standard exponential distribution, \(k \in (0, \infty)\), and \(b \in (0, \infty)\), then \(Y = b X^{1/k}\) has the Weibull distribution with shape parameter \(k\) and scale parameter \(b\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="exponential/Gumbel">
-	<from>exponential distribution</from>
-	<to>Gumbel distribution</to>
-	<statement>If \((X_1, X_2, \ldots)\) is a sequence of indpendent random variables, each with the standard exponential distribution, then the distribution of \(\max\{X_1, \ldots, X_n\} - \ln(n)\) converges to the standard Gumbel distribution.</statement>
-	<type>limiting distribution</type>
-</relation>
+	<relation id="exponential/Gumbel">
+		<from>exponential distribution</from>
+		<to>Gumbel distribution</to>
+		<statement>If \((X_1, X_2, \ldots)\) is a sequence of indpendent random variables, each with the standard exponential distribution, then the distribution of \(\max\{X_1, \ldots, X_n\} - \ln(n)\) converges to the standard Gumbel distribution.</statement>
+		<type>limiting distribution</type>
+	</relation>
 
-<relation id="exponential/Laplace">
-	<from>exponential distribution</from>
-	<to>Laplace distribution</to>
-	<statement>If \(X\) and \(Y\) are independent random variables and each has the exponential distribution with scale parameter \(\sigma \in (0, \infty)\) then \(X - Y\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="exponential/Laplace">
+		<from>exponential distribution</from>
+		<to>Laplace distribution</to>
+		<statement>If \(X\) and \(Y\) are independent random variables and each has the exponential distribution with scale parameter \(\sigma \in (0, \infty)\) then \(X - Y\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="exponential/Rademacher/Laplace">
-	<from>exponential distribution</from>
-	<from>Rademacher distribution</from>
-	<to>Laplace distribution</to>
-	<statement>If \(X\) has the exponential distribution with scale parameter \(\sigma \in (0, \infty)\), \(Y\) has the Rademacher distribution, and \(X\) and \(Y\) are independent, then \(X V\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="exponential/Rademacher/Laplace">
+		<from>exponential distribution</from>
+		<from>Rademacher distribution</from>
+		<to>Laplace distribution</to>
+		<statement>If \(X\) has the exponential distribution with scale parameter \(\sigma \in (0, \infty)\), \(Y\) has the Rademacher distribution, and \(X\) and \(Y\) are independent, then \(X V\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="exponential/normal/Laplace">
-	<from>exponential distribution</from>
-	<from>normal distribution</from>
-	<to>Laplace distribution</to>
-	<statement>If \(X\) has the standard exponential distribution, \(Z\) has the standard normal distribution, \(X\) and \(Z\) are independent, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\), then \(\mu + \sigma Z \sqrt{2 X}\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="exponential/normal/Laplace">
+		<from>exponential distribution</from>
+		<from>normal distribution</from>
+		<to>Laplace distribution</to>
+		<statement>If \(X\) has the standard exponential distribution, \(Z\) has the standard normal distribution, \(X\) and \(Z\) are independent, \(\mu \in (-\infty, \infty)\), and \(\sigma \in (0, \infty)\), then \(\mu + \sigma Z \sqrt{2 X}\) has the Laplace distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="F/F">
-	<from>F-distribution</from>
-	<to>F-distribution</to>
-	<statement>If \(X\) has the F-distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom in the numerator and \(n \in \{1, 2, \ldots\}\) degrees of freedom in the denominator, then \(\frac{1}{X}\) has the F-distribution with \(n\) degrees of freedom in the numerator and \(m\) degrees of freedom in the denominator.</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="F/F">
+		<from>F-distribution</from>
+		<to>F-distribution</to>
+		<statement>If \(X\) has the F-distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom in the numerator and \(n \in \{1, 2, \ldots\}\) degrees of freedom in the denominator, then \(\frac{1}{X}\) has the F-distribution with \(n\) degrees of freedom in the numerator and \(m\) degrees of freedom in the denominator.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="F/beta"> 
-	<from>F-distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the F-distribution with \(m \in (0, \infty)\) degrees of freedom in the numerator and \(n \in (0, \infty)\) degrees of freedom in the denominator, then \(\frac{(m/n)X}{1 + (m/n)X}\) has the beta distribution with left parameter \(\frac{m}{2}\) and right parameter \(\frac{n}{2}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
+	<relation id="F/beta"> 
+		<from>F-distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the F-distribution with \(m \in (0, \infty)\) degrees of freedom in the numerator and \(n \in (0, \infty)\) degrees of freedom in the denominator, then \(\frac{(m/n)X}{1 + (m/n)X}\) has the beta distribution with left parameter \(\frac{m}{2}\) and right parameter \(\frac{n}{2}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
 
-<relation id="F/chi-square">
-	<from>F-distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X\) has the chi-square distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom in the numerator and \(n \in \{1, 2, \ldots\}\) degrees of freedom in the denominator, then the distribution of \(m X\) converges to the chi-square distribution with \(m\) degrees of freedom as \(n \to \infty\).</statement>
-	<type>limiting distribution</type>
-</relation>
+	<relation id="F/chi-square">
+		<from>F-distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X\) has the chi-square distribution with \(m \in \{1, 2, \ldots\}\) degrees of freedom in the numerator and \(n \in \{1, 2, \ldots\}\) degrees of freedom in the denominator, then the distribution of \(m X\) converges to the chi-square distribution with \(m\) degrees of freedom as \(n \to \infty\).</statement>
+		<type>limiting distribution</type>
+	</relation>
 
-<relation id="gamma/gamma.1">
-	<from>gamma distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\) and \(c \in (0, \infty)\), then \(Y = cX\) has the gamma distribution with shape parameter \(\alpha\) and scale parameter \(c \lambda\).</statement>
-	<type>scale transformation</type>
-</relation>
+	<relation id="gamma/gamma.1">
+		<from>gamma distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\) and \(c \in (0, \infty)\), then \(Y = cX\) has the gamma distribution with shape parameter \(\alpha\) and scale parameter \(c \lambda\).</statement>
+		<type>scale transformation</type>
+	</relation>
 
-<relation id="gamma/gamma.2"> 
-	<from>gamma distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the gamma distribution with shape parameter \(\alpha + \beta\) and scale parameter \(\lambda\).</statement>
-	<type>convolution</type>
-</relation>
+	<relation id="gamma/gamma.2"> 
+		<from>gamma distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the gamma distribution with shape parameter \(\alpha + \beta\) and scale parameter \(\lambda\).</statement>
+		<type>convolution</type>
+	</relation>
 
-<relation id="gamma/exponential"> 
-	<from>gamma distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the gamma distributed with parameter shape parameter \(k = 1\) and scale parameter \(\lambda \in (0, \infty)\) then and then \(X\) has the exponential distribution with scale parameter \(\lambda\) (and hence rate parameter \(1/\lambda\).</statement>
-	<type>special case</type>
-</relation>
+	<relation id="gamma/exponential"> 
+		<from>gamma distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the gamma distributed with parameter shape parameter \(k = 1\) and scale parameter \(\lambda \in (0, \infty)\) then and then \(X\) has the exponential distribution with scale parameter \(\lambda\) (and hence rate parameter \(1/\lambda\).</statement>
+		<type>special case</type>
+	</relation>
 
-<relation id="gamma/chi-square">
-	<from>gamma distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), then \(\frac{2 X}{\lambda}\) has the chi-square distribution with \(k\) degrees of freedom.</statement>
-	<type>linear transformation</type>
-</relation>
+	<relation id="gamma/chi-square">
+		<from>gamma distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), then \(\frac{2 X}{\lambda}\) has the chi-square distribution with \(k\) degrees of freedom.</statement>
+		<type>linear transformation</type>
+	</relation>
 
-<relation id="gamma/Erlang">
-	<from>gamma distribution</from>
-	<to>Erlang distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(k \in \{1, 2, \ldots\}\) and scale parameter \(c \in (0, \infty)\), then \(X\) has the Erlang distribution with shape parameter \(k\) and scale parameter \(c\).</statement>
-	<type>special case</type>
-</relation>
+	<relation id="gamma/Erlang">
+		<from>gamma distribution</from>
+		<to>Erlang distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(k \in \{1, 2, \ldots\}\) and scale parameter \(c \in (0, \infty)\), then \(X\) has the Erlang distribution with shape parameter \(k\) and scale parameter \(c\).</statement>
+		<type>special case</type>
+	</relation>
  
-<relation id="gamma/Maxwell-Boltzmann"> 
-	<from>gamma distribution</from>
-	<to>Maxwell-Boltzmann distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(k = \frac{3}{2}\) and scale parameter \(\theta = 2 a^2\) where \(a \in (0, \infty)\), then \(\sqrt{X}\) has the Maxwell-Boltzmann distribution with parameter \(a\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="gamma/standard-normal">
-	<from>gamma distribution</from>
-	<to>standard normal distribution</to>
-	<statement>If \(X_k\) has the gamma distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) then the distribution of \(\frac{X - k b}{\sqrt{k} b}\) converges to the standard normal distribution as \(k \to \infty\).</statement>
-	<type>central limit theorem</type>
-</relation>
-
-<relation id="gamma/beta"> 
-	<from>gamma distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(\frac{X}{X + Y}\) has the beta distribution with left parameter \(\alpha\) and right parameter \(\beta\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="gamma/inverted-beta">
-	<from>gamma distribution</from>
-	<to>inverted beta distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(\frac{X}{Y}\) has the inverted beta distribution with shape parameters \(\alpha\) and \(\beta\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="gamma/Levy">
-	<from>gamma distribution</from>
-	<to>Levy distribution</to>
-	<statement>If \(X\) has the gamma distribution with shape parameter \(\frac{1}{x}\) and scale parameter \(\sigma \in (0, \infty)\) then \(\frac{1}{X}\) has the Levy distribution with location parameter \(0\) and scale parameter \(\frac{2}{\sigma}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="geometric/geometric">
-	<from>geometric distribution</from>
-	<to>geometric distribution</to>
-	<statement>If \(X\) has the geometric distributin on \(\{0, 1, \ldots\}\) then \(X + 1\) has the geometric distribution on \(\{1, 2 \ldots\}\).</statement>
-	<type>linear transformation</type>
-</relation>
-
-<relation id="geometric/discrete-uniform">
-	<from>geometric distribution</from>
-	<to>discrete uniform distribution</to>
-	<statement>If \(X\) has the geometric distribution on \(\{1, 2, \ldots\}\) with parameter \(p \in (0, 1)\) and \(n \in \{1, 2, \ldots\}\), then the conditional distribution of \(X\) given \(X \in \{1, 2, \ldots, n\}\) converges to the uniform distribution on \(\{1, 2, \ldots, n\}\) as \(p \to 0\).</statement>
-	<type>limiting conditional distribution</type>
-</relation>
-
-<relation id="geometric/exponential">
-	<from>geometric distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X_n\) has the geometric distribution on \(\{1, 2, \ldots\}\) with parmeter \(p_n \in (0, 1)\) for each \(n \in \{1, 2, \ldots\}\) and \(n p_n \to r \in (0, \infty)\) as \(n \to \infty\), then the distribution of \(\frac{X_n}{n}\) converges to the exponential distribution with rate parameter \(r\).</statement>
-	<type>limiting distribution</type>
-</relation>
-
-<relation id="Gumbel/Gumbel">
-	<from>Gumbel distribution</from>
-	<to>Gumbel distribution</to>
-	<statement>If \(X\) has the Gumbel distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), and \(a \in (-\infty, \infty)\), \(b \in (0, \infty)\), then \(a + b X\) has the Gumbel distribution with location parameter \(a + b \mu\) and scale parameter \(b \sigma\).</statement>
-	<type>location-scale transformation</type>
-</relation>
-
-<relation id="Gumbel/standard-uniform">
-	<from>Gumbel distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>If \(X\) has the Gumbel distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\) then \(\exp\left[-\exp\left(\frac{X - \mu}{\sigma}\right)\right]\) has the standard uniform distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="hypergeometric/hypergeometric">
-	<from>hypergeometric distribution</from>
-	<to>hypergeometric distribution</to>
-	<statement>If \(X\) has the hypergeometric distribution with population size \(m \in \{1, 2, \ldots\}\), sample size \(n \in \{1, 2, \ldots, m\}\) and type parameter \(r \in \{1, 2, \ldots, m\}\) then \(n - X\) has the hypergeometric distribution with population size \(m\), sample size \(n\), and type parameter \(m - r\).</statement>
-	<type>linear transformation</type>
-</relation>
-
-<relation id="hypergeometric/binomial">
-	<from>hypergeometric distribution</from>
-	<to>binomial distribution</to>
-	<statement>Let \(n \in \{1, 2, \ldots\}\) and \(r_m \in \{1, 2, \ldots, m\}\) for each \(m \in \{1, 2, \ldots\}\) with \(\frac{r_m}{m} \to p \in (0, 1)\) as \(m \to \infty\). The hypergeometric distribution with population size \(m\), sample size \(n\), and type parameter \(r_m\) converges to the binomial distribution with trial parameter \(n\) and success parameter \(p\) as \(m \to \infty\).</statement>
-	<type>limiting distribution</type>
-</relation>
-
-<relation id="hypergeometric/Bernoulli">
-	<from>hypergeometric distribution</from>
-	<to>Bernoulli distribution</to>
-	<statement>If \(X\) has the hypergeometric distribution with population size \(m \in \{1, 2, \ldots\}\), sample size \(n = 1\), and type parameter \(r \in \{1, 2, \ldots, m\}\), then \(X\) has the Bernoulli distribution with parameter \(\frac{r}{m}\).</statement>
-	<type>TBD</type>
-</relation>
-
-<relation id="hyperbolic-secant/standard-uniform">
-	<from>hyperbolic secant distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>If \(X\) has the hyperbolic secant distribution then \(\frac{2}{\pi} \arctan[\exp(\frac{\pi}{2} X)]\) has the standard uniform distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Irwin-Hall/Irwin-Hall">
-	<from>Irwin-Hall distribution</from>
-	<to>Irwin-Hall distribution</to>
-	<statement>If \(X\) has the Irwin-Hall distribution with parameter \(m \in \{1, 2, \ldots\}\), \(Y\) has the Irwin-Hall distribution with parameter \(n \in \{1, 2, \ldots\}\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Irwin-Hall distribution with parameter \(m + n\).</statement>
-	<type>convolution</type>
-</relation>
-
-<relation id="Irwin-Hall/standard-uniform">
-	<from>Irwin-Hall distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>The Irwin-Hall distribution with parameter \(1\) is the standard uniform distribution.</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="Irwin-Hall/triangular">
-	<from>Irwin-Hall distribution</from>
-	<to>triangular distribution</to>
-	<statement>The Irwin-Hall distribution with parmeter \(2\) is the triangular distribution with left endpoint \(0\), right endpoint \(1\) and midpoint \(\frac{1}{2}\).</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="inverted-beta/inverted-beta"> 
-	<from>inverted beta distribution</from>
-	<to>inverted beta distribution</to>
-	<statement>If \(X\) has the inverted beta distribution with shape parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(\frac{1}{X}\) has the inverted beta distribution with shape parameters \(\beta\) and \(\alpha\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="inverted-beta/F">
-	<from>inverted beta distribution</from>
-	<to>F-distribution</to>
-	<statement>If \(X\) has the inverted beta distribution with shape parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(\frac{\beta}{\alpha} X\) has the F-distribution with \(2 \alpha\) degrees of freedom in the numerator and \(2 \beta\) degrees of freedom in the denominator.</statement>
-	<type>linear transformation</type>
-</relation>
-
-<relation id="Laplace/exponential">
-	<from>Laplace distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\) then \(|X|\) has the exponential distribution with scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Levy/folded-normal">
-	<from>Levy distribution</from>
-	<to>folded normal distribution</to>
-	<statement>If \(X\) has the Levy distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), then \(\frac{1}{\sqrt{X - \mu}}\) has the folded normal distribution with location parameter \(0\) and scale parameter \(\frac{1}{\sigma}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Levy/gamma"> 
-	<from>Levy distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \(X\) has the Levy distribution with location parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\), then \(\frac{1}{X}\) has the gamma distribution with shape parameter \(\frac{1}{x}\) and scale parameter \(\frac{2}{\sigma}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="logarithmic/Poisson">
-	<from>logarithmic distribution</from>
-	<from>Poisson distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\) and \(N\) has the Poisson distribution with parameter \(\lambda \in (0, \infty)\), then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with parameters \(\lambda\) and \(p\).</statement>
-	<type>mixture</type>
-</relation>
-
-<relation id="logistic/standard-uniform"> %logistic to standard uniform
-	<from>logistic distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>If \(X\) has the logistic distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\) then \(\frac{1}{1 + \exp\left(\frac{X - \mu}{\sigma}\right)}\) has the standard uniform distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="logistic-skew/exponential">
-	<from>skew logistic distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the skew-logistic distribution with parameter \(\alpha \in (0, \infty)\), then \(Y = \ln(1+e^{-X})\) has the exponential distribution with rate parameter \(\alpha\).</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="log-normal/log-normal.1">
-	<from>log-normal distribution </from>
-	<to>log-normal distribution</to>
-	<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), \(Y\) has the log-normal distribuiton with location parameter \(\nu \in (-\infty, \infty)\) and scale parameter \(\tau \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X Y\) has the log-normal distirbution with location parameter \(\mu + \tau\) and scale parameter \(\sqrt{\sigma^2 + \tau^2}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="log-normal/log-normal.2">
-	<from>log-normal distribution</from>
-	<to>log-normal distribution</to>
-	<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parmaeter \(\sigma \in (0, \infty)\), and \(a \neq 0\) then \(a X\) has the log-normal distribution with location parameter \(a \mu\) and scale parameter \(|a| \sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="log-normal/log-normal.3">
-	<from>log-normal distribution</from>
-	<to>log-normal distribution</to>
-	<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(a \in (0, \infty)\), and \(\sigma \in (0, \infty)\), then \(a X\) has the log-normal distribution with location parameter \(\ln(a) + \mu\) and scale parameter \(\sigma\).</statement>
-	<type>linear transformation</type>
-</relation>
-
-<relation id="log-normal/normal">
-	<from>log-normal distribution</from>
-	<to>normal distribution</to>
-	<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), then \(\ln(X)\) has the normald distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Maxwell-Boltzmann/Maxwell-Boltzmann">
-	<from>Maxwell-Boltzmann distribution </from>
-	<to>Maxwell-Boltzmann distribution</to>
-	<statement>If \(X\) has the Maxwell-Boltzmann distribution with scale parameter \(a \in (0, \infty)\) and \(b \in (0, \infty)\), then \(b X\) has the Maxwell-Boltzmann distribution with scale parameter \(a b\).</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="Maxwell-Boltzman/chi">
-	<from>Maxwell-Boltzmann distribution</from>
-	<to>chi distribution</to>
-	<statement>If \(X\) has the Maxwell-Boltzmann distribution with scale parameter \(a \in (0, \infty)\), then \(\frac{X}{a}\) has the chi distribution with 3 degrees of freedom.</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="negative-binomial/negative-binomial">
-	<from>negative binomial distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>If \(X\) has the negative binomial distribution with stopping parameter \(r \in (0, \infty)\) and success parameter \(p \in (0, 1)\), \(Y\) has the negative binomial distribution with stopping parameter \(s \in (0, \infty)\) and success parameter \(p\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the negative binomial distribution with stopping parameter \(r + s\) and success parameter \(p\).</statement>
-	<type>convolution</type>
-</relation>
-
-<relation id="negative-binomial/geometric">
-	<from>negative binomial distribution</from>
-	<to>geometric distribution</to>
-	<statement>The negative binomial distribution with stopping parameter \(1\) and success parameter \(p \in (0, 1)\) is the geometric distribution with success parameter \(p\).</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="negative-binomial/Poisson">
-	<from>negative binomial distribution</from>
-	<to>Poisson distribution</to>
-	<statement>If \(p_r \in (0, 1)\) for each \(r \in (0, \infty)\) and \(r \frac{p}{1-p} \to \lambda \in (0, \infty)\) as \(r \to \infty\), then the negative binomial distribution with stopping parameter \(r\) and success parameter \(p_r\) converges to the Poisson distribution with parameter \(\lambda\).</statement>
-	<type>limiting distribution with respect to parameter</type>
-</relation>
-
-<relation id="negative-binomial/standard-normal">
-	<from>negative binomial distribution</from>
-	<to>standard normal distribution</to>
-	<statement>If \(X\) has the negative binomial distribution with stopping parameter \(r \in (0, \infty)\) and success parameter \(p \in (0, \infty)\), then the distribution of \(\frac{p X - r (1 - p)}{\sqrt{r (1 - p}}\) converges to the standard normal distribution at \(r \to \infty\).</statement>
-	<type>central limit theorem</type>
-</relation>
-
-<relation id="negative-binomial/binomial">
-	<from>negative binomial distribution</from>
-	<to>binomial distribution</to>
-	<statement> For \(k \in \{1, 2, \ldots\}\), let \(Z_k\) denote the number of failures before the \(k\)th success in a sequence of Bernoulli trials with success parameter \(p \in (0, 1)\), so that \(Z_k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\). Then for \(n \in \{1, 2, \ldots\}\), \(Y_n = \max\{k: k + Z_k \leq n\}\) has the binomial distribution with trial parameter \(n\) and success parameter \(p\).</statement>
-	<type>inverse stochastic process</type>
-</relation>
-
-<relation id="normal/log-normal">
-	<from>normal distribution</from>
-	<to>log-normal distribution</to>
-	<statement>If \(X\) has a normal distribution with mean \(\mu \in (-\infty, \infty)\) and variance \(\sigma^2\), then \(Y = e^X\) has the log-normal distribution with parameters \(\mu\) and \(\sigma^2\).</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="normal/folded-normal">
-	<from>normal distribution</from>
-	<to>folded normal Distribution</to>
-	<statement>If \(X\) is has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(|X|\) has the folded normal distribution with parameters \(\mu\) and \(\sigma\).</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="normal/half-normal">
-	<from>normal distribution</from>
-	<to>half normal distribution</to>
-	<statement>If \(X\) is has the normal distribution with mean \(\mu\) = 0 and standard deviation \(\sigma \in (0, \infty)\), then \(|X|\) has a half-normal distribution with parameter \(\sigma\).</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="normal/noncentral-chi-square">
-	<from>normal distribution</from>
-	<to>non-central chi-square distribution</to>
-	<statement>If \(X\)  has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then variable \(Y = \frac{X^2}{\sigma^2}\) has a non-central chi-square distribution with one degree of freedom and non-centrality parameter \(\frac{\mu^2}{\sigma^2}\).</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="normal/truncated-normal">
-	<from>normal distribution</from>
-	<to>truncated normal distribution</to>
-	<statement>If \(X\) is has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), and if \(a, b \in [-\infty, \infty]\) with \(a \lt b\), then the conditional distribution of \(X\) given  \(X \in (a,b)\) is the truncated normal distribution with location parameter \(\mu\), scale parameter \(\sigma\), minimum value \(a\), and maximum value \(b\).</statement>
-	<type>conditioning</type>
-</relation>
-
-<relation id="normal/Levy">
-	<from>normal distribution</from>
-	<to>Levy distribution</to>
-	<statement>If \(X\) has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(\frac{1}{(X - \mu)^2}\) has the Levy distribution with location parameter 0  and scale parameter \(\frac{1}{\sigma^2}\).</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="normal/Rice"> 
-	<from>normal distribution</from>
-	<to>Rice distribution</to>
-	<statement>Let \(\nu \in [0, \infty)\), \(\theta \in (-\infty, \infty)\) and \(\sigma \in (0, \infty)\). If \(X\) has the normal distribution with mean \(\nu \cos(\theta)\) and standard deviation \(\sigma\), \(Y\) has the normal distribution with mean \(\nu \sin(\theta)\) and standard deviation \(\sigma\), and \(X\) and \(Y\) are independent, then \(\sqrt{X^2 + Y^2}\) has the Rice distribution with distance parameter \(\nu\) and scale parameter \(\sigma\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="normal/standard-normal"> 
-	<from>normal distribution</from>
-	<to>standard normal</to>
-	<statement>If \(X\) has the normal distribution with mean \(\mu = 0\) and standard deviation \(\sigma = 1\), then \(X\) has a standard normal distribution.</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="standard-normal/chi-square">
-	<from>standard normal distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X_1, X_2, \ldots, X_n\) are independent standard normal random variables, then \(\sum_{i=1}^n X_i^2\) has the chi-square distribution with \(n\) degrees of freedom.</statement>
-	<type>convolution</type>
-</relation>
-
-<relation id="normal/student">
-	<from>normal distribution</from>
-	<to>Student t distribution</to>
-	<statement>If \(X_1, X_2, \ldots, X_n\) are independent normally distributed random variables with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(T = \frac{\overline{X} - \mu}{S / \sqrt{n}}\) has the Student's t distribution with \(n-1\) degrees of freedom.</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="normal/Maxwell-Boltzmann">
-	<from>normal distribution </from>
-	<to>Maxwell-Boltzmann distribution</to>
-	<statement>If \(X_1\), \(X_2\), and \(X_3\) are independent random variables, each with the normal distribuiton with mean \(0\) and standard deviation \(a \in (0, \infty)\), then \(\sqrt{X_1^2 + X_2^2 + X_3^2}\) has the Maxwell-Boltzmann distribution with parameter \(a\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="standard-normal/standard-Cauchy">
-	<from>standard normal distribution</from>
-	<to>standard Cauchy distribution</to>
-	<statement>If \(X\) and \(Y\) are independent variables, each with the standard normal distribution, then \(\frac{X}{Y}\) has the standard Cauchy distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Pareto/Exponential">
-	<from>Pareto distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(\ln\left(\frac{X}{b}\right)\) has the exponential distribution with rate parameter \(a\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Pareto/Pareto">
-	<from>Pareto distribution</from>
-	<to>Pareto distribution</to>
-	<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), and \(c \in (0, \infty)\) then \(c X\) has the Pareto distribution with shape parameter \(a\) and scale parameter \(b c\).</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="Pareto/beta">
-	<from>Pareto distribution</from>
-	<to>beta distribution</to>
-	<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) then \(\frac{b}{X}\) has the beta distribution with left shape parameter \(a\) and right shape parameter \(1\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Pareto/standard-uniform">
-	<from>Pareto distribution</from>
-	<to>standard uniform distribution</to>
-	<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(1 - \left(\frac{b}{X}\right)^a\) has the standard uniform distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Poisson/Poisson">
-	<from>Poisson distribution</from>
-	<to>Poisson distribution</to>
-	<statement>If \(X\) has the Poisson distribution with parameter \(\alpha \in (0, \infty)\), \(Y\) has the Poisson distribution with parameter \(\beta \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Poisson distribution with parameter \(\alpha + \beta\).</statement>
-	<type>convolution</type>
-</relation>
-
-<relation id="Poisson/standard-normal">
-	<from>Poisson distribution</from>
-	<to>standard normal distribution</to>
-	<statement>If \(X\) has the Poisson distribution with parameter \(\alpha \in (0, \infty)\), then the distribution of \(\frac{X - \alpha}{\sqrt{\alpha}}\) converges to the standard normal distribution as \(\alpha \to \infty\).</statement>
-	<type>central limit theorem</type>
-</relation>
-
-<relation id="Poisson/binomial"> 
-	<from>Poisson distribution</from>
-	<to>binomial distribution</to>
-	<statement>If \(\{N_t: t \ge 0\}\) is a Poisson process and if \(s \lt t\), then the conditional distribution of \(N_s\) given \(N_t = n\) is binomial with parameters \(n\) and \(\frac{s}{t}\).</statement>
-	<type>conditioning</type>
-</relation>
-
-<relation id="Poisson/gamma"> 
-	<from>Poisson distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \(\{N_t: t \ge 0\}\) is a Poisson process with rate parameter \(\alpha \in (0, \infty)\) and \(n \in \{1, 2, \ldots\}\) then \(T = \min\{t \ge 0: N_t = n\}\) has the gamma distsribution with shape parameter \(k\) and scale parameter \(\frac{1}{\alpha}\).</statement>
-	<type>stochastic process</type>
-</relation>
-
-<relation id="Poisson/logarithmic/negative-binomial">
-	<from>Poisson distribution</from>
-	<from>logarithmic distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>If \(\bs{X} =(X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\), \(N\) has the Poisson distribution with parameter \(-r \ln(1 - p)\) where \(r \in (0, \infty)\), and \(N\) and \(\bs{X}\) are independent, then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with stopping parameter \(r\) and sucess parameter \(p\).</statement>
-	<type>compound Poisson transformation</type>
-</relation>
-
-<relation id="Poisson/gamma/negative-binomial"> 
-	<from>Poisson distribution</from>
-	<from>gamma distribution</from>
-	<to>negative binomial distribution</to>
-	<statement>If \(\Lambda\) has the gamma distribution with shape parameter \(r \in (0, \infty)\) and scale parameter \(\frac{p}{1-p}\) where \(p \in (0, 1)\), and the conditional distribution of \(X\) given \(\Lambda = \lambda \in (0, \infty)\) is Poisson with parameter \(\lambda\), then \(X\) has the negative binomial distribution with stopping parameter \(r\) and success parameter \(p\).</statement>
-	<type>mixture</type>
-</relation>
-
-<relation id="Rademacher/Bernoulli">
-	<from>Rademacher distribution</from>
-	<to>Bernoulli distribution</to>
-	<statement>If \(X\) has the Rademacher distribution then \(\frac{X+1}{2}\) has the Bernoulli distribution with success parameter \(\frac{1}{2}\).</statement>
-	<type>linear transformation</type>
-</relation>
-
-<relation id="Rayleigh/chi-square">
-	<from>Rayleigh distribution</from>
-	<to>chi-square distribution</to>
-	<statement>If \(X\) has the Rayleigh distribution with scale parameter \(1\), then \(X^2\) has the chi-square distribution with 2 degrees of freedom.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Rayleigh/Rayleigh">
-	<from>Rayleigh distribution</from>
-	<to>Rayleigh distribution</to>
-	<statement>If \(X\) has the Rayleigh distribution with scale parameter \(\sigma \in (0, \infty)\) and \(b \in (0, \infty)\), then \(b X\) has the Rayleigh distribution with scale parameter \(b \sigma\).</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="Rayleigh/gamma">
-	<from>Rayleigh distribution</from>
-	<to>gamma distribution</to>
-	<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the Rayleigh distribution with scale parameter \(\sigma \in (0, \infty)\), then \(\sum_{i=1}^n X_i^2\) has the chi-square distribution with shape parameter \(n\) and scale parameter \(2 \sigma^2\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Rayleigh/standard-uniform">
-	<from>Rayleigh distribution</from>
-	<to>Standard uniform distribution</to>
-	<statement>If \(X\) has the Rayleigh distribution with shape parameter \(\sigma \in (0, \infty)\), then \(1 - \exp\left(-\frac{X^2}{2 \sigma^2}\right)\) has the standard uniform distribution.</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="Rice/Rayleigh">
-	<from>Rice distribution</from>
-	<to>Rayleigh distribution</to>
-	<statement>The Rice distribution with distance parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\) is the Rayleigh distribution with scale parameter \(\sigma\)</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="Rice/noncentral-chi-square">
-	<from>Rice distribution</from>
-	<to>noncentral chi-square distribution</to>
-	<statement>If \(X\) has the Rice distribution with distance parameter \(\nu \in [0, \infty)\) and scale parameter \(1\), then \(X^2\) has the noncentral chi-square distribution with 2 degrees of freedom and noncentrality parameter \(\nu^2\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="semicircle/standard-uniform">
-	<from>semicircle distribution</from>
-	<to>standard uniform distribution </to>
-	<statement>If \(X\) has the semicircle distribution with radius \(r \in (0, \infty)\) then \(\frac{1}{2} + \frac{1}{\pi r^2} X \sqrt{r^2 - X^2} + \frac{1}{\pi} \arcsin\left(\frac{X}{r}\right)\) has the standard uniform distribution</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="stable/Cauchy">
-	<from>stable distribution</from>
-	<to>Cauchy distribution</to>
-	<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 1\), skewness parameter \(\beta = 0\), location parameter \(\mu \in (-\infty, \infty)\), and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a Cauchy distribution with scale parameter \(\gamma\) and location parameter \(\mu\).</statement>
-	<type>special case.</type>
-</relation>
-
-<relation id="stable/normal">
-	<from>stable Distribution</from>
-	<to>normal Distribution</to>
-	<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 2\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a normal distribution with mean \(\mu\) and variance \(\sigma^2 = 2 \gamma^2\).</statement>
-	<type>special case.</type>
-</relation>
-
-<relation id="stable/Levy"> 
-	<from>stable Distribution</from>
-	<to>Levy Distribution</to>
-	<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = \frac{1}{2}\), skewness parameter \(\beta=1\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a Levy distribution with scale parameter \(\gamma\) and shift parameter \(\mu\).</statement>
-	<type>special case.</type>
-</relation>
-
-<relation id="stable/Landau">
-	<from>stable Distribution</from>
-	<to>Landau Distribution</to>
-	<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 1\), skewness parameter \(\beta = 1\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\) then \(X\) has a Landau distribution with scale parameter \(\gamma\) and location parameter \(\mu\).</statement>
-	<type>special case</type>	
-</relation>
-
-<relation id="r"> %Student's t to F
-	<from>Student's t-distribution</from>
-	<to>F-distribution</to>
-	<statement>if \(X\) has the Student's t-distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(Y = X^2\) has the F distribuiton with \(1\) degree of freedom in the numerator and \(n\) degrees of freedom in the denominator.</statement>
-	<type>transformation</type>
-</relation>
-
-<relation id="student/Cauchy">
-	<from>Student t-distribution</from>
-	<to>Cauchy distribution</to>
-	<statement>The Student's t-distribution with 1 degree of freedom is the standard Cauchy distribuiton.</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="U-quadratic/standard-uniform">
-	<from>U-quadratic distribution</from>
-	<to>standard uniform distribuiton</to>
-	<statement>If \(X\) has the U-quadratic distribution with left endpoint \(a \in (-\infty, \infty)\) and right endpoint \(b \in (a, \infty)\) then \(\frac{\alpha}{3} [(X - \beta)^3 + (\beta - \alpha)^3]\) has the standard uniform distribution, where \(\alpha = \frac{12}{(b - a)^3}\) and \(\beta = \frac{a + b}{2}\).</statement>
-	<type>nonlinear transformation</type>
-</relation>
-
-<relation id="von-Mises/uniform">
-	<from>von Mises distribution</from>
-	<to>continuous uniform distribution</to>
-	<statement>The von Mises distribution with location parameter \(0\) and shape parameter \(0\) is the uniform distribution on the interval \([-\pi, \pi]\).</statement>
-	<type>special case</type>
-</relation>
-
-<relation id="Wald/Wald.1">
-	<from>Wald distribution</from>
-	<to>Wald distribution</to>
-	<statement>If \(X\) has the Wald distribution with mean \(\mu \in (0, \infty)\) and shape parameter \(\lambda \in (0, \infty)\) and \(t \in (0, \infty)\), then \(t X\) has the Wald distribution with mean \(t \mu\) and shape parameter \(t \lambda\)</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="Wald/Wald.2"> 
-	<from>Wald distribution</from>
-	<to>Wald distribution</to>
-	<statement>If \(X\) has the Wald distribution with mean \(\mu a\) and shape paramter \(\lambda a^2\) where \(\mu \in (0, \infty)\), \(\lambda \in (0, \infty)\), and \(a \in (0, \infty)\), and if \(Y\) has the Wald distribution with mean \(\mu b\) and shape parameter \(\lambda b\) where \(b \in (0, \infty)\), and if \(X\) and \(Y\) are independent, then \(X + Y\) has the Wald distribution with mean \(\mu(a + b)\) and shape paramter \(\lambda(a^2 + b^2)\).</statement>
-	<type>convolution</type>
-</relation>
-
-<relation id="Weibull/Weibull">
-	<from>Weibull distribution</from>
-	<to>Weibull distribution</to>
-	<statement>If \(X\) has the Weibull distribution with shape parameter \(k \in (0, \infty)\), scale parameter \(b \in (0, \infty)\), and \(c \in (0, \infty)\), then \(Y = c X\) has the Weibull distribution with shape parameter \(k\) and scale parameter \(b c\).</statement>
-	<type>scale transformation</type>
-</relation>
-
-<relation id="Weibull/exponential">
-	<from>Weibull distribution</from>
-	<to>exponential distribution</to>
-	<statement>If \(X\) has the Weibull distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(Y = \left(\frac{X}{b}\right)^k\) has the standard exponential distribution.</statement>
-	<type>transformation</type>
-</relation>
+	<relation id="gamma/Maxwell-Boltzmann"> 
+		<from>gamma distribution</from>
+		<to>Maxwell-Boltzmann distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(k = \frac{3}{2}\) and scale parameter \(\theta = 2 a^2\) where \(a \in (0, \infty)\), then \(\sqrt{X}\) has the Maxwell-Boltzmann distribution with parameter \(a\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="gamma/standard-normal">
+		<from>gamma distribution</from>
+		<to>standard normal distribution</to>
+		<statement>If \(X_k\) has the gamma distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) then the distribution of \(\frac{X - k b}{\sqrt{k} b}\) converges to the standard normal distribution as \(k \to \infty\).</statement>
+		<type>central limit theorem</type>
+	</relation>
+
+	<relation id="gamma/beta"> 
+		<from>gamma distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(\frac{X}{X + Y}\) has the beta distribution with left parameter \(\alpha\) and right parameter \(\beta\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="gamma/inverted-beta">
+		<from>gamma distribution</from>
+		<to>inverted beta distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(\alpha \in (0, \infty)\) and scale parameter \(\lambda \in (0, \infty)\), \(Y\) has the gamma distribution with shape parameter \(\beta \in (0, \infty)\) and scale parameter \(\lambda\), and \(X\) and \(Y\) are independent, then \(\frac{X}{Y}\) has the inverted beta distribution with shape parameters \(\alpha\) and \(\beta\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="gamma/Levy">
+		<from>gamma distribution</from>
+		<to>Levy distribution</to>
+		<statement>If \(X\) has the gamma distribution with shape parameter \(\frac{1}{x}\) and scale parameter \(\sigma \in (0, \infty)\) then \(\frac{1}{X}\) has the Levy distribution with location parameter \(0\) and scale parameter \(\frac{2}{\sigma}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="geometric/geometric">
+		<from>geometric distribution</from>
+		<to>geometric distribution</to>
+		<statement>If \(X\) has the geometric distributin on \(\{0, 1, \ldots\}\) then \(X + 1\) has the geometric distribution on \(\{1, 2 \ldots\}\).</statement>
+		<type>linear transformation</type>
+	</relation>
+
+	<relation id="geometric/discrete-uniform">
+		<from>geometric distribution</from>
+		<to>discrete uniform distribution</to>
+		<statement>If \(X\) has the geometric distribution on \(\{1, 2, \ldots\}\) with parameter \(p \in (0, 1)\) and \(n \in \{1, 2, \ldots\}\), then the conditional distribution of \(X\) given \(X \in \{1, 2, \ldots, n\}\) converges to the uniform distribution on \(\{1, 2, \ldots, n\}\) as \(p \to 0\).</statement>
+		<type>limiting conditional distribution</type>
+	</relation>
+
+	<relation id="geometric/exponential">
+		<from>geometric distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X_n\) has the geometric distribution on \(\{1, 2, \ldots\}\) with parmeter \(p_n \in (0, 1)\) for each \(n \in \{1, 2, \ldots\}\) and \(n p_n \to r \in (0, \infty)\) as \(n \to \infty\), then the distribution of \(\frac{X_n}{n}\) converges to the exponential distribution with rate parameter \(r\).</statement>
+		<type>limiting distribution</type>
+	</relation>
+
+	<relation id="Gumbel/Gumbel">
+		<from>Gumbel distribution</from>
+		<to>Gumbel distribution</to>
+		<statement>If \(X\) has the Gumbel distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), and \(a \in (-\infty, \infty)\), \(b \in (0, \infty)\), then \(a + b X\) has the Gumbel distribution with location parameter \(a + b \mu\) and scale parameter \(b \sigma\).</statement>
+		<type>location-scale transformation</type>
+	</relation>
+
+	<relation id="Gumbel/standard-uniform">
+		<from>Gumbel distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>If \(X\) has the Gumbel distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\) then \(\exp\left[-\exp\left(\frac{X - \mu}{\sigma}\right)\right]\) has the standard uniform distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="hypergeometric/hypergeometric">
+		<from>hypergeometric distribution</from>
+		<to>hypergeometric distribution</to>
+		<statement>If \(X\) has the hypergeometric distribution with population size \(m \in \{1, 2, \ldots\}\), sample size \(n \in \{1, 2, \ldots, m\}\) and type parameter \(r \in \{1, 2, \ldots, m\}\) then \(n - X\) has the hypergeometric distribution with population size \(m\), sample size \(n\), and type parameter \(m - r\).</statement>
+		<type>linear transformation</type>
+	</relation>
+
+	<relation id="hypergeometric/binomial">
+		<from>hypergeometric distribution</from>
+		<to>binomial distribution</to>
+		<statement>Let \(n \in \{1, 2, \ldots\}\) and \(r_m \in \{1, 2, \ldots, m\}\) for each \(m \in \{1, 2, \ldots\}\) with \(\frac{r_m}{m} \to p \in (0, 1)\) as \(m \to \infty\). The hypergeometric distribution with population size \(m\), sample size \(n\), and type parameter \(r_m\) converges to the binomial distribution with trial parameter \(n\) and success parameter \(p\) as \(m \to \infty\).</statement>
+		<type>limiting distribution</type>
+	</relation>
+
+	<relation id="hypergeometric/Bernoulli">
+		<from>hypergeometric distribution</from>
+		<to>Bernoulli distribution</to>
+		<statement>If \(X\) has the hypergeometric distribution with population size \(m \in \{1, 2, \ldots\}\), sample size \(n = 1\), and type parameter \(r \in \{1, 2, \ldots, m\}\), then \(X\) has the Bernoulli distribution with parameter \(\frac{r}{m}\).</statement>
+		<type>TBD</type>
+	</relation>
+
+	<relation id="hyperbolic-secant/standard-uniform">
+		<from>hyperbolic secant distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>If \(X\) has the hyperbolic secant distribution then \(\frac{2}{\pi} \arctan[\exp(\frac{\pi}{2} X)]\) has the standard uniform distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Irwin-Hall/Irwin-Hall">
+		<from>Irwin-Hall distribution</from>
+		<to>Irwin-Hall distribution</to>
+		<statement>If \(X\) has the Irwin-Hall distribution with parameter \(m \in \{1, 2, \ldots\}\), \(Y\) has the Irwin-Hall distribution with parameter \(n \in \{1, 2, \ldots\}\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Irwin-Hall distribution with parameter \(m + n\).</statement>
+		<type>convolution</type>
+	</relation>
+
+	<relation id="Irwin-Hall/standard-uniform">
+		<from>Irwin-Hall distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>The Irwin-Hall distribution with parameter \(1\) is the standard uniform distribution.</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="Irwin-Hall/triangular">
+		<from>Irwin-Hall distribution</from>
+		<to>triangular distribution</to>
+		<statement>The Irwin-Hall distribution with parmeter \(2\) is the triangular distribution with left endpoint \(0\), right endpoint \(1\) and midpoint \(\frac{1}{2}\).</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="inverted-beta/inverted-beta"> 
+		<from>inverted beta distribution</from>
+		<to>inverted beta distribution</to>
+		<statement>If \(X\) has the inverted beta distribution with shape parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(\frac{1}{X}\) has the inverted beta distribution with shape parameters \(\beta\) and \(\alpha\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="inverted-beta/F">
+		<from>inverted beta distribution</from>
+		<to>F-distribution</to>
+		<statement>If \(X\) has the inverted beta distribution with shape parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(\frac{\beta}{\alpha} X\) has the F-distribution with \(2 \alpha\) degrees of freedom in the numerator and \(2 \beta\) degrees of freedom in the denominator.</statement>
+		<type>linear transformation</type>
+	</relation>
+
+	<relation id="Laplace/exponential">
+		<from>Laplace distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the Laplace distribution with location parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\) then \(|X|\) has the exponential distribution with scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Levy/folded-normal">
+		<from>Levy distribution</from>
+		<to>folded normal distribution</to>
+		<statement>If \(X\) has the Levy distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), then \(\frac{1}{\sqrt{X - \mu}}\) has the folded normal distribution with location parameter \(0\) and scale parameter \(\frac{1}{\sigma}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Levy/gamma"> 
+		<from>Levy distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \(X\) has the Levy distribution with location parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\), then \(\frac{1}{X}\) has the gamma distribution with shape parameter \(\frac{1}{x}\) and scale parameter \(\frac{2}{\sigma}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="logarithmic/Poisson">
+		<from>logarithmic distribution</from>
+		<from>Poisson distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>If \((X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\) and \(N\) has the Poisson distribution with parameter \(\lambda \in (0, \infty)\), then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with parameters \(\lambda\) and \(p\).</statement>
+		<type>mixture</type>
+	</relation>
+
+	<relation id="logistic/standard-uniform"> %logistic to standard uniform
+		<from>logistic distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>If \(X\) has the logistic distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\) then \(\frac{1}{1 + \exp\left(\frac{X - \mu}{\sigma}\right)}\) has the standard uniform distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="logistic-skew/exponential">
+		<from>skew logistic distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the skew-logistic distribution with parameter \(\alpha \in (0, \infty)\), then \(Y = \ln(1+e^{-X})\) has the exponential distribution with rate parameter \(\alpha\).</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="log-normal/log-normal.1">
+		<from>log-normal distribution </from>
+		<to>log-normal distribution</to>
+		<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), \(Y\) has the log-normal distribuiton with location parameter \(\nu \in (-\infty, \infty)\) and scale parameter \(\tau \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X Y\) has the log-normal distirbution with location parameter \(\mu + \tau\) and scale parameter \(\sqrt{\sigma^2 + \tau^2}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="log-normal/log-normal.2">
+		<from>log-normal distribution</from>
+		<to>log-normal distribution</to>
+		<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parmaeter \(\sigma \in (0, \infty)\), and \(a \neq 0\) then \(a X\) has the log-normal distribution with location parameter \(a \mu\) and scale parameter \(|a| \sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="log-normal/log-normal.3">
+		<from>log-normal distribution</from>
+		<to>log-normal distribution</to>
+		<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(a \in (0, \infty)\), and \(\sigma \in (0, \infty)\), then \(a X\) has the log-normal distribution with location parameter \(\ln(a) + \mu\) and scale parameter \(\sigma\).</statement>
+		<type>linear transformation</type>
+	</relation>
+
+	<relation id="log-normal/normal">
+		<from>log-normal distribution</from>
+		<to>normal distribution</to>
+		<statement>If \(X\) has the log-normal distribution with location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\sigma \in (0, \infty)\), then \(\ln(X)\) has the normald distribution with location parameter \(\mu\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Maxwell-Boltzmann/Maxwell-Boltzmann">
+		<from>Maxwell-Boltzmann distribution </from>
+		<to>Maxwell-Boltzmann distribution</to>
+		<statement>If \(X\) has the Maxwell-Boltzmann distribution with scale parameter \(a \in (0, \infty)\) and \(b \in (0, \infty)\), then \(b X\) has the Maxwell-Boltzmann distribution with scale parameter \(a b\).</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="Maxwell-Boltzman/chi">
+		<from>Maxwell-Boltzmann distribution</from>
+		<to>chi distribution</to>
+		<statement>If \(X\) has the Maxwell-Boltzmann distribution with scale parameter \(a \in (0, \infty)\), then \(\frac{X}{a}\) has the chi distribution with 3 degrees of freedom.</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="negative-binomial/negative-binomial">
+		<from>negative binomial distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>If \(X\) has the negative binomial distribution with stopping parameter \(r \in (0, \infty)\) and success parameter \(p \in (0, 1)\), \(Y\) has the negative binomial distribution with stopping parameter \(s \in (0, \infty)\) and success parameter \(p\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the negative binomial distribution with stopping parameter \(r + s\) and success parameter \(p\).</statement>
+		<type>convolution</type>
+	</relation>
+
+	<relation id="negative-binomial/geometric">
+		<from>negative binomial distribution</from>
+		<to>geometric distribution</to>
+		<statement>The negative binomial distribution with stopping parameter \(1\) and success parameter \(p \in (0, 1)\) is the geometric distribution with success parameter \(p\).</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="negative-binomial/Poisson">
+		<from>negative binomial distribution</from>
+		<to>Poisson distribution</to>
+		<statement>If \(p_r \in (0, 1)\) for each \(r \in (0, \infty)\) and \(r \frac{p}{1-p} \to \lambda \in (0, \infty)\) as \(r \to \infty\), then the negative binomial distribution with stopping parameter \(r\) and success parameter \(p_r\) converges to the Poisson distribution with parameter \(\lambda\).</statement>
+		<type>limiting distribution with respect to parameter</type>
+	</relation>
+
+	<relation id="negative-binomial/standard-normal">
+		<from>negative binomial distribution</from>
+		<to>standard normal distribution</to>
+		<statement>If \(X\) has the negative binomial distribution with stopping parameter \(r \in (0, \infty)\) and success parameter \(p \in (0, \infty)\), then the distribution of \(\frac{p X - r (1 - p)}{\sqrt{r (1 - p}}\) converges to the standard normal distribution at \(r \to \infty\).</statement>
+		<type>central limit theorem</type>
+	</relation>
+
+	<relation id="negative-binomial/binomial">
+		<from>negative binomial distribution</from>
+		<to>binomial distribution</to>
+		<statement> For \(k \in \{1, 2, \ldots\}\), let \(Z_k\) denote the number of failures before the \(k\)th success in a sequence of Bernoulli trials with success parameter \(p \in (0, 1)\), so that \(Z_k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\). Then for \(n \in \{1, 2, \ldots\}\), \(Y_n = \max\{k: k + Z_k \leq n\}\) has the binomial distribution with trial parameter \(n\) and success parameter \(p\).</statement>
+		<type>inverse stochastic process</type>
+	</relation>
+
+	<relation id="normal/log-normal">
+		<from>normal distribution</from>
+		<to>log-normal distribution</to>
+		<statement>If \(X\) has a normal distribution with mean \(\mu \in (-\infty, \infty)\) and variance \(\sigma^2\), then \(Y = e^X\) has the log-normal distribution with parameters \(\mu\) and \(\sigma^2\).</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="normal/folded-normal">
+		<from>normal distribution</from>
+		<to>folded normal Distribution</to>
+		<statement>If \(X\) is has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(|X|\) has the folded normal distribution with parameters \(\mu\) and \(\sigma\).</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="normal/half-normal">
+		<from>normal distribution</from>
+		<to>half normal distribution</to>
+		<statement>If \(X\) is has the normal distribution with mean \(\mu\) = 0 and standard deviation \(\sigma \in (0, \infty)\), then \(|X|\) has a half-normal distribution with parameter \(\sigma\).</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="normal/noncentral-chi-square">
+		<from>normal distribution</from>
+		<to>non-central chi-square distribution</to>
+		<statement>If \(X\)  has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then variable \(Y = \frac{X^2}{\sigma^2}\) has a non-central chi-square distribution with one degree of freedom and non-centrality parameter \(\frac{\mu^2}{\sigma^2}\).</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="normal/truncated-normal">
+		<from>normal distribution</from>
+		<to>truncated normal distribution</to>
+		<statement>If \(X\) is has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), and if \(a, b \in [-\infty, \infty]\) with \(a \lt b\), then the conditional distribution of \(X\) given  \(X \in (a,b)\) is the truncated normal distribution with location parameter \(\mu\), scale parameter \(\sigma\), minimum value \(a\), and maximum value \(b\).</statement>
+		<type>conditioning</type>
+	</relation>
+
+	<relation id="normal/Levy">
+		<from>normal distribution</from>
+		<to>Levy distribution</to>
+		<statement>If \(X\) has the normal distribution with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(\frac{1}{(X - \mu)^2}\) has the Levy distribution with location parameter 0  and scale parameter \(\frac{1}{\sigma^2}\).</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="normal/Rice"> 
+		<from>normal distribution</from>
+		<to>Rice distribution</to>
+		<statement>Let \(\nu \in [0, \infty)\), \(\theta \in (-\infty, \infty)\) and \(\sigma \in (0, \infty)\). If \(X\) has the normal distribution with mean \(\nu \cos(\theta)\) and standard deviation \(\sigma\), \(Y\) has the normal distribution with mean \(\nu \sin(\theta)\) and standard deviation \(\sigma\), and \(X\) and \(Y\) are independent, then \(\sqrt{X^2 + Y^2}\) has the Rice distribution with distance parameter \(\nu\) and scale parameter \(\sigma\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="normal/standard-normal"> 
+		<from>normal distribution</from>
+		<to>standard normal</to>
+		<statement>If \(X\) has the normal distribution with mean \(\mu = 0\) and standard deviation \(\sigma = 1\), then \(X\) has a standard normal distribution.</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="standard-normal/chi-square">
+		<from>standard normal distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X_1, X_2, \ldots, X_n\) are independent standard normal random variables, then \(\sum_{i=1}^n X_i^2\) has the chi-square distribution with \(n\) degrees of freedom.</statement>
+		<type>convolution</type>
+	</relation>
+
+	<relation id="normal/student">
+		<from>normal distribution</from>
+		<to>Student t distribution</to>
+		<statement>If \(X_1, X_2, \ldots, X_n\) are independent normally distributed random variables with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(T = \frac{\overline{X} - \mu}{S / \sqrt{n}}\) has the Student's t distribution with \(n-1\) degrees of freedom.</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="normal/Maxwell-Boltzmann">
+		<from>normal distribution </from>
+		<to>Maxwell-Boltzmann distribution</to>
+		<statement>If \(X_1\), \(X_2\), and \(X_3\) are independent random variables, each with the normal distribuiton with mean \(0\) and standard deviation \(a \in (0, \infty)\), then \(\sqrt{X_1^2 + X_2^2 + X_3^2}\) has the Maxwell-Boltzmann distribution with parameter \(a\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="standard-normal/standard-Cauchy">
+		<from>standard normal distribution</from>
+		<to>standard Cauchy distribution</to>
+		<statement>If \(X\) and \(Y\) are independent variables, each with the standard normal distribution, then \(\frac{X}{Y}\) has the standard Cauchy distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Pareto/Exponential">
+		<from>Pareto distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(\ln\left(\frac{X}{b}\right)\) has the exponential distribution with rate parameter \(a\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Pareto/Pareto">
+		<from>Pareto distribution</from>
+		<to>Pareto distribution</to>
+		<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), and \(c \in (0, \infty)\) then \(c X\) has the Pareto distribution with shape parameter \(a\) and scale parameter \(b c\).</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="Pareto/beta">
+		<from>Pareto distribution</from>
+		<to>beta distribution</to>
+		<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) then \(\frac{b}{X}\) has the beta distribution with left shape parameter \(a\) and right shape parameter \(1\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Pareto/standard-uniform">
+		<from>Pareto distribution</from>
+		<to>standard uniform distribution</to>
+		<statement>If \(X\) has the Pareto distribution with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(1 - \left(\frac{b}{X}\right)^a\) has the standard uniform distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Poisson/Poisson">
+		<from>Poisson distribution</from>
+		<to>Poisson distribution</to>
+		<statement>If \(X\) has the Poisson distribution with parameter \(\alpha \in (0, \infty)\), \(Y\) has the Poisson distribution with parameter \(\beta \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Poisson distribution with parameter \(\alpha + \beta\).</statement>
+		<type>convolution</type>
+	</relation>
+
+	<relation id="Poisson/standard-normal">
+		<from>Poisson distribution</from>
+		<to>standard normal distribution</to>
+		<statement>If \(X\) has the Poisson distribution with parameter \(\alpha \in (0, \infty)\), then the distribution of \(\frac{X - \alpha}{\sqrt{\alpha}}\) converges to the standard normal distribution as \(\alpha \to \infty\).</statement>
+		<type>central limit theorem</type>
+	</relation>
+
+	<relation id="Poisson/binomial"> 
+		<from>Poisson distribution</from>
+		<to>binomial distribution</to>
+		<statement>If \(\{N_t: t \ge 0\}\) is a Poisson process and if \(s \lt t\), then the conditional distribution of \(N_s\) given \(N_t = n\) is binomial with parameters \(n\) and \(\frac{s}{t}\).</statement>
+		<type>conditioning</type>
+	</relation>
+
+	<relation id="Poisson/gamma"> 
+		<from>Poisson distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \(\{N_t: t \ge 0\}\) is a Poisson process with rate parameter \(\alpha \in (0, \infty)\) and \(n \in \{1, 2, \ldots\}\) then \(T = \min\{t \ge 0: N_t = n\}\) has the gamma distsribution with shape parameter \(k\) and scale parameter \(\frac{1}{\alpha}\).</statement>
+		<type>stochastic process</type>
+	</relation>
+
+	<relation id="Poisson/logarithmic/negative-binomial">
+		<from>Poisson distribution</from>
+		<from>logarithmic distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>If \(\bs{X} =(X_1, X_2, \ldots)\) is a sequence of independent random variables, each with the logarithmic distribution with parameter \(p \in (0, 1)\), \(N\) has the Poisson distribution with parameter \(-r \ln(1 - p)\) where \(r \in (0, \infty)\), and \(N\) and \(\bs{X}\) are independent, then \(\sum_{i=1}^N X_i\) has the negative binomial distribution with stopping parameter \(r\) and sucess parameter \(p\).</statement>
+		<type>compound Poisson transformation</type>
+	</relation>
+
+	<relation id="Poisson/gamma/negative-binomial"> 
+		<from>Poisson distribution</from>
+		<from>gamma distribution</from>
+		<to>negative binomial distribution</to>
+		<statement>If \(\Lambda\) has the gamma distribution with shape parameter \(r \in (0, \infty)\) and scale parameter \(\frac{p}{1-p}\) where \(p \in (0, 1)\), and the conditional distribution of \(X\) given \(\Lambda = \lambda \in (0, \infty)\) is Poisson with parameter \(\lambda\), then \(X\) has the negative binomial distribution with stopping parameter \(r\) and success parameter \(p\).</statement>
+		<type>mixture</type>
+	</relation>
+
+	<relation id="Rademacher/Bernoulli">
+		<from>Rademacher distribution</from>
+		<to>Bernoulli distribution</to>
+		<statement>If \(X\) has the Rademacher distribution then \(\frac{X+1}{2}\) has the Bernoulli distribution with success parameter \(\frac{1}{2}\).</statement>
+		<type>linear transformation</type>
+	</relation>
+
+	<relation id="Rayleigh/chi-square">
+		<from>Rayleigh distribution</from>
+		<to>chi-square distribution</to>
+		<statement>If \(X\) has the Rayleigh distribution with scale parameter \(1\), then \(X^2\) has the chi-square distribution with 2 degrees of freedom.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Rayleigh/Rayleigh">
+		<from>Rayleigh distribution</from>
+		<to>Rayleigh distribution</to>
+		<statement>If \(X\) has the Rayleigh distribution with scale parameter \(\sigma \in (0, \infty)\) and \(b \in (0, \infty)\), then \(b X\) has the Rayleigh distribution with scale parameter \(b \sigma\).</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="Rayleigh/gamma">
+		<from>Rayleigh distribution</from>
+		<to>gamma distribution</to>
+		<statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the Rayleigh distribution with scale parameter \(\sigma \in (0, \infty)\), then \(\sum_{i=1}^n X_i^2\) has the chi-square distribution with shape parameter \(n\) and scale parameter \(2 \sigma^2\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Rayleigh/standard-uniform">
+		<from>Rayleigh distribution</from>
+		<to>Standard uniform distribution</to>
+		<statement>If \(X\) has the Rayleigh distribution with shape parameter \(\sigma \in (0, \infty)\), then \(1 - \exp\left(-\frac{X^2}{2 \sigma^2}\right)\) has the standard uniform distribution.</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="Rice/Rayleigh">
+		<from>Rice distribution</from>
+		<to>Rayleigh distribution</to>
+		<statement>The Rice distribution with distance parameter \(0\) and scale parameter \(\sigma \in (0, \infty)\) is the Rayleigh distribution with scale parameter \(\sigma\)</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="Rice/noncentral-chi-square">
+		<from>Rice distribution</from>
+		<to>noncentral chi-square distribution</to>
+		<statement>If \(X\) has the Rice distribution with distance parameter \(\nu \in [0, \infty)\) and scale parameter \(1\), then \(X^2\) has the noncentral chi-square distribution with 2 degrees of freedom and noncentrality parameter \(\nu^2\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="semicircle/standard-uniform">
+		<from>semicircle distribution</from>
+		<to>standard uniform distribution </to>
+		<statement>If \(X\) has the semicircle distribution with radius \(r \in (0, \infty)\) then \(\frac{1}{2} + \frac{1}{\pi r^2} X \sqrt{r^2 - X^2} + \frac{1}{\pi} \arcsin\left(\frac{X}{r}\right)\) has the standard uniform distribution</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="stable/Cauchy">
+		<from>stable distribution</from>
+		<to>Cauchy distribution</to>
+		<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 1\), skewness parameter \(\beta = 0\), location parameter \(\mu \in (-\infty, \infty)\), and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a Cauchy distribution with scale parameter \(\gamma\) and location parameter \(\mu\).</statement>
+		<type>special case.</type>
+	</relation>
+
+	<relation id="stable/normal">
+		<from>stable Distribution</from>
+		<to>normal Distribution</to>
+		<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 2\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a normal distribution with mean \(\mu\) and variance \(\sigma^2 = 2 \gamma^2\).</statement>
+		<type>special case.</type>
+	</relation>
+
+	<relation id="stable/Levy"> 
+		<from>stable Distribution</from>
+		<to>Levy Distribution</to>
+		<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = \frac{1}{2}\), skewness parameter \(\beta=1\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\), then \(X\) has a Levy distribution with scale parameter \(\gamma\) and shift parameter \(\mu\).</statement>
+		<type>special case.</type>
+	</relation>
+
+	<relation id="stable/Landau">
+		<from>stable Distribution</from>
+		<to>Landau Distribution</to>
+		<statement>If \(X\) has a stable distribution with stability parameter \(\alpha = 1\), skewness parameter \(\beta = 1\), location parameter \(\mu \in (-\infty, \infty)\) and scale parameter \(\gamma \in (0, \infty)\) then \(X\) has a Landau distribution with scale parameter \(\gamma\) and location parameter \(\mu\).</statement>
+		<type>special case</type>	
+	</relation>
+
+	<relation id="r"> %Student's t to F
+		<from>Student's t-distribution</from>
+		<to>F-distribution</to>
+		<statement>if \(X\) has the Student's t-distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(Y = X^2\) has the F distribuiton with \(1\) degree of freedom in the numerator and \(n\) degrees of freedom in the denominator.</statement>
+		<type>transformation</type>
+	</relation>
+
+	<relation id="student/Cauchy">
+		<from>Student t-distribution</from>
+		<to>Cauchy distribution</to>
+		<statement>The Student's t-distribution with 1 degree of freedom is the standard Cauchy distribuiton.</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="U-quadratic/standard-uniform">
+		<from>U-quadratic distribution</from>
+		<to>standard uniform distribuiton</to>
+		<statement>If \(X\) has the U-quadratic distribution with left endpoint \(a \in (-\infty, \infty)\) and right endpoint \(b \in (a, \infty)\) then \(\frac{\alpha}{3} [(X - \beta)^3 + (\beta - \alpha)^3]\) has the standard uniform distribution, where \(\alpha = \frac{12}{(b - a)^3}\) and \(\beta = \frac{a + b}{2}\).</statement>
+		<type>nonlinear transformation</type>
+	</relation>
+
+	<relation id="von-Mises/uniform">
+		<from>von Mises distribution</from>
+		<to>continuous uniform distribution</to>
+		<statement>The von Mises distribution with location parameter \(0\) and shape parameter \(0\) is the uniform distribution on the interval \([-\pi, \pi]\).</statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="Wald/Wald.1">
+		<from>Wald distribution</from>
+		<to>Wald distribution</to>
+		<statement>If \(X\) has the Wald distribution with mean \(\mu \in (0, \infty)\) and shape parameter \(\lambda \in (0, \infty)\) and \(t \in (0, \infty)\), then \(t X\) has the Wald distribution with mean \(t \mu\) and shape parameter \(t \lambda\)</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="Wald/Wald.2"> 
+		<from>Wald distribution</from>
+		<to>Wald distribution</to>
+		<statement>If \(X\) has the Wald distribution with mean \(\mu a\) and shape paramter \(\lambda a^2\) where \(\mu \in (0, \infty)\), \(\lambda \in (0, \infty)\), and \(a \in (0, \infty)\), and if \(Y\) has the Wald distribution with mean \(\mu b\) and shape parameter \(\lambda b\) where \(b \in (0, \infty)\), and if \(X\) and \(Y\) are independent, then \(X + Y\) has the Wald distribution with mean \(\mu(a + b)\) and shape paramter \(\lambda(a^2 + b^2)\).</statement>
+		<type>convolution</type>
+	</relation>
+
+	<relation id="Weibull/Weibull">
+		<from>Weibull distribution</from>
+		<to>Weibull distribution</to>
+		<statement>If \(X\) has the Weibull distribution with shape parameter \(k \in (0, \infty)\), scale parameter \(b \in (0, \infty)\), and \(c \in (0, \infty)\), then \(Y = c X\) has the Weibull distribution with shape parameter \(k\) and scale parameter \(b c\).</statement>
+		<type>scale transformation</type>
+	</relation>
+
+	<relation id="Weibull/exponential">
+		<from>Weibull distribution</from>
+		<to>exponential distribution</to>
+		<statement>If \(X\) has the Weibull distribution with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\), then \(Y = \left(\frac{X}{b}\right)^k\) has the standard exponential distribution.</statement>
+		<type>transformation</type>
+	</relation>
 
     <relation id="General Normal/Standard Normal">
       <from>General Normal distribution</from>
