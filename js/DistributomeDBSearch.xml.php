@@ -160,11 +160,12 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
 </script-->
 
 <div id="wrapper-footer">
-<div id="footer">Visitor number <img
- src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
- align="middle" border="0" height="20" hspace="4" vspace="2" width="60">
-| 2011 | <a href="http://www.Distributome.org">www.Distributome.org</a>
-
+<div id="footer">
+	Visitor number <img src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple" align="middle" border="0" height="20" hspace="4" vspace="2" width="60"> 
+	<script type="text/javascript"> var d=new Date(); 
+		document.write(" | 2008-"+d.getFullYear()+" | ");
+	</script>
+	<a href="http://www.Distributome.org">www.Distributome.org</a>
 </div>
 </div>
 <!-- Start of StatCounter Code -->
