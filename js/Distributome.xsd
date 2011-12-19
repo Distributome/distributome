@@ -112,16 +112,13 @@
         <xs:element ref="ns1:year"/>
         <xs:element ref="ns1:Journal"/>
         <xs:element ref="ns1:address"/>
-        <xs:element ref="ns1:auhtor"/>
         <xs:element ref="ns1:author"/>
         <xs:element ref="ns1:doi"/>
         <xs:element ref="ns1:edition"/>
-        <xs:element ref="ns1:jounral"/>
         <xs:element ref="ns1:journal"/>
         <xs:element ref="ns1:number"/>
         <xs:element ref="ns1:page"/>
         <xs:element ref="ns1:report"/>
-        <xs:element ref="ns1:tilte"/>
         <xs:element ref="ns1:volume"/>
       </xs:choice>
       <xs:attribute name="id" use="required"/>
@@ -130,7 +127,6 @@
   </xs:element>
   <xs:element name="Journal" type="xs:string"/>
   <xs:element name="address" type="xs:string"/>
-  <xs:element name="auhtor" type="xs:string"/>
   <xs:element name="author">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -143,12 +139,10 @@
   </xs:element>
   <xs:element name="doi" type="xs:string"/>
   <xs:element name="edition" type="xs:string"/>
-  <xs:element name="jounral" type="xs:string"/>
   <xs:element name="journal" type="xs:string"/>
   <xs:element name="number" type="xs:integer"/>
   <xs:element name="page" type="xs:NMTOKEN"/>
   <xs:element name="report" type="xs:string"/>
-  <xs:element name="tilte" type="xs:string"/>
   <xs:element name="volume" type="xs:integer"/>
   <xs:element name="name" type="xs:string"/>
   <xs:element name="type" type="xs:string"/>

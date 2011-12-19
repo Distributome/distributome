@@ -3783,7 +3783,7 @@
 </reference>
 <reference id="Everitt 2002" type="book">
 	<author> Everitt, B.S. </author>
-	<tilte>The Cambridge Dictionary of Statistics</tilte>
+	<title>The Cambridge Dictionary of Statistics</title>
 	<year>2002</year>
 	<url>http://en.wikipedia.org/wiki/Laplace_distribution#References</url>
 </reference>
@@ -4048,7 +4048,7 @@
 	<address>London</address>
 </reference>
 <reference id="Lukacs King 1954" type="article">
-	<jounral>The Annals of Mathematical Statistics</jounral>
+	<journal>The Annals of Mathematical Statistics</journal>
 	<author>Lukacs, Eugene</author>
 	<author>King, Edgar P. </author>
 	<title>A property of normal distribution</title>
@@ -4065,14 +4065,14 @@
 	<author>Marsaglia, George</author>
 	<author> Tsang, Wai Wan </author>
 	<title>The Ziggurat Method for Generating Random Variables</title>
-	<jounral>Journal of Statistical Software </jounral>
+	<journal>Journal of Statistical Software </journal>
 	<year>2000</year>
 	<url>http://www.jstatsoft.org/v05/i08/paper</url>
 </reference>
 <reference id="Stigler 1978" type="article">
 	<author>Stigler, Stephen M. </author>
 	<title>Mathematical statistics in the early states</title>
-	<jounral>The Annals of Statistics </jounral>
+	<journal>The Annals of Statistics </journal>
 	<year>1978</year>
 </reference>
 <reference id="Stigler 1982" type="article">
@@ -4165,7 +4165,7 @@
 <reference id="Bailey 1994" type="article">
 	<author>Bailey, R. W.</author>
 	<title>Polar generation of random variates with the t-distribution</title>
-	<jounral>Mathematics of Computation </jounral>
+	<journal>Mathematics of Computation </journal>
 	<year>1994</year>
 </reference>
 <reference id="Venables Ripley 2002" type="book">
