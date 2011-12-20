@@ -15,12 +15,12 @@ function initializeExperiment(){
 	distTable = document.getElementById("distTable");
 	stopSelect = document.getElementById("stopSelect");
 	stopSelect.value = "10";
-	showSelect = document.getElementById("showSelect");
-	showSelect.value = "show";
+	showCheck = document.getElementById("showCheck");
+	showCheck.checked = true;
 	muParam = new Parameter(document.getElementById("muInput"), document.getElementById("muLabel"));
-	muParam.setProperties(-50, 50, 0.1, mu, "\u03BC");
+	muParam.setProperties(-50, 50, 0.1, mu, "<var>\u03BC</var>");
 	sigmaParam = new Parameter(document.getElementById("sigmaInput"), document.getElementById("sigmaLabel"));
-	sigmaParam.setProperties(0.1, 50, 0.1, sigma, "\u03C3");
+	sigmaParam.setProperties(0.1, 50, 0.1, sigma, "<var>\u03C3</var>");
 	resetExperiment();
 }
 
@@ -53,7 +53,7 @@ function resetExperiment(){
 	dist = new NormalDistribution(mu, sigma);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.xFormat = 2;
-	distGraph.showDist(showSelect.value == "show");
+	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text;
 }
 
