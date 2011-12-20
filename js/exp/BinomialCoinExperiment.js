@@ -4,7 +4,7 @@ var runCount = 0, stopCount = 0, stopFreq = 10;
 var currentRecord, completeRecord = "", header = "Run\tY\tM";;
 var binomialDist, scaleDist, distGraph, pParam, nParam;
 var recordTable, distTable;
-var runButton, stepButton, distCanvas, stopSelect, rvSelect;
+var runButton, stepButton, distCanvas, stopSelect, rvSelect, showCheck;
 var p = 0.5, n = 10, N = 50, sum, average, count;
 var coin = new Array(N);
 
@@ -18,13 +18,13 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	rvSelect = document.getElementById("rvSelect");
 	rvSelect.value = "0";
-	showSelect = document.getElementById("showSelect");
-	showSelect.value = "show";
+	showCheck = document.getElementById("showCheck");
+	showCheck.checked = true;
 	for (var i = 0; i < N; i++) coin[i] = new Coin(document.getElementById("coin" + i));
 	nParam = new Parameter(document.getElementById("nInput"), document.getElementById("nLabel"));
-	nParam.setProperties(1, N, 1, n, "n");
+	nParam.setProperties(1, N, 1, n, "<var>n</var>");
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
-	pParam.setProperties(0, 1, 0.01, p, "p");
+	pParam.setProperties(0, 1, 0.01, p, "<var>p</var>");
 	resetExperiment();
 }
 
@@ -87,7 +87,7 @@ function setDist(){
 		distGraph = new DistributionGraph(distCanvas, scaleDist, "M");
 		distGraph.xFormat = 3;
 	}
-	distGraph.showDist(showSelect.value == "show");
+	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text;
 }
 
@@ -127,7 +127,6 @@ function update(){
 	scaleDist.setValue(average);
 	currentRecord = runCount + "\t" + sum + "\t" + average.toFixed(3);
 	completeRecord = completeRecord + "\n" + currentRecord;
-	distGraph.showDist(showSelect.value == "show");
+	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text;
 }	
-
