@@ -4,7 +4,7 @@ var runCount = 0, stopCount = 0, stopFreq = 10;
 var currentRecord, completeRecord = "", header = "Run\tN";;
 var dist, distGraph, tParam, rParam;
 var recordTable, distTable, timeline;
-var runButton, stepButton, distCanvas, showSelect;
+var runButton, stepButton, distCanvas, showCheck;
 var t = 5, time, r = 5, n;
 
 function initializeExperiment(){
@@ -14,13 +14,13 @@ function initializeExperiment(){
 	distCanvas = document.getElementById("distCanvas");
 	distTable = document.getElementById("distTable");
 	stopSelect = document.getElementById("stopSelect").value = "10";
-	showSelect = document.getElementById("showSelect");
-	showSelect.value = "show";
+	showCheck = document.getElementById("showCheck");
+	showCheck.checked = true;
 	distCanvas = document.getElementById("distCanvas");
 	tParam = new Parameter(document.getElementById("tInput"), document.getElementById("tLabel"));
-	tParam.setProperties(0.5, 10, 0.1, t, "t");
+	tParam.setProperties(0.5, 10, 0.1, t, "<var>t</var>");
 	rParam = new Parameter(document.getElementById("rInput"), document.getElementById("rLabel"));
-	rParam.setProperties(0.5, 10, 0.1, r, "r");
+	rParam.setProperties(0.5, 10, 0.1, r, "<var>r</var>");
 	resetExperiment();
 }
 
@@ -62,7 +62,7 @@ function resetExperiment(){
 	timeline.setXFormat(1);
 	dist = new PoissonDistribution(r * t);
 	distGraph = new DistributionGraph(distCanvas, dist, "N");
-	showDist(showSelect.value == "show");
+	showDist(showCheck.checked);
 	timeline.draw(0);
 }
 
@@ -108,8 +108,3 @@ function update(){
 	distGraph.draw();
 	distTable.value = distGraph.text;
 }	
-	
-	
-
-
-
