@@ -154,11 +154,15 @@ function renderMath(){
 	MathJax.Hub.Typeset();
 }
 
+/*************** Get the drop down selected value **************/
+function getDropDownSelectedValue(id){
+	var dropDown = document.getElementById(id);
+	return dropDown.options[dropDown.selectedIndex].value;	
+}
 
 /*************** Get node index for the distribution name **************/
 function getNodeIndex(nodesArray, nodeName){
 	return (nodesArray[nodeName] != undefined)?nodesArray[nodeName]:0;
-	//return (distributomeNodes[nodeName] != undefined)?distributomeNodes[nodeName]:0;
 }
 
 /*************** Get the reference of the nodes wrt browser **************/
