@@ -1,4 +1,3 @@
-
 var relationStrength = new Array();
 relationStrength["convolution"] = 2;
 relationStrength["transformation"] = 2;
@@ -158,6 +157,21 @@ function renderMath(){
 function getDropDownSelectedValue(id){
 	var dropDown = document.getElementById(id);
 	return dropDown.options[dropDown.selectedIndex].value;	
+}
+
+
+/*************** set the drop down **************/
+function setDropDownSelectedValue(dropDownID, value){
+	var dropDown =document.getElementById(dropDownID);
+	if(dropDown.options[value]){
+		dropDown.options[value].selected = true;
+	}else{
+		for(var i=0; i< dropDown.options.length; i++){
+			if(dropDown.options[i].value == value){
+				dropDown.options[i].selected = true;
+			}
+		}
+	}
 }
 
 /*************** Get node index for the distribution name **************/

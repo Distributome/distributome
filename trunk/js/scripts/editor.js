@@ -58,9 +58,14 @@ function reflectResourceType(){
 	if(type == 1){
 		document.getElementById('distributome.distributionXml').style.display = '';
 		document.getElementById('distributome.relationXml').style.display = 'none'; 
+		setDropDownSelectedValue('distributome.distributionXmlTable.dropDown0', 'name');
+		setDropDownSelectedValue('distributome.distributionXmlTable.dropDown1', 'pdf');
 	}else if(type ==2){
 		document.getElementById('distributome.relationXml').style.display = ''; 
-		document.getElementById('distributome.distributionXml').style.display = 'none'; 
+		document.getElementById('distributome.distributionXml').style.display = 'none';
+		setDropDownSelectedValue('distributome.relationXmlTable.dropDown0', 'to');
+		setDropDownSelectedValue('distributome.relationXmlTable.dropDown1', 'from');
+		setDropDownSelectedValue('distributome.relationXmlTable.dropDown2', 'statement');
 	}
 }
 
@@ -68,13 +73,14 @@ function reflectResourceType(){
 function saveXML(){
 	var XML = new XMLWriter(true);
 	XML.BeginNode("distributome");
+	XML.Attrib("version","2.0");
 	var e = document.getElementById('distributome.distributionXmlTable');
 	if(e.hasChildNodes()){
 		if(e.childNodes[0].childNodes.length>1){
 			var name = false; var pdf = false;
 			var trs = e.childNodes[0].childNodes;
-			XML.BeginNode("distributions");
-			XML.BeginNode("distribution");
+			XML.BeginNode("distributions",1);
+			XML.BeginNode("distribution",2);
 			var tempXML = new XMLWriter();
 			for(var i=0; i<(trs.length-1);i++){
 				var dropDownValue = getDropDownSelectedValue('distributome.distributionXmlTable.dropDown'+i);
@@ -86,7 +92,7 @@ function saveXML(){
 					}
 					value = value + ' distribution';
 				}else if(dropDownValue == 'pdf') pdf = true;
-				tempXML.BeginNode(dropDownValue);
+				tempXML.BeginNode(dropDownValue,3);
 				tempXML.WriteString(value);
 				tempXML.EndNode();
 			}
@@ -105,8 +111,8 @@ function saveXML(){
 		if(e.childNodes[0].childNodes.length>1){
 			var from = false; var to = false; var statement = false;
 			var trs = e.childNodes[0].childNodes;
-			XML.BeginNode("relations");
-			XML.BeginNode("relation");
+			XML.BeginNode("relations",1);
+			XML.BeginNode("relation",2);
 			var tempXML = new XMLWriter();
 			for(var i=0; i<(trs.length-1);i++){
 				var dropDownValue = getDropDownSelectedValue('distributome.relationXmlTable.dropDown'+i);
@@ -123,7 +129,7 @@ function saveXML(){
 				}else if(dropDownValue == 'statement'){
 					statement = true;
 				}
-				tempXML.BeginNode(dropDownValue);
+				tempXML.BeginNode(dropDownValue,3);
 				tempXML.WriteString(value);
 				tempXML.EndNode();
 			}
@@ -147,7 +153,7 @@ function saveXML(){
     var doc = win.document;
     doc.write("<html><head><title>Save XML by copying<\br></title></head><body><div><textarea rows=\"50\" cols=\"100\">"+distributomeXML+"</textarea></div></body></html>");
     doc.close();
-	//alert(distributomeXML);
+	alert("To proceed further, Save this XML displayed and email it for review and publishing to info@sistributome.org");
 }
 
 /********* Create a drop down **********/
@@ -172,18 +178,26 @@ function saveXML(){
 	}
 	
 function initialize(){
-	document.getElementById('distributome.distributionXmlTable').innerHTML = '<tr><td>'+distributionDropDown+'</td><td></td></tr>';
+	//document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>hfjf</td></tr></tbody>';
+	document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>'+distributionDropDown+'</td><td></td></tr></tbody>';
 	document.getElementById('distributome.distributionXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('id','distributome.distributionXmlTable.dropDown0');
-	document.getElementById('distributome.distributionXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('onchange','displayText(\'distributome.distributionXmlTable\',0, \'distribution\');');
+	displayText('distributome.distributionXmlTable',0, 'distribution');
+	displayText('distributome.distributionXmlTable',1, 'distribution');
+	document.getElementById('distributome.distributionXmlTable').childNodes[0].childNodes[1].childNodes[0].childNodes[0].setAttribute('onchange','');
 	
+	
+	//alert(getDropDownSelectedValue('distributome.distributionXmlTable.dropDown0'));
 	document.getElementById('distributome.relationXmlTable').innerHTML = '<tr><td>'+relationDropDown+'</td><td></td></tr>';
 	document.getElementById('distributome.relationXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('id','distributome.relationXmlTable.dropDown0');
-	document.getElementById('distributome.relationXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('onchange','displayText(\'distributome.relationXmlTable\',0, \'relation\');');
+	setDropDownSelectedValue('distributome.relationXmlTable.dropDown0', 'to');
+	displayText('distributome.relationXmlTable',0, 'relation');
+	setDropDownSelectedValue('distributome.relationXmlTable.dropDown1', 'from');
+	displayText('distributome.relationXmlTable',1, 'relation');
+	displayText('distributome.relationXmlTable',2, 'relation');
+	document.getElementById('distributome.relationXmlTable').childNodes[0].childNodes[2].childNodes[0].childNodes[0].setAttribute('onchange','');
 }
 	
 function displayText(id,num, type){
-	//var length = id.length;
-	//var nodeNum = id.substring(length-1);
 	var nodeNum = num+1;
 	if(type == 'distribution')
 		document.getElementById(id+'.dropDown'+num).parentNode.parentNode.childNodes[1].innerHTML = '<input type="text" style="width:180px" class="home-txt" id="'+id+'.text'+(num)+'"/>';
@@ -258,9 +272,10 @@ function fetchArray(xmlDoc){
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xsd",false);
 		xmlhttp.send();
-		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
-			xmlhttp.responseXML.load(xmlhttp.responseStream);
+		//if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
+			//xmlhttp.responseXML.load(xmlhttp.responseStream);
 		var xmlDoc = xmlhttp.responseXML;
+		//alert(xmlDoc);
 		fetchArray(xmlDoc);
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
@@ -274,7 +289,7 @@ function fetchArray(xmlDoc){
 		}catch(error){
 			distributomeEditorXML_Objects=xmlDoc.childNodes;
 		}
-		traverseXML(false, null, distributomeEditorXML_Objects, distributomeEditor.nodes, distributomeEditor.edges, distributomeEditor.references, distributomeEditorNodes, referenceEditorNodes);
+		traverseXML(false, null, distributomeEditorXML_Objects, distributomeEditor.nodes, distributomeEditor.edges, distributomeEditor.references, distributomeEditorNodes, referenceEditorNodes);//TODO send xmlDoc also
 		nodeDropDown = nodesDropDown();
 	
 }

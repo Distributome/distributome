@@ -1,7 +1,7 @@
 function XMLWriter(includeXMLHeader)
 {
     if(includeXMLHeader)
-		this.XML=new Array('<?xml version="1.0" encoding="UTF-8"?>');
+		this.XML=new Array('<?xml version="1.0" encoding="UTF-8"?>\n');
 	else
 		this.XML=[];
     this.Nodes=[];
@@ -12,23 +12,45 @@ function XMLWriter(includeXMLHeader)
             return Str.replace(/&/g, "&amp;").replace(/\"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         return ""
     }
-    this.BeginNode = function(Name)
+    this.BeginNode = function(Name,numberOfTabs)
     {
         if (!Name) return;
-        if (this.State=="beg") this.XML.push(">");
-        this.State="beg";
-        this.Nodes.push(Name);
+        if (this.State=="beg"){
+			this.XML.push(">\n");
+		}
+        
+		this.Nodes.push(Name);
+		if(numberOfTabs){
+			if (this.State=="beg"){
+				this.Nodes.push(numberOfTabs);
+				this.Nodes.push("tabs");
+			}
+			for(var no=0;no<numberOfTabs;no++){
+				this.XML.push("\t");
+			}
+		}
+		this.State="beg";
         this.XML.push("<"+Name);
     }
     this.EndNode = function()
     {
         if (this.State=="beg")
         {
-            this.XML.push("/>");
+            this.XML.push("/>\n");
             this.Nodes.pop();
+			this.Nodes.pop();
+			this.Nodes.pop();
         }
-        else if (this.Nodes.length>0)
-            this.XML.push("</"+this.Nodes.pop()+">");
+        else if (this.Nodes.length>0){
+			var nodeValue = this.Nodes.pop();
+			if(nodeValue == "tabs"){
+				var numberOfTabs = this.Nodes.pop();
+				for(var no=0;no<numberOfTabs;no++){
+					this.XML.push("\t");
+				}
+				this.XML.push("</"+this.Nodes.pop()+">\n");
+			}else this.XML.push("</"+nodeValue+">\n");
+		}
         this.State="";
     }
     this.Attrib = function(Name, Value)
@@ -45,8 +67,8 @@ function XMLWriter(includeXMLHeader)
     this.Node = function(Name, Value)
     {
         if (!Name) return;
-        if (this.State=="beg") this.XML.push(">");
-        this.XML.push((Value=="" || !Value)?"<"+Name+"/>":"<"+Name+">"+this.FormatXML(Value)+"</"+Name+">");
+        if (this.State=="beg") this.XML.push(">\n");
+        this.XML.push((Value=="" || !Value)?"<"+Name+"/>\n":"<"+Name+">"+this.FormatXML(Value)+"</"+Name+">\n");
         this.State="";
     }
     this.Close = function()
@@ -57,7 +79,7 @@ function XMLWriter(includeXMLHeader)
     }
 	this.AppendXML = function(appendValue)
 	{
-		if (this.State=="beg") this.XML.push(">");
+		if (this.State=="beg") this.XML.push(">\n");
 		this.XML.push(appendValue);
 		this.State="";
 	}
