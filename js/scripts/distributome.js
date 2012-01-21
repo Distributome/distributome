@@ -109,12 +109,6 @@ function resetView(){
 	resetText();
 }
 
-/*************** Reset the drop down **************/
-function setDropDownSelectedValue(dropDownID, value){
-	var dropDown =document.getElementById(dropDownID);
-	dropDown.options[value].selected = true;
-}
-
 function getLinkColor(d,l){
 	if(l.selected == 'yellow'){
 		return "yellow";
@@ -365,12 +359,6 @@ function nodeTypeInfoFetch(){
 	resetNavigator();
 	search("node", 1, type);
 	vis.render();
-}
-
-/*************** Get the drop down selected value **************/
-function getDropDownSelectedValue(id){
-	var dropDown = document.getElementById(id);
-	return dropDown.options[dropDown.selectedIndex].value;	
 }
 
 /*************** Edge Action **************/
