@@ -18,26 +18,25 @@
 		}
     </style>
 
-	<script type="text/javascript" src="core.js"></script>
-	<script type="text/javascript" src="PoissonExperiment.js"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="PoissonExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 <body class="ancillary" onload="initializeExperiment();">
-
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Experiments"><span>Experiments</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Experiments"><span>Experiments</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -53,9 +52,8 @@
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
 
-<form class="applet">
+<div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
 		<img src="step.png" alt="Step" title="Step" />
@@ -99,13 +97,12 @@
 		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="7"></textarea></td>
 	</tr>
 </table>
-</form>
+</div>
 
 <h4 class="ancillary">Description</h4>
 
 <p>The experiment is to run a Poisson process until time \(t\). The arrivals are shown as red dots on a timeline. The random variable of interest is the number of arrivals \(N\); this variable has a Poisson distribution. The value of \(N\) is recorded on each update in the data table. The probability density function and moments of \(N\) are shown in blue in the distribution graph and are recorded in the distribution table. On each update, the empirical density function and moments are shown in red in the distribution graph and recorded in the distribution table. The parameters of the experiment are the rate of the process \(r\) and the time \(t\), which can be varied with the input controls.</p>
-</center>
-</div>
+
 <div id="wrapper-footer">
 <div id="footer">
 	Visitor number <img src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple" align="middle" border="0" height="20" hspace="4" vspace="2" width="60"> 
@@ -115,6 +112,7 @@
 	<a href="http://www.Distributome.org">www.Distributome.org</a>
 </div>
 </div>
+
 <!-- Start of StatCounter Code -->
 	<script type="text/javascript">
 		var sc_project=5714596; 
@@ -136,3 +134,4 @@
   	<!-- End of GoogleAnalytics Code -->
 </body>
 </html>
+

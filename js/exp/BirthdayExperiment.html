@@ -18,27 +18,25 @@
 		}
     </style>
 
-	<script type="text/javascript" src="devices.js"></script>
-	<script type="text/javascript" src="distributions.js"></script>
-	<script type="text/javascript" src="BirthdayExperiment.js"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="BirthdayExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 <body class="ancillary" onload="initializeExperiment();">
-
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Experiments"><span>Experiments</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Experiments"><span>Experiments</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -54,8 +52,7 @@
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
-<form class="applet">
+<div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
 		<img src="step.png" alt="Step" title="Step" />
@@ -162,15 +159,11 @@
 		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="7"></textarea></td>
 	</tr>
 </table>
-</form>
+</div>
 
 <h4 class="ancillary">Description</h4>
 
 <p>The experiment is to draw a random sample of size \(n\) <em>with replacement</em> from a population of size \(m\). In the applet, the population consists of \(m\) balls numbered from 1 to \(m\). The random variables of interest are \(V\), the number of distinct values in the sample, and \(I\), the indicator variable that indicates at least one duplication in the sample (the birthday event). On each update, the sample of balls is shown in the urn graph; a ball that duplicates a previously chosen ball is shown in red, and otherwise is shown in green. The values of \(V\) and \(I\) are recorded on each update in the data table. The probability density function of the selected variable is shown in blue in the distribution graph and is recorded in the distribution table. On each update, the empirical density function of the  selected variable is shown in red in the distribution graph and is recorded in the distribution table. The parameters \(m\) and \(n\) can be varied with scroll bars.</p>
-
-</center>
-
-</div>
 
 <div id="wrapper-footer">
 <div id="footer">
@@ -203,3 +196,4 @@
   	<!-- End of GoogleAnalytics Code -->
 </body>
 </html>
+

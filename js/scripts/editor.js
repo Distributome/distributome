@@ -272,17 +272,20 @@ function fetchArray(xmlDoc){
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xsd",false);
 		xmlhttp.send();
-		//if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
-			//xmlhttp.responseXML.load(xmlhttp.responseStream);
-		var xmlDoc = xmlhttp.responseXML;
-		//alert(xmlDoc);
-		fetchArray(xmlDoc);
+		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
+			xmlhttp.responseXML.load(xmlhttp.responseStream);
+		var xsdDoc = xmlhttp.responseXML;
+		alert(xsdDoc);
+		fetchArray(xsdDoc);
+		
+		
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		xmlDoc = xmlhttp.responseXML;
+		alert(xmlDoc);
 		var distributomeEditorXML_Objects;
 		try{
 			distributomeEditorXML_Objects=xmlDoc.documentElement.childNodes;

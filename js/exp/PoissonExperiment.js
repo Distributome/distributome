@@ -108,3 +108,4 @@ function update(){
 	distGraph.draw();
 	distTable.value = distGraph.text;
 }	
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  	<title>www.Distributome.org: Polya's Experiment</title>
+  	<title>www.Distributome.org: Polya Experiment</title>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<meta name="verify-v1" content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
   	<meta name="description"
@@ -18,27 +18,25 @@
 		}
     </style>
 
-	<script type="text/javascript" src="devices.js"></script>
-	<script type="text/javascript" src="distributions.js"></script>
-	<script type="text/javascript" src="PolyaExperiment.js"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="PolyaExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 <body class="ancillary" onload="initializeExperiment();">
-
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Experiments"><span>Experiments</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Experiments"><span>Experiments</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -47,16 +45,15 @@
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Polya's Experiment</center>
+<center>Polya Experiment</center>
 </h1>
 </div>
 </div>
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
 
-<form class="applet">
+<div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
 		<img src="step.png" alt="Step" title="Step" />
@@ -163,15 +160,14 @@
 		<td class="device"><textarea id="distTable" readonly="true" class="table" rows="8"></textarea></td>
 	</tr>
 </table>
-</form>
+</div>
 
 <h4 class="ancillary">Description</h4>
 
 <p>This applet models P&oacute;lya's urn experiment. An urn initially contains \(a\) red and \(b\) green balls.  On each trial, a ball is selected at random from the urn, and then replaced along with \(c\) new balls of the same color. In this simulation, the red balls are numbered consecutively \((1, 2, \ldots)\) and the green balls are numbered consecutively in the same manner. The sample of balls in \(n\) trials is shown in the left graph box. Random variable \(Y\) gives the number of red balls selected after \(n\) trials, and \(M\) gives the proportion of red balls selected in the \(n\) trials. These are recorded on each update in the data table.</p>
 
 <p>The probability density function and moments of \(Y\) are shown in blue in the distribution graph and are recorded in the distribution table. On each update, the empirical density function and moments of \(Y\) are shown in red in the distribution graph and are recorded in the distribution table. The parameters \(a\), \(b\), \(c\), and \(n\) can be varied with the input controls.</p>
-</center>
-</div>
+
 <div id="wrapper-footer">
 <div id="footer">
 	Visitor number <img src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple" align="middle" border="0" height="20" hspace="4" vspace="2" width="60"> 
@@ -181,6 +177,7 @@
 	<a href="http://www.Distributome.org">www.Distributome.org</a>
 </div>
 </div>
+
 <!-- Start of StatCounter Code -->
 	<script type="text/javascript">
 		var sc_project=5714596; 
@@ -202,3 +199,4 @@
   	<!-- End of GoogleAnalytics Code -->
 </body>
 </html>
+
