@@ -130,3 +130,4 @@ function update(){
 	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text;
 }	
+

@@ -18,27 +18,25 @@
 		}
     </style>
 
-	<script type="text/javascript" src="devices.js"></script>
-	<script type="text/javascript" src="distributions.js"></script>
-	<script type="text/javascript" src="BinomialCoinExperiment.js"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="BinomialCoinExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 <body class="ancillary" onload="initializeExperiment();">
-
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Experiments"><span>Experiments</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Experiments"><span>Experiments</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -54,8 +52,8 @@
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
-<form class="applet">
+
+<div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
 		<img src="step.png" alt="Step" title="Step" />
@@ -162,14 +160,11 @@
 		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="7"></textarea></td>
 	</tr>
 </table>
-</form>
+</div>
 
 <h4 class="ancillary">Description</h4>
 
 <p>The random experiment consists of tossing \(n\) coins, each with probability of heads \(p\). Random variable \(Y\) gives the number of heads, and random variable \(M\) gives the proportion of heads. These are recorded on each update in the data table. Either \(Y\) or \(M\) can be selected with the list box. The probability density function and moments of the selected variable are shown in blue in the distribution graph blue and are recorded in the distribution table. On each update, the empirical density function and moments of the selected variable are shown in red in the distribution graph and are recorded in the distribution table. The parameters \(n\) and \(p\) can be varied with scroll bars.</p>
-
-</center>
-</div>
 
 <div id="wrapper-footer">
 <div id="footer">

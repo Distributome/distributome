@@ -17,28 +17,26 @@
   			margin: 0;
 		}
     </style>
-    
-    <script type="text/javascript" src="devices.js"></script>
-	<script type="text/javascript" src="distributions.js"></script>
-	<script type="text/javascript" src="FiniteOrderStatisticExperiment.js"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="FiniteOrderStatisticExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 <body class="ancillary" onload="initializeExperiment();">
-
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Experiments"><span>Experiments</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Experiments"><span>Experiments</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -47,16 +45,15 @@
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Finite Order Statistic Experiment</center>
+<center>Finate Order Statistic Experiment</center>
 </h1>
 </div>
 </div>
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
 
-<form class="applet">
+<div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
 		<img src="step.png" alt="Step" title="Step" />
@@ -161,15 +158,11 @@
 		<td class="device"><textarea id="distTable" readonly="true" class="table" rows="7" wrap="off"></textarea></td>
 	</tr>
 </table>
-</form>
+</div>
 
 <h4 class="ancillary">Description</h4>
 
 <p>The experiment consists of selecting \(n\) balls at random (without replacement) from a population of \(m\) balls, numbered from 1 to \(m\).  For \(i \in \{1, 2, \ldots, n\}\), the \(i\)th smallest number in the sample, \(X_{(i)}\) (the \(i\)th order statistic), is recorded on each update. For a selected \(k\), the probability density function and moments of \(X_{(k)}\) are shown in the blue in the distribution graph and are recorded in the distribution table. When the simulation runs, the empirical density function and moments of \(X_{(k)}\) are shown in red in the distribution graph and are recorded in the distribution table. The parameters \(m\), \(n\), and \(k\) can be varied with input controls.</p>
-
-</center>
-
-</div>
 
 <div id="wrapper-footer">
 <div id="footer">
@@ -202,3 +195,4 @@
   	<!-- End of GoogleAnalytics Code -->
 </body>
 </html>
+
