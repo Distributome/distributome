@@ -179,6 +179,7 @@ function saveXML(){
 	
 function initialize(){
 	//document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>hfjf</td></tr></tbody>';
+	alert(distributionDropDown);
 	document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>'+distributionDropDown+'</td><td></td></tr></tbody>';
 	document.getElementById('distributome.distributionXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('id','distributome.distributionXmlTable.dropDown0');
 	displayText('distributome.distributionXmlTable',0, 'distribution');
@@ -228,7 +229,7 @@ function displayText(id,num, type){
 
 
 function fetchArray(xmlDoc){
-	var element=xmlDoc.getElementsByTagName('xs:element');
+	var element=xmlDoc.getElementsByTagName('xsd:element');
 	var fillArray = new Array();
 	var k;
 	for(var i=0; i<element.length;i++){
@@ -241,11 +242,11 @@ function fetchArray(xmlDoc){
 			}
 			k=0;
 			if(attribute == "distribution"){
-				var childnodes = element[i].getElementsByTagName("xs:complexType")[0].getElementsByTagName("xs:sequence")[0].childNodes;
+				var childnodes = element[i].getElementsByTagName("xsd:complexType")[0].getElementsByTagName("xsd:sequence")[0].childNodes;
 				for(var j=0; j<childnodes.length; j++){
 					if (childnodes[j].nodeType==1) {
-						var name = childnodes[j].getAttribute("ref");
-						name = name.substring(4);
+						var name = childnodes[j].getAttribute("name");
+						//name = name.substring(4);
 						fillArray[k++] = name;
 					}
 				}
@@ -253,11 +254,11 @@ function fetchArray(xmlDoc){
 			}
 			k=0;
 			if(attribute == "relation"){
-				var childnodes = element[i].getElementsByTagName("xs:complexType")[0].getElementsByTagName("xs:choice")[0].childNodes;
+				var childnodes = element[i].getElementsByTagName("xsd:complexType")[0].getElementsByTagName("xsd:sequence")[0].childNodes;
 				for(var j=0; j<childnodes.length; j++){
 					if (childnodes[j].nodeType==1) {
-						var name = childnodes[j].getAttribute("ref");
-						name = name.substring(4);
+						var name = childnodes[j].getAttribute("name");
+						//name = name.substring(4);
 						fillArray[k++] = name;
 					}
 				}
@@ -269,15 +270,16 @@ function fetchArray(xmlDoc){
 
 {
 
-		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xsd",false);
-		xmlhttp.send();
-		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
-			xmlhttp.responseXML.load(xmlhttp.responseStream);
-		var xsdDoc = xmlhttp.responseXML;
+	/***/
+		var xsdhttp=createAjaxRequest();
+		xsdhttp.open("GET","Distributome.xsd",false);
+		xsdhttp.send();
+		//if (!xsdhttp.responseXML.documentElement && xsdhttp.responseStream)
+			//xsdhttp.responseXML.load(xsdhttp.responseStream);
+		var xsdDoc = xsdhttp.responseText;
 		alert(xsdDoc);
-		fetchArray(xsdDoc);
-		
+		//fetchArray(xsdDoc);
+	/***/
 		
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
