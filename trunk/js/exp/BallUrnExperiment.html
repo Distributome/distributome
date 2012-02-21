@@ -74,19 +74,29 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<option value="10000">Stop: 10000</option>
 		<option value="0">Stop: never</option>
 	</select>
-	<input type="checkbox" id="showCheck" onchange="showDist(this.checked)" />
-	<label for="showCheck">Show Distribution</label>
-	<input type="checkbox" id="replaceCheck" onchange="setType()" />
-	<label for="replaceCheck">With replacement</label>
+	<span class="tool">
+		<input type="checkbox" tabindex="6" id="showCheck" onchange="showDist(this.checked)" />
+		<label for="showCheck">Show Distribution</label>
+	</span>
+	<span class="tool">
+		<input type="checkbox" tabindex="7" id="replaceCheck" onchange="setType()" />
+		<label for="replaceCheck">With replacement</label>
+	</span>
 </fieldset>
 
 <fieldset class="toolbar">
-	<label id="mLabel" for="mInput"></label>
-	<input id="mInput" type="range" tabindex="7" class="parameter" onchange="setPopulation();" />
-	<label id="rLabel" for="rInput"></label>
-	<input id="rInput" type="range" tabindex="8" class="parameter" onchange="setReds();" />
-	<label id="nLabel" for="nInput"></label>
-	<input id="nInput" type="range" tabindex="9" class="parameter" onchange="setSample();" />
+	<span class="tool">
+		<label id="mLabel" or="mInput"></label>
+		<input id="mInput" type="range" tabindex="8" class="parameter" onchange="setPopulation();" />
+	</span>
+	<span <span class="tool">
+		<label id="rLabel" for="rInput"></label>
+		<input id="rInput" type="range" tabindex="9" class="parameter" onchange="setReds();" />
+	<span>
+	<span class="tool">
+		<label id="nLabel" for="nInput"></label>
+		<input id="nInput" type="range" tabindex="10" class="parameter" onchange="setSample();" />
+	</span>
 </fieldset>
 
 <table class="applet">
@@ -156,8 +166,8 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<td class="device"><canvas id="distCanvas" width="325" height="170">Distribution graph</canvas></td>
 	</tr>
 	<tr>
-		<td class="device"><textarea id="recordTable" readonly="true" class="table" rows="8"></textarea></td>
-		<td class="device"><textarea id="distTable" readonly="true" class="table" rows="8"></textarea></td>
+		<td class="device"><textarea id="recordTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
+		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
 	</tr>
 </table>
 </div>
