@@ -74,17 +74,25 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<option value="10000">Stop: 10000</option>
 		<option value="0">Stop: never</option>
 	</select>
-	<input type="checkbox" id="showCheck" onchange="showDist(this.checked)" />
-	<label for="showCheck">Show Distribution</label>
+	<span class="tool">
+		<input type="checkbox" id="showCheck" tabindex="6" onchange="showDist(this.checked)" />
+		<label for="showCheck">Show Distribution</label>
+	</span>
 </fieldset>
 
 <fieldset class="toolbar">
-	<label id="mLabel" for="mInput"></label>
-	<input id="mInput" type="range" tabindex="7" class="parameter" onchange="setPopulation();" />
-	<label id="nLabel" for="nInput"></label>
-	<input id="nInput" type="range" tabindex="8" class="parameter" onchange="setSample();" />
-	<label id="kLabel" for="kInput"></label>
-	<input id="kInput" type="range" tabindex="9" class="parameter" onchange="setOrder();" />
+	<span class="tool">
+		<label id="mLabel" for="mInput"></label>
+		<input id="mInput" type="range" tabindex="7" class="parameter" onchange="setPopulation();" />
+	</span>
+	<span class="tool">
+		<label id="nLabel" for="nInput"></label>
+		<input id="nInput" type="range" tabindex="8" class="parameter" onchange="setSample();" />
+	</span>
+	<span class="tool">
+		<label id="kLabel" for="kInput"></label>
+		<input id="kInput" type="range" tabindex="9" class="parameter" onchange="setOrder();" />
+	</span>
 </fieldset>
 
 <table class="applet">
