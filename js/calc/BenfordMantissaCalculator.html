@@ -52,14 +52,14 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </div>
 <div style="text-align: justify;" id="content">
 <div style="text-align: justify;" id="content">
-<div class="applet">
 
+<div class="applet">
 <fieldset class="toolbar">
 	<span class="tool" title="Scale parameter">
 		<label id="bLabel" for="bInput"></label>
-		<input id="bInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
+		<input id="bInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<select id="graphSelect" tabindex="3" title="Select view" onchange="distGraph.setGraphType(value);">
+	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
 		<option value="pdf">PDF</option>
 		<option value="cdf">CDF</option>
 	</select>
@@ -74,11 +74,11 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <fieldset class="toolbar">
 	<span class="tool" title="x">
 		<label id="xLabel" for="xInput"></label>
-		<input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
+		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
 	</span>
 	<span class="tool" title="p">
 		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
+		<input id="pInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
 	</span>
 </fieldset>
 </div>
