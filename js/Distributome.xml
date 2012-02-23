@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="../images/Distributome_style.css" type="text/css"?>
 <distributome version="1.1" 
-	xmlns="http://www.distributome.org" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.distributome.org/distributome.xsd">
+  xmlns="http://www.distributome.org" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.distributome.org/distributome.xsd">
 
 <distributions>
 <distribution id="arcsine">
