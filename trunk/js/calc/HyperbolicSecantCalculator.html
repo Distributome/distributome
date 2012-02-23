@@ -54,7 +54,6 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div style="text-align: justify;" id="content">
 
 <div class="applet">
-
 <fieldset class="toolbar">
 	<select id="graphSelect" tabindex="1" title="Select view" onchange="distGraph.setGraphType(value);">
 		<option value="pdf">PDF</option>
@@ -69,10 +68,14 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </table>
 
 <fieldset class="toolbar">
-	<label id="xLabel" for="xInput"></label>
-	<input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
-	<label id="pLabel" for="pInput"></label>
-	<input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
+	<span class="tool">
+		<label id="xLabel" for="xInput"></label>
+		<input id="xInput" type="text" class="parameter" tabindex="2" onchange="setValue();" />
+	</span>
+	<span class="tool">
+		<label id="pLabel" for="pInput"></label>
+		<input id="pInput" type="text" class="parameter" tabindex="3" onchange="setProb()" />
+	</span>
 </fieldset>
 </div>
 
