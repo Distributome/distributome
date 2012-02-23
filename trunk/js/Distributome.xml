@@ -479,21 +479,22 @@
 	<name>hyperbolic secant distribution</name>
 	<type>continuous</type>
 	<model>The hyperbolic secant distribution is a symmetric, unimodal distribution but with larger kurtosis than the normal distribution.</model>
+	<parameter>\( \mu \in (-\infty, \infty) \), the location parameter</parameter>
+  <parameter>\( \sigma \in (0, \infty) \), the scale parameter</parameter>
 	<support>\((-\infty, \infty)\)</support>
-	<pdf>\(f(x) = \frac{1}{2} \sech\left(\frac{\pi}{2} x\right), \; x \in (-\infty, \infty)\)</pdf>
-	<mode>\(0\)</mode>
-	<cdf>\(F(x) = \frac{2}{\pi} \arctan\left[\exp\left(\frac{\pi}{2} x \right)\right], \; x \in (-\infty, \infty)\)</cdf>
-	<qf>\(Q(p) = \frac{2}{\pi} \ln[\tan(\frac{\pi}{2} p)], \; p \in (0, 1)\)</qf>
-	<mgf>\(M(t) = \sec(t), \; t \in (-\frac{\pi}{1}, \frac{\pi}{2})\)</mgf>
+	<pdf>\(f(x) = \frac{1}{2 \sigma} \sech\left[\frac{\pi}{2} \left(\frac{x - \mu}{\sigma} \right)\right], \; x \in (-\infty, \infty)\)</pdf>
+	<mode>\(\mu\)</mode>
+	<cdf>\(F(x) = \frac{2}{\pi} \arctan\left[\exp\left(\frac{\pi}{2} \left(\frac{x - \mu}{\sigma}\right) \right)\right], \; x \in (-\infty, \infty)\)</cdf>
+	<qf>\(Q(p) = \mu + \sigma \frac{2}{\pi} \ln[\tan(\frac{\pi}{2} p)], \; p \in (0, 1)\)</qf>
+	<mgf>\(M(t) = e^{\mu t} \sec(\sigma t), \; t \in (-\frac{\pi}{1}, \frac{\pi}{2 \sigma})\)</mgf>
 	<cf>\(\varphi(t) = \sech(t), \; t \in (-\infty, \infty)\)</cf>
-	<mean>\(0\)</mean>
-	<variance>\(1\)</variance>
+	<mean>\(\mu\)</mean>
+	<variance>\(\sigma^2\)</variance>
 	<skew>\(0\)</skew>
 	<kurt>\(2\)</kurt>
-	<entropy>\(\frac{4}{\pi \kappa}\) where \(\kappa\) is Catalan's constant</entropy>
-	<median>\(0\)</median>
-	<q1>\(\frac{2}{\pi} \ln(\sqrt{2} - 1)\)</q1>
-	<q3>\(\frac{2}{\pi} \ln(\sqrt{2} + 1)\)</q3>
+	<median>\(\mu\)</median>
+	<q1>\( \mu + \sigma \frac{2}{\pi} \ln(\sqrt{2} - 1)\)</q1>
+	<q3>\( \mu + \sigma \frac{2}{\pi} \ln(\sqrt{2} + 1)\)</q3>
 </distribution>
 
 <distribution id="Irwin-Hall">
