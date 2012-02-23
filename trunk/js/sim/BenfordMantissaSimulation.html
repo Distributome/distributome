@@ -51,6 +51,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </div>
 </div>
 <div style="text-align: justify;" id="content">
+
 <div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
@@ -73,7 +74,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<option value="0">Stop: never</option>
 	</select>
 	<span class="tool">
-		<input type="checkbox" id="showCheck" onchange="showDist(this.checked)" />
+		<input type="checkbox" tabindex="6" id="showCheck" onchange="showDist(this.checked)" />
 		<label for="showCheck">Show Distribution</label>
 	</span>
 </fieldset>
@@ -81,7 +82,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <fieldset class="toolbar">
 	<span class="tool" title="Scale parameter">
 		<label id="bLabel" for="bInput"></label>
-		<input id="bInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+		<input id="bInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
 	</span>
 </fieldset>
 
