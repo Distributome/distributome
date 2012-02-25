@@ -179,7 +179,6 @@ function saveXML(){
 	
 function initialize(){
 	//document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>hfjf</td></tr></tbody>';
-	alert(distributionDropDown);
 	document.getElementById('distributome.distributionXmlTable').innerHTML = '<tbody><tr><td>'+distributionDropDown+'</td><td></td></tr></tbody>';
 	document.getElementById('distributome.distributionXmlTable').childNodes[0].childNodes[0].childNodes[0].childNodes[0].setAttribute('id','distributome.distributionXmlTable.dropDown0');
 	displayText('distributome.distributionXmlTable',0, 'distribution');
@@ -229,39 +228,52 @@ function displayText(id,num, type){
 
 
 function fetchArray(xmlDoc){
-	var element=xmlDoc.getElementsByTagName('xsd:element');
 	var fillArray = new Array();
 	var k;
-	for(var i=0; i<element.length;i++){
-		if (element[i].nodeType==1) {
-			var attribute = element[i].getAttribute("name");
-			if(attribute == "distribution"){
+	xmlDoc = xmlDoc.element[0].complexType[0].sequence[0];
+	for(var rows=0; rows<xmlDoc._children.length;rows++){
+		var childName = xmlDoc._children[rows];
+		var element = eval('xmlDoc.'+childName+'['+rows+']');
+		if(!element){
+			//alert("error"); 
+			return;
+		}
+		temp = xmlDoc;
+		var attribute = eval('temp.'+childName+'['+rows+'].name');
+		if(attribute == "distributions" || attribute == "relations"){
+			if(attribute == "distributions"){
 				fillArray = distributionArray;
-			}else if(attribute == "relation"){
+			}else if(attribute == "relations"){
 				fillArray = relationArray;
 			}
 			k=0;
-			if(attribute == "distribution"){
-				var childnodes = element[i].getElementsByTagName("xsd:complexType")[0].getElementsByTagName("xsd:sequence")[0].childNodes;
-				for(var j=0; j<childnodes.length; j++){
-					if (childnodes[j].nodeType==1) {
-						var name = childnodes[j].getAttribute("name");
-						//name = name.substring(4);
+			
+			temp = eval('xmlDoc.'+childName+'[rows].complexType[0].sequence[0].'+childName+'[0].complexType[0]');
+			var childrenLength = temp._children.length;
+			for(var listCount=0; listCount<childrenLength; listCount++){
+				var childrenName = temp._children[listCount];
+				if(childrenName == 'sequence'){
+					var childnodes = eval('temp.sequence[0]._children');
+					for(var j=0; j<childnodes.length; j++){
+							var child = eval('temp.sequence[0]._children[j]');
+							var name = eval('temp.sequence[0].'+child+'[j].name');
+							//name = name.substring(4);
+							fillArray[k++] = name;
+						
+					}
+				}else{
+					var attributeLength = eval('temp.'+childrenName+'.length');
+					for(var j=0; j<attributeLength; j++){
+						var name = eval('temp.'+childrenName+'[j].name');
 						fillArray[k++] = name;
 					}
 				}
-				distributionDropDown = createDropDown(fillArray, '<option value="-1">Select a distribution attribute</option>');
+				
+				
 			}
-			k=0;
-			if(attribute == "relation"){
-				var childnodes = element[i].getElementsByTagName("xsd:complexType")[0].getElementsByTagName("xsd:sequence")[0].childNodes;
-				for(var j=0; j<childnodes.length; j++){
-					if (childnodes[j].nodeType==1) {
-						var name = childnodes[j].getAttribute("name");
-						//name = name.substring(4);
-						fillArray[k++] = name;
-					}
-				}
+			if(attribute == "distributions"){
+				distributionDropDown = createDropDown(fillArray, '<option value="-1">Select a distribution attribute</option>');
+			}else{
 				relationDropDown = createDropDown(fillArray, '<option value="-1">Select a relation criteria</option>');
 			}
 		}
@@ -270,24 +282,20 @@ function fetchArray(xmlDoc){
 
 {
 
-	/***/
-		var xsdhttp=createAjaxRequest();
-		xsdhttp.open("GET","Distributome.xsd",false);
-		xsdhttp.send();
-		//if (!xsdhttp.responseXML.documentElement && xsdhttp.responseStream)
-			//xsdhttp.responseXML.load(xsdhttp.responseStream);
-		var xsdDoc = xsdhttp.responseText;
-		alert(xsdDoc);
-		//fetchArray(xsdDoc);
-	/***/
-		
+		var xmlhttp=createAjaxRequest();
+		xmlhttp.open("GET","Distributome.xsd",false);
+		xmlhttp.send();
+		//if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
+			//xmlhttp.responseXML.load(xmlhttp.responseStream);
+		var xmlData = xmlhttp.responseText;
+		var myXMLasJSON = convertXMLToJSON(convertTextToXML(xmlData));
+		fetchArray(myXMLasJSON);
 		var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		xmlDoc = xmlhttp.responseXML;
-		alert(xmlDoc);
 		var distributomeEditorXML_Objects;
 		try{
 			distributomeEditorXML_Objects=xmlDoc.documentElement.childNodes;
