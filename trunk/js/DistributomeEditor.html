@@ -8,27 +8,30 @@
 
 <head>
   	<title>Distributome.org</title>
-  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  	<meta name="description" content="Probability and Statistics Distributions Resource - Distributome"/>
-  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Application"/>
-  	<meta name="author" content="Ivo Dinov - http://www.Distributome.org"/>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<meta name="description" content="Probability and Statistics Distributions Resource - Distributome">
+  	<meta name="keywords" content="Probability Statistics Distributions Resource Distributome Web Application">
+  	<meta name="author" content="Ivo Dinov - http://www.Distributome.org">
+
   
-  	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css"/>
-  	<link rel="shortcut icon" href="../images/favicon.ico"/>
+  	<link rel="stylesheet" type="text/css" href="../images/Distributome_style.css">
+  	<link rel="shortcut icon" href="../images/favicon.ico">
 	
   	<script type="text/javascript" src="scripts/protovis-r3.2.js"></script>
   	
+	<script type="text/javascript" src="scripts/xml2json.js"></script>
   	<script type="text/javascript" src="scripts/common.js"></script>
 	<script type="text/javascript" src="scripts/editor.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.js"></script>
 	<script type="text/javascript" src="./scripts/splitter.js"></script>
+
 	<script type="text/javascript" src="./scripts/XMLWriter.js"></script>
 
 	<!-- MathJax LaTeX/TeX Typesetting scripts -->
 	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	</script>
 	
-	<script type="text/javascript" > 
+	<script> 
   		MathJax.Hub.Config({
   			TeX: {
     			Macros: {
@@ -49,6 +52,7 @@
   		});
   	</script>
 	<!-- End of MathJax LaTeX/TeX Typesetting scripts -->
+
 	
   	<style type="text/css" media="all">
 		html, body {
@@ -128,11 +132,13 @@
 <div id="wrapper-menu-top">
 <div id="menu-top">
 	<ul>
+
   		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
   		<li><span> Tools</span><span> »</span></li>
   		<li><a href="./DistributomeDBSearch.xml.html" title="Keyword Search the Distributome Meta-data"><span>DB Search</span></a></li>
   		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
   		<li><a href="../docs.html" title="Distributome Technical Documentation"><span>Tech Docs</span></a></li>
+
   		<li><a href="../about.html" title="About the Probability Distributome Project"><span>About</span></a></li>
   		<li><a href="./DistributomeNavigator.html" title="Distributome Interactive Explorer"><span>Navigator</span></a></li>
 		<li><a href="../legacy.html" title="Legacy Distributome Java Resources"><span>Legacy Resources</span></a></li>
@@ -150,6 +156,7 @@
 		<h1> <center>Distributome Resource Interactive Web-based Editor</center>
 	</h1>
 	</div>
+
 	</div>
 	</div>
 </div>
@@ -165,6 +172,7 @@
   	-->
   	<table class="toolbar" style="width=90%">
 	<tr>
+
   		<!-- Search Area -->
   			<td class="tool">
   				<!-- Search for a node (distributon) or edge (relation) by keyword(s).
@@ -177,6 +185,7 @@
 
   		<!--Neighbors Selector --> 
   			<td class="tool">
+
   				<!-- Having a Distribution (node) selected by the user, highlight node neighbors,
   					parents, children, or both - parents and children (of a chosen distribution)
   				 -->
@@ -186,6 +195,7 @@
 						<option value="parent">Show Parent</option>
 						<option value="children">Show Children</option>
 						<option value="parentchildren">Parents and Children</option>
+
 					</select>
 				</form>
 			</td>
@@ -196,12 +206,14 @@
  					<!-- Get the type of a node (distribution) and highlight all nodes of this type.
   				 	-->
 					<select name="NodeType" id="distributome.nodeTypeAction" onchange="nodeTypeInfoFetch();">
+
 						<option value="distributionType">Distribution Type</option>
 						<option value="convolution">Convolution</option>
 						<option value="memoryless">Memoryless</option>
 						<option value="inverse">Inverse</option>
 						<option value="linearCombination">Linear Combination</option>
 						<option value="maximum">Maximum</option>
+
 						<option value="minimum">Minimum</option>
 						<option value="discrete">Discrete</option>
 						<option value="continuous">Continuous</option>
@@ -210,6 +222,7 @@
 			</td>
 
 		<!-- Edge-Type Selector -->
+
 			<td class="tool">
 				<form action="EdgeTypeAction" >
 					<!-- Get the type of an edge (relation) and highlight all edges of this type.
@@ -219,6 +232,7 @@
 						<option value="relationType">Relation Type</option>
 						<option value="special case">Special Case</option>
 						<option value="transform">Transform</option>
+
 						<option value="limiting">Limiting</option>
 						<option value="transformation">Transformation</option>
 						<option value="bayesian">Bayesian</option>
@@ -227,6 +241,7 @@
 			</td>
 
 			<!-- Reset Navigator -->
+
 			<td class="tool">
 				<!-- Reset the Distributome Graph Navigator (reset zoom, location (pan),
 					give new random coordinates of all nodes and start Protovis relaxation
@@ -242,6 +257,7 @@
 				</button>
 			</td>
 			<td class="tool">
+
 				<button type="button" id="resetButton" tabindex="4" 
 					title="Reset View" onclick="graphPause();">Pause
 				</button>
@@ -333,6 +349,7 @@
     <div id="RightSide_Splitter1"> 
  
 	<div class="Top Pane" id="distributome.propertiesPannel">		<!-- Get the Distribution Properties from Distributome.xml -->
+
 		<script type="text/javascript">
 			/****	To Do:
 				Make the content of 3 panels below (Distirbution-proprties, edge properties
@@ -355,6 +372,7 @@
 	<div id="RightSide_Splitter2">
 		<div class="Middle Pane 1">
 			<b><u>Distribution Actions</u></b> <br />
+
 			<ul> 
 				<li><a href="./calc/NormalCalculator.html" target="_blank" title="Interactive Distribution Calculator" id="distributome.calculator">Calculator</a></li>
 				<li><a href="./exp/PoissonExperiment.html" target="_blank" title="Run Virtual Distribution Experiment">Experiment</a></li>
@@ -370,6 +388,7 @@
 
 			<div class="Bottom Pane" id="distributome.referencePanel"> <!-- Get the References from Distributome.xml -->
 				<b><u>Distribution Referencies</u></b> <br />
+
 			</div>
 		</div>
 	</div>
@@ -381,6 +400,7 @@
 <div style="height:25px">
 	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="igoogle" style="width: 100%; border-color:black; border-width:0px; margin-top:3px;">
 		<tr><td align="left"><font class="home-txt">Resource Type</font>&nbsp;</td>
+
 			<td align="left">
 				<select class="home-txt" id="distributome.resourceType" onchange="reflectResourceType();">
 					<option value="-1">Select a resource</option>
@@ -388,6 +408,7 @@
 					<option value="2">Relation</option>
 				</select>
 			</td>
+
 		</tr>
 	</table>
 </div>
@@ -402,6 +423,7 @@
 <div style="position:absolute;top:400px; ">
 	<table cellpadding="0" cellspacing="0" border="0" width="100%" class="igoogle" style="width: 100%; border-color:black; border-width:0px; margin-top:3px;">
 		<tr valign="middle">
+
 			<td colspan="2" align="left" style="white-space:nowrap; height:10px;" >
 				<input type="button" class="home-txt" id="divAdminConsole.edit.submit" value="Save" onClick="saveXML();">
 			</td>
@@ -414,6 +436,7 @@
 </div>
 
 <div id="wrapper-footer">
+
 	<div id="footer">
 		Visitor number <img src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple" align="middle" border="0" height="20" hspace="4" vspace="2" width="60"> 
 		<script type="text/javascript"> var d=new Date(); 
@@ -537,6 +560,7 @@ $().ready(function() {
 <!-- GoogleAnalytics -->
 <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> </script>
 <script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker(); </script>
+
 <!-- End of GoogleAnalytics Code -->
 
 </body>
