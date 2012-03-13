@@ -121,7 +121,7 @@
 	<parameter>\(a \in (0, \infty)\), the left beta parameter</parameter>
 	<parameter>\(b \in (0, \infty)\), the right beta parameter</parameter>
 	<support>\(\{0, 1, \ldots, n\}\)</support>
-	<pdf>\(f(x) = {n \choose x} \frac{B(a + x) B(b + n - x)}{B(a, b)}, \; x \in \{0, 1, \ldots, n\}\), where \(B\) is the beta function</pdf>
+	<pdf>\( f(x) = \binom{n}{x} \frac{a^{[x]} b^{[n-x]}}{(a + b)^{[n]}} \), where \( r^{[j]} \) denotes the rising power of order \( j \)</pdf>
 	<cdf>\(F(x) = \sum_0^x f(t), \quad x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function</cdf>
 	<qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
 	<mean>\(n \frac{a}{a + b}\)</mean>
@@ -129,6 +129,24 @@
 	<skew>\(\frac{(a + b + 2n)(b - a)}{(a + b + 2)} \sqrt{\frac{1 + a + b}{b a b (n + a + b)}}\)</skew>
 	<kurt>\(\frac{(a + b)^2 ( + 1 + b)}{n a b (a + b + 2)(a + b + 3)(a + b + n)} \left[(a + b)(a + b - 1 + 6 n) + 3 a b (n - 2) + 6 n^2 - \frac{3 a b n (6-n)}{a + b} - \frac{18 a b n^2}{(a + b)^2}\right]\)</kurt>
 	<median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+</distribution>
+
+<distribution id="beta-negative binomial">
+	<name>beta-negative binomial distribution</name>
+	<type>discrete</type>
+	<model>The beta-negative binomial distribution arises when the success parameter in the negative binomial distribution is randomized and given a beta distribution.</model>
+	<parameter>\(k \in \{1, 2, \ldots\}\), the number of trials</parameter>
+	<parameter>\(a \in (0, \infty)\), the left beta parameter</parameter>
+	<parameter>\(b \in (0, \infty)\), the right beta parameter</parameter>
+	<support>\(\{k, k + 1, \ldots \}\)</support>
+	<pdf>\( f(x) = \binom{n - 1}{x - 1} \frac{a^{[x]} b^{[n-x]}}{(a + b)^{[n]}} \), where \( r^{[j]} \) denotes the rising power of order \( j \)</pdf>
+	<cdf>\(F(x) = \sum_0^x f(t), \quad x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function</cdf>
+	<qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
+	<mean>\(k \frac{a + b - 1}{a - 1}\) if \( a \gt 1 \)</mean>
+	<variance>\( k \frac{a + b - 1}{(a - 1)(a - 2)}[b + k (a + b - 2)] - k^2 \left(\frac{a + b - 1}{a - 1}\right)^2 \) if \( a \gt 2 \)</variance>
+  <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
 	<q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
 	<q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
 </distribution>
