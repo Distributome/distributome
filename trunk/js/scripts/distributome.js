@@ -84,8 +84,11 @@ function resetVariables(){
 	resetNodesEdges();
 	presetNodes = null;
 	connectivity = false;
-	//Default href for calculator
+	
+	//Default href for calculator, experiment, simulation
 	document.getElementById('distributome.calculator').href = './calc/NormalCalculator.html';
+	document.getElementById('distributome.experiment').href = './exp/BallUrnExperiment.html';
+	document.getElementById('distributome.simulation').href = './sim/NormalSimulation.html';
 }
 
 /*************** Reset search text **************/
@@ -160,7 +163,11 @@ function getNodeProperties(index, nodeName, d){
 	nodeName = trimSpecialCharacters(nodeName);
 	var firstChar = nodeName.substring(0,1).toUpperCase();
 	nodeName = nodeName.substring(1); //Is it camel case or only first letter Upper Case?
+	
 	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
+	document.getElementById('distributome.experiment').href = './exp/'+firstChar+nodeName+'Experiment.html';
+	document.getElementById('distributome.simulation').href = './sim/'+firstChar+nodeName+'Simulation.html';
+	
 	vis.render();
 }
 
