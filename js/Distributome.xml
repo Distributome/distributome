@@ -2117,6 +2117,20 @@
 		<type>convolution</type>
 	</relation>
 
+	<relation id="Beta/continuous-uniform"> 
+		<from>Beta</from>
+		<to>continuous uniform distribution</to>
+		<statement>Continuous Uniform \(\alpha=0\) and \(\beta==1\) is a special case of the Beta distribution (\(\alpha=1\), \(\beta=1\) ). </statement>
+		<type>special case</type>
+	</relation>
+
+	<relation id="Continuous-uniform/Exponential"> 
+		<from>Continuous-uniform</from>
+		<to>Exponential</to>
+		<statement>If U is Uniform(0,1), then \(V=-\frac{\log(U)}{r}\) has exponential distribution with parameter \(r\). </statement>
+		<type>special case</type>
+	</relation>
+	
 	<relation id="continuous-uniform/exponential">
 		<from>standard uniform distribtion</from>
 		<to>exponential distribution</to>
