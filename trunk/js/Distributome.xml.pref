@@ -41,6 +41,7 @@
 		<name>Chi-square</name>
 		<name>F-distribution</name>
 		<name>Exponential</name>
+		<name>Beta</name>
 	</hierarchy_level>
 
 	<hierarchy_level id="middle_hierarchy">
@@ -59,6 +60,7 @@
 		<name>Erlang</name>
 		<name>Wald</name>
 		<name>Levy</name>
+		<name>Pareto</name>
 	</hierarchy_level>
 
 </distributome_ontology>
