@@ -2081,6 +2081,13 @@
 		<type>transformation</type>
 	</relation>
 
+	<relation id="student/Cauchy"> 
+		<from>Student's t-distribution</from>
+		<to>Cauchy</to>
+		<statement>Cauchy is a spacial case of Student's \(t\)-distribution with \(n=1\) degrees of freedom.</statement>
+		<type>special case</type>
+	</relation>
+
 	<relation id="chi-square/Poisson/Rice">
 		<from>chi-square distribution</from>
 		<from>Poisson distribution</from>
