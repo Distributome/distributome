@@ -2077,7 +2077,7 @@
 		<from>chi-square distribution</from>
 		<from>standard normal distribution</from>
 		<to>Student's t-distribution</to>
-		<statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's's \(t\)-distribution with \(n\) degrees of freedom.</statement>
+		<statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's \(t\)-distribution with \(n\) degrees of freedom.</statement>
 		<type>transformation</type>
 	</relation>
 
