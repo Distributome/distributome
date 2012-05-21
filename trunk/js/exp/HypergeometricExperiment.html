@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Hypergeometric Experiment</title>
+<link rel="stylesheet" href="ScreenStyles.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="PrintStyles.css" type="text/css" media="print" />
+
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="HypergeometricExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+<body class="ancillary" onload="initializeExperiment();">
+
+<div class="header">
+<h3 class="ancillary">Hypergeometric Experiment</h3>
+</div>
+
+<div class="applet">
+<fieldset class="toolbar">
+	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
+		<img src="step.png" alt="Step" title="Step" />
+	</button>
+	<button type="button" id="runButton" tabindex="2" title="Run" onclick="runExperiment()">
+		<img id="runImage" src="run.png" alt="Run" title="Run" />
+	</button>
+	<button type="button" id="stopButton" tabindex="3" title="Stop" onclick="stopExperiment();">
+		<img id="stopImage" src="stop.png" alt="Stop" title="Stop" />
+	</button>
+	<button type="button" id="resetButton" tabindex="4" title="Reset" onclick="resetExperiment();">
+		<img src="reset.png" alt="Reset" title="Reset" />
+	</button>
+	<select id="stopSelect" tabindex="5" title="Stop frequency" onchange="stopFreq = value;">
+		<option value="10">Stop: 10</option>
+		<option value="100">Stop: 100</option>
+		<option value="1000">Stop: 1000</option>
+		<option value="10000">Stop: 10000</option>
+		<option value="0">Stop: never</option>
+	</select>
+	<span class="tool">
+		<input type="checkbox" tabindex="6" id="showCheck" onchange="showDist(this.checked)" />
+		<label for="showCheck">Show Distribution</label>
+	</span>
+</fieldset>
+
+<fieldset class="toolbar">
+	<span class="tool">
+		<label id="mLabel" or="mInput"></label>
+		<input id="mInput" type="range" tabindex="8" class="parameter" onchange="setPopulation();" />
+	</span>
+	<span <span class="tool">
+		<label id="rLabel" for="rInput"></label>
+		<input id="rInput" type="range" tabindex="9" class="parameter" onchange="setReds();" />
+	<span>
+	<span class="tool">
+		<label id="nLabel" for="nInput"></label>
+		<input id="nInput" type="range" tabindex="10" class="parameter" onchange="setSample();" />
+	</span>
+</fieldset>
+
+<table class="applet">
+	<tr>
+		<td class="device"><table class="ballPanel">
+			<tr>
+				<td class="device"><canvas id="ball0" class="ball"  width="30" height="30">Ball 1</canvas></td>
+				<td class="device"><canvas id="ball1" class="ball" width="30" height="30">Ball 2</canvas></td>
+				<td class="device"><canvas id="ball2" class="ball" width="30" height="30">Ball 3</canvas></td>
+				<td class="device"><canvas id="ball3" class="ball" width="30" height="30">Ball 4</canvas></td>
+				<td class="device"><canvas id="ball4" class="ball" width="30" height="30">Ball 5</canvas></td>
+				<td class="device"><canvas id="ball5" class="ball" width="30" height="30">Ball 6</canvas></td>
+				<td class="device"><canvas id="ball6" class="ball" width="30" height="30">Ball 7</canvas></td>
+				<td class="device"><canvas id="ball7" class="ball" width="30" height="30">Ball 8</canvas></td>
+				<td class="device"><canvas id="ball8" class="ball" width="30" height="30">Ball 9</canvas></td>
+				<td class="device"><canvas id="ball9" class="ball" width="30" height="30">Ball 10</canvas></td>
+			</tr>
+			<tr>
+				<td class="device"><canvas id="ball10" class="ball" width="30" height="30">Ball 11</canvas></td>
+				<td class="device"><canvas id="ball11" class="ball" width="30" height="30">Ball 12</canvas></td>
+				<td class="device"><canvas id="ball12" class="ball" width="30" height="30">Ball 13</canvas></td>
+				<td class="device"><canvas id="ball13" class="ball" width="30" height="30">Ball 14</canvas></td>
+				<td class="device"><canvas id="ball14" class="ball" width="30" height="30">Ball 15</canvas></td>
+				<td class="device"><canvas id="ball15" class="ball" width="30" height="30">Ball 16</canvas></td>
+				<td class="device"><canvas id="ball16" class="ball" width="30" height="30">Ball 17</canvas></td>
+				<td class="device"><canvas id="ball17" class="ball" width="30" height="30">Ball 18</canvas></td>
+				<td class="device"><canvas id="ball18" class="ball" width="30" height="30">Ball 19</canvas></td>
+				<td class="device"><canvas id="ball19" class="ball" width="30" height="30">Ball 20</canvas></td>
+			</tr>
+			<tr>
+				<td class="device"><canvas id="ball20" class="ball" width="30" height="30">Ball 21</canvas></td>
+				<td class="device"><canvas id="ball21" class="ball" width="30" height="30">Ball 22</canvas></td>
+				<td class="device"><canvas id="ball22" class="ball" width="30" height="30">Ball 23</canvas></td>
+				<td class="device"><canvas id="ball23" class="ball" width="30" height="30">Ball 24</canvas></td>
+				<td class="device"><canvas id="ball24" class="ball" width="30" height="30">Ball 25</canvas></td>
+				<td class="device"><canvas id="ball25" class="ball" width="30" height="30">Ball 26</canvas></td>
+				<td class="device"><canvas id="ball26" class="ball" width="30" height="30">Ball 27</canvas></td>
+				<td class="device"><canvas id="ball27" class="ball" width="30" height="30">Ball 28</canvas></td>
+				<td class="device"><canvas id="ball28" class="ball" width="30" height="30">Ball 29</canvas></td>
+				<td class="device"><canvas id="ball29" class="ball" width="30" height="30">Ball 30</canvas></td>
+			</tr>
+			<tr>
+				<td class="device"><canvas id="ball30" class="ball" width="30" height="30">Ball 31</canvas></td>
+				<td class="device"><canvas id="ball31" class="ball" width="30" height="30">Ball 32</canvas></td>
+				<td class="device"><canvas id="ball32" class="ball" width="30" height="30">Ball 33</canvas></td>
+				<td class="device"><canvas id="ball33" class="ball" width="30" height="30">Ball 34</canvas></td>
+				<td class="device"><canvas id="ball34" class="ball" width="30" height="30">Ball 35</canvas></td>
+				<td class="device"><canvas id="ball35" class="ball" width="30" height="30">Ball 36</canvas></td>
+				<td class="device"><canvas id="ball36" class="ball" width="30" height="30">Ball 37</canvas></td>
+				<td class="device"><canvas id="ball37" class="ball" width="30" height="30">Ball 38</canvas></td>
+				<td class="device"><canvas id="ball38" class="ball" width="30" height="30">Ball 39</canvas></td>
+				<td class="device"><canvas id="ball39" class="ball" width="30" height="30">Ball 40</canvas></td>
+			</tr>
+			<tr>
+				<td class="device"><canvas id="ball40" class="ball" width="30" height="30">Ball 41</canvas></td>
+				<td class="device"><canvas id="ball41" class="ball" width="30" height="30">Ball 42</canvas></td>
+				<td class="device"><canvas id="ball42" class="ball" width="30" height="30">Ball 43</canvas></td>
+				<td class="device"><canvas id="ball43" class="ball" width="30" height="30">Ball 44</canvas></td>
+				<td class="device"><canvas id="ball44" class="ball" width="30" height="30">Ball 45</canvas></td>
+				<td class="device"><canvas id="ball45" class="ball" width="30" height="30">Ball 46</canvas></td>
+				<td class="device"><canvas id="ball46" class="ball" width="30" height="30">Ball 47</canvas></td>
+				<td class="device"><canvas id="ball47" class="ball" width="30" height="30">Ball 48</canvas></td>
+				<td class="device"><canvas id="ball48" class="ball" width="30" height="30">Ball 49</canvas></td>
+				<td class="device"><canvas id="ball49" class="ball" width="30" height="30">Ball 50</canvas></td>
+			</tr>
+		</table></td>
+		<td class="device"><canvas id="distCanvas" width="325" height="170">Distribution graph</canvas></td>
+	</tr>
+	<tr>
+		<td class="device"><textarea id="recordTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
+		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
+	</tr>
+</table>
+</div>
+
+<h4 class="ancillary">Description</h4>
+
+<p>The experiment consists of selecting \(n\) balls at random, without replacement, from an urn with \(m\) balls, \(r\) of which are red and the other \(m - r\) green. Random variable \(Y\) gives the number of red balls in the sample, and is recorded on each run in the data table. This random variable has the hypergeometric distribution with parameters \( m \), \( r \), and \( n \).</p>
+
+<div class="footer">
+
+</div>
+</body>
+
+</html>
