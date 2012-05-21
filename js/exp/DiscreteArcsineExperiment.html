@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Discrete Arcsine Distribution Experiment</title>
+
+<link rel="stylesheet" href="ScreenStyles.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="PrintStyles.css" type="text/css" media="print" />
+
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="DiscreteArcsineExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+<body class="ancillary" onload="initializeExperiment();">
+
+<div class="header">
+<h3 class="ancillary">Discrete Arcsine Distribution Experiment</h3>
+</div>
+
+<div class="applet">
+<fieldset class="toolbar">
+	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
+		<img src="step.png" alt="Step" title="Step" />
+	</button>
+	<button type="button" id="runButton" tabindex="2" title="Run" onclick="runExperiment()">
+		<img id="runImage" src="run.png" alt="Run" title="Run" />
+	</button>
+	<button type="button" id="stopButton" tabindex="3" title="Stop" onclick="stopExperiment();">
+		<img id="stopImage" src="stop.png" alt="Stop" title="Stop" />
+	</button>
+	<button type="button" id="resetButton" tabindex="4" title="Reset" onclick="resetExperiment();">
+		<img src="reset.png" alt="Reset" title="Reset" />
+	</button>
+	<select id="stopSelect" tabindex="5" title="Stop frequency" onchange="stopFreq = value;">
+		<option value="10">Stop: 10</option>
+		<option value="100">Stop: 100</option>
+		<option value="1000">Stop: 1000</option>
+		<option value="10000">Stop: 10000</option>
+		<option value="0">Stop: never</option>
+	</select>
+	<span class="tool">
+		<input type="checkbox" id="showCheck" tabindex="6" onchange="showDist(this.checked)" />
+		<label for="showCheck">Show Distribution</label>
+	</span>
+</fieldset>
+
+<fieldset class="toolbar">
+	<span class="tool">
+		<label id="nLabel" for="nInput"></label>
+		<input type="range" id="nInput" class="parameter" tabindex="7" onchange="resetExperiment();"/>
+	</span>
+</fieldset>
+
+<table class="applet">
+	<tr>
+		<td class="device"><canvas width="300" height="200" class="graph" id="walkCanvas" title="Walk Graph">Walk graph</canvas></td>
+		<td class="device"><canvas width="300" height="200" id="distCanvas" title="Distribution graph">Distribution graph</canvas></td>
+	</tr>
+	<tr>
+		<td class="device"><textarea readonly="true" wrap="off" class="table" id="recordTable" rows="7"></textarea></td>
+		<td class="device"><textarea readonly="true" wrap="off" class="table" id="distTable" rows="7"></textarea></td>
+	</tr>
+</table>
+</div>
+
+<h4 class="ancillary">Description</h4>
+
+<p>The experiment consists of tossing \(n\) fair coins. The position of the random walk after \(j\) tosses is the number of heads minus the number of tails. The random variables of interest is \( L \) the time of the last zero, which has the discrete arcsine distribution. The random walk is shown in red in the left graph on each update. A red dot is shown at  \((L, 0)\). The value of \( L \) is recorded in the data table on each run. The probability density function and moments of \( L \) is shown in blue in the distribution graph and are recorded in the distribution table. On each run, the empirical density function and moments are shown in red in the distribution graph and are recorded in the distribution table. The number of steps \(n\) can be varied with the input control.</p>
+
+</body>
+</html>
