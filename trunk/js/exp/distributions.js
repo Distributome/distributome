@@ -5,6 +5,21 @@ See http://www.distributome.org
 
 //Special Functions
 
+//Error function
+erf = function(x){
+	var p=0.3275911, a1=0.254829592, a2=-0.284496736, a3=1.421413741, a4=-1.453152027, a5=1.061405429;
+	var x0 = Math.abs(x);
+	var t = 1 / (1 + p * x0)
+	var y = 1 - (a1 * t + a2 * Math.pow(t, 2) + a3 * Math.pow(t, 3) + a4 * Math.pow(t, 4) + a5 * Math.pow(t, 5)) * Math.exp(-Math.pow(x, 2));
+	if (x >= 0) return y; 
+	else return -y;	
+}
+
+//Standard normal CDF
+stdNormalCDF = function(x){
+	return 0.5 + 0.5 * erf(x / Math.sqrt(2));
+}
+
 //Tests for parity
 function isEven(n){
     if (n % 2 === 0) return true;
@@ -61,6 +76,16 @@ function binomial(n, k){
 	var product = 1;
 	for (var i = 0; i < k; i++)	product = product * ((n - i) / (k - i));
 	return product;
+}
+
+//Polylogarithm function
+function polyLog(a, x){
+	var sum = 0, k = 1, e = 0.0001;
+	while (Math.pow(x, k) / Math.pow(k, a) > e){
+		sum = sum + Math.pow(x, k) / Math.pow(k, a);
+		k++;
+	}
+	return sum;
 }
 
 //Sampling functions
@@ -177,8 +202,17 @@ function betaCDF(x, a, b){
 	var bt;
 	if ((x === 0) || (x === 1)) bt = 0;
 	else bt = Math.exp(logGamma(a + b) - logGamma(a) - logGamma(b) + a * Math.log(x) + b * Math.log(1 - x));
-	if (x < (a + 1) / (a + b + 2)) return bt * betaCF(x, a, b) / a;
+	if (x < (a + 1)/(a + b + 2)) return bt * betaCF(x, a, b) / a;
 	else return 1 - bt * betaCF(1 - x, b, a) / b;
+}
+
+//Zeta function
+function zeta(x){
+	var terms = Math.ceil(Math.pow(10, 4 / x));
+	var sum = 0;
+	for (var n = 1; n < terms; n++)
+	sum = sum + 1 / Math.pow(n, x);
+	return sum;
 }
 
 //Data distribution
@@ -206,6 +240,10 @@ function Data(a, b, s){
 	
 	this.mean = function(){
 		return sum / size;
+	};
+	
+	this.meanSquare = function(){
+		return sumSquares / size;
 	};
 	
 	this.variance = function(){
@@ -355,28 +393,38 @@ function Distribution(minValue, maxValue, step, type, pdf){
 	
 	this.CDF = function(x){
 		var sum = 0, dt;
-		if (type === 0) dt = 1; else dt = this.step;
+		if (this.type === 0) dt = 1; else dt = this.step;
 		for (var t = this.minValue; t <= x; t = t + this.step) sum = sum + this.density(t) * dt;
 		return sum;
 	};
 	
 	this.quantile = function(p){
-		var x, x1, x2, error, q, n;
+		var x, q, n, x1, x2, error;
 		if (p < 0 || p > 1) return NaN;
-		else if (p === 0) return this.lowerBound;
-		else if (p === 1) return this.upperBound;
+		else if (p === 0) return this.minValue;
+		else if (p === 1) return this.this.maxValue;
 		else{
-			x1 = this.minValue; x2 = this.maxValue;
-			x = (x1 + x2) / 2;
-			q = this.CDF(x);
-			error = Math.abs(q - p);
-			n = 1;
-			while (error > 0.0001 && n < 100){
-				n++;
-				if (q < p) x1 = x; else x2 = x;
+			if (this.type === 0){
+				x = this.minValue;
+				q = this.density(x);
+				while(q < p){
+					x = x + this.step;
+					q = q + this.density(x);
+				}
+			}
+			else {
+				x1 = this.minValue; x2 = this.maxValue;
 				x = (x1 + x2) / 2;
 				q = this.CDF(x);
 				error = Math.abs(q - p);
+				n = 1;
+				while (error > 0.00001 && n < 100){
+					n++;
+					if (q < p) x1 = x; else x2 = x;
+					x = (x1 + x2) / 2;
+					q = this.CDF(x);
+					error = Math.abs(q - p);
+				}
 			}
 			return x;
 		}
@@ -418,8 +466,7 @@ function Distribution(minValue, maxValue, step, type, pdf){
 		var s = this.stdDev();
 		return this.centralMoment(4) / Math.pow(s, 4);
 	};
-	
-	
+		
 	this.MGF = function(t){
 		var sum = 0, dx;
 		if (this.type === 0) dx = 1; else dx = this.step;
@@ -447,7 +494,7 @@ function Distribution(minValue, maxValue, step, type, pdf){
 
 	this.simulate = function(){
 		var p = Math.random(), sum = 0, y;
-		if (type === 0){
+		if (this.type === 0){
 			for (var x = this.minValue; x <= this.maxValue; x = x + this.step){
 				if ((sum < p) && (p <= sum + this.density(x))) y = x;
 				sum = sum + this.density(x);
@@ -523,7 +570,7 @@ function BinomialDistribution(trials, prob){
 		return perm(this.trials, n) * Math.pow(this.prob, n);
 	};
 }
-BinomialDistribution.prototype = new Distribution();
+BinomialDistribution.prototype = new Distribution;
 
 //The binomial distribution with the number of trials randomized
 function BinomialNDistribution(dist, prob){
@@ -557,7 +604,7 @@ function BinomialNDistribution(dist, prob){
 		return successes;
 	};
 }
-BinomialNDistribution.prototype = new Distribution();
+BinomialNDistribution.prototype = new Distribution;
 
 //Negative binomial distribution
 function NegativeBinomialDistribution(successes, prob){
@@ -612,10 +659,10 @@ function NegativeBinomialDistribution(successes, prob){
 	};
 	
 	this.kurt = function(){
-		return (1 / this.successes) * (6 + this.prob * this.prob / (1 - this.prob));
+		return (1/this.successes) * (6 + this.prob * this.prob / (1 - this.prob));
 	};
 }
-NegativeBinomialDistribution.prototype = new Distribution();
+NegativeBinomialDistribution.prototype = new Distribution;
 
 //Normal distribution
 function NormalDistribution(mu, sigma){
@@ -642,9 +689,7 @@ function NormalDistribution(mu, sigma){
 	};
 	
 	this.CDF = function(x){
-		var z = (x - this.mu) / this.sigma;
-		if (z >= 0) return 0.5 + 0.5 * gammaCDF(0.5 * z * z, 0.5);
-		else return 0.5 - 0.5 * gammaCDF(0.5 * z * z, 0.5);
+		return stdNormalCDF((x - this.mu) / this.sigma);
 	};	
 	
 	this.simulate = function(){
@@ -685,7 +730,7 @@ function NormalDistribution(mu, sigma){
 		}
 	};
 }
-NormalDistribution.prototype = new Distribution();
+NormalDistribution.prototype = new Distribution;
 
 //Gamma Distribution
 function GammaDistribution(shape, scale){
@@ -726,7 +771,7 @@ function GammaDistribution(shape, scale){
 		return stdDev;
 	};
 }
-GammaDistribution.prototype = new Distribution();	
+GammaDistribution.prototype = new Distribution;	
 
 //Chi-square distribution
 function ChiSquareDistribution(df){
@@ -749,7 +794,7 @@ function ChiSquareDistribution(df){
 	};
 
 	this.CDF = function(x){
-		return gammaCDF(x / 2, this.df / 2);
+		return gammaCDF(x/2, this.df / 2);
 	};
 			
 	this.mean = function(){
@@ -773,7 +818,7 @@ function ChiSquareDistribution(df){
 		return V;
 	};
 }
-ChiSquareDistribution.prototype = new Distribution();
+ChiSquareDistribution.prototype = new Distribution;
 
 //Student t-distribution
 function StudentDistribution(df){
@@ -837,17 +882,16 @@ function StudentDistribution(df){
 		return x;
 	};
 }
-StudentDistribution.prototype = new Distribution();
+StudentDistribution.prototype = new Distribution;
 
 //F distribution
 function FDistribution(num, den){
 	this.num = num; 
 	this.den = den;
-	var c = (gamma((this.num + this.den) / 2) / (gamma(this.num / 2) * gamma(this.den / 2))) * Math.pow(this.num / this.den, this.num / 2);
-	if (this.den == 1) this.minValue = 0.1; 
-	else this.minValue = 0;
+	var c = (gamma((this.num + this.den)/2) / (gamma(this.num/2) * gamma(this.den/2))) * Math.pow(this.num/this.den, this.num/2);
+	this.minValue = 0;
 	if (this.den <= 4) this.maxValue = 20; 
-	else this.maxValue = this.den / (this.den - 2)  + 4 * Math.sqrt(2.0 * (this.den / (this.den - 2)) * (this.den / (this.den - 2)) * (this.den + this.num - 2) / (this.num * (this.den - 4)));
+	else this.maxValue = this.den/(this.den - 2)  + 4 * Math.sqrt(2.0 * (this.den/(this.den - 2)) * (this.den/(this.den - 2)) * (this.den + this.num - 2) / (this.num * (this.den - 4)));
 	this.step = (this.maxValue - this.minValue) / 100;
 	this.type = 1;
 	this.data = new Data(this.minValue, this.maxValue, this.step);
@@ -858,13 +902,13 @@ function FDistribution(num, den){
 	};
 	
 	this.density = function(x){
-		return c * Math.pow(x, (this.num - 2) / 2) / Math.pow(1 + (this.num / this.den) * x, (this.num + this.den) / 2);
+		return c * Math.pow(x, (this.num - 2)/2)/Math.pow(1 + (this.num/this.den) * x, (this.num + this.den) / 2);
 
 	};
 
 	this.CDF = function(x){
 		var u = this.den / (this.den + this.num * x);
-		if (x < 0) return 0;
+		if (x <= 0) return 0;
 		else return 1 - betaCDF(u, 0.5 * this.den, 0.5 * this.num);
 	};
 		
@@ -876,7 +920,7 @@ function FDistribution(num, den){
 	this.variance = function(){
 		if (this.den <= 2) return NaN;
 		else if (this.den <= 4) return Infinity;
-		else return 2.0 * (this.den / (this.den - 2)) * (this.den / (this.den - 2))	* (this.den + this.num - 2) / (this.num * (this.den - 4));
+		else return 2.0 * (this.den/(this.den - 2)) * (this.den/(this.den - 2))	* (this.den + this.num - 2) / (this.num * (this.den - 4));
 	};
 		
 	this.simulate = function(){
@@ -895,12 +939,12 @@ function FDistribution(num, den){
 			Z = r * Math.cos(theta);
 			V = V + Z * Z;
 		}
-		x = (U / this.num) / (V / this.den);
+		x = (U/this.num) / (V/this.den);
 		this.setValue(x);
 		return x;
 	};	
 }
-FDistribution.prototype = new Distribution();
+FDistribution.prototype = new Distribution;
 
 //Beta distribution
 function BetaDistribution(left, right){
@@ -940,7 +984,7 @@ function BetaDistribution(left, right){
 		return this.left * this.right / ((this.left + this.right) * (this.left + this.right) * (this.left + this.right + 1));
 	};
 }
-BetaDistribution.prototype = new Distribution();
+BetaDistribution.prototype = new Distribution;
 
 //Weibull distribution
 function WeibullDistribution(shape, scale){
@@ -980,7 +1024,7 @@ function WeibullDistribution(shape, scale){
 		return variance;
 	};
 }
-WeibullDistribution.prototype = new Distribution();
+WeibullDistribution.prototype = new Distribution;
 
 //Pareto distribution
 function ParetoDistribution(shape, scale){
@@ -1007,7 +1051,7 @@ function ParetoDistribution(shape, scale){
 	};
 	
 	this.quantile = function(p){
-		return this.scale / Math.pow((1 - p), 1 / this.shape);
+		return this.scale/Math.pow((1 - p), 1 / this.shape);
 	};
 		
 	this.mean = function(){
@@ -1021,7 +1065,7 @@ function ParetoDistribution(shape, scale){
 		else return (this.shape * this.scale * this.scale) / ((this.shape - 1) * (this.shape - 2) * (this.shape - 2));
 	};
 }
-ParetoDistribution.prototype = new Distribution();
+ParetoDistribution.prototype = new Distribution;
 
 //Logistic distribution
 function LogisticDistribution(location, scale){
@@ -1060,7 +1104,7 @@ function LogisticDistribution(location, scale){
 		return variance;
 	};
 }
-LogisticDistribution.prototype = new Distribution();
+LogisticDistribution.prototype = new Distribution;
 
 //Lognormal distribution
 function LogNormalDistribution(mu, sigma){
@@ -1076,7 +1120,7 @@ function LogNormalDistribution(mu, sigma){
 	
 	this.density = function(x){
 		if (x === 0) return 0; 
-		else return Math.exp(-(Math.log(x) - this.mu) * (Math.log(x) - this.mu) / (2 * this.sigma * this.sigma)) / (Math.sqrt(2 * Math.PI) * this.sigma * x);
+		else return Math.exp(-(Math.log(x) - this.mu) * (Math.log(x) - this.mu)/(2 * this.sigma * this.sigma)) / (Math.sqrt(2 * Math.PI) * this.sigma * x);
 	};
 	
 	this.mode = function(){
@@ -1084,9 +1128,13 @@ function LogNormalDistribution(mu, sigma){
 	};
 	
 	this.CDF = function(x){
-		var z = (Math.log(x) - this.mu) / this.sigma;
-		if (z >= 0) return 0.5 + 0.5 * gammaCDF(0.5 * z * z, 0.5);
-		else return 0.5 - 0.5 * gammaCDF(0.5 * z * z, 0.5);
+		var z;
+		if (x <= 0) return 0;
+		else{
+			z = (Math.log(x) - this.mu) / this.sigma;
+			if (z >= 0) return 0.5 + 0.5 * gammaCDF(0.5 * z * z, 0.5);
+			else return 0.5 - 0.5 * gammaCDF(0.5 * z * z, 0.5);
+		}
 	};
 	
 	this.mean = function(){
@@ -1105,7 +1153,7 @@ function LogNormalDistribution(mu, sigma){
 		return x;
 	};	
 }
-LogNormalDistribution.prototype = new Distribution();
+LogNormalDistribution.prototype = new Distribution;
 
 //Extreme value distribution	
 function ExtremeValueDistribution(location, scale){
@@ -1146,7 +1194,7 @@ function ExtremeValueDistribution(location, scale){
 		return variance;
 	};
 }
-ExtremeValueDistribution.prototype = new Distribution();
+ExtremeValueDistribution.prototype = new Distribution;
 
 //Poisson distribution
 function PoissonDistribution(rate){
@@ -1188,7 +1236,7 @@ function PoissonDistribution(rate){
 		return arrivals;
 	};	
 }
-PoissonDistribution.prototype = new Distribution();
+PoissonDistribution.prototype = new Distribution;
 
 //Uniform distribution
 function UniformDistribution(left, right){
@@ -1201,8 +1249,7 @@ function UniformDistribution(left, right){
 	this.data = new Data(this.minValue, this.maxValue, this.step);
 	
 	this.density = function(x){
-		if (x < this.left || x > this.right) return 0;
-		else return 1 / (this.right - this.left);
+		return 1 / (this.right - this.left);
 	};
 	
 	this.mode = function(){
@@ -1228,7 +1275,7 @@ function UniformDistribution(left, right){
 		return (Math.pow(this.right - this.left, 2)) / 12;
 	};
 }	
-UniformDistribution.prototype = new Distribution();
+UniformDistribution.prototype = new Distribution;
 
 //The hypergeometric distribution
 function HypergeometricDistribution(population, red, sample){
@@ -1258,7 +1305,7 @@ function HypergeometricDistribution(population, red, sample){
 		return this.sample * (this.red / this.population) * (1 - this.red / this.population) * (this.population - this.sample) / (this.population - 1);
 	};		
 }
-HypergeometricDistribution.prototype = new Distribution();
+HypergeometricDistribution.prototype = new Distribution;
 
 //Polya distribution
 function PolyaDistribution(red, green, add, trials){
@@ -1307,7 +1354,7 @@ function PolyaDistribution(red, green, add, trials){
 	};
 		
 }
-PolyaDistribution.prototype = new Distribution();
+PolyaDistribution.prototype = new Distribution;
 
 //Birthday Distribution
 function BirthdayDistribution(days, sample){
@@ -1365,7 +1412,7 @@ function BirthdayDistribution(days, sample){
 		return distinct;
 	};
 }
-BirthdayDistribution.prototype = new Distribution();
+BirthdayDistribution.prototype = new Distribution;
 
 //Finite order statistic distribution
 function FiniteOrderStatistic(population, sample, order){
@@ -1390,7 +1437,7 @@ function FiniteOrderStatistic(population, sample, order){
 		return (this.population + 1) * (this.population - this.sample) * this.order * (this.sample + 1 - this.order) / ((this.sample + 1) * (this.sample + 1) * (this.sample + 2));
 	};		
 }
-FiniteOrderStatistic.prototype = new Distribution();
+FiniteOrderStatistic.prototype = new Distribution;
 
 //Matching distribtion
 function MatchDistribution(hats){
@@ -1432,7 +1479,7 @@ function MatchDistribution(hats){
 		return sum;
 	};
 }
-MatchDistribution.prototype = new Distribution();
+MatchDistribution.prototype = new Distribution;
 
 //Discrete arcsine distribution
 function DiscreteArcsineDistribution(trials){
@@ -1468,7 +1515,7 @@ function DiscreteArcsineDistribution(trials){
 		return lastZero;
 	};
 }
-DiscreteArcsineDistribution.prototype = new Distribution();
+DiscreteArcsineDistribution.prototype = new Distribution;
 
 //Triangle distribution
 function TriangleDistribution(left, right, middle){
@@ -1511,7 +1558,7 @@ function TriangleDistribution(left, right, middle){
 		else return this.right - Math.sqrt((1 - p) * (this.right - this.left) * (this.right - this.middle));
 	};
 }
-TriangleDistribution.prototype = new Distribution();
+TriangleDistribution.prototype = new Distribution;
 
 //Semicircle distribution
 function SemiCircleDistribution(r){
@@ -1522,8 +1569,12 @@ function SemiCircleDistribution(r){
 	this.data = new Data(this.minValue, this.maxValue, this.step);
 	
 	this.density = function(x){
-		if (-r <= x && x <= r) return 2 * Math.sqrt(r * r - x * x) / (Math.PI * r * r);
-		else return 0;
+		if (x <= -r || x >= r) return 0; 
+		else return 2 * Math.sqrt(r * r - x * x) / (Math.PI * r * r);
+	};
+	
+	this.CDF = function(x){
+		return 0.5 + (Math.asin(x / r) + (x / r) * Math.sqrt(1 - x * x / (r * r)))/Math.PI;
 	};
 	
 	this.mode = function(){
@@ -1543,7 +1594,7 @@ function SemiCircleDistribution(r){
 	};
 
 }
-SemiCircleDistribution.prototype = new Distribution();
+SemiCircleDistribution.prototype = new Distribution;
 
 //Coupon collector distribution
 function CouponDistribution(m, k){
@@ -1590,7 +1641,7 @@ function CouponDistribution(m, k){
 		return ballCount;
 	};
 }
-CouponDistribution.prototype = new Distribution();
+CouponDistribution.prototype = new Distribution;
 
 //Distribution of the maximum position in the simple random walk
 function WalkMaxDistribution(n){
@@ -1623,10 +1674,10 @@ function WalkMaxDistribution(n){
 		return max;
 	};	
 }
-WalkMaxDistribution.prototype = new Distribution();
+WalkMaxDistribution.prototype = new Distribution;
 
 //Distribution of the final position in the simple random walk
-function WalkPositionDistribution(n){
+function WalkPositionDistribution(n, p){
 	this.minValue = -n;
 	this.maxValue = n;
 	this.step = 2;
@@ -1634,25 +1685,25 @@ function WalkPositionDistribution(n){
 	this.data = new Data(-n, n, 2);
 	
 	this.density = function(x){
-		return binomial(n, (x + n) / 2) / Math.pow(2, n);
+		return binomial(n, (x + n)/2) * Math.pow(p, (n + x)/2) * Math.pow(1 - p, (n - x)/2);
 	};
 	
-	this.maxDensity = function(){
-		return this.density(0);
+	this.mode = function(){
+		return 2 * Math.floor((n + 1) * p) - n;
 	};
 		
 	this.mean = function(){
-		return 0;
+		return n * (2 * p - 1);
 	};
 	
 	this.variance = function(){
-		return n;
+		return 4 * n * p * (1 - p);
 	};
 		
 	this.simulate = function(){
 		var step, position = 0;
 		for (var i = 1; i <= n; i++){
-			if (Math.random() < 0.5) step = 1;
+			if (Math.random() < p) step = 1;
 			else step = -1;
 			position = position + step;
 		}
@@ -1660,7 +1711,7 @@ function WalkPositionDistribution(n){
 		return position;
 	};
 }
-WalkPositionDistribution.prototype = new Distribution();
+WalkPositionDistribution.prototype = new Distribution;
 
 //The location scale distribution associated with a given distribution, location parameter a, scale parameter b
 function LocationScaleDistribution(dist, location, scale){
@@ -1702,7 +1753,7 @@ function LocationScaleDistribution(dist, location, scale){
 		return x;
 	};	
 }
-LocationScaleDistribution.prototype = new Distribution();
+LocationScaleDistribution.prototype = new Distribution;
 
 //Convolution power of a distribution
 function Convolution(d, n){
@@ -1749,7 +1800,7 @@ function Convolution(d, n){
 		return sum;
 	};
 }
-Convolution.prototype = new Distribution();
+Convolution.prototype = new Distribution;
 
 //Distribution of an order statistic from a given distribution
 function OrderStatistic(dist, sample, order){
@@ -1786,7 +1837,7 @@ function OrderStatistic(dist, sample, order){
 		return x;
 	};
 }
-OrderStatistic.prototype = new Distribution();
+OrderStatistic.prototype = new Distribution;
 
 //Cauchy distribution
 function CauchyDistribution(scale){
@@ -1822,7 +1873,7 @@ function CauchyDistribution(scale){
 	};
 	
 }
-CauchyDistribution.prototype = new Distribution();
+CauchyDistribution.prototype = new Distribution;
 
 //Arcsine distribution
 function ArcsineDistribution(){
@@ -1861,7 +1912,7 @@ function ArcsineDistribution(){
 	};
 	
 }
-ArcsineDistribution.prototype = new Distribution();
+ArcsineDistribution.prototype = new Distribution;
 
 //Hyperbolic Secant distribution
 function HyperbolicSecantDistribution(location, scale){
@@ -1887,7 +1938,7 @@ function HyperbolicSecantDistribution(location, scale){
 	};
 	
 	this.quantile = function(p){
-		return this.location + this.scale * (2 / Math.PI) * Math.log(Math.tan((Math.PI / 2) * p));
+		return this.location + this.scale * (2/Math.PI) * Math.log(Math.tan((Math.PI/2) * p));
 	};
 	
 	this.mean = function(){
@@ -1898,7 +1949,7 @@ function HyperbolicSecantDistribution(location, scale){
 		return Math.pow(this.scale, 2);
 	};
 }
-HyperbolicSecantDistribution.prototype = new Distribution();
+HyperbolicSecantDistribution.prototype = new Distribution;
 
 //Irwin-Hall distribution
 function IrwinHallDistribution(terms){
@@ -1938,7 +1989,7 @@ function IrwinHallDistribution(terms){
 	};
 	
 }
-IrwinHallDistribution.prototype = new Distribution();
+IrwinHallDistribution.prototype = new Distribution;
 
 function LaplaceDistribution(location, scale){
 	this.location = location;
@@ -1976,7 +2027,7 @@ function LaplaceDistribution(location, scale){
 	};
 }
 
-LaplaceDistribution.prototype = new Distribution();
+LaplaceDistribution.prototype = new Distribution;
 
 function BenfordMantissaDistribution(b){
 	this.base = b;
@@ -2011,7 +2062,7 @@ function BenfordMantissaDistribution(b){
 	};
 }	
 	
-BenfordMantissaDistribution.prototype = new Distribution();
+BenfordMantissaDistribution.prototype = new Distribution;
 
 function BenfordDigitDistribution(b){
 	this.base = b;
@@ -2029,7 +2080,7 @@ function BenfordDigitDistribution(b){
 		return (Math.log(x + 1) - Math.log(x)) / Math.log(this.base);
 	};
 }	
-BenfordDigitDistribution.prototype = new Distribution();
+BenfordDigitDistribution.prototype = new Distribution;
 
 function BetaBinomialDistribution(a, b, n){
 	this.trials = n;
@@ -2056,7 +2107,7 @@ function BetaBinomialDistribution(a, b, n){
 	};
 }	
 	
-BetaBinomialDistribution.prototype = new Distribution();
+BetaBinomialDistribution.prototype = new Distribution;
 
 function BetaNegativeBinomialDistribution(a, b, k){
 	this.successes = k;
@@ -2085,4 +2136,280 @@ function BetaNegativeBinomialDistribution(a, b, k){
 	};
 }	
 	
-BetaNegativeBinomialDistribution.prototype = new Distribution();
+BetaNegativeBinomialDistribution.prototype = new Distribution;
+
+//Discrete Uniform distribution
+function DiscreteUniformDistribution(a, b){
+	this.minValue = a;
+	this.maxValue = b;
+	this.step = 1;
+	this.type = 0;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	var n = this.maxValue - this.minValue + 1;
+	
+	this.density = function(x){
+		if (x < this.minValue || x > this.maxValue) return 0;
+		else return 1 / n;
+	};
+	
+	this.mode = function(){
+		return this.minValue;
+	};
+		
+	this.CDF = function(x){
+		x = Math.round(x);
+		if (x < this.minValue) return 0;
+		else if (x > this.maxValue) return 1;
+		else return (x - this.minValue + 1) / n;
+	};
+	
+	this.simulate = function(){
+		var x = this.minValue + Math.floor(n * Math.random());
+		this.setValue(x);
+		return x;
+	};
+
+	this.mean = function(){
+		return (this.minValue + this.maxValue) / 2;
+	};
+	
+	this.variance = function(){
+		return (this.maxValue - this.minValue) * (this.maxValue - this.minValue + 2) / 12;
+	};
+}	
+DiscreteUniformDistribution.prototype = new Distribution;
+
+//Exponential-Logarithmi distribution
+function ExponentialLogarithmicDistribution(shape, scale){
+	this.scale = scale;
+	this.shape = shape;
+	this.minValue = 0;
+	this.maxValue = 4 / this.scale;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	this.type = 1;
+	
+	this.mode = function(){
+		return 0;
+	};
+	
+	this.density = function(x){
+		return -this.scale * (1 - this.shape) * Math.exp(-this.scale * x) / (Math.log(this.shape) * (1 - (1 - this.shape) * Math.exp(-this.scale * x)));
+	};
+	
+	this.CDF = function(x){
+		return 1 - Math.log(1 - (1 - this.shape) * Math.exp(-this.scale * x)) / Math.log(this.shape);
+	};
+	
+	this.quantile = function(p){
+		return Math.log((1 - this.shape) / (1 - Math.pow(this.shape, 1 - p))) / this.scale;
+	};
+	
+	this.mean = function(){
+		return -polyLog(2, 1 - this.shape) / (this.scale * Math.log(this.shape));
+	}
+	
+	this.variance = function(){
+		return -2 * polyLog(3, 1 - this.shape) / (Math.pow(this.scale, 2) * Math.log(this.shape)) - Math.pow(this.mean(), 2);
+	}
+}
+ExponentialLogarithmicDistribution.prototype = new Distribution;
+
+//Beta prime distribution
+function BetaPrimeDistribution(a, b){
+	this.shape1 = a;
+	this.shape2 = b;
+	var c = gamma(this.shape1 + this.shape2) / (gamma(this.shape1) * gamma(this.shape2));
+	if (this.shape1 >= 1) this.minValue = 0;
+	else this.minValue = 0.01;
+	this.maxValue = 4 * this.shape1 / this.shape2;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	this.type = 1;
+	
+	this.mode = function(){
+		if (this.shape1 >=1) return (this.shape1 - 1) / (this.shape2 + 1);
+		else return this.minValue;
+	};
+	
+	this.density = function(x){
+		return c * Math.pow(x, this.shape1 - 1) * Math.pow(1 + x, -this.shape1 - this.shape2);
+	};
+	
+	this.CDF = function(x){
+		return betaCDF(x / (x + 1), this.shape1, this.shape2);
+	};
+	
+	this.mean = function(){
+		if (this.shape2 > 1) return this.shape1 / (this.shape2 - 1);
+		else return Infinity;
+	}
+	
+	this.variance = function(){
+		if (this.shape2 > 2) return this.shape1 * (this.shape1 + this.shape2 - 1) / ((this.shape2 - 2) * Math.pow(this.shape2 - 1, 2)) ;
+		else if (this.shape2 > 1) return Infinity;
+		else return NaN;
+	}
+}
+BetaPrimeDistribution.prototype = new Distribution;
+
+function ZetaDistribution(a){
+	this.shape = a;
+	this.minValue = 1;
+	this.maxValue = Math.ceil(Math.pow(10, 3.5 / this.shape));
+	this.step = 1;
+	this.type = 0;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	var c = zeta(this.shape);
+
+	this.density = function(x){
+		return 1 / (c * Math.pow(x, this.shape));
+	};
+	
+	
+	this.mean = function(){
+		if (this.shape > 2) return zeta(this.shape - 1) / zeta(this.shape);
+		else return Infinity;
+	};
+	
+	this.variance = function(){
+		if (this.shape > 3) return zeta(this.shape - 2) / zeta(this.shape) - this.mean() * this.mean();
+		else if (this.shape > 2) return Infinity;
+		else return NaN;
+	};
+}	
+	
+ZetaDistribution.prototype = new Distribution;
+
+function LogarithmicDistribution(p){
+	this.shape = p;
+	this.minValue = 1;
+	var mu = -this.shape / (Math.log(1 - this.shape) * (1 - this.shape));
+	var s2 = -this.shape * (this.shape + Math.log(1 - this.shape)) / (Math.pow(1 - this.shape, 2) * Math.pow(Math.log(1 - this.shape), 2));
+	this.maxValue = mu + 4 * Math.sqrt(s2);
+	this.step = 1;
+	this.type = 0;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+
+	this.density = function(x){
+		return -Math.pow(this.shape, x) / (x * Math.log(1 - this.shape));
+	};
+	
+	this.mode = function(){
+		return 1;
+	};
+	
+	this.mean = function(){
+		return mu;
+	};
+	
+	this.variance = function(){
+		return s2;
+	};
+}	
+	
+LogarithmicDistribution.prototype = new Distribution;
+
+function LogLogisticDistribution(a, b){
+	this.scale = a;
+	this.shape = b;
+	if (this.shape >= 1) this.minValue = 0;
+	else this.minValue = 0.001;
+	if (this.shape >= 2) this.maxValue = this.scale * Math.pow(100, 1 / this.shape);
+	else this.maxValue = this.scale * 10;
+	this.step = (this.maxValue -this.minValue) / 100;
+	this.type = 1;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+
+	this.density = function(x){
+		return (this.shape / this.scale) * Math.pow(x / this.scale, this.shape - 1) / Math.pow(1 + Math.pow(x / this.scale, this.shape), 2);
+	};
+	
+	this.mode = function(){
+		if (this.shape >=1) return this.scale * Math.pow((this.shape - 1) / (this.shape + 1), 1 / this.shape);
+		else return this.minValue;
+	};
+	
+	this.mean = function(){
+		if (this.shape > 1) return ((this.scale * Math.PI) / this.shape) / Math.sin(Math.PI / this.shape);
+		else return Infinity;
+	};
+	
+	this.variance = function(){
+		var t = Math.PI / this.shape;
+		if (this.shape > 2) return Math.pow(this.scale, 2) * ((2 * t) / Math.sin(2 * t) - Math.pow(t, 2) / Math.pow(Math.sin(t), 2));
+		else if (this.shape > 1) return Infinity;
+		else return NaN;
+	};
+	
+	this.CDF = function(x){
+		return Math.pow(x, this.shape) / (Math.pow(this.scale, this.shape) + Math.pow(x, this.shape));
+	};
+	
+	this.quantile = function(p){
+		return this.scale * Math.pow(p / (1 - p), 1 / this.shape);
+	};
+}	
+	
+LogLogisticDistribution.prototype = new Distribution;
+
+function MaxwellBoltzmannDistribution(a){
+	this.shape = a;
+	var mu = 2 * this.shape * Math.sqrt(2 / Math.PI);
+	var sigma = this.shape * Math.sqrt(3 - 8 / Math.PI);
+	this.minValue = 0;
+	this.maxValue = mu + 4 * sigma;
+	this.step = (this.maxValue -this.minValue) / 100;
+	this.type = 1;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+
+	this.density = function(x){
+		return Math.sqrt(2 / Math.PI) * Math.pow(x, 2) * Math.exp(-Math.pow(x, 2) / (2 * Math.pow(this.shape, 2))) / Math.pow(this.shape, 3);
+	};
+	
+	this.mode = function(){
+		return Math.sqrt(2) * this.shape;
+	};
+	
+	this.mean = function(){
+		return mu;
+	};
+	
+	this.variance = function(){
+		return sigma * sigma;
+	};
+}	
+	
+MaxwellBoltzmannDistribution.prototype = new Distribution;
+
+function UQuadraticDistribution(a, b){
+	this.left = a;
+	this.right = b;
+	this.minValue = a;
+	this.maxValue = b;
+	this.step = (this.maxValue -this.minValue) / 100;
+	this.type = 1;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+
+	this.density = function(x){
+		return (12 / Math.pow(this.right - this.left, 3)) * Math.pow(x - (this.left + this.right) / 2, 2) ;
+	};
+	
+	this.CDF = function(x){
+		return (4 / Math.pow(this.right - this.left, 3)) * Math.pow(x - (this.left + this.right) / 2, 3) + 1/2;
+	};
+	
+	this.mode = function(){
+		return this.left;
+	};
+	
+	this.mean = function(){
+		return (this.left + this.right) / 2;
+	};
+	
+	this.variance = function(){
+		return 3 * Math.pow(this.right - this.left, 2) / 20;
+	};
+}	
+	
+UQuadraticDistribution.prototype = new Distribution;
