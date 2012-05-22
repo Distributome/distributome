@@ -5,6 +5,7 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, nParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
+var showCheck;
 var n = 5;
 
 function initializeExperiment(){
