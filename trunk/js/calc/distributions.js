@@ -383,7 +383,7 @@ function Distribution(minValue, maxValue, step, type, pdf){
 		var x, q;
 		if (p < 0 || p > 1) return NaN;
 		else if (p === 0) return this.minValue;
-		else if (p === 1) return this.this.maxValue;
+		else if (p === 1) return this.maxValue;
 		else{
 			x = this.minValue;
 			q = this.CDF(x);
