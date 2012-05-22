@@ -1089,7 +1089,7 @@ function LogNormalDistribution(mu, sigma){
 	
 	this.density = function(x){
 		if (x === 0) return 0; 
-		else return Math.exp(-(Math.log(x) - this.mu) * (Math.log(x) - this.mu) / (2 * this.sigma * this.sigma)) / (Math.sqrt(2 * Math.PI) * this.sigma * x);
+		else return Math.exp(-(Math.log(x) - this.mu) * (Math.log(x) - this.mu)/(2 * this.sigma * this.sigma)) / (Math.sqrt(2 * Math.PI) * this.sigma * x);
 	};
 	
 	this.mode = function(){
@@ -1097,9 +1097,13 @@ function LogNormalDistribution(mu, sigma){
 	};
 	
 	this.CDF = function(x){
-		var z = (Math.log(x) - this.mu) / this.sigma;
-		if (z >= 0) return 0.5 + 0.5 * gammaCDF(0.5 * z * z, 0.5);
-		else return 0.5 - 0.5 * gammaCDF(0.5 * z * z, 0.5);
+		var z;
+		if (x <= 0) return 0;
+		else{
+			z = (Math.log(x) - this.mu) / this.sigma;
+			if (z >= 0) return 0.5 + 0.5 * gammaCDF(0.5 * z * z, 0.5);
+			else return 0.5 - 0.5 * gammaCDF(0.5 * z * z, 0.5);
+		}
 	};
 	
 	this.mean = function(){
@@ -1118,7 +1122,7 @@ function LogNormalDistribution(mu, sigma){
 		return x;
 	};	
 }
-LogNormalDistribution.prototype = new Distribution();
+LogNormalDistribution.prototype = new Distribution;
 
 //Extreme value distribution	
 function ExtremeValueDistribution(location, scale){
