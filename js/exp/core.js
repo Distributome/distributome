@@ -332,6 +332,165 @@ function graph(canvas, x0, x1, y0, y1){
 	}
 }
 
+//Another basic graph
+function Graph(canvas, x0, x1, y0, y1){
+	//Properties
+	this.canvas = canvas;
+	this.xMin = x0; this.xMax = x1; this.yMin = y0; this.yMax = y1;
+	this.leftMargin = 30; this.rightMargin = 20; this.bottomMargin = 20; this.topMargin = 20;
+	if (this.canvas !== undefined){
+		this.ctx = this.canvas.getContext("2d");
+		this.width = this.canvas.width;
+		this.height = this.canvas.height;
+	}
+
+	this.clear = function(){
+		this.ctx.clearRect(0, 0, this.width, this.height);
+	};
+	
+	this.setMargins = function(lm, rm, bm, tm){
+		this.leftMargin = lm; this.rightMargin = rm; this.bottomMargin = bm; this.topMargin = tm;
+	};
+	
+	//This function returns the horizontal coordinate in cavnas units for a given x in scaled units
+	this.xCanvas = function(x){
+		return this.leftMargin + Math.round(((x - this.xMin)/(this.xMax - this.xMin)) * (this.width - this.leftMargin - this.rightMargin));
+	};
+	
+	//This function returns the vertical coordinate in canvas units for a given y in scaled units
+	this.yCanvas = function(y){
+		return this.height - this.bottomMargin - Math.round(((y - this.yMin)/(this.yMax - this.yMin)) * (this.height - this.bottomMargin - this.topMargin));
+	};
+	
+	//This function returns the horizontal coordinate in scaled units for a given x in canvas units.
+	this.xScale = function(x){
+		return this.xMin + ((x - this.leftMargin)/(this.width - this.leftMargin - this.rightMargin)) * (this.xMax - this.xMin);
+	};
+	
+	//This funciton returns the vertical coordinate in scaled units for a given y in canvas units.
+	this.yScale = function(y){
+		return this.yMin + ((this.height - y - this.bottomMargin)/(this.height  - this.bottomMargin - this.topMargin)) * (this.yMax - this.yMin);
+	};
+	
+	this.beginPath = function(){
+		this.ctx.beginPath();
+	};
+	
+	this.strokeStyle = function(c){
+		this.ctx.strokeStyle = c;
+	};
+	
+	this.fillStyle = function(c){
+		this.ctx.fillStyle = c;
+	};
+	
+	this.stroke = function(){
+		this.ctx.stroke();
+	};
+	
+	this.fill = function(){
+		this.ctx.fill();
+	}
+
+	this.moveTo = function(x, y){
+		this.ctx.moveTo(this.xCanvas(x), this.yCanvas(y));
+	};
+
+	this.lineTo = function(x, y){
+		this.ctx.lineTo(this.xCanvas(x), this.yCanvas(y));
+	};
+
+	this.drawLine = function(x0, y0, x1, y1){
+		this.ctx.beginPath();
+		this.ctx.moveTo(this.xCanvas(x0), this.yCanvas(y0));
+		this.ctx.lineTo(this.xCanvas(x1), this.yCanvas(y1));
+		this.ctx.stroke();
+	};
+	
+	this.drawAxis = function(lower, upper, pos, step, type){
+		//lower bound, upper bound, position, step size, type ("hor" horizontal or "vert" vertical)
+		var x, y, tick = 3;
+		this.ctx.beginPath();
+		this.ctx.lineWidth = 1;
+		switch(type){
+		case "hor":
+			y = this.yCanvas(pos);
+			this.ctx.moveTo(this.xCanvas(lower), y);
+			this.ctx.lineTo(this.xCanvas(upper), y);
+			for (var t = lower; t <= upper; t = t + step){
+				x = this.xCanvas(t);
+				this.ctx.moveTo(x, y - tick);
+				this.ctx.lineTo(x, y + tick);
+			}
+			break;
+		case "vert":
+			x = this.xCanvas(pos);
+			this.ctx.moveTo(x, this.yCanvas(lower));
+			this.ctx.lineTo(x, this.yCanvas(upper));
+			for (var t = lower; t <= upper; t = t + step){
+				y = this.yCanvas(t);
+				this.ctx.moveTo(x - tick, y);
+				this.ctx.lineTo(x + tick, y);
+			}
+			break;
+		}
+		this.ctx.stroke();
+	};
+	
+	this.drawText = function(text, x, y, pos){
+		switch(pos){
+		case "left": 
+			this.ctx.fillText(text, this.xCanvas(x) - 5 * text.length - 5, this.yCanvas(y) + 5);
+			break;
+		case "below":
+			this.ctx.fillText(text, this.xCanvas(x)  -  2  *  text.length, this.yCanvas(y) + 15);
+			break;
+		case "right":
+			this.ctx.fillText(text, this.xCanvas(x) + 5 * text.length - 5, this.yCanvas(y) - 5);
+			break;
+		case "above":
+			this.ctx.fillText(text, this.xCanvas(x)  -  2  *  text.length, this.yCanvas(y));
+			break;
+		case "at":
+			this.ctx.fillText(text, this.xCanvas(x) - text.length, this.yCanvas(y));
+			break;
+		}
+	}
+	
+	this.drawPoint = function(x, y, r){
+		//(x, y): position in scale units, r: radius in pixels
+		this.ctx.beginPath();
+		this.ctx.arc(this.xCanvas(x), this.yCanvas(y), r, 0, 2 * Math.PI, true);
+		this.ctx.fill();
+	};
+	
+	this.fillCircle = function(x, y, r){
+		this.ctx.beginPath();
+		var x0 = this.xCanvas(x), y0 = this.yCanvas(y), r0 = this.xCanvas(x + r) - x0;
+		this.ctx.arc(x0, y0, r0, 0, 2 * Math.PI, true);
+		this.ctx.fill();
+	};
+		
+	this.strokeCircle = function(x, y, r){
+		this.ctx.beginPath();
+		var x0 = this.xCanvas(x), y0 = this.yCanvas(y), r0 = this.xCanvas(x + r) - x0;
+		this.ctx.arc(x0, y0, r0, 0, 2 * Math.PI, true);
+		this.ctx.stroke();
+	};
+	
+	this.strokeRect = function(x0, y0, x1, y1){
+		this.ctx.beginPath();
+		var x = this.xCanvas(x0), y = this.yCanvas(y0), w = this.xCanvas(x1) - x, h = this.yCanvas(y1) - y; 
+		this.ctx.strokeRect(x, y, w, h);
+	};
+	
+	this.fillRect = function(x0, y0, x1, y1){
+		this.ctx.beginPath();
+		var x = this.xCanvas(x0), y = this.yCanvas(y0), w = this.xCanvas(x1) - x, h = this.yCanvas(y1) - y; 
+		this.ctx.fillRect(x, y, w, h);
+	};
+}
+
 function DistributionGraph(canvas, dist, label){
 	//Properties
 	this.dist = dist; this.label = label;

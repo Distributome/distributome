@@ -77,6 +77,7 @@ function walk(){
 }
 
 function initializeWalkGraph(){
+	walkGraph = new Graph(walkCanvas, 0, n, - yMax, yMax);
 	walkGraph.clear();
 	walkGraph.strokeStyle("gray"); walkGraph.fillStyle("gray");
 	walkGraph.drawAxis(0, n, 0, 1, "hor");
