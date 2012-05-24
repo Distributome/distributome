@@ -98,6 +98,8 @@ function trim(inputString) {
 }
 
 /*************** Removing special characters like -,spaces **************/
+// Why is each new keyword capitalized. It shouldn't. For example, "Student's T Distribution
+// becomes rendered as "http://distributome.org/js/calc/StudentSTCalculator.html"
 function trimSpecialCharacters(inputString) {
 	if(typeof inputString != "string"){
 		return inputString; 
