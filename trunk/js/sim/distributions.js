@@ -1907,7 +1907,7 @@ function HyperbolicSecantDistribution(location, scale){
 	};
 	
 	this.quantile = function(p){
-		return this.location + this.scale * (2 / Math.PI) * Math.log(Math.tan((Math.PI / 2) * p));
+		return this.location + this.scale * (2/Math.PI) * Math.log(Math.tan((Math.PI/2) * p));
 	};
 	
 	this.mean = function(){
