@@ -80,6 +80,17 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 	</span>
 </fieldset>
 
+<fieldset class="toolbar">
+	<span class="tool">
+		<label id="muLabel" for="muInput"></label>
+		<input id="muInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
+	</span>
+	<span class="tool">
+		<label id="sigmaLabel" for="sigmaInput"></label>
+		<input id="sigmaInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+	</span>
+</fieldset>
+
 <table class="applet">
 	<tr>
 		<td class="device" colspan="2"><canvas id="distCanvas" title="Distribution graph" width="500" height="170">Distribution graph</canvas></td>

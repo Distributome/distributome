@@ -1,10 +1,11 @@
-//Beta Simulation
+//Hyperbolic Secant Simulation
 var runID;
 var runCount = 0, stopCount = 0, stopFreq = 10, coinCount = 10;
 var currentRecord, completeRecord = "", header = "Run\tX";
-var dist, distGraph;
+var dist, distGraph, muParam, sigmaParam;
 var recordTable, distTable;
-var runButton, stepButton, distCanvas, stopSelect, showSelect;
+var runButton, stepButton, distCanvas, stopSelect;
+var mu = 0, sigma = 1;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -16,9 +17,10 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
-	dist = new HyperbolicSecantDistribution();
-	distGraph = new DistributionGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 2;
+	muParam = new Parameter(document.getElementById("muInput"), document.getElementById("muLabel"));
+	muParam.setProperties(-50, 50, 0.1, mu, "<var>\u03BC</var>");
+	sigmaParam = new Parameter(document.getElementById("sigmaInput"), document.getElementById("sigmaLabel"));
+	sigmaParam.setProperties(0.1, 50, 0.1, sigma, "<var>\u03C3</var>");
 	resetExperiment();
 }
 
@@ -44,9 +46,13 @@ function stopExperiment(){
 function resetExperiment(){
 	stopExperiment();
 	runCount = 0; stopCount = 0;
+	mu = muParam.getValue();
+	sigma = sigmaParam.getValue();
 	completeRecord = "";
 	recordTable.value = header;
-	dist.data.reset();
+	dist = new HyperbolicSecantDistribution(mu, sigma);
+	distGraph = new DistributionGraph(distCanvas, dist, "X");
+	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text;
 }
