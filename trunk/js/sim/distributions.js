@@ -2184,8 +2184,8 @@ function ExponentialLogarithmicDistribution(shape, scale){
 }
 ExponentialLogarithmicDistribution.prototype = new Distribution();
 
-//Beta prime distribution
-function BetaPrimeDistribution(a, b){
+//Inverted-Beta / Beta-Prime distribution
+function InvertedBetaDistribution(a, b){
 	this.shape1 = a;
 	this.shape2 = b;
 	var c = gamma(this.shape1 + this.shape2) / (gamma(this.shape1) * gamma(this.shape2));
@@ -2220,7 +2220,7 @@ function BetaPrimeDistribution(a, b){
 		else return NaN;
 	}
 }
-BetaPrimeDistribution.prototype = new Distribution();
+InvertedBetaDistribution.prototype = new Distribution();
 
 function ZetaDistribution(a){
 	this.shape = a;
