@@ -1876,10 +1876,12 @@ function CauchyDistribution(scale){
 CauchyDistribution.prototype = new Distribution;
 
 //Arcsine distribution
-function ArcsineDistribution(){
-	this.minValue = 0.01;
-	this.maxValue = 0.99;
-	this.step = (this.maxValue - this.minValue) / 100;
+function ArcsineDistribution(a, b){
+	this.lower = a;
+	this.upper = b;
+	this.step = (this.upper- this.lower) / 100;
+	this.minValue = this.lower + this.step;
+	this.maxValue = this.upper - this.step;
 	this.data = new Data(this.minValue, this.maxValue, this.step);
 	this.type = 1;
 	
@@ -1890,25 +1892,25 @@ function ArcsineDistribution(){
 	this.maxDensity = function(){
 		return this.density(this.minValue);
 	};
-	
+
 	this.density = function(x){
-		return 1 / (Math.PI * Math.sqrt(x * (1 - x)));
+		return 1 / (Math.PI * Math.sqrt((x - this.lower) * (this.upper - x)));
 	};
 	
 	this.CDF = function(x){
-		return (2 / Math.PI) * Math.asin(Math.sqrt(x));
+		return (2/Math.PI) * Math.asin(Math.sqrt((x - this.lower) / (this.upper - this.lower)));
 	};
 	
 	this.quantile = function(p){
-		return Math.pow(Math.sin(p * Math.PI / 2), 2);
+		return this.lower + (this.upper - this.lower) * Math.pow(Math.sin(p * Math.PI / 2), 2);
 	};	
 	
 	this.mean = function(){
-		return 1 / 2;
+		return (this.lower + this.upper) / 2;
 	};
 	
 	this.variance = function(){
-		return 1 / 8;
+		return Math.pow(this.upper - this.lower, 2) / 8;
 	};
 	
 }
@@ -2413,3 +2415,43 @@ function UQuadraticDistribution(a, b){
 }	
 	
 UQuadraticDistribution.prototype = new Distribution;
+
+function HalfNormalDistribution(s){
+	this.sigma = s;
+	var c = Math.sqrt(2 / Math.PI), mn = s * c, sd = Math.sqrt(s * s * (1 - c * c));
+	this.minValue = 0;
+	this.maxValue = mn + 4 * sd;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.type = 1;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	
+	this.density = function(x){
+		return (c/s) * Math.exp(-(x * x) / (2 * this.sigma * this.sigma));
+	}
+	
+	this.cdf = function(x){
+		return erf(x / (Math.sqrt(2) * this.sigma));
+	}
+	
+	this.mode = function(){
+		return 0;
+	}
+	
+	this.mean = function(){
+		return mn;
+	}
+	
+	this.variance = function(){
+		return sd * sd;
+	}
+	
+	this.simulate = function(){
+		var r = Math.sqrt(-2 * Math.log(Math.random()));
+		var theta = 2 * Math.PI * Math.random();
+		var x = Math.abs(this.sigma * r * Math.cos(theta));
+		this.setValue(x); 
+		return x;
+	};
+}
+
+HalfNormalDistribution.prototype = new Distribution;
