@@ -500,7 +500,7 @@ function DistributionGraph(canvas, dist, label){
 }
 		
 function showCopyright(title){
-	alert(title + "\n\n" + "Copyright (c) 2010-2011, Kyle Siegrist.\n\nThis program is free software; you can redistribute it and/or modify it under the terms of the Creative Commons License (http://creativecommons.org/licenses/by/2.0/).\n\nThis program is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.\n\nThis program is part of Virtual Laboratories in Probability and Statistics (http://www.math.uah.edu/stat) developed with support from the National Science Foundation under grants  DUE-9652870 and DUE-0089377");
+	alert(title + "\n\n" + "This program is free software develioped by the Probability Distributome Project; you can redistribute it and/or modify it under the terms of the Creative Commons License (http://creativecommons.org/licenses/by/2.0/).\n\nThis program is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.\n\nThis program is part of VLPS (http://www.math.uah.edu/stat) and the Probability Distributome Project (www.Distributome.org) developed with support from the National Science Foundation under grants  9652870, 0089377, 1023115, 1022560, and 1022636");
 }
 
 function QuantileGraph(canvas, dist){
