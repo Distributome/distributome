@@ -2455,3 +2455,51 @@ function HalfNormalDistribution(s){
 }
 
 HalfNormalDistribution.prototype = new Distribution;
+
+//Folded Normal distribution
+function FoldedNormalDistribution(mu, sigma){
+	this.mu = mu;
+	this.sigma = sigma;
+	var m = this.sigma * Math.sqrt(2/Math.PI) * Math.exp(-Math.pow(this.mu, 2)/(2 * Math.pow(this.sigma,2))) + this.mu * (1 - 2 * stdNormalCDF(-this.mu/this.sigma));	
+	var s2 = Math.pow(this.mu,2)+Math.pow(this.sigma,2)-Math.pow(this.sigma * Math.sqrt(2/Math.PI) * Math.exp(-Math.pow(this.mu, 2)/(2 * Math.pow(this.sigma,2))) + this.mu * (1 - 2 * stdNormalCDF(-this.mu/this.sigma)),2);
+	var s = Math.sqrt(s2);
+	this.minValue = Math.max(0, m - 3 * s);
+	this.maxValue = m + 3 * s;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	this.type = 1;
+	var c = 1 / (this.sigma * Math.sqrt(2 * Math.PI));
+
+    this.maxDensity = function(){
+    	return Math.max(this.density(Math.abs(this.mu)), this.density(0));
+	}
+
+    this.density = function(x){
+		var z = -1 / (2 * this.sigma * this.sigma);
+        if(x >= 0) return c * Math.exp(z * (-x - this.mu) * (-x - this.mu)) + c * Math.exp(z * (x - this.mu) * (x - this.mu));
+        else return 0;
+     }
+     
+     this.CDF = function(x){
+		return 0.5 * (erf((x + this.mu) / (Math.sqrt(2) * this.sigma)) + erf((x - this.mu)/(Math.sqrt(2) * this.sigma)));
+	}
+	
+	this.mean = function(){
+	  return m;
+	}
+    
+    this.variance = function(){
+		return s2;
+	}
+	
+	this.simulate = function(){
+		var r = Math.sqrt(-2 * Math.log(Math.random()));
+		var theta = 2 * Math.PI * Math.random();
+		var x = this.mu + this.sigma * r * Math.cos(theta); 
+        this.setValue(Math.abs(x));  
+		return Math.abs(x);       
+	}	
+}
+	
+FoldedNormalDistribution.prototype = new Distribution;
+
