@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Chi-Square Experiment</title>
+<link rel="stylesheet" href="ScreenStyles.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="PrintStyles.css" type="text/css" media="print" />
+
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="ChiSquareExperiment.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+<body class="ancillary" onload="initializeExperiment();">
+
+<div class="header">
+<h3 class="ancillary">Chi-Square Experiment</h3>
+</div>
+
+<div class="applet">
+<fieldset class="toolbar">
+	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
+		<img src="step.png" alt="Step" title="Step" />
+	</button>
+	<button type="button" id="runButton" tabindex="2" title="Run" onclick="runExperiment()">
+		<img id="runImage" src="run.png" alt="Run" title="Run" />
+	</button>
+	<button type="button" id="stopButton" tabindex="3" title="Stop" onclick="stopExperiment();">
+		<img id="stopImage" src="stop.png" alt="Stop" title="Stop" />
+	</button>
+	<button type="button" id="resetButton" tabindex="4" title="Reset" onclick="resetExperiment();">
+		<img src="reset.png" alt="Reset" title="Reset" />
+	</button>
+	<select id="stopSelect" tabindex="5" title="Stop frequency" onchange="stopFreq = value;">
+		<option value="10">Stop: 10</option>
+		<option value="100">Stop: 100</option>
+		<option value="1000">Stop: 1000</option>
+		<option value="10000">Stop: 10000</option>
+		<option value="0">Stop: never</option>
+	</select>
+	<span class="tool">
+		<input type="checkbox" id="showCheck" tabindex="6" onchange="showDist(this.checked)" />
+		<label for="showCheck">Show Distribution</label>
+	</span>
+</fieldset>
+
+<fieldset class="toolbar">
+	<span class="tool">
+		<label id="muLabel" for="muInput"></label>
+		<input id="muInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
+	</span>
+	<span class="tool">
+		<label id="sigmaLabel" for="sigmaInput"></label>
+		<input id="sigmaInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+	</span>
+	<span class="tool">
+		<label id="nLabel" for="nInput"></label>
+		<input id="nInput" type="range" class="parameter" tabindex="9" onchange="resetExperiment();" />
+	</span>
+</fieldset>
+
+<table class="applet">
+	<tr>
+		<td class="device"><canvas id="normalDistCanvas" title="Normal Distribution graph" width="250" height="170">Normal Distribution graph</canvas></td>
+		<td class="device"><canvas id="chiSquareDistCanvas" title="Chi-Square Distribution graph" width="250" height="170">Chi-Square Distribution graph</canvas></td>
+	</tr>
+	<tr>
+		<td class="device"><textarea id="recordTable" readonly="true" wrap="off" class="table" title="X"></textarea></td>
+		<td class="device"><textarea id="chiSquareDistTable" readonly="true" wrap="off" class="table" title="Distribution table"></textarea></td>
+	</tr>
+</table>
+</div>
+
+<h4>Description</h4>
+
+<p>The experiment simulates a random sample \( (X_1, X_2, \ldots, X_n) \) of size \( n \) from the normal distribution with mean \( \mu \) and variance \( \sigma^2 \). Random variable \( V \) is the sum of the squares of the standard scores:</p>
+
+\[ V = \sum_{i=1}^n \left(\frac{X - \mu}{\sigma}\right)^2 \]
+
+<p>which has the chi-square distribution with \( n \) degrees of freedom. On each run, the applet shows the normal sample in the graph on the left.  The chi-square distribution is shown in the graph and table on the right. As the experiment runs, the empricial density and moments are shown in this graph and recorded in this table. The parameters \( \mu \), \( \sigma \), and  \(n\) can be varied with the input controls.</p>
+
+</body>
+
+</html>
