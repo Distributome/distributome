@@ -335,7 +335,8 @@ function getReferences(index){
 	var html = new Array();
 	html.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
 	if(index){
-		html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
+		//html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
+		html.push("TEST ...... TEST");
 	}
 	document.getElementById('distributome.referencePanel').innerHTML = html.join('');
 }
