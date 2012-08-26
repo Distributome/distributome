@@ -510,6 +510,54 @@ function Distribution(minValue, maxValue, step, type, pdf){
 	};	
 }
 
+//The Geometric distribution
+function GeometricDistribution(prob){
+	if (prob <= 0) prob = 0.5;
+	if (prob > 1) prob = 1;
+	this.prob = prob;
+	this.type = 0;
+	this.minValue = 1;
+	this.maxValue = 4.0/this.prob;
+	this.step = 1;
+	
+	this.density = function(x){
+		var k = Math.round(x);
+		if (k < 1) return 0;
+		else return Math.pow(1-this.prob, k-1)*this.prob;
+	};
+	
+	this.mode = function(){
+		return 1;
+	};
+			
+	this.mean = function(){
+		return 1.0/this.prob;
+	};
+	
+	this.median = function(){
+		return (-1.0*Math.log(2))/Math.log(1-this.prob);
+	};
+	
+	this.variance = function(){
+		return (1 - this.prob)/Math.pow(this.prob, 2);
+	};
+		
+	this.MGF = function(t){
+		if (t<-Math.log(1-this.prob)) 
+			return (this.prob*Math.exp(t))/(1-(1-this.prob)*Math.exp(t));
+		else return 0.0;
+	};
+	
+	this.skew = function(){
+		return (2 - this.prob) / Math.sqrt(1- this.prob);
+	};
+	
+	this.kurt = function(){
+		return (6 + Math.pow(this.prob,2)/(1 - this.prob));
+	};
+}
+GeometricDistribution.prototype = new Distribution;
+
 //The binomial distribution
 function BinomialDistribution(trials, prob){
 	if (prob < 0) prob = 0;
@@ -2181,7 +2229,7 @@ function DiscreteUniformDistribution(a, b){
 }	
 DiscreteUniformDistribution.prototype = new Distribution;
 
-//Exponential-Logarithmi distribution
+//Exponential-Logarithmic distribution
 function ExponentialLogarithmicDistribution(shape, scale){
 	this.scale = scale;
 	this.shape = shape;
@@ -2216,6 +2264,44 @@ function ExponentialLogarithmicDistribution(shape, scale){
 	}
 }
 ExponentialLogarithmicDistribution.prototype = new Distribution;
+
+//Exponential distribution
+function ExponentialDistribution(rate){
+	if (rate<0) rate=0;
+	
+	this.rate = rate;
+	this.minValue = 0;
+	this.maxValue = 2;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	this.type = 1;
+	
+	this.mode = function(){
+		return 0;
+	};
+	
+	this.density = function(x){
+		return this.rate * Math.exp(-this.rate * x);
+	};
+	
+	this.CDF = function(x){
+		return (1 - Math.exp(-this.rate * x));
+	};
+	
+	this.quantile = function(p){
+		return -Math.log(1 - p) / this.rate;
+	};
+	
+	this.mean = function(){
+		return 1.0/this.rate;
+	}
+	
+	this.variance = function(){
+		return 1.0/Math.pow(this.rate,2);
+	}
+}
+ExponentialDistribution.prototype = new Distribution;
+
 
 //Beta prime distribution
 function BetaPrimeDistribution(a, b){
@@ -2455,3 +2541,50 @@ function HalfNormalDistribution(s){
 }
 
 HalfNormalDistribution.prototype = new Distribution;
+
+//Folded Normal distribution
+function FoldedNormalDistribution(mu, sigma){
+	this.mu = mu;
+	this.sigma = sigma;
+	var m = this.sigma * Math.sqrt(2/Math.PI) * Math.exp(-Math.pow(this.mu, 2)/(2 * Math.pow(this.sigma,2))) + this.mu * (1 - 2 * stdNormalCDF(-this.mu/this.sigma));	
+	var s2 = Math.pow(this.mu,2)+Math.pow(this.sigma,2)-Math.pow(this.sigma * Math.sqrt(2/Math.PI) * Math.exp(-Math.pow(this.mu, 2)/(2 * Math.pow(this.sigma,2))) + this.mu * (1 - 2 * stdNormalCDF(-this.mu/this.sigma)),2);
+	var s = Math.sqrt(s2);
+	this.minValue = Math.max(0, m - 3 * s);
+	this.maxValue = m + 3 * s;
+	this.step = (this.maxValue - this.minValue) / 100;
+	this.data = new Data(this.minValue, this.maxValue, this.step);
+	this.type = 1;
+	var c = 1 / (this.sigma * Math.sqrt(2 * Math.PI));
+
+    this.maxDensity = function(){
+    	return Math.max(this.density(Math.abs(this.mu)), this.density(0));
+	}
+
+    this.density = function(x){
+		var z = -1 / (2 * this.sigma * this.sigma);
+        if(x >= 0) return c * Math.exp(z * (-x - this.mu) * (-x - this.mu)) + c * Math.exp(z * (x - this.mu) * (x - this.mu));
+        else return 0;
+     }
+     
+     this.CDF = function(x){
+		return 0.5 * (erf((x + this.mu) / (Math.sqrt(2) * this.sigma)) + erf((x - this.mu)/(Math.sqrt(2) * this.sigma)));
+	}
+	
+	this.mean = function(){
+	  return m;
+	}
+    
+    this.variance = function(){
+		return s2;
+	}
+	
+	this.simulate = function(){
+		var r = Math.sqrt(-2 * Math.log(Math.random()));
+		var theta = 2 * Math.PI * Math.random();
+		var x = this.mu + this.sigma * r * Math.cos(theta); 
+        this.setValue(Math.abs(x));  
+		return Math.abs(x);       
+	}	
+}
+	
+FoldedNormalDistribution.prototype = new Distribution;
