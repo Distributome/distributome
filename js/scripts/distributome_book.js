@@ -429,7 +429,11 @@ function updateNodeColor(ontologyArray, level){
 		
 		xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","Distributome.xml.Book.pref",false);
+		xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+		// Override MIME type.  Set this before send. 
+    	if (xmlhttp.overrideMimeType)   xmlhttp.overrideMimeType('text/xml');
 		xmlhttp.send();
+		/** alert(xmlhttp.responseXML); **/
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		var ontologyOrder = xmlhttp.responseXML;	
