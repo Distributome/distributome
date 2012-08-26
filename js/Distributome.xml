@@ -1777,8 +1777,8 @@
 		<pdf>\( b e^{-bx} e^{-\eta e^{-bx}}\left[1 + \eta\left(1 - e^{-bx}\right)\right]  \)</pdf>
 	</distribution>
 
-	<distribution id="MultiNomial">
-		<name>MultiNomial</name>
+	<distribution id="Multinomial">
+		<name>Multinomial</name>
 		<type>discrete</type>
     	<type>nonsymmetric</type>
     	<type>finite</type>
@@ -1787,7 +1787,7 @@
 	</distribution>
 
 	<distribution id="NegativeMultiNomial">
-		<name>NegativeMultiNomial</name>
+		<name>NegativeMultinomial</name>
 		<type>discrete</type>
     	<type>nonsymmetric</type>
     	<type>finite</type>
