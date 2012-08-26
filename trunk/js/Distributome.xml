@@ -371,8 +371,8 @@
 </distribution>
 
 <distribution id="F">
-	<name>F-distribution </name>
-	<name>Snedecor's F-distribution </name>
+	<name>F distribution</name>
+	<name>Snedecor's F distribution</name>
 	<name>Fisher-Snedecor distribution</name>
 	<type>continuous</type>
 	<model>The F-distribution governs the ratio of independent, scaled chi-square variables.</model>
@@ -1136,7 +1136,9 @@
 
 <distribution id="student">
 	<name>t-distribution </name>
-	<name>Student t-distribution</name>
+	<name>Student t distribution</name>
+	<name>Student distribution</name>
+	<name>Student's distribution</name>
 	<type>continuous</type>
 	<model>The Student t-distribution arises in a sample from a normal distribution, when the sample mean is standardized using the sample standard deviation </model>
 	<parameter>\(n \in (0, \infty)\), degrees of freedom</parameter>
@@ -2032,6 +2034,7 @@
 
 	<relation id="chi-square/chi-square">
 		<from>chi-square distribution</from>
+		<from>chisquare distribution</from>
 		<to>chi-square distribution</to>
 		<statement>If \(X\) has the chi-square distribution with \(m \in (0, \infty)\) degrees of freedom; \(Y\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom; and \(X\) and \(Y\) are independent, then \(X + Y\) has the chi-square distribution with \(m + n\) degrees of freedom.</statement>
 		<type>convolution</type>
