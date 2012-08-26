@@ -9,11 +9,9 @@ function initialize(){
 	distSelect = document.getElementById("distSelect");
 	
 	probParam = new Parameter(document.getElementById("probInput"), document.getElementById("probLabel"));
-	probParam.setProperties(0, 1, 0.01, 0.5, "<var>p</var>");
+	probParam.setProperties(0, 1, 0.01, 0.5, "<var>probability</var>");
 	
 	xParam = new Parameter(document.getElementById("xInput"), document.getElementById("xLabel"));
-	xParam.setProperties(1, 200, 1, 3, "<var>p</var>");
-	
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
 	pParam.setProperties(0.001, 0.999, 0.001, 0.5, "<var>p</var>");
 	setDist();
