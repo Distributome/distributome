@@ -516,13 +516,13 @@ function GeometricDistribution(prob){
 	if (prob > 1) prob = 1;
 	this.prob = prob;
 	this.type = 0;
-	this.minValue = 0;
-	//this.maxValue = 1;
+	this.minValue = 1;
+	this.maxValue = 4.0/this.prob;
 	this.step = 1;
 	
 	this.density = function(x){
 		var k = Math.round(x);
-		if (k < 0) return 0;
+		if (k < 1) return 0;
 		else return Math.pow(1-this.prob, k-1)*this.prob;
 	};
 	
@@ -534,8 +534,12 @@ function GeometricDistribution(prob){
 		return 1.0/this.prob;
 	};
 	
+	this.median = function(){
+		return (-1.0*Math.log(2))/Math.log(1-this.prob);
+	};
+	
 	this.variance = function(){
-		return this.trials * this.prob * (1 - this.prob);
+		return (1 - this.prob)/Math.pow(this.prob, 2);
 	};
 		
 	this.MGF = function(t){
