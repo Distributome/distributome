@@ -521,14 +521,16 @@ function bibtex_js_draw(entryKey) {
 	    
 	    /******
 	    
+	    //alert("entryKey="+entryKey);
+	    
 	    var b = new BibtexParser();
 	    b.setInput(bib_data);
 	    b.bibtex();
 
 	    var e = b.getEntries();
 	    for (var item in e) {
-	    	//var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
-	    	var tpl = $("#bibtex_display").clone().removeClass('#bibtex_display');
+	    	var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
+	    	//var tpl = $("#bibtex_display").clone().removeClass('#bibtex_display');
 	    	tpl.addClass("unused");
 	      
 	    	for (var key in e[item]) {
@@ -537,7 +539,7 @@ function bibtex_js_draw(entryKey) {
 	    		//
 	    		// !!!!!!!!!!!!!!!!!
 	    		//
-	    		alert("BibtexParser::bibtex_js_draw::fields[0]="+fields[0]);
+	    		//alert("BibtexParser::bibtex_js_draw::fields[0]="+fields[0]);
 	    		
 	    		for (var i = 0; i < fields.size(); i++) {
 	    			var f = $(fields[i]);

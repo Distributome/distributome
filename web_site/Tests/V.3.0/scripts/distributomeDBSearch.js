@@ -32,7 +32,7 @@ function displayXmlText(displayAll){
 	var relationhtml = new Array();
 	/*nodehtml.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	relationhtml.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
-	referencehtml.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	referencehtml.push("<b><u>Distribution References</u></b> <div style='height:7px'></div>");
 	*/
 	var display = true;
 	for(var i=0; i< distributomeDBSearch.nodes.length; i++){
