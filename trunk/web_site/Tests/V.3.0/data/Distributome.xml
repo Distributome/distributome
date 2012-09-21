@@ -2813,7 +2813,7 @@
 		<from>Cauchy Distribution</from>
 		<to>standard-normal Distribution</to>
 		<statement>If \(X\) and \(Y\) are two independent normally distributed random 
-			variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\}
+			variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\)
 			has the standard Cauchy distribution.</statement>
 		<type>transformation</type>
 		<cite>MR1326603</cite>
