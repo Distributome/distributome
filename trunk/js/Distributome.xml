@@ -5,29 +5,6 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://www.distributome.org/distributome.xsd">
 
-<-- Comments
-	o Node (distribution) Types will be (full-Name and abbreviation) 
-		0 No Type Given 
-		1 Convolution (Conv) 
-		2 Memoryless (Mless) 
-		3 Inverse (Inv) 
-		4 Linear Combination (LinComb) 
-		5 Minimum (min) 
-		6 Maximum (max) 
-		7 Product (Prod) 
-		8 Conditional ResIDual (CondRes) 
-		9 Scaling (Scale) 
-		10 Simulate (Sim) 
-		11 Variate Generation(VGen)
-
-	o Edge Types (directional distribution relations) 
-		0 No Type Given 
-		1 Special Case (SC) 
-		2 Transform (T) 
-		3 Limiting (Lim) 
-		4 Bayesian (Bayes)
--->
-
 <distributions>
 <distribution id="arcsine">
 	<name>arcsine distribution</name>
@@ -2052,7 +2029,7 @@
 		<from>Cauchy Distribution</from>
 		<to>standard-normal Distribution</to>
 		<statement>If \(X\) and \(Y\) are two independent normally distributed random 
-			variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\}
+			variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\)
 			has the standard Cauchy distribution.</statement>
 		<type>transformation</type>
 		<cite>MR1326603</cite>
