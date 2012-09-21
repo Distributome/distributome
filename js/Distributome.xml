@@ -5,6 +5,29 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://www.distributome.org/distributome.xsd">
 
+<-- Comments
+	o Node (distribution) Types will be (full-Name and abbreviation) 
+		0 No Type Given 
+		1 Convolution (Conv) 
+		2 Memoryless (Mless) 
+		3 Inverse (Inv) 
+		4 Linear Combination (LinComb) 
+		5 Minimum (min) 
+		6 Maximum (max) 
+		7 Product (Prod) 
+		8 Conditional ResIDual (CondRes) 
+		9 Scaling (Scale) 
+		10 Simulate (Sim) 
+		11 Variate Generation(VGen)
+
+	o Edge Types (directional distribution relations) 
+		0 No Type Given 
+		1 Special Case (SC) 
+		2 Transform (T) 
+		3 Limiting (Lim) 
+		4 Bayesian (Bayes)
+-->
+
 <distributions>
 <distribution id="arcsine">
 	<name>arcsine distribution</name>
@@ -2023,6 +2046,16 @@
 		<to>Cauchy Distribution</to>
 		<statement>If \(X\) has the Cauchy distribution with location parameter \(\alpha_1 \in (-\infty, \infty)\) and location parameter \(\beta_1 \in (0, \infty)\), \(Y\) has the Cauchy distribution with location parameter \(\alpha_2 \in (-\infty, \infty)\) and scale parameter \(\beta_2 \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Cauchy distribution with location parameter \(\alpha_1 + \alpha_2\) and scale parameter \(\beta_1 + \beta_2\).</statement>
 		<type>convolution</type>
+	</relation>
+
+	<relation id="Cauchy/standard-normal">
+		<from>Cauchy Distribution</from>
+		<to>standard-normal Distribution</to>
+		<statement>If \(X\) and \(Y\) are two independent normally distributed random 
+			variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\}
+			has the standard Cauchy distribution.</statement>
+		<type>transformation</type>
+		<cite>MR1326603</cite>
 	</relation>
 
 	<relation id="Cauchy/Cauchy.2">
@@ -4266,6 +4299,14 @@
 	<title>Gaussian class multivariate Weibull distributions: theory and applications in fading channels</title>
 	<journal>Transactions on Information Theory </journal>
 	<year>2005</year>
+</reference>
+<reference id="SMR1326603" type="book">
+	<author>Johnson, Norman L.</author>
+	<author>Kotz, Samuel</author>
+	<author>Balakrishnan, N.</author>
+	<title>Continuous univariate distributions</title>
+	<publisher>John Wiley and Sons</publisher>
+	<year>1995</year>
 </reference>
 </references>
 </distributome>
