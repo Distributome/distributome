@@ -15,8 +15,7 @@
           href="../images/Distributome_style.css">
     <link rel="shortcut icon" href="../images/favicon.ico">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="./scripts/bibtex_js.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="./scripts/validator.js"></script>
 
     <script type="text/x-mathjax-config">
@@ -39,6 +38,34 @@
             margin-top: 1.5em;
             border-top: 3px solid #666666;
             border-bottom: 2px solid #999999;
+        }
+        div.item {
+            margin-top: 0;
+            margin-bottom: 0;
+            font: 1em/1.3 Gill Sans, My Gill Sans, sans-serif;
+            color: #555;
+            text-align: left;
+        }
+        .level1 {
+            margin-top: 20px;
+            letter-spacing: .051em;
+            font: normal 1.5em/1.1 OFL Sorts Mill Goudy, Georgia, serif;
+        }
+        .level2 {
+            margin-top: 10px;
+            color: #333;
+            font: 1.1em/1.3 Gill Sans, My Gill Sans, sans-serif;
+        }
+        .level3 {
+            font-family: monospace;
+            color: #111;
+        }
+        .clearfix:after {
+            content: " "; /* Older browser do not support empty content */
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
         }
     </style>
 

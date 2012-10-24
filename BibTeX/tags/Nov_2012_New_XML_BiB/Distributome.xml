@@ -414,7 +414,7 @@
             <median> \(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
             <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
             <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
-            <history>The \(F\)-distribution was first derived by George Snedecor in 1934.  The letter <em>F</em> was chosen as a tribute to Ronald Fisher.</history>
+            <history>The \(F\)-distribution was first derived by George Snedecor in 1934.  The letter F was chosen as a tribute to Ronald Fisher.</history>
             <cite>johnson2005univariate</cite>
         </distribution>
 
@@ -850,7 +850,7 @@
             <family>exponential </family>
             <family>stable</family>
             <cite>dinov2008central</cite>
-            <history>The normal distribution was first derived by Carl Friedrich Gauss in 1809 (hence the alternative name Gaussian distribution). The normalizing constant and the first version of the Central Limit Theorem were contributions by Pierre Simon Laplace. The term <q>normalizing constant</q> was popularized by Karl Pearson around the turn of the 20th century.</history>
+            <history>The normal distribution was first derived by Carl Friedrich Gauss in 1809 (hence the alternative name Gaussian distribution). The normalizing constant and the first version of the Central Limit Theorem were contributions by Pierre Simon Laplace. The term normalizing constant was popularized by Karl Pearson around the turn of the 20th century.</history>
         </distribution>
 
         <distribution id="Student's t">
@@ -1172,7 +1172,7 @@
             <median>\(0\)</median>
             <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
             <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
-            <history>The term <q>standard normal distribution</q> came into general use around 1950.</history>
+            <history>The term standard normal distribution came into general use around 1950.</history>
             <cite>mcpherson1990statistics</cite>
         </distribution>
 
@@ -1231,7 +1231,7 @@
             <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
             <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
             <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
-            <history>The \(t\)-distribution was derived by William Sealy Gosset while he worked at the Guinness Brewery in Dublin.  Gosset published his work under the pseudonym <em>Student</em>. The \(t\)-test in statistics was developed by Ronald Fisher who called the distribution <q>Student's distribution</q></history>
+            <history>The \(t\)-distribution was derived by William Sealy Gosset while he worked at the Guinness Brewery in Dublin.  Gosset published his work under the pseudonym Student. The \(t\)-test in statistics was developed by Ronald Fisher who called the distribution Student's distribution</history>
             <cite>fisher1925applications</cite>
         </distribution>
 
@@ -1375,7 +1375,7 @@
             <q1>\(\lambda [\ln(4) - \ln(3)]^{1/k}\)</q1>
             <q3>\(\lambda [\ln(4)]^{1/k}\)</q3>
             <family>exponential</family>
-            <history>The Weibull distribution is named for Waloddi Weibull who published a paper on the distribution in 1951. The distribution was used earlier by Maurice Frechet. The term <q>Weibull distribution</q> was first used in 1955 in a paper by Julius Lieblein.</history>
+            <history>The Weibull distribution is named for Waloddi Weibull who published a paper on the distribution in 1951. The distribution was used earlier by Maurice Frechet. The term Weibull distribution was first used in 1955 in a paper by Julius Lieblein.</history>
             <cite>weibull1951statistical</cite>
         </distribution>
 
