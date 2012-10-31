@@ -472,7 +472,7 @@ function updateNodeColor(ontologyArray, level){
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
 		
 		xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","./data/Distributome.xml.pref",false);
+		xmlhttp.open("GET","./data/Distributome.xml.Book.pref",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
