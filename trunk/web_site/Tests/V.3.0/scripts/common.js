@@ -235,7 +235,9 @@ function XMLObject(index, type){
 /*************** Parse XML to fetch information per node in the XML **************/
 function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 	var html = new Array();
-	var referenceName = null;
+	//var referenceName = null;
+	//referenceName as the list of reference names
+	var referenceName = new Array();
 	if (XML_Objects[i].nodeType==1) {
 		
 		var Level1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].childNodes;
@@ -253,7 +255,10 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 					//Process only level=3 element nodes (type 1)
 					if(reference){
 						if(currLevel2Prop.nodeName == "cite"){
-							referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
+							//referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
+							var a=trim(currLevel2Prop.childNodes[0].nodeValue);
+							referenceName.push(a);
+							//alert(referenceName);
 						}
 					}
 					if(currLevel2Prop.nodeName == 'name' && nameFlag){

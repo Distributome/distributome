@@ -95,7 +95,7 @@ function resetVariables(){
 function resetText(){
 	document.getElementById('distributome.text').value = '';
 	//debugging
-	document.getElementById('bibtex_display').innerHTML = '<b><u>Distribution References</u></b>';
+	document.getElementById('bibtex_display').innerHTML = '<b><u>Distribution Referencies</u></b>';
 	document.getElementById('distributome.propertiesPannel').innerHTML = '<b><u>Distribution Properties</u></b>';	
 	document.getElementById('distributome.relationPannel').innerHTML = '<b><u>Distribution Relations</u></b>';
 }
@@ -149,24 +149,15 @@ function getRelationProperties(nodeName, linkIndex){
 	html.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true, DistributomeXML_Objects);
 	html.push(parserOutput[0]);
-	
-	//
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//
+	//alert(parserOutput);
+
 	var referenceName = parserOutput[1];
+	//alert(referenceName);
 	document.getElementById('distributome.relationPannel').innerHTML = html.join('');
+	//(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName.toUpperCase());
 	
-	/* 	// For debugging: 
-	 	// alert(document.getElementById('distributome.relationPannel').innerHTML);
-		if(referenceName!=null) getReferences(referenceNodes[referenceName]);
-		else getReferences(false);
-	*/
-	
-	//
-	// !!!!!!!!!!!!!!!!!
-	//
-	alert("distributome.js::getRelationProperties::referenceName = " + referenceName);
-	
+	(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName);
+
 	renderMath();
 	vis.render();
 }
@@ -174,7 +165,7 @@ function getRelationProperties(nodeName, linkIndex){
 /*************** Fetch node properties **************/
 function getNodeProperties(index, nodeName, d){
 	
-	alert("distributome.js::getNodeProperties::index = " + index+"\t nodeName="+nodeName);
+	//alert("distributome.js::getNodeProperties::index = " + index+"\t nodeName="+nodeName);
 	
 	if(connectivity && d.selected != "top_hierarchy" && d.selected != "middle_hierarchy") return;
 	if(!_shiftKey){
@@ -193,19 +184,21 @@ function getNodeProperties(index, nodeName, d){
 	var parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, index, true, DistributomeXML_Objects);
 	html.push(parserOutput[0]);
 	var referenceName= parserOutput[1];
-	
-	// referenceName contains the Reference ID all in lower-case!!!!!!!!!!!!!!!!!!!!
-	// alert("getNodeProperties::referenceName="+referenceName);
-	
 	document.getElementById('distributome.propertiesPannel').innerHTML = html.join('');	
+	
+
+	(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName);
+
+	
+
 	
 	//
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//
 	// GETS DISTRIBUTOME REFERENCES
-	alert("distributome.js::getNodeProperties::referenceName = " + referenceName);
+	//alert("distributome.js::getNodeProperties::referenceName = " + referenceName);
 	
-	/* 
+	/*
 	if(referenceName !=null){
 		if (BibtexParser != null) {
 			BibtexParser.setRef(referenceName);
@@ -226,7 +219,7 @@ function getNodeProperties(index, nodeName, d){
 	nodeName = nodeName.substring(1); //Is it camel case or only first letter Upper Case?
 	
 	// GENERATES LINKS FOR DISTRIBUTION ACTIONS
-	alert("...Setting the Calc, Sim and Exp ...");
+	//alert("...Setting the Calc, Sim and Exp ...");
 	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
 	document.getElementById('distributome.experiment').href = './exp/'+firstChar+nodeName+'Experiment.html';
 	document.getElementById('distributome.simulation').href = './sim/'+firstChar+nodeName+'Simulation.html';
@@ -401,11 +394,11 @@ function getReferences(index){
 	var html = new Array();
 	html.push("<b><u>Distribution References</u></b> <div style='height:7px'></div>");
 	if(index){
-		//html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
+		html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
 		document.getElementById('#bibtex_display').innerHTML = 
-			'<b><u>Distribution References <br> TEST!!!!!!!!!!!!!!!!!!</u></b>';
+			'<b><u>Distribution Referencies <br> TEST!!!!!!!!!!!!!!!!!!</u></b>';
 	}
-	//document.getElementById('distributome.referencePanel').innerHTML = html.join('');
+	document.getElementById('distributome.referencePanel').innerHTML = html.join('');
 }
 
 
