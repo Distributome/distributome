@@ -327,7 +327,6 @@ function BibtexParser() {
 	    return value;
 	  }
 }
-
 function BibtexDisplay() {
   this.fixValue = function (value) {
     value = value.replace(/\\glqq\s?/g, "&bdquo;");
@@ -345,7 +344,7 @@ function BibtexDisplay() {
     value = value.replace(/\{(.*?)\}/g, '$1');
     return value;
   }
-  
+/*  
   this.displayBibtex2 = function(i, o) {
     var b = new BibtexParser();
     b.setInput(i);
@@ -394,83 +393,162 @@ function BibtexDisplay() {
     old.remove();
   }
 
-  
-  
-  
+*/
   this.displayBibtex = function(input, output) {
     // parse bibtex input
-	  
-	  // Show ALL BIB entries!!!
-	  var b = new BibtexParser();
-	    b.setInput(input);
-	    b.bibtex();
-	    
-	    // save old entries to remove them later
-	    var old = output.find("*");    
+    var b = new BibtexParser();
+    b.setInput(input);
+    b.bibtex();
+    
+    // save old entries to remove them later
+    var old = output.find("*");
 
-	    // iterate over bibTeX entries
-	    var entries = b.getEntries();
-	    for (var entryKey in entries) {
-	      var entry = entries[entryKey];
-	      
-	      //Debugging
-	      //alert("Entry-Key="+entryKey.toUpperCase());
-	      
-	      // find template
-	      var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
-	      
-	      // find all keys in the entry
-	      var keys = [];
-	      for (var key in entry) {
-	        keys.push(key.toUpperCase());
-	      }
-	      
-	      // find all ifs and check them
-	      var removed = false;
-	      do {
-	        // find next if
-	        var conds = tpl.find(".if");
-	        if (conds.size() == 0) {
-	          break;
-	        }
-	        
-	        // check if
-	        var cond = conds.first();
-	        cond.removeClass("if");
-	        var ifTrue = true;
-	        var classList = cond.attr('class').split(' ');
-	        $.each( classList, function(index, cls){
-	          if(keys.indexOf(cls.toUpperCase()) < 0) {
-	            ifTrue = false;
-	          }
-	          cond.removeClass(cls);
-	        });
-	        
-	        // remove false ifs
-	        if (!ifTrue) {
-	          cond.remove();
-	        }
-	      } while (true);
-	      
-	      // fill in remaining fields 
-	      for (var index in keys) {
-	        var key = keys[index];
-	        var value = entry[key] || "";
-	        tpl.find("span:not(a)." + key.toLowerCase()).html(this.fixValue(value));
-	        tpl.find("a." + key.toLowerCase()).attr('href', this.fixValue(value));
-	      }
-	      
-	      output.append(tpl);
-	      tpl.show();
-	      // debugging
-	      //alert("tpl="+tpl);
-	    }
-	    
-	    // remove old entries
-	    old.remove();
+    // iterate over bibTeX entries
+    var entries = b.getEntries();
+	
+    for (var entryKey in entries) {
+      var entry = entries[entryKey];
+      
+      // find template
+      var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
+      
+      // find all keys in the entry
+      var keys = [];
+      for (var key in entry) {
+        keys.push(key.toUpperCase());
+      }
+
+      // find all ifs and check them
+      var removed = false;
+      do {
+        // find next if
+        var conds = tpl.find(".if");
+        if (conds.size() == 0) {
+          break;
+        }
+        
+        // check if
+        var cond = conds.first();
+        cond.removeClass("if");
+        var ifTrue = true;
+        var classList = cond.attr('class').split(' ');
+        $.each( classList, function(index, cls){
+          if(keys.indexOf(cls.toUpperCase()) < 0) {
+            ifTrue = false;
+          }
+          cond.removeClass(cls);
+        });
+        
+        // remove false ifs
+        if (!ifTrue) {
+          cond.remove();
+        }
+      } while (true);
+      
+      // fill in remaining fields 
+      for (var index in keys) {
+        var key = keys[index];
+        var value = entry[key] || "";
+        tpl.find("span:not(a)." + key.toLowerCase()).html(this.fixValue(value));
+        tpl.find("a." + key.toLowerCase()).attr('href', this.fixValue(value));
+      }
+      
+      output.append(tpl);
+      tpl.show();
+    }
+    
+    // remove old entries
+    old.remove();
   }
 
+
+
+// new display function: reference list as an argument
+	this.displayBibtex2 = function(input, output, refList) {
+		//ref is the ARRAY of reference names
+    // parse bibtex input
+    var b = new BibtexParser();
+    b.setInput(input);
+    b.bibtex();
+
+    // save old entries to remove them later
+    var old = output.find("*");
+	
+	
+    // iterate over bibTeX entries
+    var entries = b.getEntries();
+
+
+	for (i=0;i<refList.length;i++){
+		ref=refList[i].toUpperCase();
+
+    for (var entryKey in entries) {
+
+		
+		if(entryKey != ref){
+			continue;
+		}
+
+
+      var entry = entries[entryKey];
+
+      // find template
+      var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
+
+      // find all keys in the entry
+      var keys = [];
+      for (var key in entry) {
+        keys.push(key.toUpperCase());
+      }
+
+      // find all ifs and check them
+      var removed = false;
+      do {
+        // find next if
+        var conds = tpl.find(".if");
+        if (conds.size() == 0) {
+          break;
+        }
+
+        // check if
+        var cond = conds.first();
+        cond.removeClass("if");
+        var ifTrue = true;
+        var classList = cond.attr('class').split(' ');
+        $.each( classList, function(index, cls){
+          if(keys.indexOf(cls.toUpperCase()) < 0) {
+            ifTrue = false;
+          }
+          cond.removeClass(cls);
+        });
+
+        // remove false ifs
+        if (!ifTrue) {
+          cond.remove();
+        }
+      } while (true);
+
+      // fill in remaining fields 
+      for (var index in keys) {
+        var key = keys[index];
+        var value = entry[key] || "";
+        tpl.find("span:not(a)." + key.toLowerCase()).html(this.fixValue(value));
+        tpl.find("a." + key.toLowerCase()).attr('href', this.fixValue(value));
+      }
+
+      output.append(tpl);
+      tpl.show();
+    }
+	
+	
+    // remove old entries
+    old.remove();
+	}
+  }
+
+
 }
+
 
 var bib_data;
 
@@ -490,7 +568,8 @@ function bibtex_js_draw() {
 	xmlhttp.open("GET","./data/Distributome.bib",false);
 	xmlhttp.send();
 	bib_data = xmlhttp.responseText;
-	
+	//(new BibtexDisplay()).displayBibtex3(bib_data, $("#bibtex_display"), "10.1016/0304-4076(94)01612-4");
+    $("#bibtex_display").hide();
 	// Debugging
 	// alert(bib_data);
     // Display the raw test in BIB-TeX file
@@ -499,18 +578,10 @@ function bibtex_js_draw() {
 	//displayBibtex(bib_data, "#bibtex_display");
 }
 
+/*
 function bibtex_js_draw(entryKey) {
 	  $("#bibtex_display").hide();
-	  
-	  //Load references from BIB file instead of XML or directly from mockup.html
-	  /** $.get('./data/Distributome.bib', function(data) {
-		  bib_data = data;
-		  alert(bib_data);
 
-		  (new BibtexDisplay()).displayBibtex(bib_data, $("#bibtex_display"));
-	  });//end get BIB data
-	  */
-	  
 	    var xmlhttp=createAjaxRequest();
 		xmlhttp.open("GET","./data/Distributome.bib",false);
 		xmlhttp.send();
@@ -518,55 +589,9 @@ function bibtex_js_draw(entryKey) {
 		//alert(bib_data);
 	    (new BibtexDisplay()).displayBibtex(bib_data, $("#bibtex_display"));
 	    $("#bibtex_display").hide();
-	    
-	    /******
-	    
-	    //alert("entryKey="+entryKey);
-	    
-	    var b = new BibtexParser();
-	    b.setInput(bib_data);
-	    b.bibtex();
-
-	    var e = b.getEntries();
-	    for (var item in e) {
-	    	var tpl = $(".bibtex_template").clone().removeClass('bibtex_template');
-	    	//var tpl = $("#bibtex_display").clone().removeClass('#bibtex_display');
-	    	tpl.addClass("unused");
-	      
-	    	for (var key in e[item]) {
-	    		var fields = tpl.find("." + key.toLowerCase());
-	    		
-	    		//
-	    		// !!!!!!!!!!!!!!!!!
-	    		//
-	    		//alert("BibtexParser::bibtex_js_draw::fields[0]="+fields[0]);
-	    		
-	    		for (var i = 0; i < fields.size(); i++) {
-	    			var f = $(fields[i]);
-	    			f.removeClass("unused");
-	    			var value = b.fixValue(e[item][key]);
-	    			if (f.is("a")) {
-	    				f.attr("href", value);
-	    			} else {
-	    				var currentHTML = f.html() || "";
-	    				if (currentHTML.match("%")) {
-	    					// "complex" template field
-	    					f.html(currentHTML.replace("%", value));
-	    				} else {
-	    					// simple field
-	    					f.html(value);
-	    				}
-	    			}
-	    		}
-	    	}
-	    
-	    	//bibtex_display.append(e[item].toUpperCase());
-	    	(new BibtexDisplay()).displayBibtex(fields[0], $("#bibtex_display"));
-	    	tpl.show();
-	    	alert("tpl="+e[item].toUpperCase());
-	    }
-	    ****/
 	}
+
+*/
 
 // check whether or not jquery is present
 if (typeof jQuery == 'undefined') {  
@@ -574,11 +599,18 @@ if (typeof jQuery == 'undefined') {
   // in the future.
   alert("Please include jquery in all pages using bibtex_js!");
 } else {
+
+
+
+
+
+
   // draw bibtex when loaded
   $(document).ready(function () {
     // check for template, add default
+	// open the "view online" link in a new tab
     if ($(".bibtex_template").size() == 0) {
-      $("body").append("<div class=\"bibtex_template\"><div class=\"if author\" style=\"font-weight: bold;\">\n  <span class=\"if year\">\n    <span class=\"year\"></span>, \n  </span>\n  <span class=\"author\"></span>\n  <span class=\"if url\" style=\"margin-left: 20px\">\n    <a class=\"url\" style=\"color:black; font-size:10px\">(view online)</a>\n  </span>\n</div>\n<div style=\"margin-left: 10px; margin-bottom:5px;\">\n  <span class=\"title\"></span>\n</div></div>");
+      $("body").append("<div class=\"bibtex_template\"><div class=\"if author\" style=\"font-weight: bold;\">\n  <span class=\"if year\">\n    <span class=\"year\"></span>, \n  </span>\n  <span class=\"author\"></span>\n  <span class=\"if url\" style=\"margin-left: 20px\">\n    <a class=\"url\" style=\"color:black; font-size:10px\" target=\"_blank\">(view online)</a>\n  </span>\n</div>\n<div style=\"margin-left: 10px; margin-bottom:5px;\">\n  <span class=\"title\"></span>\n</div></div>");
     }
    
     bibtex_js_draw();
