@@ -31,24 +31,25 @@
 		<name>Bernoulli</name>
 		<name>Binomial</name>
 		<name>Geometric</name>
-		<name>Discrete Uniform</name>
-		<name>Hypergeometric</name>
 		<name>Negative Binomial</name>
-		<name>Multinomial</name>
 		<name>Poisson</name>
+		<name>Continuous Uniform</name>
+		<name>Normal</name>
+		<name>Beta</name>
+		<name>Cauchy</name>
+		
 	</hierarchy_level>
 
 	<hierarchy_level id="middle_hierarchy">
 		<name>Student</name>
-		<name>Normal</name>
-		<name>Beta</name>
-		<name>Cauchy</name>
-		<name>Continuous Uniform</name>
+		<name>Discrete Uniform</name>
 		<name>Gamma</name>
 		<name>Pareto</name>
 		<name>ChiSquare</name>
 		<name>F</name>
 		<name>Exponential</name>
+		<name>Multinomial</name>
+		<name>Hypergeometric</name>
 	</hierarchy_level>
 
 </distributome_ontology>
