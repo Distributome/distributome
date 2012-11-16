@@ -2372,8 +2372,8 @@
 		<relation id="Cauchy/standard-normal">
 			<from>Cauchy Distribution</from>
 			<to>standard-normal Distribution</to>
-			<statement>If \(X\) and \(Y\) are two independent normally distributed random 
-				variables with expected value 0 and variance 1, then the ratio \(\frac{X}{Y}\)
+			<statement>If \(Z_1\) and \(Z_2\) are two independent normally distributed random 
+				variables with expected value 0 and variance 1, then the ratio \(\frac{Z_1}{Z_2}\)
 				has the standard Cauchy distribution.</statement>
 			<type>transformation</type>
 			<cite>MR1326603</cite>
