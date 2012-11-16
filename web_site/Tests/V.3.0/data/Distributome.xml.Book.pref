@@ -34,7 +34,7 @@
 		<name>Negative Binomial</name>
 		<name>Poisson</name>
 		<name>Continuous Uniform</name>
-		<name>Normal</name>
+		<name>Standard Normal</name>
 		<name>Beta</name>
 		<name>Cauchy</name>
 		
@@ -50,6 +50,7 @@
 		<name>Exponential</name>
 		<name>Multinomial</name>
 		<name>Hypergeometric</name>
+		<name>Normal</name>
 	</hierarchy_level>
 
 </distributome_ontology>
