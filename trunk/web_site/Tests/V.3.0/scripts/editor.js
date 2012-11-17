@@ -522,7 +522,7 @@ function editorSave() {
     var doc = win.document;
 	// create form for email submission
 	doc.write("<html><head><title>XML Submission Page<\br></title><link href=\"mockup.css\" rel=\"stylesheet\" type=\"text/css\">");
-	var emailForm = '<div id = "submission"><form id="emailForm" action="/email.php" method="POST" >\
+	var emailForm = '<div id = "submission"><form id="emailForm" action="./scripts/email.php" method="POST" >\
 			<h3>Submit XML to Distributome Project</h3>\
 			<label id="nameLable" >Name: </label><input id="name" type="text" name="name" /><br />\
 			<div id="nameError" style=\"display:none;color:red\">Please put your name.</div>\
