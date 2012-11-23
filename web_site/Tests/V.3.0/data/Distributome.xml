@@ -262,7 +262,14 @@
             <name>continuous uniform distribution </name>
             <name>rectangular distribution</name>
             <type>continuous</type>
-            <model>The continuous uniform distribution governs a point chosen at random from an interval.</model>
+            <model>The continuous uniform distribution governs a point chosen at random from an interval.
+            		The continuous uniform distribution, aka rectangular distribution, is a family of
+                probability distributions where all intervals of the same length on the distribution's
+                support are equally probable. The support is defined by the two parameters, a and b, which
+                are its minimum and maximum values. It is the maximum entropy probability distribution
+                for a random variate X under no constraint other than that it is contained in the
+                distribution's support
+                </model>
             <parameter>\(a \in (-\infty, \infty)\), the left endpoint</parameter>
             <parameter>\(b \in (a, \infty)\), the right endpoint</parameter>
             <support>\([a, b]\)</support>
@@ -1532,33 +1539,6 @@
             <cite>motwani1995randomized</cite>
         </distribution>
 
-        <distribution id="continuous uniform">
-            <name>continuous uniform distribution</name>
-            <type>continuous</type>
-            <model>The continuous uniform distribution, aka rectangular distribution, is a family of
-                probability distributions where all intervals of the same length on the distribution's
-                support are equally probable. The support is defined by the two parameters, a and b, which
-                are its minimum and maximum values. It is the maximum entropy probability distribution
-                for a random variate X under no constraint other than that it is contained in the
-                distribution's support.</model>
-            <parameter>\(A \in \{-\infty , \infty\}\), left limit</parameter>
-            <parameter>\(B \in \{A , \infty\}\), right limit (B>A)</parameter>
-            <support>\(\{A, B\}\)</support>
-            <pdf>\(\begin{cases}
-                \frac{1}{b - a}, \text{for } x \in [a,b]  \\
-                0               , \text{otherwise}
-                \end{cases}\)</pdf>
-            <cdf>\(\begin{cases}
-                0               , \text{for } x \le a \\
-                \frac{x-a}{b-a} , \text{for } x \in [a,b] \\
-                1               , \text{for } x \ge b
-                \end{cases}\)</cdf>
-            <mean>\(\frac{1}{2}(a+b)\)</mean>
-            <median>\(\frac{1}{2}(a+b)\)</median>
-            <variance>\(\frac{1}{12}(b-a)^2\)</variance>
-            <cite>kuipers2006uniform</cite>
-        </distribution>
-
         <distribution id="standard continuous uniform">
             <name>standard continuous uniform distribution</name>
             <name>standard uniform distribution</name>
@@ -2463,7 +2443,7 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="continuous-uniform/continuous-uniform">
+        <relation id="continuous uniform/continuous uniform">
             <from>continuous uniform distribution</from>
             <to>continuous uniform distribution</to>
             <statement>If \(X\) is uniformly distributed on the interval \([a, b]\) and \(c, d \in (-\infty, \infty)\) with \(c \ne 0\), then \(Y = cX + d\) is uniformly distributed on \([ca + d, cb + d]\) if \(c \gt 0\) or on \([cb + d, ca + d]\) if \(c \lt 0\)</statement>
@@ -2472,7 +2452,7 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="continuous-uniform/standard-uniform">
+        <relation id="continuous uniform/standard uniform">
             <from>continuous uniform distribution</from>
             <to>standard uniform distribution</to>
             <statement>The continuous uniform distribution on \([0, 1]\) is the standard uniform distribution</statement>
@@ -2481,7 +2461,7 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="continuous-uniform/triangular">
+        <relation id="continuous uniform/triangular">
             <from>continuous uniform distribution</from>
             <to>triangular distribution</to>
             <statement>If \(X\) and \(Y\) are independent and each is uniformly distributed on the interval \([a, b]\), then \(X + Y\) has the triangular distribution with parameters \(a\), \(b\), and \(c = \frac{a+b}{2}\).</statement>
