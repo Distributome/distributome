@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../images/Distributome_style.css" type="text/css"?>
+<distributome version="1.1"
+              xmlns="http://www.distributome.org"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.distributome.org/distributome.xsd">
+
+
+    <distributions>
+        <distribution id="arcsine">
+            <name>arcsine distribution</name>
+            <name>Levy arcsine distribution</name>
+            <type>continuous</type>
+            <model>The arcsine distribution models the proportion of time that Brownian motion is positive.</model>
+            <support>\(x\in[0,1]\)</support>
+            <pdf>\(f(x)=\frac{1}{\pi\sqrt{x(1-x)}}\)</pdf>
+            <mode>\(x\in{0,1}\)</mode>
+            <cdf>\(F(x)=\frac{2}{\pi}\arcsin\left(\sqrt x\right)\)</cdf>
+            <qf>\(Q(p) = \sin^2(\frac{\pi}{2} p), \; p \in (0, 1)\)</qf>
+            <mean>\(\frac{1}{2}\)</mean>
+            <variance>\(\tfrac{1}{8}\)</variance>
+            <skew>\(0\)</skew>
+            <kurt>\(-\tfrac{3}{2}\)</kurt>
+            <median>\(\frac{1}{2}\)</median>
+            <q1>\(\frac{2 - \sqrt{2}}{4}\)</q1>
+            <q3>\(\frac{2 + \sqrt{2}}{4}\)</q3>
+            <history>Derived by Paul Levy in 1939 as the distribution of proportion of time that Brownian motion is  positive.</history>
+            <cite>arnold1980some</cite>
+        </distribution>
+
+        <distribution id="Bernoulli">
+            <name>Bernoulli distribution</name>
+            <type>discrete</type>
+            <model>The Bernoulli distribution governs an indicator random variable.</model>
+            <parameter>\(p \in [0, 1]\), the probability of the event</parameter>
+            <support>\(\{0, 1\}\)</support>
+            <pdf>\(f(x) = p^x (1 - p)^{1 - x}, \; x \in \{0, 1\}\)</pdf>
+            <mode>\(\lfloor 2 p \rfloor\)</mode>
+            <cdf>\(F(x) = (1 - p)^{1 - x}, \; x \in \{0, 1\}\)</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \; p \in (0, 1)\) where \(F\) is the distribution function</qf>
+            <pgf>\(G(t) = 1 - p + p t, \; t \in (-\infty, \infty)\)</pgf>
+            <mgf>\(M(t) = 1 - p + p e^t, \; t \in (-\infty, \infty)\)</mgf>
+            <cf>\(\varphi(t) = 1 - p + p e^{i t}, \; t \in (-\infty, \infty)\)</cf>
+            <moments type="raw">\(\mu(n) = p, \; n \in \{0, 1, \ldots\}\)</moments>
+            <mean>\(p\)</mean>
+            <variance>\(p (1-p)\)</variance>
+            <skew>\(\frac{1 - 2 p}{\sqrt{p (1 - p)}}\)</skew>
+            <kurt>\(\frac{1- 6 p + 6 p^2}{p (1 - p)}\)</kurt>
+            <entropy>\(-(1 - p) \ln(1 - p) - p \ln(p)\)</entropy>
+            <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <family>power series </family>
+            <family>exponential</family>
+            <history>Named for Jacob Bernoulli</history>
+            <cite>marshall1985family</cite>
+        </distribution>
+
+        <distribution id="beta">
+            <name>beta distribution</name>
+            <type>continuous</type>
+            <model>The beta distribution is used to model random proportions and probabilities. </model>
+            <parameter>\(\alpha \in (0, \infty)\), the left shape parameter</parameter>
+            <parameter>\(\beta \in (0, \infty)\), the right shape parameter</parameter>
+            <support>\((0, 1)\)</support>
+            <pdf>\(\frac{x^{\alpha-1}(1-x)^{\beta-1}} {\mathrm{B}(\alpha,\beta)}\!\)</pdf>
+            <mode>\(\frac{\alpha - 1}{\alpha + \beta - 2}; \; \alpha \in (1, \infty), \beta \in (1, \infty)\)</mode>
+            <cdf>\(I_x(\alpha,\beta)\!\)</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \; p \in (0, 1)\), where \(F\) is the distribution function.</qf>
+            <mgf>\(1  +\sum_{k=1}^{\infty} \left( \prod_{r=0}^{k-1} \frac{\alpha+r}{\alpha+\beta+r} \right) \frac{t^k}{k!}\)</mgf>
+            <mean>\(\frac{\alpha}{\alpha + \beta}\)</mean>
+            <variance>\(\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}\)</variance>
+            <skew>\(\frac{2\,(\beta-\alpha)\sqrt{\alpha+\beta+1}}{(\alpha+\beta+2)\sqrt{\alpha\beta}}\)</skew>
+            <kurt>\(\frac{6[(\alpha - \beta)^2 (\alpha +\beta + 1) - \alpha \beta (\alpha + \beta + 2)]}{\alpha \beta (\alpha + \beta + 2) (\alpha + \beta + 3)}\)</kurt>
+            <entropy>\(\ln(B(\alpha, \beta)) - (\alpha - 1) \psi(\alpha) - (\beta - 1) \psi(\beta) + (\alpha + \beta - 2) \psi(\alpha + \beta)\) where \(\psi\) is the digamma function</entropy>
+            <median>\(\begin{matrix}I_{\frac{1}{2}}^{[-1]}(\alpha,\beta)\text{ (in general) }\\[0.5em] \approx \frac{ \alpha - \tfrac{1}{3} }{ \alpha + \beta - \tfrac{2}{3} }\text{ for }\alpha>1, \beta>1\end{matrix}\)</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <family>exponential</family>
+            <cite>mcdonald1995generalization</cite>
+        </distribution>
+
+        <distribution id="inverse beta">
+            <name>inverse beta distribution</name>
+            <type>continuous</type>
+            <model>The inverse beta distribution, as the name suggests, is the inverse probability dsitribution of a Beta-distributed variable. </model>
+            <parameter>\(\alpha \in (0, \infty)\), the left shape parameter</parameter>
+            <parameter>\(\beta \in (0, \infty)\), the right shape parameter</parameter>
+            <support>\((0, 1)\)</support>
+            <family>exponential</family>
+            <cite>mcdonald1995generalization</cite>
+        </distribution>
+
+        <distribution id="binomial">
+            <name>binomial distribution</name>
+            <type>discrete</type>
+            <model>The binomial distribution models the number of successes in a fixed number of independent trials each with the same probability of success.</model>
+            <parameter>\(n \in \{1, 2, \ldots\}\), the number of trials</parameter>
+            <parameter>\(p \in [0, 1]\), the probability of success</parameter>
+            <support>\(\{0, 1, \ldots, n\}\)</support>
+            <pdf>\(f(x) = {n \choose x} p^x (1 - p)^{n - x}, \; x \in \{0, 1, \ldots, n\}\)</pdf>
+            <mode>\(\lfloor (n + 1) p \rfloor\)</mode>
+            <cdf>\(F(x) = B(1 - p; n - x, x + 1), \; x \in \{0, 1, \ldots, n\}\) where \(B\) is the incomplete beta function</cdf>
+            <qf>\(Q(r) = F^{-1}(r), \; r \in [0, 1]\) where \(F\) is the distribution function</qf>
+            <pgf>\(G(t) = (1 - p + p t)^n, \; t \in (-\infty, \infty)\)</pgf>
+            <mgf>\(M(t) = (1 - p + p e^t)^n, \; t \in (-\infty, \infty)\)</mgf>
+            <cf>\(\varphi(t) = (1 - p + p e^{i t})^n, \; t \in (-\infty, \infty)\)</cf>
+            <mean>\(n p\)</mean>
+            <variance>\(n p (1 - p)\)</variance>
+            <skew>\(\frac{1 - 2 p}{\sqrt{n p (1 - p)}}\)</skew>
+            <kurt>\(\frac{1 - 6 p (1 - p)}{n p (1 - p)}\)</kurt>
+            <entropy>\(\frac{1}{2} \log_2[2 \pi e n p (1 - p)] + O\left(\frac{1}{n}\right)\)</entropy>
+            <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{1}{3})\) where \(Q\) is the quantile function</q3>
+            <family>power series </family>
+            <family>exponential</family>
+            <history>The binomial distribution is attributed to Jacob Bernoulli</history>
+            <cite>altham1978two</cite>
+        </distribution>
+
+        <distribution id="beta-binomial">
+            <name>beta-binomial distribution</name>
+            <type>discrete</type>
+            <model>The beta-binomial distribution arises when the success parameter in the binomial distribution is randomized and given a beta distribution.</model>
+            <parameter>\(n \in \{1, 2, \ldots\}\), the number of trials</parameter>
+            <parameter>\(a \in (0, \infty)\), the left beta parameter</parameter>
+            <parameter>\(b \in (0, \infty)\), the right beta parameter</parameter>
+            <support>\(\{0, 1, \ldots, n\}\)</support>
+            <pdf>\({n\choose k}\frac{\mathrm{B}(k+\alpha,n-k+\beta)} {\mathrm{B}(\alpha,\beta)}\!\) denotes the rising power of order \( j \)</pdf>
+            <cdf>\(F(x) = \sum_0^x f(t), \quad x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
+            <mgf>\(_{2}F_{1}(-n,\alpha;\alpha+\beta;1-e^{t})\!\)</mgf>
+            <mean>\(\frac{n\alpha}{\alpha+\beta}\!\)</mean>
+            <variance>\(n\frac{n\alpha\beta(\alpha+\beta+n)}{(\alpha+\beta)^2(\alpha+\beta+1)}\!\)</variance>
+            <skew>\(\tfrac{(\alpha+\beta+2n)(\beta-\alpha)}{(\alpha+\beta+2)}\sqrt{\tfrac{1+\alpha+\beta}{n\alpha\beta(n+\alpha+\beta)}}\!\)</skew>
+            <kurt>\(\frac{(a + b)^2 ( + 1 + b)}{n a b (a + b + 2)(a + b + 3)(a + b + n)} \left[(a + b)(a + b - 1 + 6 n) + 3 a b (n - 2) + 6 n^2 - \frac{3 a b n (6-n)}{a + b} - \frac{18 a b n^2}{(a + b)^2}\right]\)</kurt>
+            <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <cite>altham1978two</cite>
+        </distribution>
+		
+		<distribution id="beta-negative binomial">
+            <name>beta-negative binomial distribution</name>
+            <type>discrete</type>
+            <model>The beta-negative binomial distribution arises when the success parameter in the negative binomial distribution is randomized and given a beta distribution.</model>
+            <parameter>\(k \in \{1, 2, \ldots\}\), the number of trials</parameter>
+            <parameter>\(a \in (0, \infty)\), the left beta parameter</parameter>
+            <parameter>\(b \in (0, \infty)\), the right beta parameter</parameter>
+            <support>\(\{k, k + 1, \ldots \}\)</support>
+            <pdf>\( f(x) = \binom{n - 1}{x - 1} \frac{a^{[x]} b^{[n-x]}}{(a + b)^{[n]}} \), where \( r^{[j]} \) denotes the rising power of order \( j \)</pdf>
+            <cdf>\(F(x) = \sum_0^x f(t), \quad x \in \{0, 1, \ldots, n\}\) where \(f\) is the probability density function</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
+            <mean>\(k \frac{a + b - 1}{a - 1}\) if \( a \gt 1 \)</mean>
+            <variance>\( k \frac{a + b - 1}{(a - 1)(a - 2)}[b + k (a + b - 2)] - k^2 \left(\frac{a + b - 1}{a - 1}\right)^2 \) if \( a \gt 2 \)</variance>
+            <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <cite>johnson2005univariate</cite>
+        </distribution>
+		
+		<distribution id="Cauchy">
+            <name>Cauchy distribution </name>
+            <name>Cauchy-Lorentz distribution </name>
+            <name>Lorentz distribution </name>
+            <name>Breit-Wigner distribution</name>
+            <type>continuous</type>
+            <model>The general Cauchy distribution is the location-scale family associated with the standard Cauchy distribution </model>
+            <parameter>\(\alpha \in (-\infty, \infty)\). the location parameter</parameter>
+            <parameter>\(\beta \in (0, \infty)\), the scale parameter</parameter>
+            <support>\(\displaystyle x\in(-\infty,+\infty)\!\)</support>
+            <pdf>\(\frac{1}{\pi\gamma\,\left[1+\left(\frac{x-x_0}{\gamma}\right)^2\right]}\!\)</pdf>
+            <mode>\(x_0\!\)</mode>
+            <cdf>\(\frac{1}{\pi}\arctan\left(\frac{x-x_0}{\gamma}\right)+\frac{1}{2}\!\)</cdf>
+            <qf>\(Q(p) = F^{-1}(p) = \alpha + \beta \tan \left(\pi (p - \frac{1}{2}) \right), \; p \in (0, 1)\)</qf>
+            <mgf>Does not exist</mgf>
+            <cf>\(\varphi(t) = \exp(\alpha i t - \beta |t|), \; t \in (-\infty, \infty)\)</cf>
+            <mean>Does not exist</mean>
+            <variance>Does not exist</variance>
+            <skew>Does not exist</skew>
+            <kurt>Does not exist</kurt>
+            <entropy>\(\ln (4 \pi \beta ) \)</entropy>
+            <median>\(x_0\!\)</median>
+            <q1>\(\alpha - \beta\)</q1>
+            <q3>\(\alpha + \beta\)</q3>
+            <family>location</family>
+            <history>The distribution was first used by Simeon Poisson in 1824 and was re-introduced by Augustin Cauchy in 1853. It is also named for Hendrick Lorentz.</history>
+            <cite>haas1970inferences</cite>
+        </distribution>
+
+        <distribution id="chi-square">
+            <name>chi-square distribution </name>
+            <name>chi-squared distribution</name>
+            <type>continuous</type>
+            <model>The chi-square distribution governs the sum of squares of independent standard normal variable.</model>
+            <parameter>\(n \in (0, \infty)\), degrees of freedom</parameter>
+            <support>\((0, \infty)\)</support>
+            <pdf>\(\frac{1}{2^{\frac{k}{2}}\Gamma\left(\frac{k}{2}\right)}\; x^{\frac{k}{2}-1} e^{-\frac{x}{2}}\,\)</pdf>
+            <mode>\(n-2, \; n \in [2, \infty)\)</mode>
+            <cdf>\(\frac{1}{\Gamma\left(\frac{k}{2}\right)}\;\gamma\left(\frac{k}{2},\,\frac{x}{2}\right)\)</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \; p \in [0, 1)\) where \(F\) is the distribution function</qf>
+            <mgf>\(M(t) = \frac{1}{(1 - 2 t)^{n/2}}, \; t \in (-\infty, \frac{1}{2})\)</mgf>
+            <cf>\(\frac{1}{(1 - 2 i t^{n/2})}, \; t \in (-\infty, \infty)\)</cf>
+            <mean>\(n\)</mean>
+            <variance>\(2 n\)</variance>
+            <skew>\(\scriptstyle\sqrt{8/k}\,\)</skew>
+            <kurt>\(12/n\)</kurt>
+            <entropy>\(\frac{k}{2}\!+\!\ln(2\Gamma(k/2))\!+\!(1\!-\!k/2)\psi(k/2)\)</entropy>
+            <median>\(\approx k\bigg(1-\frac{2}{9k}\bigg)^3\)</median>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <family>exponential</family>
+            <history>The chi-square distribution was first used by Karl Pearson in 1900.</history>
+            <cite>lancaster2005chi</cite>
+        </distribution>
+
+        <distribution id="non-central chi-square">
+            <name>non-central chi-square distribution</name>
+            <name>non-central chi-squared distribution</name>
+            <type>continuous</type>
+            <model>The non-central chi-square distribution distribution is a generalization of the chi-squared distribution, which arises in the power analysis of statistical tests where the null distribution is asymptotically a chi-squared distribution; important examples of such tests are the likelihood ratio tests.</model>
+            <parameter>\(k \in (0, \infty)\), degrees of freedom</parameter>
+            <parameter>\(\lambda \in (0, \infty)\), non-centrality parameter</parameter>
+            <support>\(x \in [0; +\infty)\,\)</support>
+            <pdf>\(\frac{1}{2}e^{-(x+\lambda)/2}\left (\frac{x}{\lambda} \right)^{k/4-1/2}
+                I_{k/2-1}(\sqrt{\lambda x})\)</pdf>
+            <cdf>\(F(x) = 1 - Q_{\frac{k}{2}} \left( \sqrt{\lambda}, \sqrt{x} \right)\),
+                where \(Q_M(a,b)\) is the Marcum Q-function</cdf>
+            <mgf>\(\frac{\exp\left(\frac{ \lambda t}{1-2t }\right)}{(1-2 t)^{k/2}}, \) for \( 2t \lt 1\)</mgf>
+            <cf>\(\frac{1}{(1 - 2 i t^{n/2}}) \; t \in (-\infty, \infty)\)</cf>
+            <mean>\(k+\lambda\)</mean>
+            <variance>\(2(k+2\lambda)\)</variance>
+            <skew>\(\frac{2^{3/2}(k+3\lambda)}{(k+2\lambda)^{3/2}}\)</skew>
+            <kurt>\(\frac{12(k+4\lambda)}{(k+2\lambda)^2}\)</kurt>
+            <family>exponential</family>
+            <cite>sankaran1959non</cite>
+        </distribution>
+
+        <distribution id="chi">
+            <name>chi distribution</name>
+            <type>continuous</type>
+            <model>The chi distribution governs the square root of a variable with the chi-square distribution.</model>
+            <parameter>\(n \in \{1, 2, \ldots\}\), the degrees of freedom</parameter>
+            <support>\(x\in[0;\infty)\)</support>
+            <pdf>\(\frac{2^{1-k/2}x^{k-1}e^{-x^2/2}}{\Gamma(k/2)}\)</pdf>
+            <mode>\(\sqrt{k-1}\,\)for\(k\ge1\)</mode>
+            <cdf>\(P(k/2,x^2/2)\,\)</cdf>
+            <qf>\(Q(p) = F^{-1}(p), \; p \in (0, 1)\) where \(F\) is the distribution function</qf>
+            <moments>\(\mu(k) = \frac{2^{k/2} \Gamma[(n+k)/2)]}{\Gamma(n/2)}, \; n \in \{1, 2, \ldots\}\) where \(\Gamma\) is the gamma function</moments>
+            <mean>\(\mu=\sqrt{2}\,\frac{\Gamma((k+1)/2)}{\Gamma(k/2)}\)</mean>
+            <variance>\(\sigma^2=k-\mu^2\,\)</variance>
+            <skew>\(\gamma_1=\frac{\mu}{\sigma^3}\,(1-2\sigma^2)\)</skew>
+            <kurt>\(\frac{2}{\sigma^2}(1-\mu\sigma\gamma_1-\sigma^2)\)</kurt>
+            <entropy>\(\ln[\Gamma(n/2)] + \frac{1}{2} [n - \ln(2) - (n-1) \psi_0(n/2)]\) where \(\psi_0\) is the polygamma function</entropy>
+            <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
+            <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
+            <cite>krishnaiah1963note</cite>
+        </distribution>
+
+        <distribution id="continuous-uniform">
+            <name>continuous uniform distribution </name>
+            <name>rectangular distribution</name>
+            <type>continuous</type>
+            <model>The continuous uniform distribution governs a point chosen at random from an interval.</model>
+            <parameter>\(a \in (-\infty, \infty)\), the left endpoint</parameter>
+            <parameter>\(b \in (a, \infty)\), the right endpoint</parameter>
+            <support>\([a, b]\)</support>
+            <pdf>\(f(x) = \frac{1}{b - a}, \; x \in [a, b]\)</pdf>
+            <mode> all \(x \in [a, b]\)</mode>
+            <cdf>\(F(x) = \frac{x - a}{b - a}, \; x \in [a, b]\)</cdf>
+            <qf>\(Q(p) = a + p (b - a). \; p \in [0, 1]\)</qf>
+            <mgf>\(M(t) = \frac{e^{t b} - e^{t a}}{t (b - a)}, \; t \in (-\infty, \infty)\)</mgf>
+            <cf>\(\varphi(t) = \frac{e^{i t b} - e^{i t a}}{i t (b - a)}, \; t \in (-\infty, \infty)\)</cf>
+            <moments type="raw">\(\mu(t) = \frac{b^{t+1} - a^{t+1}}{(t + 1)(b - a)}, \; t \in (0, \infty)\)</moments>
+            <mean>\(\frac{1}{2}(a + b)\)</mean>
+            <variance>\(\frac{1}{12} (b - a)^2\)</variance>
+            <skew>\(0\)</skew>
+            <kurt>\(-\frac{6}{5}\)</kurt>
+            <entropy>\(\ln(b - a)\)</entropy>
+            <median>\(\frac{1}{2}(a + b)\)</median>
+            <q1>\(\frac{3}{4} a + \frac{1}{4}b\)</q1>
+            <q3>\(\frac{1}{4} a + \frac{3}{4} b\)</q3>
+            <family>location </family>
+            <family>scale</family>
+            <cite>kuipers2006uniform</cite>
+        </distribution>
+
+        <distribution id="discrete-uniform">
+            <name>discrete uniform distribution</name>
+            <type>discrete</type>
+            <model>The discrete uniform distribution governs a point chosen at random from an integer interval.</model>
+            <parameter>\(a \in \{\ldots -2, -1, 0, 1, 2, \ldots\}\), the left endpoint</parameter>
+            <parameter>\(b \in \{a, a+1, \ldots\}\), the right endpoint</parameter>
+            <support>\(k \in \{a,a+1,\dots,b-1,b\}\,\)</support>
+            <pdf><![CDATA[
+            \(\begin{matrix}
+            \frac{1}{n} & \mbox{for }a\le k \le b\ \\0 & \mbox{otherwise }
+            \end{matrix}\)
+        ]]></pdf>
+            <mode>all \(x \in \{a, a+1, \ldots, b\}\)</mode>
+            <cdf><![CDATA[
+            \(\begin{matrix}
+            0 & \mbox{for }k<a\\ \frac{\lfloor k \rfloor -a+1}{n} & \mbox{for }a \le k \le b \\1 & \mbox{for }k>b
+            \end{matrix}\)
+        ]]></cdf>
+            <qf>\(Q(p) = \lceil a + p (b - a) \rceil, \; p \in [0, 1]\)</qf>
+            <mgf>\(\frac{e^{at}-e^{(b+1)t}}{n(1-e^t)}\,\)</mgf>
+            <cf>\(\varphi(t) = \frac{e^{i a t} - e^{i (b+1) t}}{(b + a + 1)(1 - e^{i t})}, \; t \in (-\infty, \infty)\)</cf>
+            <mean>\(\frac{a+b}{2}\,\)</mean>
+            <variance>\(\frac{n^2-1}{12}\)</variance>
+            <skew>\(0\)</skew>
+            <kurt>\(-\frac{6(n^2+1)}{5(n^2-1)}\,\)</kurt>
+            <entropy>\(\ln(n)\,\)</entropy>
+            <median>\(\frac{a+b}{2}\,\)</median>
+            <q1>\(\lceil \frac{3}{4} a + \frac{1}{4} b \rceil\)</q1>
+            <q3>\(\lceil \frac{1}{4} a + \frac{3}{4} b \rceil\)</q3>
+            <cite>freund1967modern</cite>
+        </distribution>
+
+        <distribution id="exponential">
+            <name>exponential distribution</name>
+            <name>negative exponential distribution</name>
+            <type>continuous</type>
+            <model>The exponential distribution models the time between random points in the Poisson model.</model>
+            <parameter>\(r \in (0, \infty)\), rate</parameter>
+            <support>\([0, \infty)\)</support>
+            <pdf>\(f(x) = r e^{-r x}, \; x \in [0, \infty)\)</pdf>
+            <mode>\(0\)</mode>
+            <cdf>\(F(x) = 1 - e^{-r x}, \; x \in [0, \infty)\)</cdf>
+            <qf>\(Q(p) = \frac{- \ln(1 - p)}{r}, \; p \in [0, 1)\)</qf>
+            <mgf>\(\left(1 - \frac{t}{\lambda}\right)^{-1}\,\)</mgf>
+            <cf>\(\frac{r}{r - i t}, \; t \in (-\infty, \infty)\)</cf>
+            <mean>\(\frac{1}{r}\)</mean>
+            <variance>\(\frac{1}{r^2}\)</variance>
+            <skew>\(2\)</skew>
+            <kurt>\(6\)</kurt>
+            <entropy>\(1 - \ln(r)\)</entropy>
+            <median>\(\frac{\ln(2)}{r}\)</median>
+            <q1>\(\frac{\ln(4) - \ln(3)}{r}\)</q1>
+            <q3>\(\frac{\ln(3)}{r}\)</q3>
+            <family>exponential </family>
+            <family>scale</family>
+            <history>The exponential distribution was named by Karl Pearson in 1895.</history>
+            <cite>siegrist2007exponential</cite>
+        </distribution>
+
+		<distribution id="standard-Cauchy">
+            <name>standard Cauchy distribution</name>
+            <type>continuous</type>
+            <model>The standard Cauchy distribution governs the ratio of two independent, standard normal variables.</model>
+            <support>\((-\infty, \infty)\)</support>
+            <pdf>\(f(x) = \frac{1}{\pi (1 + x^2)}, \; x \in (-\infty, \infty)\)</pdf>
+            <mode>\(0\)</mode>
+            <cdf>\(F(t) = \frac{1}{2} + \frac{1}{\pi} \arctan(x), \; x \in (-\infty, \infty)\)</cdf>
+            <qf>\(Q(p) = \tan(\pi (p - \frac{1}{2})), \; p \in (0, 1)\)</qf>
+            <mgf>Does not exist</mgf>
+            <cf>\(\varphi(t) = e^{-|t|}\)</cf>
+            <mean>Does not exist</mean>
+            <variance>Does not exist</variance>
+            <skew>Does not exist</skew>
+            <kurt>Does not exist</kurt>
+            <entropy>\(\ln( 4 \pi)\)</entropy>
+            <median>\(0\)</median>
+            <q1>\(-1\)</q1>
+            <q3>\(1\)</q3>
+            <cite>kotz2000continuous</cite>
+        </distribution>
+        
+    </distributions>
+
+    <relations>
+        <relation id="Bernoulli/binomial">
+            <from>Bernoulli distribution</from>
+            <to>binomial distribution</to>
+            <statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in [0, 1]\) then \(Y = \sum_{i = 1}^n X_i\) has the binomial distribution with parameters \(n\) and \(p\).</statement>
+            <type>convolution</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="Bernoulli/beta">
+            <from>Bernoulli distribution</from>
+            <to>beta distribution</to>
+            <statement>If \((X_1, X_2, \ldots)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in (0, 1)\), then \(Y = \min\{n \in \{1, 2, \ldots\}: X_n = 1\}\) has the geometric distribution with parameter \(p\).</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="beta/arcsine">
+            <from>beta distribution</from>
+            <to>arcsine distribution</to>
+            <statement>The beta distribution with parameters \(\alpha = \frac{1}{2}\) and \(\beta = \frac{1}{2}\) is the arcsine distribution.</statement>
+            <type>special case</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="beta/inverse-beta">
+            <from>beta distribution</from>
+            <to>inverse beta distribution</to>
+            <statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\), then \(Y = \frac{X}{1 - X}\) has the inverse beta distribution with parameters \(\alpha\) and \(\beta\).</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="beta/beta">
+            <from>beta distribution</from>
+            <to>beta distribution</to>
+            <statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) then \(Y = 1 - X\) has the beta distribution with parameters \(\beta\) and \(\alpha\).</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="r"> %beta to beta
+            <from>beta distribution</from>
+            <to>beta distribution</to>
+            <statement>If \(X\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta = 1\), and \(r \in (0, \infty)\), then \(Y = X^r\) has the beta distribution with parameters \(\frac{\alpha}{r}\) and \(1\).</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="beta/binomial/beta-binomial">
+            <from>beta distribution</from>
+            <from>binomial distribution</from>
+            <to>beta-binomial distribution</to>
+            <statement>If \(P\) has the beta distribution with parameters \(\alpha \in (0, \infty)\) and \(\beta \in (0, \infty)\) and if the conditional distribution of \(X\) given \(P = p\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p\), then \(X\) has the beta-binomial distribution with parameters \(n\), \(\alpha\), and \(\beta\).</statement>
+            <type>Conditioning</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="binomial/Bernoulli">
+            <from>binomial distribution</from>
+            <to>Bernoulli distribution</to>
+            <statement>The binomial distribution with parameters \(n = 1\) and \(p \in [0, 1]\) is the Bernoulli distribution with parameter \(p\).</statement>
+            <type>special case</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="binomial/binomial">
+            <from>binomial distribution</from>
+            <to>binomial distribution</to>
+            <statement>If \(X\) has the binomial distribution with parameters \(n \in \{1, 2, \ldots\}\) and \(p \in [0, 1]\); \(Y\) has the binomial distribution with parameters \(m \in \{1, 2, \ldots\}\) and \(p\); and \(X\) and \(Y\) are independent, then \(X + Y\) has the binomial distribution with parameters \(m + n\) and \(p\).</statement>
+            <type>convolution</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="binomial/negative-binomial">
+            <from>binomial distribution</from>
+            <to>negative binomial distribution</to>
+            <statement>For \(n \in \{1, 2, \ldots\}\), let \(Y_n\) denote the number of successes in the first \(n\) of a sequence of Bernoulli trials, so that \(Y_n\) has the binomial distribution with trial parameter \(n\) and sucess parameter \(p\). Then for \(k \in \{1, 2, \ldots\}\), \(Z_k = \min\{n: Y_n \geq k\} - k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\).</statement>
+            <type>inverse stochastic process</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+		
+		<relation id="binomial/negative-binomial">
+            <from>binomial distribution</from>
+            <to>negative binomial distribution</to>
+            <statement>For \(n \in \{1, 2, \ldots\}\), let \(Y_n\) denote the number of successes in the first \(n\) of a sequence of Bernoulli trials, so that \(Y_n\) has the binomial distribution with trial parameter \(n\) and sucess parameter \(p\). Then for \(k \in \{1, 2, \ldots\}\), \(Z_k = \min\{n: Y_n \geq k\} - k\) has the negative binomial distribution with stopping parameter \(k\) and success parameter \(p\).</statement>
+            <type>inverse stochastic process</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="Cauchy/Cauchy.1">
+            <from>Cauchy Distribution</from>
+            <to>Cauchy Distribution</to>
+            <statement>If \(X\) has the Cauchy distribution with location parameter \(\alpha_1 \in (-\infty, \infty)\) and location parameter \(\beta_1 \in (0, \infty)\), \(Y\) has the Cauchy distribution with location parameter \(\alpha_2 \in (-\infty, \infty)\) and scale parameter \(\beta_2 \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(X + Y\) has the Cauchy distribution with location parameter \(\alpha_1 + \alpha_2\) and scale parameter \(\beta_1 + \beta_2\).</statement>
+            <type>convolution</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="Cauchy/Cauchy.2">
+            <from>Cauchy distribution </from>
+            <to>Cauchy distribution</to>
+            <statement>If \(X\) has Cauchy distribution with location parameter \(\alpha \in (-\infty, \infty)\) and scale parameter \(\beta \in (0, \infty)\), \(a \in (-\infty, \infty)\) and \(b \in (0, \infty)\), then \(a + b X\) has the Cauchy distribution with location parameter \(a + b \alpha\) and location parameter \(\beta b\).</statement>
+            <type>location-scale transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="chi-square/chi-square">
+            <from>chi-square distribution</from>
+            <to>chi-square distribution</to>
+            <statement>If \(X\) has the chi-square distribution with \(m \in (0, \infty)\) degrees of freedom; \(Y\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom; and \(X\) and \(Y\) are independent, then \(X + Y\) has the chi-square distribution with \(m + n\) degrees of freedom.</statement>
+            <type>convolution</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+		<relation id="chi-square/chi">
+            <from>chi-square distribution</from>
+            <to>chi distribution</to>
+            <statement>If \(X\) has the chi-square distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(\sqrt{X}\) has the chi distribution with \(n\) degrees of freedom.</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+		
+		<relation id="continuous-uniform/exponential">
+            <from>standard uniform distribution</from>
+            <to>exponential distribution</to>
+            <statement>If \(X\) has the standard uniform distribution and \(\beta \in (0, \infty)\), then \(-\beta \ln(1 - X)\) has the exponential distribution with scale parameter \(\beta\).</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+		 <relation id="standard-uniform/beta">
+            <from>standard uniform distribution</from>
+            <to>beta distribution</to>
+            <statement>If \(X\) has the standard uniform distribution and \(\alpha \in (0, \infty)\) then \(X^{1/\alpha}\) has the beta distribution with left parameter \(\alpha\) and right parameter 1.</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="standard-uniform/standard-Cauchy">
+            <from>standard uniform distribution</from>
+            <to>standard Cauchy distribution</to>
+            <statement>If \(X\) has the standard uniform distribution then \(\tan[\pi(X - \frac{1}{2})]\) has the standard Cauchy distribution.</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="standard-uniform/arcsine">
+            <from>standard uniform distribution</from>
+            <to>arcsine distribution</to>
+			<to>chi-square distribution</to>
+            <statement>If \(X\) has the standard uniform distribution then \(\sin^2(\frac{\pi}{2} X)\) has the arcsine distribution.</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+		
+		<relation id="exponential/exponential">
+            <from>exponential distribution</from>
+			<from>arcsine distribution</from>
+            <to>exponential distribution</to>
+            <statement>If \(X\) has the exponential distribution with rate parameter \(r \in (0, \infty)\), \(Y\) has the exponential distribution with rate parameter \(s \in (0, \infty)\), and \(X\) and \(Y\) are independent, then \(\min\{X, Y\}\) has the exponential distribution with rate parameter \(r + s\).</statement>
+            <type>nonlinear transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+        <relation id="exponential/standard-uniform">
+            <from>exponential distribution</from>
+            <to>standard uniform distribution</to>
+			<to>arcsine distribution</to>
+            <statement>If \(X\) has the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = e^{-\lambda X}\) has the standard uniform distribution.</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+
+
+    </relations>
+</distributome>
