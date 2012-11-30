@@ -5061,7 +5061,9 @@
     function dragmove(d) {
       d.px = d3.event.x;
       d.py = d3.event.y;
+	  //force.stop();
       force.resume();
+	  //force.alpha(0.1, true);
     }
     var force = {}, event = d3.dispatch("start", "tick", "end"), size = [ 1, 1 ], drag, alpha, friction = .9, linkDistance = d3_layout_forceLinkDistance, linkStrength = d3_layout_forceLinkStrength, charge = -30, gravity = .1, theta = .8, interval, nodes = [], links = [], distances, strengths, charges;
     force.tick = function() {
@@ -5170,7 +5172,7 @@
       theta = x;
       return force;
     };
-    force.alpha = function(x) {
+    force.alpha = function(x, move) {
       if (!arguments.length) return alpha;
       if (alpha) {
         if (x > 0) alpha = x; else alpha = 0;
@@ -5179,7 +5181,9 @@
           type: "start",
           alpha: alpha = x
         });
-        d3.timer(force.tick);
+		//if(move == undefined)
+			d3.timer(force.tick);
+		//else force.tick();
       }
       return force;
     };
