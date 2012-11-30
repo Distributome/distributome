@@ -16,7 +16,8 @@
 	$name = htmlentities($name);
 	$type = ucwords($_POST['type']);
 	$node = $_POST['node'];
-	$xml = $_POST['xml'];
+	//$xml = $_POST['xml'];
+	$xml = stripslashes($_POST['xml']);
 	
 	// create xml document from $xml
 	$xml = new SimpleXMLElement($xml);

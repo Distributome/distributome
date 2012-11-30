@@ -441,6 +441,7 @@
                             var w =	leftPanelWidth.substring(0,leftPanelWidth.indexOf('px')),
                                 h = leftPanelHeight.substring(0,leftPanelHeight.indexOf('px'));*/
 
+			
 			var w = 1200;
 			var h = 650;
 			var colors = d3.scale.category20();
@@ -451,6 +452,7 @@
 				.linkDistance(200)
 				.charge(-80)
 				.on("tick", tick);
+			 
 				//.start();
 			var forceNodes = force.nodes(),
 			forceLinks = force.links();
@@ -610,7 +612,7 @@
 		    followed by <div> PANEL CONTENT </div> -->
 				<div class = "accordion">
 					<h3>Editor</h3>
-                        <div id="editor" >
+                        <div id="editor" style="overflow-x:hidden">
 		                    <div id="editorTitle" ></div>
 		                    <div id="contentHolder" >
 			                    <div id="editorContent" >
@@ -622,11 +624,11 @@
                                         </p>
 				                    </div>
 			                    </div>
-			                    <div id="addAttrDiv" >
-                                    <div id="addAttrTitle" >
+			                    <div id="addAttrDiv" style="width:94%;overflow-x:hidden">
+                                    <div id="addAttrTitle" style="width:94%;overflow-x:hidden">
                                         Choose an attribute
                                     </div>
-                                    <div id="disAttr" >
+                                    <div id="disAttr" style="width:94%;overflow-x:hidden">
                                         <div class="attrChoice" >
                                             Name
                                         </div>

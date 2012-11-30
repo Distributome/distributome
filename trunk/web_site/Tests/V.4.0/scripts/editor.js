@@ -729,17 +729,17 @@ function editorNewAttrDiv(name) {
 
 // get attribute name div
 function editorAttrName(name) {
-	var temp = $('<div class="attrName" ></div>');
+	var temp = $('<div class="attrName" style="width:10%"></div>');
 	temp.text(name);
 	return temp.clone().wrap('<div/>').parent().html()
 }
 
 // get attribute value div
 function editorAttrValue(value) {
-	var temp1 = $('<div class="attrValue" ></div>');
-	var temp2 = $('<input class="attrInput" style="display:none" type="text" />');
+	var temp1 = $('<div class="attrValue" style="width:80%" ></div>');
+	var temp2 = $('<input class="attrInput" style="display:none;width:80%" type="text" />');
 	temp1.text(value);
-	temp2.attr("value", temp1.text());
+	//temp2.attr("value", temp1.text());
 	return temp1.clone().wrap('<div/>').parent().html() + temp2.clone().wrap('<div/>').parent().html();
 
 }
@@ -749,7 +749,7 @@ function editorAttrDiv(node) {
 	var nodeName = node.tagName.toLowerCase();
 	var nodeValue = $(node).text(); 
 	var attrDiv;
-	
+	//alert(editorAttrName(nodeName));
 	// create new html element based on xml node
 	attrDiv = $('<div class="attrDiv" >' + editorAttrName(nodeName) + editorAttrValue(nodeValue) + editorAttrButtons() + '</div>');
 	// set attrDiv attributes for condition tests
@@ -764,16 +764,16 @@ function editorAttrDiv(node) {
 	var attrDivBut2 = $(attrDiv.find(".attrBut2")[0]);
 	var attrEditB = $(attrDiv.find(".attrEditB")[0]);
 	var attrRemoveB = $(attrDiv.find(".attrRemoveB")[0]);
-	var attrDoneB = $(attrDiv.find(".attrDoneB")[0]);
-	var attrCancelB = $(attrDiv.find(".attrCancelB")[0]);
+	//var attrDoneB = $(attrDiv.find(".attrDoneB")[0]);
+	//var attrCancelB = $(attrDiv.find(".attrCancelB")[0]);
 	attrDiv.data("attrValue", attrValue);
 	attrDiv.data("attrInput", attrInput);
 	attrDiv.data("attrDivBut1", attrDivBut1);
 	attrDiv.data("attrDivBut2", attrDivBut2);
 	attrDiv.data("attrEditB", attrEditB);
 	attrDiv.data("attrRemoveB", attrRemoveB);
-	attrDiv.data("attrDoneB", attrDoneB);
-	attrDiv.data("attrCancelB", attrCancelB);
+	//attrDiv.data("attrDoneB", attrDoneB);
+	//attrDiv.data("attrCancelB", attrCancelB);
 	// set changeState function
 	attrDiv.data("changeState", function(state) {
 		state = state.toLowerCase();
@@ -791,20 +791,28 @@ function editorAttrDiv(node) {
 			attrInput.css("display", "none");
 		}
 	});
-	// set click functions for attrDiv buttons
-	attrEditB.click(function(){
-		attrDiv.data("changeState")("edit");
-	});
-	attrDoneB.click(function(){
+	attrInput.keyup(function(event){
+    if(event.keyCode == 13){
 		attrValue.text(attrInput.val());
 		attrDiv.data("new", false);
 		attrDiv.data("value", attrValue.text());
 		attrDiv.data("changeState")("done");
+    }
 	});
-	attrCancelB.click(function(){
+	// set click functions for attrDiv buttons
+	attrEditB.click(function(){
+		attrDiv.data("changeState")("edit");
+	});
+	/*attrDoneB.click(function(){
+		attrValue.text(attrInput.val());
+		attrDiv.data("new", false);
+		attrDiv.data("value", attrValue.text());
+		attrDiv.data("changeState")("done");
+	});*/
+	/*attrCancelB.click(function(){
 		attrInput.val(attrValue.text());
 		attrDiv.data("changeState")("cancel");
-	});
+	});*/
 	attrRemoveB.click(function(){
 		attrDiv.remove();
 	});
@@ -815,11 +823,11 @@ function editorAttrDiv(node) {
 	// set hover functions
 	attrDiv.hover(function() {
 		if (!$(this).data("editing")) {
-			$(this).data("attrDivBut1").css("display", "block");
+			//$(this).data("attrDivBut1").css("display", "block");
 		}
 	}, function() {
 		if (!$(this).data("editing")) {
-			$(this).data("attrDivBut1").css("display", "none");
+			//$(this).data("attrDivBut1").css("display", "none");
 		}
 	});
 	if (nodeName == null) {
@@ -831,8 +839,8 @@ function editorAttrDiv(node) {
 // get attribute buttons div
 function editorAttrButtons() {
 	var but1 = '<div class="attrBut1" ><button class="attrEditB" >Edit</button><button class="attrRemoveB">Remove</button></div>';
-	var but2 = '<div class="attrBut2" ><button class="attrDoneB" >Done</button><button class="attrCancelB">Cancel</button></div>';
-	return but1 + but2;
+	//var but2 = '<div class="attrBut2" ><button class="attrDoneB" >Done</button><button class="attrCancelB">Cancel</button></div>';
+	return but1 ;//+ but2;
 }
 
 // get editor footer buttons
@@ -927,6 +935,7 @@ function editorAddAttrDiv(){
 function appendNewAttr(name) {
 	var tempX = document.createElement(name);
 	tempX.innerHTML = "Click here to edit new attribute";
+	eval('tempX.style.width="80%"');
 	var tempN = editorAttrDiv(tempX);
 	tempN.data("new", true);
 	editorContent.append(tempN);
