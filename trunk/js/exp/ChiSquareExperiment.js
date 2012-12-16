@@ -61,13 +61,13 @@ function resetExperiment(){
 	chiSquareDist = new ChiSquareDistribution(n);
 	chiSquareDistGraph = new DistributionGraph(chiSquareDistCanvas, chiSquareDist, "V");
 	chiSquareDistGraph.showDist(showCheck.checked);
-	chiSquareDistTable.value = chiSquareDistGraph.text;
+	chiSquareDistTable.value = chiSquareDistGraph.text();
 }
 
 function simulate(){
 	runCount++;
 	stopCount++;
-	normalDist.data.reset();
+	normalDist.data().reset();
 	var sum = 0, x, z;
 	for (var i = 0; i < n; i++){
 		x = normalDist.simulate();
@@ -81,12 +81,12 @@ function simulate(){
 	if (stopCount == stopFreq) stopExperiment();
 	normalDistGraph.draw();
 	chiSquareDistGraph.draw();
-	chiSquareDistTable.value = chiSquareDistGraph.text;
+	chiSquareDistTable.value = chiSquareDistGraph.text();
 }
 
 function showDist(b){
 	normalDistGraph.showDist(b);
 	chiSquareDistGraph.showDist(b);
-	chiSquareDistTable.value = chiSquareDistGraph.text;
+	chiSquareDistTable.value = chiSquareDistGraph.text();
 }
 

@@ -50,7 +50,7 @@ function resetExperiment(){
 	dist = new ZetaDistribution(a);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -61,11 +61,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(bool){
 	distGraph.showDist(bool);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

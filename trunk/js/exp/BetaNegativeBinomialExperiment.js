@@ -30,7 +30,7 @@ function stepExperiment(){
 	runButton.disabled = true;
 	time = 0; sum = 0;
 	timeline.reset();
-	dist0.data.reset();
+	dist0.data().reset();
 	p = dist0.simulate();
 	dist0Graph.draw();
 	stepID = setInterval(doTrial, 50);
@@ -65,14 +65,13 @@ function resetExperiment(){
 	dist0Graph = new DistributionGraph(dist0Canvas, dist0, "P");
 	dist1 = new BetaNegativeBinomialDistribution(a, b, k);
 	dist1Graph = new DistributionGraph(dist1Canvas, dist1, "V");
-	dist1Graph.xFormat = 0;
-	timeline = new Timeline(document.getElementById("timeline"), 1, dist1.maxValue, 1);
-	timeline.setXFormat(0);
+	timeline = new Timeline(document.getElementById("timeline"), 1, dist1.maxValue(), 1);
+	timeline.setFormat(0);
 	timeline.setPointSize(3);
 	timeline.draw(1);
 	dist0Graph.draw();
 	dist1Graph.draw();
-	distTable.value = dist1Graph.text;
+	distTable.value = dist1Graph.text();
 }
 
 function doTrial(){
@@ -95,7 +94,7 @@ function doTrial(){
 function doTrials(){
 	stopCount++; sum = 0; time = 0;
 	timeline.reset();
-	dist0.data.reset();
+	dist0.data().reset();
 	p = dist0.simulate();
 	dist0Graph.draw();
 	while (sum < k) {
@@ -118,5 +117,5 @@ function update(){
 	currentRecord = runCount + "\t" + p.toFixed(2) + "\t" + time;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist1Graph.draw();
-	distTable.value = dist1Graph.text;
+	distTable.value = dist1Graph.text();
 }	

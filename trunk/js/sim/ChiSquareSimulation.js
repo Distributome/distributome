@@ -5,7 +5,6 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, nParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
-var showCheck;
 var n = 5;
 
 function initializeExperiment(){
@@ -50,9 +49,8 @@ function resetExperiment(){
 	recordTable.value = header;
 	dist = new ChiSquareDistribution(n);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -63,11 +61,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

@@ -65,13 +65,13 @@ function resetExperiment(){
 	k = kParam.getValue();
 	dist = new NegativeBinomialDistribution(k, p);
 	distGraph = new DistributionGraph(distCanvas, dist, "V");
-	distGraph.xFormat = 0;
-	timeline = new Timeline(document.getElementById("timeline"), 1, dist.maxValue, 1);
-	timeline.setXFormat(0);
+	timeline = new Timeline(document.getElementById("timeline"), 1, dist.maxValue(), 1);
+	timeline.setMargins(30, 10, 10, 20);
+	timeline.setFormat(0);
 	timeline.setPointSize(3);
 	timeline.draw(1);
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function doTrial(){
@@ -114,5 +114,5 @@ function update(){
 	currentRecord = runCount + "\t" + time;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }	

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>www.Distributome.org: Name</title>
+<title>www.Distributome.org: Beta-Negative Binomial Distribution Experiment</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="verify-v1"
 content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
@@ -21,8 +21,7 @@ margin: 0;
 <script type="text/javascript" src="devices.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
 <script type="text/javascript" src="BetaNegativeBinomialExperiment.js"></script>
-<script type="text/javascript"
-src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body class="ancillary" onload="initializeExperiment();">
 <div id="wrapper-menu-top">
@@ -45,7 +44,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Beta-Negative Binomial Experiment</center>
+<center>Beta-Negative Binomial Distribution Experiment</center>
 </h1>
 </div>
 </div>
@@ -78,15 +77,15 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="successes">
 		<label id="kLabel" for="kInput"></label>
 		<input id="kInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Left shape">
 		<label id="aLabel" for="aInput"></label>
 		<input id="aInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Right shape">
 		<label id="bLabel" for="bInput"></label>
 		<input id="bInput" type="range" class="parameter" tabindex="9" onchange="resetExperiment();" />
 	</span>
@@ -109,7 +108,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>In this experiment, a random probability \( P \) has a beta distribution with left parameter \( a \) and right parameter \( b \). Then, Bernoulli trials with success probabiity  \( P \) are performed.  Random variable \( V \) is the trial number of the \( k \)th success, and has the beta-negative binomial distribution with parameters \( k \), \( a \), and \( b \). The top graph shows the sequence of Bernoulli trials in a timeline, with each success as a red dot and each failure as a green dot.  The first distribution graph shows the probability density function and empirical probability density function of \( P \). The second distribution graph shows the probability density function and empirical probability density function of \( V \). The first table records the outome \( (P, V) \) of the experiment. The second table records the same information in text form as the graph above it. The parameters \( k \), \( a \), and \( b \) can be varied with input controls.</p>
+<p>In this experiment, a random probability \( P \) has a beta distribution with left shape parameter \( a \) and right shape parameter \( b \). Then, Bernoulli trials with success probabiity  \( P \) are performed.  Random variable \( V \) is the trial number of the \( k \)th success, and has the beta-negative binomial distribution with parameters \( k \), \( a \), and \( b \). The top graph shows the sequence of Bernoulli trials in a timeline, with each success as a red dot and each failure as a green dot.  The first distribution graph shows the probability density function and empirical probability density function of \( P \). The second distribution graph shows the probability density function and empirical probability density function of \( V \). The first table records the outome \( (P, V) \) of the experiment. The second table records the same information in text form as the graph above it. The parameters \( k \), \( a \), and \( b \) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img

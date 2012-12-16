@@ -1,10 +1,10 @@
 //Birthday Experiment
 var stepID, runID;
 var runCount = 0, stopCount = 0, stopFreq = 10;
-var currentRecord, completeRecord = "", header = "Run\tV\tI";;
-var vDist, iDist, distGraph, mParam, nParam;
+var currentRecord, completeRecord = "", header = "Run\tV";;
+var vDist, distGraph, mParam, nParam;
 var recordTable, distTable;
-var runButton, stepButton, runImage, distCanvas, stopSelect, rvSelect, showCheck;
+var runButton, stepButton, runImage, distCanvas, stopSelect, showCheck;
 var m = 365, n = 20, N = 50, p;
 var ball = new Array(N), count, distinct, duplicate, person;
 
@@ -16,8 +16,6 @@ function initializeExperiment(){
 	distTable = document.getElementById("distTable");
 	stopSelect = document.getElementById("stopSelect");
 	stopSelect.value = "10";
-	rvSelect = document.getElementById("rvSelect");
-	rvSelect.value = "0";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
 	for (var i = 0; i < N; i++) ball[i] = new Ball(document.getElementById("ball" + i));
@@ -69,22 +67,9 @@ function resetExperiment(){
 	recordTable.value = header;
 	p = 1 - perm(m, n) / Math.pow(m, n);
 	vDist = new BirthdayDistribution(m, n);
-	iDist = new BinomialDistribution(1, p);
-	setDist();
-}
-
-function setDist(){
-	if (rvSelect.value == 0){
-		distGraph = new DistributionGraph(distCanvas, vDist, "V");
-		distGraph.xFormat = 0;
-	}
-	else {
-		distGraph = new DistributionGraph(distCanvas, iDist, "I");
-		distGraph.xFormat = 0;
-		distGraph.showMoments(false);
-	}
+	distGraph = new DistributionGraph(distCanvas, vDist, "V");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function selectBirthdays(){
@@ -123,17 +108,15 @@ function selectBirthday(){
 function update(){
 	runCount++;
 	vDist.setValue(distinct);
-	if (distinct == n) duplicate = 0; else duplicate = 1;
-	iDist.setValue(duplicate);
-	currentRecord = runCount + "\t" + distinct + "\t" + duplicate;
+	currentRecord = runCount + "\t" + distinct;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 

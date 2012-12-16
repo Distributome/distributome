@@ -57,13 +57,13 @@ function resetExperiment(){
 	dx = Math.sqrt(ds);
 	dxDist = new NormalDistribution(0, Math.sqrt(ds));
 	vDist = new LogNormalDistribution(0, Math.sqrt(t));
-	xMax = vDist.maxValue;
+	xMax = vDist.maxValue();
 	pathGraph = new Graph(pathCanvas, 0, t, 0, xMax);
 	pathGraph.setMargins(20, 20, 20, 10);
 	initializeGraph();
 	distGraph = new DistributionGraph(distCanvas, vDist, "V");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	completeRecord = ""; recordTable.value = header;
 }
 
@@ -92,12 +92,12 @@ function initializeGraph(){
 	pathGraph.clear();
 	pathGraph.strokeStyle("gray"); 
 	pathGraph.fillStyle("gray");
-	pathGraph.drawAxis(0, t, 0, 0.1, "hor");
-	pathGraph.drawText("0", 0, 0, "below");
-	pathGraph.drawText(t.toFixed(1), t, 0, "below");
-	pathGraph.drawAxis(0, xMax, 0, 1, "vert");
-	pathGraph.drawText("0", 0, 0, "left");
-	pathGraph.drawText(xMax.toFixed(1), 0, xMax, "left");
+	pathGraph.drawAxis(0, t, 0, 0.1, HOR);
+	pathGraph.drawText("0", 0, 0, BELOW);
+	pathGraph.drawText(t.toFixed(1), t, 0, BELOW);
+	pathGraph.drawAxis(0, xMax, 0, 1, VERT);
+	pathGraph.drawText("0", 0, 0, LEFT);
+	pathGraph.drawText(xMax.toFixed(1), 0, xMax, LEFT);
 	pathGraph.strokeStyle("red");
 	pathGraph.fillStyle("red");
 	pathGraph.beginPath();
@@ -127,13 +127,13 @@ function update(){
 	pathGraph.drawPoint(t, v, 3, "red");
 	vDist.setValue(v);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	currentRecord = runCount + "\t" + v.toFixed(2);
 	completeRecord = completeRecord + "\n" + currentRecord;
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

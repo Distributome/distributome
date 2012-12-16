@@ -1,8 +1,9 @@
-//Arcisine distribution smulation
+//Arcsine distribution smulation
 var runID;
-var runCount = 0, stopCount = 0, stopFreq = 10, coinCount = 10;
+var runCount = 0, stopCount = 0, stopFreq = 10;
+var a = 0, w = 1;
 var currentRecord, completeRecord = "", header = "Run\tX";
-var dist, distGraph;
+var dist, distGraph, aParam, wParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
 
@@ -16,9 +17,10 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
-	dist = new ArcsineDistribution();
-	distGraph = new DistributionGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 2;
+	aParam = new Parameter(document.getElementById("aInput"), document.getElementById("aLabel"));
+	aParam.setProperties(-50, 50, 0.1, a, "<var>a</var>");
+	wParam = new Parameter(document.getElementById("wInput"), document.getElementById("wLabel"));
+	wParam.setProperties(1, 50, 0.1, w, "<var>w</var>");	
 	resetExperiment();
 }
 
@@ -48,9 +50,12 @@ function resetExperiment(){
 	runCount = 0; stopCount = 0;
 	completeRecord = "";
 	recordTable.value = header;
-	dist.data.reset();
+	a = aParam.getValue();
+	w = wParam.getValue();
+	dist = new ArcsineDistribution(a, w);
+	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -61,11 +66,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

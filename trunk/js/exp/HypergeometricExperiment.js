@@ -72,7 +72,7 @@ function resetExperiment(){
 	dist = new HypergeometricDistribution(m, r, n);
 	distGraph = new DistributionGraph(distCanvas, dist, "Y");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function setPopulation(){
@@ -135,11 +135,11 @@ function update(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist.setValue(y);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

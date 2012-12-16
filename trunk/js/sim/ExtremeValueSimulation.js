@@ -2,7 +2,7 @@
 var runID;
 var runCount = 0, stopCount = 0, stopFreq = 10, coinCount = 10;
 var currentRecord, completeRecord = "", header = "Run\tX";
-var dist, distGraph, kParam, bParam;
+var dist, distGraph, aParam, bParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
 var a = 0, b = 1;
@@ -54,7 +54,7 @@ function resetExperiment(){
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -65,11 +65,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(bool){
 	distGraph.showDist(bool);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

@@ -81,13 +81,17 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
-		<label id="bLabel" for="bInput"></label>
-		<input id="bInput" type="range" class="parameter" tabindex="7" onchange="setParameters();" />
+	<span class="tool" title="Location">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
-		<label id="cLabel" for="cInput"></label>
-		<input id="cInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+	<span class="tool" title="Scale">
+		<label id="wLabel" for="wInput"></label>
+		<input id="wInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+	</span>
+	<span class="tool" title="Shape">
+		<label id="pLabel" for="pInput"></label>
+		<input id="pInput" type="range" class="parameter" tabindex="9" onchange="resetExperiment();" />
 	</span>
 </fieldset>
 
@@ -104,7 +108,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment simulates a value of a random variable with a triangle distribution on the interval \( [0, b] \) with vertex at \( c \in [0, b] \). The value is recorded on each update. The parameters \(b\), and \(c\) can be varied with the input controls.</p>
+<p>This applet simulates a value of a random variable with a triangle distribution on the interval \( [a, a + w] \) with vertex at \( a + pw \). The value is recorded on each update. The location parameter \(a\), the scale parameter \(w\), and the shape parameter \(p\) can be varied with the input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img

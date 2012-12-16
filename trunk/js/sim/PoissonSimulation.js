@@ -5,7 +5,7 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, lambdaParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
-var l = 1;
+var lambda = 5;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -15,10 +15,10 @@ function initializeExperiment(){
 	distTable = document.getElementById("distTable");
 	stopSelect = document.getElementById("stopSelect");
 	stopSelect.value = "10";
-	showSelect = document.getElementById("showSelect");
-	showSelect.value = "show";
+	showCheck = document.getElementById("showCheck");
+	showCheck.checked = true;
 	lambdaParam = new Parameter(document.getElementById("lambdaInput"), document.getElementById("lambdaLabel"));
-	lambdaParam.setProperties(0, 200, 0.1, l, "lambda");
+	lambdaParam.setProperties(0.5, 100, 0.01, lambda, "<var>\u03bb</var>");
 	resetExperiment();
 }
 
@@ -44,14 +44,14 @@ function stopExperiment(){
 function resetExperiment(){
 	stopExperiment();
 	runCount = 0; stopCount = 0;
-	l = lambdaParam.getValue();
+	lambda = lambdaParam.getValue();
 	completeRecord = "";
 	recordTable.value = header;
-	dist = new PoissonDistribution(l);
+	dist = new PoissonDistribution(lambda);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.xFormat = 2;
-	distGraph.showDist(showSelect.value == "show");
-	distTable.value = distGraph.text;
+	distGraph.showDist(showCheck.checked);
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -62,11 +62,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
-function showDist(b){
-	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+function showDist(n){
+	distGraph.showDist(n);
+	distTable.value = distGraph.text();
 }
 

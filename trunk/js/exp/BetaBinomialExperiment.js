@@ -63,7 +63,7 @@ function resetExperiment(){
 	a = aParam.getValue();
 	b = bParam.getValue();
 	timeline = new Timeline(document.getElementById("timeline"), 1, n, 1);
-	timeline.setXFormat(0);
+	timeline.setFormat(0);
 	timeline.setPointSize(3);
 	timeline.draw();
 	completeRecord = "";
@@ -74,13 +74,13 @@ function resetExperiment(){
 	dist1 = new BetaBinomialDistribution(a, b, n);
 	dist1Graph = new DistributionGraph(dist1Canvas, dist1, "Y");
 	dist1Graph.draw();
-	distTable.value = dist1Graph.text;
+	distTable.value = dist1Graph.text();
 }
 
 function doTrials(){
 	stopCount++;
 	y = 0;
-	dist0.data.reset();
+	dist0.data().reset();
 	p = dist0.simulate();
 	dist0Graph.draw();
 	timeline.reset();
@@ -119,7 +119,7 @@ function update(){
 	currentRecord = runCount + "\t" + p.toFixed(2) + "\t" + y;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist1Graph.draw();
-	distTable.value = dist1Graph.text;
+	distTable.value = dist1Graph.text();
 }
 
 

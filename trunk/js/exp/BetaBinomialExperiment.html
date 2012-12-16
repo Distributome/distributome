@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>www.Distributome.org: Name</title>
+<title>www.Distributome.org: Beta-Binomial Distribution Experiment</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="verify-v1"
 content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
@@ -21,8 +21,7 @@ margin: 0;
 <script type="text/javascript" src="devices.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
 <script type="text/javascript" src="BetaBinomialExperiment.js"></script>
-<script type="text/javascript"
-src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body class="ancillary" onload="initializeExperiment();">
 <div id="wrapper-menu-top">
@@ -45,7 +44,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Beta-Binomial Experiment</center>
+<center>Beta-Binomial Distribution Experiment</center>
 </h1>
 </div>
 </div>
@@ -78,15 +77,15 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="parameter" title="Sample size">
+	<span class="parameter" title="Trials">
 		<label id="nLabel" for="nInput"></label>
 		<input id="nInput" type="range" tabindex="6" class="parameter" onchange="resetExperiment()" />
 	</span>
-	<span class="parameter" title="Left beta parameter">
+	<span class="parameter" title="Left shape">
 		<label id="aLabel" for="aInput"></label>
 		<input id="aInput" type="range" tabindex="7" class="parameter" onchange="resetExperiment()" />
 	</span>
-	<span class="parameter" title="Right beta parameter">
+	<span class="parameter" title="Right shape">
 		<label id="bLabel" for="bInput"></label>
 		<input id="bInput" type="range" tabindex="8" class="parameter" onchange="resetExperiment()" />
 	</span>
@@ -109,7 +108,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>In the beta-binomial experiment, a random probability \( P \) has a beta distribution with left parameter \( a \) and right parameter \( b \). Then, \( n \) Bernoulli trials with probability of success \( P \) are performed  Random variable \( Y \) is the number of heads, and has the beta-binomial distribution with parameters \( n \), \( a \), and \( b \). The values of \( P \) and \( Y \) are recorded on each run and the outcomes of the trials are shown in the timeline graph (red for success, green for failure). The probability density function of \( P \) is shown in the first graph, and the probability density function of \( Y \) is shown in the second graph and is given in the second table. On each run, the value of \( P \) is shown in the first graph, and the empirical probability density function of \( Y \) is shown in the seond graph and recorded in the second table. The parameters \( n \), \( a \), and \( b \) can be varied with input controls.</p>
+<p>In the beta-binomial experiment, a random probability \( P \) has a beta distribution with left shape parameter \( a \) and right shape parameter \( b \). Then, \( n \) Bernoulli trials with probability of success \( P \) are performed  Random variable \( Y \) is the number of heads, and has the beta-binomial distribution with parameters \( n \), \( a \), and \( b \). The values of \( P \) and \( Y \) are recorded on each run and the outcomes of the trials are shown in the timeline graph (red for success, green for failure). The probability density function of \( P \) is shown in the first graph, and the probability density function of \( Y \) is shown in the second graph and is given in the second table. On each run, the value of \( P \) is shown in the first graph, and the empirical probability density function of \( Y \) is shown in the seond graph and recorded in the second table. The parameters \( n \), \( a \), and \( b \) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img

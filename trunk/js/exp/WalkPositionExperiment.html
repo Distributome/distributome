@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>www.Distributome.org: Name</title>
+<title>www.Distributome.org: Walk Position Distribution Experiment</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="verify-v1"
 content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
@@ -19,11 +19,9 @@ margin: 0;
 }
 </style>
 <script type="text/javascript" src="devices.js"></script>
-<script type="text/javascript" src="core.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
 <script type="text/javascript" src="WalkPositionExperiment.js"></script>
-<script type="text/javascript"
-src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body class="ancillary" onload="initializeExperiment();">
 <div id="wrapper-menu-top">
@@ -46,7 +44,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>WalkPosition Distribution Experiment</center>
+<center>Walk Position Distribution Experiment</center>
 </h1>
 </div>
 </div>
@@ -83,11 +81,11 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Steps">
 		<label id="nLabel" for="nInput"></label>
 		<input type="range" id="nInput" class="parameter" tabindex="7" onchange="resetExperiment();"/>
 	</span>
-	<span class="tool">
+	<span class="tool" title="Probability">
 		<label id="pLabel" for="pInput"></label>
 		<input type="range" id="pInput" class="parameter" tabindex="8" onchange="resetExperiment();"/>
 	</span>
@@ -107,7 +105,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment consists of tossing \(n\) coins with probability of heads \( p \). The position of the random walk after \(j\) tosses is the number of heads minus the number of tails. The random variables of interest is the final position \( Y \). The random walk is shown in red in the left graph on each update. A red dot is shown at \((n, Y)\). The value of each of \( Y \) is recorded in the data table on each run. The probability density function and moments of \( Y \) are shown in blue in the distribution graph and are recorded in the distribution table. On each run, the empirical density function and moments are shown in red in the distribution graph and are recorded in the distribution table. The number of steps \(n\) and the probability \( p \) can be varied with input controls.</p>
+<p>The experiment consists of running the simple random walk for \(n\) steps, where a step to right has probability \( p \). The random variables of interest is the final position \( Y \). The random walk is shown in red in the left graph on each update. A red dot is shown at \((n, Y)\). The value of each of \( Y \) is recorded in the data table on each run. The probability density function and moments of \( Y \) are shown in blue in the distribution graph and are recorded in the distribution table. On each run, the empirical density function and moments are shown in red in the distribution graph and are recorded in the distribution table. The parameters \(n\) and \( p \) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer">

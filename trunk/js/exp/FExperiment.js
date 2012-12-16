@@ -74,20 +74,20 @@ function resetExperiment(){
 	fDist = new FDistribution(m, n);
 	fDistGraph = new DistributionGraph(fDistCanvas, fDist, "V");
 	fDistGraph.showDist(showCheck.checked);
-	fDistTable.value = fDistGraph.text;
+	fDistTable.value = fDistGraph.text();
 }
 
 function simulate(){
 	var sX, sY, f;
 	runCount++;
 	stopCount++;
-	xDist.data.reset();
-	yDist.data.reset();
+	xDist.data().reset();
+	yDist.data().reset();
 	var sum = 0, x, z;
 	for (var i = 0; i < m; i++) xDist.simulate();
 	for (var j = 0; j < n; j++) yDist.simulate();
-	sX = xDist.data.stdDev();
-	sY = yDist.data.stdDev();
+	sX = xDist.data().stdDev();
+	sY = yDist.data().stdDev();
 	f = (Math.pow(sX, 2)/Math.pow(sigma, 2))/(Math.pow(sY, 2)/Math.pow(tau, 2));
 	fDist.setValue(f);
 	currentRecord = runCount + "\t" + sX.toFixed(3) + "\t" + sY.toFixed(3) + "\t" + f.toFixed(3);
@@ -97,13 +97,13 @@ function simulate(){
 	xDistGraph.draw();
 	yDistGraph.draw();
 	fDistGraph.draw();
-	fDistTable.value = fDistGraph.text;
+	fDistTable.value = fDistGraph.text();
 }
 
 function showDist(b){
 	xDistGraph.showDist(b);
 	yDistGraph.showDist(b);
 	fDistGraph.showDist(b);
-	fDistTable.value = fDistGraph.text;
+	fDistTable.value = fDistGraph.text();
 }
 

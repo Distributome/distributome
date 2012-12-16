@@ -81,9 +81,13 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="location">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
+	</span>
+	<span class="tool" title="scale">
 		<label id="bLabel" for="bInput"></label>
-		<input id="bInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
+		<input id="bInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
 	</span>
 </fieldset>
 
@@ -100,7 +104,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment simulates a value of a random variable with a Cauchy distribution. The value is recorded on each update. The scale parameter \(b\) can be varied with the input control.</p>
+<p>This applet simulates a value of a random variable with the Cauchy distribution with location parameter \(a\) and scale parameter \(b\). The value is recorded on each update. The parameters \(a\) and \(b\) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer">

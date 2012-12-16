@@ -81,19 +81,19 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Initial red">
 		<label id="aLabel" for="aInput"></label>
 		<input id="aInput" type="range" tabindex="7" class="parameter" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Initial green">
 		<label id="bLabel" for="bInput"></label>
 		<input id="bInput" type="range" tabindex="8" class="parameter" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Added">
 		<label id="cLabel" for="cInput"></label>
 		<input id="cInput" type="range" tabindex="9" class="parameter" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Trials">
 		<label id="nLabel" for="nInput"></label>
 		<input id="nInput" type="range" tabindex="10" class="parameter" onchange="resetExperiment();" />
 	</span>
@@ -174,7 +174,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>This applet models P&oacute;lya's urn experiment. An urn initially contains \(a\) red and \(b\) green balls.  On each trial, a ball is selected at random from the urn, and then replaced along with \(c\) new balls of the same color. In this simulation, the red balls are numbered consecutively \((1, 2, \ldots)\) and the green balls are numbered consecutively in the same manner. The sample of balls in \(n\) trials is shown in the left graph box. Random variable \(Y\) gives the number of red balls selected after \(n\) trials, and \(M\) gives the proportion of red balls selected in the \(n\) trials. These are recorded on each update in the data table.</p>
+<p>This applet models P&oacute;lya's urn experiment. An urn initially contains \(a\) red and \(b\) green balls.  On each trial, a ball is selected at random from the urn, and then replaced along with \(c\) new balls of the same color. In this simulation, the red balls are numbered consecutively \((1, 2, \ldots)\) and the green balls are numbered consecutively in the same manner. The sample of balls in \(n\) trials is shown in the left graph box. Random variable \(Y\) gives the number of red balls selected after \(n\) trials, which has the P&oacute;lya distribution with parameters \(a\), \(b\), \(c\), and \(n\). This variable is recorded on each run in the data table.</p>
 
 <p>The probability density function and moments of \(Y\) are shown in blue in the distribution graph and are recorded in the distribution table. On each update, the empirical density function and moments of \(Y\) are shown in red in the distribution graph and are recorded in the distribution table. The parameters \(a\), \(b\), \(c\), and \(n\) can be varied with the input controls.</p>
 

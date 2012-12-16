@@ -60,18 +60,18 @@ function resetExperiment(){
 	studentDist = new StudentDistribution(n);
 	studentDistGraph = new DistributionGraph(studentDistCanvas, studentDist, "T");
 	studentDistGraph.showDist(showCheck.checked);
-	studentDistTable.value = studentDistGraph.text;
+	studentDistTable.value = studentDistGraph.text();
 }
 
 function simulate(){
 	var t, m, s;
 	runCount++;
 	stopCount++;
-	normalDist.data.reset();
+	normalDist.data().reset();
 	var sum = 0, z;
 	for (var i = 0; i < n; i++) normalDist.simulate();
-	m = normalDist.data.mean();
-	s = normalDist.data.stdDev();
+	m = normalDist.data().mean();
+	s = normalDist.data().stdDev();
 	t = (m - mu)/(s / Math.sqrt(n));
 	studentDist.setValue(t);
 	currentRecord = runCount + "\t" + m.toFixed(3) + "\t" + s.toFixed(3) + "\t" + t.toFixed(3);
@@ -80,12 +80,12 @@ function simulate(){
 	if (stopCount == stopFreq) stopExperiment();
 	normalDistGraph.draw();
 	studentDistGraph.draw();
-	studentDistTable.value = studentDistGraph.text;
+	studentDistTable.value = studentDistGraph.text();
 }
 
 function showDist(b){
 	normalDistGraph.showDist(b);
 	studentDistGraph.showDist(b);
-	studentDistTable.value = studentDistGraph.text;
+	studentDistTable.value = studentDistGraph.text();
 }
 

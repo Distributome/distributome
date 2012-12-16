@@ -81,11 +81,11 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Location">
 		<label id="muLabel" for="muInput"></label>
 		<input id="muInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Scale">
 		<label id="sigmaLabel" for="sigmaInput"></label>
 		<input id="sigmaInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
 	</span>
@@ -104,7 +104,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment simulates a value of a random variable with a hyperbolic secant distribution. The value is recorded on each update.</p>
+<p>The experiment simulates a value of a random variable with a hyperbolic secant distribution with location parameter \( \mu \) and scale parameter \( \sigma \). The value is recorded on each run. The parameters \( \mu \) and \( \sigma \) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer">

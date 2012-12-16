@@ -17,7 +17,7 @@ function initializeExperiment(){
 	distCanvas = document.getElementById("distCanvas");
 	distTable = document.getElementById("distTable");
 	nParam = new Parameter(document.getElementById("nInput"), document.getElementById("nLabel"));
-	nParam.setProperties(10, 100, 2, n, "<var>n</var>");
+	nParam.setProperties(2, 100, 2, n, "<var>n</var>");
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
 	pParam.setProperties(0, 1, 0.01, p, "<var>p</var>");
 	resetExperiment();
@@ -51,7 +51,7 @@ function resetExperiment(){
 	dist = new WalkPositionDistribution(n, p);
 	distGraph = new DistributionGraph(distCanvas, dist, "Y");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	yMax = Math.abs(dist.mean()) + 3 * dist.stdDev();
 	walkGraph = new Graph(walkCanvas, 0, n, - yMax, yMax);
 	walkGraph.xFormat = 0;
@@ -80,12 +80,12 @@ function walk(){
 function initializeWalkGraph(){
 	walkGraph.clear();
 	walkGraph.strokeStyle("gray"); walkGraph.fillStyle("gray");
-	walkGraph.drawAxis(0, n, 0, 1, "hor");
-	walkGraph.drawText("0", 0, 0, "left");
-	walkGraph.drawText(n.toFixed(0), n, 0, "below");
-	walkGraph.drawAxis(-yMax, yMax, 0, 1, "vert");
-	walkGraph.drawText((-yMax).toFixed(0), 0, -yMax, "left");
-	walkGraph.drawText(yMax.toFixed(0), 0, yMax, "left");
+	walkGraph.drawAxis(0, n, 0, 1, HOR);
+	walkGraph.drawText("0", 0, 0, LEFT);
+	walkGraph.drawText(n.toFixed(0), n, 0, BELOW);
+	walkGraph.drawAxis(-yMax, yMax, 0, 1, VERT);
+	walkGraph.drawText((-yMax).toFixed(0), 0, -yMax, LEFT);
+	walkGraph.drawText(yMax.toFixed(0), 0, yMax, LEFT);
 	walkGraph.strokeStyle("red");
 	walkGraph.fillStyle("red");
 	walkGraph.beginPath();
@@ -111,13 +111,13 @@ function update(){
 	walkGraph.drawPoint(n, y, 3, "red");
 	dist.setValue(y);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	currentRecord = runCount + "\t" + y;
 	completeRecord = completeRecord + "\n" + currentRecord;
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
