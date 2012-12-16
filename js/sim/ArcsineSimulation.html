@@ -21,8 +21,7 @@ margin: 0;
 <script type="text/javascript" src="devices.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
 <script type="text/javascript" src="ArcsineSimulation.js"></script>
-<script type="text/javascript"
-src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body class="ancillary" onload="initializeExperiment();">
 <div id="wrapper-menu-top">
@@ -80,6 +79,17 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 	</span>
 </fieldset>
 
+<fieldset class="toolbar">
+	<span class="tool" title="Location">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="7" onchange="resetExperiment();" />
+	</span>
+	<span class="tool" title="Scale">
+		<label id="wLabel" for="wInput"></label>
+		<input id="wInput" type="range" class="parameter" tabindex="8" onchange="resetExperiment();" />
+	</span>
+</fieldset>
+
 <table class="applet">
 	<tr>
 		<td class="device" colspan="2"><canvas id="distCanvas" title="Distribution graph" width="500" height="170">Distribution graph</canvas></td>
@@ -93,7 +103,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment simulates a value of a random variable with an arcsine distribution. The value is recorded on each update. The scale parameter \(b\) can be varied with the input control.</p>
+<p>The experiment simulates a value of a random variable with the arcsine distribution with location parameter \(a\) and scale parameter \(b\). The value is recorded on each update. The parameters \(a\) and \(b\) can be varied with input controls.</p>
 
 <div id="wrapper-footer">
 <div id="footer">
@@ -123,5 +133,6 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 	<script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker();
   	</script>
   	<!-- End of GoogleAnalytics Code -->
+  	
 </body>
 </html>

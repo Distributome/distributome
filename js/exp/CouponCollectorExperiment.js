@@ -54,7 +54,7 @@ function resetExperiment(){
 	dist = new CouponDistribution(m, k);
 	distGraph = new DistributionGraph(distCanvas, dist, "W");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	completeRecord = ""; recordTable.value = header;
 }
 
@@ -100,7 +100,7 @@ function update(){
 	grid.showCounts(count);
 	dist.setValue(coupons);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	currentRecord = runCount + "\t" + coupons;
 	completeRecord = completeRecord + "\n" + currentRecord;
 }
@@ -108,7 +108,7 @@ function update(){
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function CellGrid(canvas, m){

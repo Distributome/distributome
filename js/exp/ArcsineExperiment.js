@@ -63,7 +63,7 @@ function resetExperiment(){
 	initializeGraph();
 	distGraph = new DistributionGraph(distCanvas, zDist, "Z");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	completeRecord = ""; recordTable.value = header;
 }
 
@@ -93,12 +93,12 @@ function initializeGraph(){
 	pathGraph.clear();
 	pathGraph.strokeStyle("gray"); 
 	pathGraph.fillStyle("gray");
-	pathGraph.drawAxis(0, t, 0, 0.1, "hor");
-	pathGraph.drawText("0", 0, 0, "left");
-	pathGraph.drawText(t.toFixed(1), t, 0, "below");
-	pathGraph.drawAxis(-xMax, xMax, 0, 1, "vert");
-	pathGraph.drawText((-xMax).toFixed(1), 0, -xMax, "left");
-	pathGraph.drawText(xMax.toFixed(1), 0, xMax, "left");
+	pathGraph.drawAxis(0, t, 0, 0.1, HOR);
+	pathGraph.drawText("0", 0, 0, LEFT);
+	pathGraph.drawText(t.toFixed(1), t, 0, BELOW);
+	pathGraph.drawAxis(-xMax, xMax, 0, 1, VERT);
+	pathGraph.drawText((-xMax).toFixed(1), 0, -xMax, LEFT);
+	pathGraph.drawText(xMax.toFixed(1), 0, xMax, LEFT);
 	pathGraph.strokeStyle("red");
 	pathGraph.fillStyle("red");
 	pathGraph.beginPath();
@@ -129,13 +129,13 @@ function update(){
 	pathGraph.drawPoint(z, 0, 3, "red");
 	zDist.setValue(z);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	currentRecord = runCount + "\t" + z.toFixed(2);
 	completeRecord = completeRecord + "\n" + currentRecord;
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

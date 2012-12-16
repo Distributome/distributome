@@ -1,13 +1,13 @@
-//Ball and Urn Experiment
+//Polya Distribution Experiment
 var runID, stepID;
 var runCount = 0, stopCount = 0, stopFreq = 10;
-var currentRecord, completeRecord = "", header = "Run\tY\tM";
+var currentRecord, completeRecord = "", header = "Run\tY";
 var dist, distCanvas, distGraph, aParam, bParam, cParam, nParam;
 var recordTable, distTable;
 var runButton, stepButton, runImage, distCanvas, stopSelect, sampleSelect, showCheck;
 var a = 1, b = 1, c = 1, n = 10, N = 50, p, totalRed, totalGreen;
 var ball = new Array(N);
-var y, m;
+var y;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -77,7 +77,7 @@ function resetExperiment(){
 	dist = new PolyaDistribution(a, b, c, n);
 	distGraph = new DistributionGraph(distCanvas, dist, "Y");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function selectBalls(){
@@ -127,16 +127,15 @@ function selectBall(){
 
 function update(){
 	runCount++;
-	m = y / n;
-	currentRecord = runCount + "\t" + y + "\t" + m.toFixed(2);
+	currentRecord = runCount + "\t" + y;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist.setValue(y);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

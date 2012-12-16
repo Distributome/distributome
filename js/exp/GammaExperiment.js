@@ -61,10 +61,10 @@ function resetExperiment(){
 	dist = new GammaDistribution(n, 1 / r);
 	distGraph = new DistributionGraph(distCanvas, dist, "T");
 	showDist(showCheck.checked);
-	T = dist.maxValue;
-	timeline = new Timeline(document.getElementById("timeline"), 0, T, T);
-	timeline.setXFormat(1);
-	timeline.setMargins(30, 20);
+	T = dist.maxValue()
+	timeline = new Timeline(document.getElementById("timeline"), 0, T, dist.step());
+	timeline.setFormat(1);
+	timeline.setMargins(30, 10, 10, 10);
 	timeline.draw(0);
 }
 
@@ -79,7 +79,7 @@ function experiment(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist.setValue(t);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	if (stopCount == stopFreq) stopExperiment();
 }
 
@@ -102,14 +102,14 @@ function increaseTime(){
 		completeRecord = completeRecord + "\n" + currentRecord;
 		dist.setValue(t);
 		distGraph.draw();
-		distTable.value = distGraph.text;
+		distTable.value = distGraph.text();
 		stopExperiment();
 	}
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 	
 	

@@ -5,7 +5,7 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, aParam, bParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
-var b = 1, c = 0.5;
+var a = 0, w = 1, p = 0.5;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -17,10 +17,13 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
-	bParam = new Parameter(document.getElementById("bInput"), document.getElementById("bLabel"));
-	bParam.setProperties(1, 10, 0.01, b, "<var>b</var>");
-	cParam = new Parameter(document.getElementById("cInput"), document.getElementById("cLabel"));
-	setParameters();
+	aParam = new Parameter(document.getElementById("aInput"), document.getElementById("aLabel"));
+	aParam.setProperties(-10, 10, 0.1, a, "<var>a</var>");
+	wParam = new Parameter(document.getElementById("wInput"), document.getElementById("wLabel"));
+	wParam.setProperties(0.5, 10, 0.1, w, "<var>w</var>");
+	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
+	pParam.setProperties(0, 1, 0.01, p, "<var>p</var>");
+	resetExperiment();
 }
 
 function stepExperiment(){
@@ -47,18 +50,13 @@ function resetExperiment(){
 	runCount = 0; stopCount = 0;
 	completeRecord = "";
 	recordTable.value = header;
-	c = cParam.getValue();
-	dist = new TriangleDistribution(0, b, c);
+	a = aParam.getValue();
+	w = wParam.getValue();
+	p = pParam.getValue();
+	dist = new TriangleDistribution(a, w, p);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
-}
-
-function setParameters(){
-	b = bParam.getValue();
-	cParam.setProperties(0, b, 0.01, 0, "<var>c</var>");
-	resetExperiment();
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -69,11 +67,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

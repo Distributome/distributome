@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  	<title>www.Distributome.org: Birthday Experiment</title>
+  	<title>www.Distributome.org: Birthday Distribution Experiment</title>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<meta name="verify-v1" content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
   	<meta name="description"
@@ -45,13 +45,14 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Birthday Experiment</center>
+<center>Birthday Distribution Experiment</center>
 </h1>
 </div>
 </div>
 </div>
 </div>
 <div style="text-align: justify;" id="content">
+
 <div class="applet">
 <fieldset class="toolbar">
 	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
@@ -80,18 +81,14 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </fieldset>
 
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Population size">
 		<label id="mLabel" for="mInput"></label>
 		<input id="mInput" type="range" tabindex="7" class="parameter" onchange="resetExperiment()" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Sample size">
 		<label id="nLabel" for="nInput"></label>
 		<input id="nInput" type="range" tabindex="8" class="parameter" onchange="resetExperiment()" />
 	</span>
-	<select id="rvSelect" tabindex="9" title="Random variable" onchange="setDist()">
-		<option value="0" selected="true">V: Number of distinct values</option>
-		<option value="1">I: Duplication</option>
-	</select>
 </fieldset>
 
 <table class="applet">
@@ -169,7 +166,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>The experiment is to draw a random sample of size \(n\) <em>with replacement</em> from a population of size \(m\). In the applet, the population consists of \(m\) balls numbered from 1 to \(m\). The random variables of interest are \(V\), the number of distinct values in the sample, and \(I\), the indicator variable that indicates at least one duplication in the sample (the birthday event). On each update, the sample of balls is shown in the urn graph; a ball that duplicates a previously chosen ball is shown in red, and otherwise is shown in green. The values of \(V\) and \(I\) are recorded on each update in the data table. The probability density function of the selected variable is shown in blue in the distribution graph and is recorded in the distribution table. On each update, the empirical density function of the  selected variable is shown in red in the distribution graph and is recorded in the distribution table. The parameters \(m\) and \(n\) can be varied with scroll bars.</p>
+<p>The experiment is to draw a random sample of size \(n\) <em>with replacement</em> from a population of size \(m\). In the applet, the population consists of \(m\) balls numbered from 1 to \(m\). The random variable of interest is \(V\), the number of distinct values in the sample. On each run, the sample of balls is shown in the urn graph; a ball that duplicates a previously chosen ball is shown in red, and otherwise is shown in green. The value of \(V\) is recorded on each run in the data table. The probability density function of \(V\)	is shown in blue in the distribution graph and is recorded in the distribution table. On each update, the empirical density function of \(V\) is shown in red in the distribution graph and is recorded in the distribution table. The parameters \(m\) and \(n\) can be varied with scroll bars.</p>
 
 <div id="wrapper-footer">
 <div id="footer">

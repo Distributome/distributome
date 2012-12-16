@@ -1,11 +1,11 @@
 //Binomial Coin Experiment
 var stepID, runID;
 var runCount = 0, stopCount = 0, stopFreq = 10;
-var currentRecord, completeRecord = "", header = "Run\tY\tM";;
-var binomialDist, scaleDist, distGraph, pParam, nParam;
+var currentRecord, completeRecord = "", header = "Run\tX";;
+var binomialDist, distGraph, pParam, nParam;
 var recordTable, distTable;
-var runButton, stepButton, distCanvas, stopSelect, rvSelect, showCheck;
-var p = 0.5, n = 10, N = 50, sum, average, count;
+var runButton, stepButton, distCanvas, stopSelect, showCheck;
+var p = 0.5, n = 10, N = 50, sum, count;
 var coin = new Array(N);
 
 function initializeExperiment(){
@@ -16,8 +16,6 @@ function initializeExperiment(){
 	distTable = document.getElementById("distTable");
 	stopSelect = document.getElementById("stopSelect");
 	stopSelect.value = "10";
-	rvSelect = document.getElementById("rvSelect");
-	rvSelect.value = "0";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
 	for (var i = 0; i < N; i++) coin[i] = new Coin(document.getElementById("coin" + i));
@@ -69,26 +67,14 @@ function resetExperiment(){
 	completeRecord = "";
 	recordTable.value = header;
 	binomialDist = new BinomialDistribution(n, p);
-	scaleDist = new LocationScaleDistribution(binomialDist, 0, 1 / n);
-	setDist();
+	distGraph = new DistributionGraph(distCanvas, binomialDist, "X");
+	distGraph.showDist(showCheck.checked);
+	distTable.value = distGraph.text();
 }
 
 function setCoinCount(){
 	coinCount = coinSelect.value;
 	resetExperiment();
-}
-
-function setDist(){
-	if (rvSelect.value == 0){
-		distGraph = new DistributionGraph(distCanvas, binomialDist, "Y");
-		distGraph.xFormat = 0;
-	}
-	else {
-		distGraph = new DistributionGraph(distCanvas, scaleDist, "M");
-		distGraph.xFormat = 3;
-	}
-	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
 }
 
 function tossCoins(){
@@ -117,17 +103,15 @@ function tossCoin(){
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function update(){
 	runCount++;
 	binomialDist.setValue(sum);
-	average = sum / n;
-	scaleDist.setValue(average);
-	currentRecord = runCount + "\t" + sum + "\t" + average.toFixed(3);
+	currentRecord = runCount + "\t" + sum;
 	completeRecord = completeRecord + "\n" + currentRecord;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }	
 

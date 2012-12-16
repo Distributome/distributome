@@ -18,7 +18,7 @@ function initializeExperiment(){
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
 	kParam = new Parameter(document.getElementById("kInput"), document.getElementById("kLabel"));
-	kParam.setProperties(1, 10, 1, k, "<var>k</var>");
+	kParam.setProperties(0.5, 10, 0.1, k, "<var>k</var>");
 	bParam = new Parameter(document.getElementById("bInput"), document.getElementById("bLabel"));
 	bParam.setProperties(0.5, 10, 0.1, b, "<var>b</var>");
 	resetExperiment();
@@ -54,7 +54,7 @@ function resetExperiment(){
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function setStopFreq(){
@@ -69,11 +69,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

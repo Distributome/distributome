@@ -58,8 +58,8 @@ function resetExperiment(){
 	recordTable.value = completeRecord;
 	t = tParam.getValue();
 	r = rParam.getValue();
-	timeline = new Timeline(document.getElementById("timeline"), 0, t, t);
-	timeline.setXFormat(1);
+	timeline = new Timeline(document.getElementById("timeline"), 0, t, t/100);
+	timeline.setFormat(1);
 	dist = new PoissonDistribution(r * t);
 	distGraph = new DistributionGraph(distCanvas, dist, "N");
 	showDist(showCheck.checked);
@@ -97,7 +97,7 @@ function increaseTime(){
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function update(){
@@ -106,6 +106,6 @@ function update(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist.setValue(n);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }	
 

@@ -18,7 +18,7 @@ function initializeExperiment(){
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
-	pParam.setProperties(0.1, 0.99, 0.01, p, "<var>p</var>");
+	pParam.setProperties(0.1, 0.95, 0.01, p, "<var>p</var>");
 	resetExperiment();
 }
 
@@ -50,7 +50,7 @@ function resetExperiment(){
 	dist = new LogarithmicDistribution(p);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -61,11 +61,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(bool){
 	distGraph.showDist(bool);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

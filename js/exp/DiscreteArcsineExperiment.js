@@ -49,7 +49,7 @@ function resetExperiment(){
 	dist = new DiscreteArcsineDistribution(n);
 	distGraph = new DistributionGraph(distCanvas, dist, "L");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	yMax = 3 * Math.sqrt(n);
 	walkGraph = new Graph(walkCanvas, 0, n, - yMax, yMax);
 	walkGraph.xFormat = 0;
@@ -77,15 +77,14 @@ function walk(){
 }
 
 function initializeWalkGraph(){
-	walkGraph = new Graph(walkCanvas, 0, n, - yMax, yMax);
 	walkGraph.clear();
 	walkGraph.strokeStyle("gray"); walkGraph.fillStyle("gray");
-	walkGraph.drawAxis(0, n, 0, 1, "hor");
-	walkGraph.drawText("0", 0, 0, "left");
-	walkGraph.drawText(n.toFixed(0), n, 0, "below");
-	walkGraph.drawAxis(-yMax, yMax, 0, 1, "vert");
-	walkGraph.drawText((-yMax).toFixed(0), 0, -yMax, "left");
-	walkGraph.drawText(yMax.toFixed(0), 0, yMax, "left");
+	walkGraph.drawAxis(0, n, 0, 1, HOR);
+	walkGraph.drawText("0", 0, 0, LEFT);
+	walkGraph.drawText(n.toFixed(0), n, 0, BELOW);
+	walkGraph.drawAxis(-yMax, yMax, 0, 1, VERT);
+	walkGraph.drawText((-yMax).toFixed(0), 0, -yMax, LEFT);
+	walkGraph.drawText(yMax.toFixed(0), 0, yMax, LEFT);
 	walkGraph.strokeStyle("red");
 	walkGraph.fillStyle("red");
 	walkGraph.beginPath();
@@ -112,13 +111,13 @@ function update(){
 	walkGraph.drawPoint(l, 0, 3, "red");
 	dist.setValue(l);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 	currentRecord = runCount + "\t" + l;
 	completeRecord = completeRecord + "\n" + currentRecord;
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

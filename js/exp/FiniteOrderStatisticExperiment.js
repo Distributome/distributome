@@ -77,7 +77,7 @@ function resetExperiment(){
 	dist = new FiniteOrderStatistic(m, n, k);
 	distGraph = new DistributionGraph(distCanvas, dist, "X(" + k + ")");
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function setPopulation(){
@@ -135,11 +135,11 @@ function update(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	dist.setValue(x[k - 1]);
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 

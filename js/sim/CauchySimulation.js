@@ -5,7 +5,7 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, aParam, bParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
-var b = 1;
+var a = 0, b = 1;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -17,8 +17,10 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
+	aParam = new Parameter(document.getElementById("aInput"), document.getElementById("aLabel"));
+	aParam.setProperties(-10, 10, 0.1, a, "<var>a</var>");
 	bParam = new Parameter(document.getElementById("bInput"), document.getElementById("bLabel"));
-	bParam.setProperties(1, 50, 0.1, b, "<var>b</var>");
+	bParam.setProperties(0.5, 10, 0.1, b, "<var>b</var>");
 	resetExperiment();
 }
 
@@ -46,14 +48,14 @@ function stopExperiment(){
 function resetExperiment(){
 	stopExperiment();
 	runCount = 0; stopCount = 0;
+	a = aParam.getValue();
 	b = bParam.getValue();
 	completeRecord = "";
 	recordTable.value = header;
-	dist = new CauchyDistribution(b);
+	dist = new CauchyDistribution(a, b);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 2;
 	distGraph.showDist(showCheck.checked);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function simulate(){
@@ -64,11 +66,11 @@ function simulate(){
 	completeRecord = completeRecord + "\n" + currentRecord;
 	if (stopCount == stopFreq) stopExperiment();
 	distGraph.draw();
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
 function showDist(b){
 	distGraph.showDist(b);
-	distTable.value = distGraph.text;
+	distTable.value = distGraph.text();
 }
 
