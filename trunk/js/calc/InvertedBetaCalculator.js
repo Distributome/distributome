@@ -21,7 +21,7 @@ function initialize(){
 function setDist(){
 	a = aParam.getValue();
 	b = bParam.getValue();
-	dist = new InvertedBetaDistribution(a, b);
+	dist = new BetaPrimeDistribution(a, b);
 	xParam.setProperties(dist.quantile(0.001), dist.quantile(0.999), 0.001, dist.quantile(0.5), "<var>x</var>");
 	distGraph = new QuantileGraph(distCanvas, dist, "X");
 	distGraph.xFormat = 2;
