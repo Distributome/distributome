@@ -55,14 +55,15 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div style="text-align: justify;" id="content">
 
 <div class="applet">
+
 <fieldset class="toolbar">
-	<span class="tool">
-		<label id="rateLabel" for="rateInput"></label>
-		<input id="rateInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
+	<span class="tool" title="scale">
+		<label id="bLabel" for="bInput"></label>
+		<input id="bInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<select id="graphSelect" tabindex="3" title="Select view" onchange="distGraph.setGraphType(value);">
-		<option value="pdf">PDF</option>
-		<option value="cdf">CDF</option>
+	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
+		<option value="0">PDF</option>
+		<option value="1">CDF</option>
 	</select>
 </fieldset>
 
@@ -75,21 +76,18 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <fieldset class="toolbar">
 	<span class="tool">
 		<label id="xLabel" for="xInput"></label>
-		<input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
+		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
 	</span>
 	<span class="tool">
-		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
+		<label id="qLabel" for="qInput"></label>
+		<input id="qInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
 	</span>
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>For the Exponential distribution, this calculator gives the value of the cumulative distribution function \(p = F(x)\) 
-for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). 
-The rate parameter of the distribution can be varied with the input control, as can the variables \(x\) and \(p\)</p>
-
+<p>This is a calculator for the exponential distribution with scale parameter \(b\). This calculator gives the value of the cumulative distribution function \(q = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(q)\) for a given value of \(q\). The parameter \(b\) and the variables \(x\) and \(q\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img
 src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
