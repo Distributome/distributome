@@ -57,17 +57,17 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div class="applet">
 <fieldset class="toolbar">
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Normal mean">
 		<label id="muLabel" for="muInput"></label>
 		<input id="muInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<span class="tool">
+	<span class="tool" title="Normal standard deviation">
 		<label id="sigmaLabel" for="sigmaInput"></label>
 		<input id="sigmaInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
 	</span>
 	<select id="graphSelect" tabindex="3" title="Select view" onchange="distGraph.setGraphType(value);">
-		<option value="pdf">PDF</option>
-		<option value="cdf">CDF</option>
+		<option value="9">PDF</option>
+		<option value="1">CDF</option>
 	</select>
 </fieldset>
 
@@ -91,7 +91,35 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <h4 class="ancillary">Description</h4>
 
-<p>This is a calculator for the folded-normal distribution with parameters \( \mu \) and \( \sigma \). The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \( \mu \) and \( \sigma \) can be varied with input controls, and the variables \(x\) and \(p\) can be varied with input controls.</p>
+<p>This is a calculator for the folded-normal distribution, corresponding to the normal distribution with mean \( \mu \) and standard deviation \( \sigma \). The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \( \mu \) and \( \sigma \) and the variables \(x\) and \(p\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
+
+<div id="wrapper-footer">
+<div id="footer"> Visitor number <img
+src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
+align="middle" border="0" height="20" hspace="4" vspace="2" width="60">
+<script type="text/javascript"> var d=new Date();
+document.write(" | 2008-"+d.getFullYear()+" | ");
+</script>
+<a href="http://www.Distributome.org">www.Distributome.org</a>
+</div>
+</div>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5714596;
+var sc_invisible=1;
+var sc_partition=71;
+var sc_click_stat=1;
+var sc_security="038e9ac4";
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js">
+</script><!-- End of StatCounter Code --><!-- GoogleAnalytics -->
+<script src="http://www.google-analytics.com/urchin.js"
+type="text/javascript">
+</script>
+<script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker();
+</script>
+<!-- End of GoogleAnalytics Code --></div>
 
 </body>
 
