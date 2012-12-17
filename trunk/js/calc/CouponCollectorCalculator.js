@@ -1,30 +1,30 @@
-//Discrete Uniform Distribution Calculator
-var dist, distGraph, aParam, nParam;
+//Coupon collector distribution calculator
+var dist, distGraph;
 var xParam, pParam, graphSelect;
-var a = 0, n = 10;
-var x, p;
+var m = 20, k = 10, mParam, kParam;
+var x, p = 0.5;
 
 function initialize(){
 	distCanvas = document.getElementById("distCanvas");
 	graphSelect = document.getElementById("graphSelect");
 	distSelect = document.getElementById("distSelect");
-	aParam = new Parameter(document.getElementById("aInput"), document.getElementById("aLabel"));
-	aParam.setProperties(-50, 50, 1, a, "<var>a</var>");
-	nParam = new Parameter(document.getElementById("nInput"), document.getElementById("nLabel"));
-	nParam.setProperties(1, 50, 1, n, "<var>n</var>");
-	xParam = new Parameter(document.getElementById("xInput"), document.getElementById("xLabel"));
+	mParam = new Parameter(document.getElementById("mInput"), document.getElementById("mLabel"));
+	mParam.setProperties(1, 25, 1, m, "<var>m</var>");
+	kParam = new Parameter(document.getElementById("kInput"), document.getElementById("kLabel"));
+	kParam.setProperties(1, m, 1, k, "<var>k</var>");	
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
 	pParam.setProperties(0.001, 0.999, 0.001, 0.5, "<var>p</var>");
-	setDist();
+	xParam = new Parameter(document.getElementById("xInput"), document.getElementById("xLabel"));
+	setDist();	
 }
 
 function setDist(){
-	a = aParam.getValue();
-	n = nParam.getValue();
-	dist = new DiscreteUniformDistribution(a, n);
+	m = mParam.getValue();
+	if (kParam.getMax() != m) kParam.setProperties(1, m, 1, Math.min(k, m), "<var>k</var>");
+	k = kParam.getValue();
+	dist = new CouponDistribution(m, k);
 	xParam.setProperties(dist.quantile(0.001), dist.quantile(0.999), 0.001, dist.quantile(0.5), "<var>x</var>");
 	distGraph = new QuantileGraph(distCanvas, dist, "X");
-	distGraph.xFormat = 0;
 	distGraph.setGraphType(graphSelect.value);
 	setProb();	
 }

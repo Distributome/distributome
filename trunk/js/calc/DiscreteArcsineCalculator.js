@@ -1,22 +1,24 @@
-//Exponential Calculator
-var dist, distGraph, bParam;
-var xParam, qParam, graphSelect;
-var x, q;
+//Discrete Arcsine distribution calculator
+var dist, distGraph;
+var xParam, pParam, graphSelect;
+var n = 10, nParam;
+var x, p = 0.5;
 
 function initialize(){
 	distCanvas = document.getElementById("distCanvas");
 	graphSelect = document.getElementById("graphSelect");
 	distSelect = document.getElementById("distSelect");
-	bParam = new Parameter(document.getElementById("bInput"), document.getElementById("bLabel"));
-	bParam.setProperties(1, 50, 0.1, 1, "<var>b</var>");
+	nParam = new Parameter(document.getElementById("nInput"), document.getElementById("nLabel"));
+	nParam.setProperties(2, 200, 2, n, "<var>n</var>");
+	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
+	pParam.setProperties(0.001, 0.999, 0.001, 0.5, "<var>p</var>");
 	xParam = new Parameter(document.getElementById("xInput"), document.getElementById("xLabel"));
-	qParam = new Parameter(document.getElementById("qInput"), document.getElementById("qLabel"));
-	qParam.setProperties(0.001, 0.999, 0.001, 0.5, "<var>q</var>");
-	setDist();
+	setDist();	
 }
 
 function setDist(){
-	dist = new ExponentialDistribution(bParam.getValue());
+	n = nParam.getValue();
+	dist = new DiscreteArcsineDistribution(n);
 	xParam.setProperties(dist.quantile(0.001), dist.quantile(0.999), 0.001, dist.quantile(0.5), "<var>x</var>");
 	distGraph = new QuantileGraph(distCanvas, dist, "X");
 	distGraph.setGraphType(graphSelect.value);
@@ -25,16 +27,16 @@ function setDist(){
 
 function setValue(){
 	x = xParam.getValue();
-	q = dist.CDF(x);
-	qParam.setValue(q);
+	p = dist.CDF(x);
+	pParam.setValue(p);
 	distGraph.setValue(x);
 }
 
 function setProb(){
-	q = qParam.getValue();
-	x = dist.quantile(q);
+	p = pParam.getValue();
+	x = dist.quantile(p);
 	xParam.setValue(x);
-	distGraph.setProb(q);
+	distGraph.setProb(p);
 }
 
 

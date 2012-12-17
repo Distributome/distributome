@@ -56,17 +56,17 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <div class="applet">
 <fieldset class="toolbar">
-	<span class="tool">
+	<span class="tool" title="Scale">
 		<label id="bLabel" for="bInput"></label>
 		<input id="bInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<span class="tool">
-		<label id="qLabel" for="qInput"></label>
-		<input id="qInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
+	<span class="tool" title="Shape">
+		<label id="pLabel" for="pInput"></label>
+		<input id="pInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
 	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
-		<option value="pdf">PDF</option>
-		<option value="cdf">CDF</option>
+		<option value="0">PDF</option>
+		<option value="1">CDF</option>
 	</select>
 </fieldset>
 
@@ -82,15 +82,15 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
 	</span>
 	<span class="tool">
-		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
+		<label id="qLabel" for="qInput"></label>
+		<input id="qInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
 	</span>
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>This applet is a calculator for the exponential-logarithmic distribution with shape parameter \( p \) and scale parameter \( b \).  The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The shape parameter \(p\) and and the scale parameter \( b \)  can be varied with the input control, as can the variables \(x\) and \(p\).</p>
+<p>This applet is a calculator for the exponential-logarithmic distribution with shape parameter \( p \) and scale parameter \( b \).  The calculator gives the value of the cumulative distribution function \(q = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(q)\) for a given value of \(q\). The parameters \(p\) and \( b \) and the variables \(x\) and \(q\) can be varied with the input controls. Either CDF view or PDF view can be selcted.</p>
 
 </body>
 </html>
