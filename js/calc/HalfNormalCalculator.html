@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>www.Distributome.org: Name</title>
+<title>www.Distributome.org: Half-Normal Distribution Calculator</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="verify-v1"
 content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
@@ -20,7 +20,7 @@ margin: 0;
 </style>
 <script type="text/javascript" src="devices.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
-<script type="text/javascript" src="GeometricCalculator.js"></script>
+<script type="text/javascript" src="HalfNormalCalculator.js"></script>
 <script type="text/javascript"
 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
@@ -45,7 +45,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Geometric Calculator</center>
+<center>Half-Normal Distribution Interactive Calculator</center>
 </h1>
 </div>
 </div>
@@ -55,10 +55,11 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div style="text-align: justify;" id="content">
 
 <div class="applet">
+
 <fieldset class="toolbar">
-	<span class="tool" title="Success probability">
-		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
+	<span class="tool" title="Scale">
+		<label id="sigmaLabel" for="sigmaInput"></label>
+		<input id="sigmaInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
 	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
 		<option value="0">PDF</option>
@@ -73,21 +74,16 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </table>
 
 <fieldset class="toolbar">
-	<span class="tool">
-		<label id="xLabel" for="xInput"></label>
-		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
-	</span>
-	<span class="tool">
-		<label id="qLabel" for="qInput"></label>
-		<input id="qInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
-	</span>
+	<label id="xLabel" for="xInput"></label>
+	<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
+	<label id="pLabel" for="pInput"></label>
+	<input id="pInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>This is a calculator for the geometric distribution with success parameter \( p \). The calculator gives the value of the cumulative distribution function \(q = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(q)\) for a given value of \(q\). The parameter \( p \) and the variables \(x\) and \(q\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
-
+<p>This is a simple calculator for the arcsine distribution with location parameter \(a\) and scale parameter \(b\). The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \(a\) and \(b\), and the variables \(x\) and \(p\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img
@@ -116,5 +112,7 @@ type="text/javascript">
 <script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker();
 </script>
 <!-- End of GoogleAnalytics Code --></div>
+
 </body>
+
 </html>
