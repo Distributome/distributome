@@ -53,12 +53,20 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </div>
 <div style="text-align: justify;" id="content">
 <div style="text-align: justify;" id="content">
-<div class="applet">
 
+<div class="applet">
 <fieldset class="toolbar">
-	<select id="graphSelect" tabindex="1" title="Select view" onchange="distGraph.setGraphType(value);">
-		<option value="pdf">PDF</option>
-		<option value="cdf">CDF</option>
+	<span class="tool" title="Location">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
+	</span>
+	<span class="tool" title="Scale">
+		<label id="wLabel" for="wInput"></label>
+		<input id="wInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
+	</span>
+	<select id="graphSelect" tabindex="3" title="Select view" onchange="distGraph.setGraphType(value);">
+		<option value="0">PDF</option>
+		<option value="1">CDF</option>
 	</select>
 </fieldset>
 
@@ -69,20 +77,16 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </table>
 
 <fieldset class="toolbar">
-  <span class="tool">
-     <label id="xLabel" for="xInput"></label>
-     <input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
-  </span>
-  <span class="tool">
-     <label id="pLabel" for="pInput"></label>
-     <input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
-  </span>
+	<label id="xLabel" for="xInput"></label>
+	<input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
+	<label id="pLabel" for="pInput"></label>
+	<input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>For the arcsine distribution, this calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The variables \(x\) and \(p\) can be varied with input controls.</p>
+<p>This is a simple calculator for the arcsine distribution with location parameter \(a\) and scale parameter \(b\). The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \(a\) and \(b\), and the variables \(x\) and \(p\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img
@@ -111,5 +115,6 @@ type="text/javascript">
 <script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker();
 </script>
 <!-- End of GoogleAnalytics Code --></div>
+
 </body>
 </html>
