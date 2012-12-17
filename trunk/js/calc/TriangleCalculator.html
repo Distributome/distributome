@@ -56,17 +56,21 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 
 <div class="applet">
 <fieldset class="toolbar">
-	<span class="tool">
-		<label id="bLabel" for="bInput"></label>
-		<input id="bInput" type="range" class="parameter" tabindex="1" onchange="setParameters();" />
+	<span class="tool" title="Location">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<span class="tool">
-		<label id="cLabel" for="cInput"></label>
-		<input id="cInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
+	<span class="tool" title="Scale">
+		<label id="wLabel" for="wInput"></label>
+		<input id="wInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
+	</span>
+	<span class="tool" title="Shape">
+		<label id="pLabel" for="pInput"></label>
+		<input id="pInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
 	</span>
 	<select id="graphSelect" tabindex="3" title="Select view" onchange="distGraph.setGraphType(value);">
-		<option value="pdf">PDF</option>
-		<option value="cdf">CDF</option>
+		<option value="0">PDF</option>
+		<option value="1">CDF</option>
 	</select>
 </fieldset>
 
@@ -82,15 +86,15 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 		<input id="xInput" type="text" class="parameter" tabindex="4" onchange="setValue();" />
 	</span>
 	<span class="tool">
-		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
+		<label id="qLabel" for="qInput"></label>
+		<input id="qInput" type="text" class="parameter" tabindex="5" onchange="setProb()" />
 	</span>
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>For the triangle distribution on \( [0, b] \) with vertex at \( c \in [0, b] \), this calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \(b\) and \(c\) of the distribution can be varied with the input controls, as can the variables \(x\) and \(p\)</p>
+<p>This is a simple calculator for the triangle distribution on the interval \( [a, a + w] \) with vertex at \( a + p w \). The calculator gives the value of the cumulative distribution function \(q = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(q)\) for a given value of \(q\). The location parameter \(a\), the scale parameter \(w\), the shape parameber \(p\), and the variables \(x\) and \(q\) can be varied with the input controls. Either CDF view or PDF view can be selcted.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img

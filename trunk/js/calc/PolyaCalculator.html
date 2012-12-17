@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>www.Distributome.org: Zeta Distribution Calculator</title>
+<title>www.Distributome.org: Polya Distribution Calculator</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="verify-v1"
 content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
@@ -20,7 +20,7 @@ margin: 0;
 </style>
 <script type="text/javascript" src="devices.js"></script>
 <script type="text/javascript" src="distributions.js"></script>
-<script type="text/javascript" src="ZetaCalculator.js"></script>
+<script type="text/javascript" src="PolyaCalculator.js"></script>
 <script type="text/javascript"
 src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
@@ -45,7 +45,7 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div id="wrapper-header2">
 <div id="wrapper-header3">
 <h1>
-<center>Zeta Distribution Interactive Calculator</center>
+<center>Polya Distribution Interactive Calculator</center>
 </h1>
 </div>
 </div>
@@ -55,12 +55,25 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 <div style="text-align: justify;" id="content">
 
 <div class="applet">
+
 <fieldset class="toolbar">
-	<span class="tool" title="Shape">
+	<span class="tool" title="Initial red">
 		<label id="aLabel" for="aInput"></label>
 		<input id="aInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
 	</span>
-	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
+	<span class="tool" title="Initial green">
+		<label id="bLabel" for="bInput"></label>
+		<input id="bInput" type="range" class="parameter" tabindex="2" onchange="setDist();" />
+	</span>
+	<span class="tool" title="Added">
+		<label id="cLabel" for="cInput"></label>
+		<input id="cInput" type="range" class="parameter" tabindex="3" onchange="setDist();" />
+	</span>
+	<span class="tool" title="Trials">
+		<label id="nLabel" for="nInput"></label>
+		<input id="nInput" type="range" class="parameter" tabindex="4" onchange="setDist();" />
+	</span>
+	<select id="graphSelect" tabindex="5" title="Select view" onchange="distGraph.setGraphType(value);">
 		<option value="0">PDF</option>
 		<option value="1">CDF</option>
 	</select>
@@ -73,20 +86,16 @@ title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
 </table>
 
 <fieldset class="toolbar">
-	<span class="tool">
-		<label id="xLabel" for="xInput"></label>
-		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
-	</span>
-	<span class="tool">
-		<label id="pLabel" for="pInput"></label>
-		<input id="pInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
-	</span>
+	<label id="xLabel" for="xInput"></label>
+	<input id="xInput" type="text" class="parameter" tabindex="6" onchange="setValue();" />
+	<label id="pLabel" for="pInput"></label>
+	<input id="pInput" type="text" class="parameter" tabindex="7" onchange="setProb()" />
 </fieldset>
 </div>
 
 <h4 class="ancillary">Description</h4>
 
-<p>This is a calculator for the zeta distribution with shape parameter \( a \).  The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameter \(a\) and the variables \(x\) and \(p\) can be varied with the input controls. Either CDF view or PDF view can be selcted.</p>
+<p>This is a simple calculator for the P&oacute;lya distribution with \(a\) initial red balls, \(b\) initial green balls, \(c\) balls added at each trial, and \(n\) trials. The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameters \(a\), \(b\), \(c\), and \(n\), and the variables \(x\) and \(p\) can be varied with input controls. Either CDF view or PDF view can be selcted.</p>
 
 <div id="wrapper-footer">
 <div id="footer"> Visitor number <img
@@ -115,7 +124,6 @@ type="text/javascript">
 <script type="text/javascript"> _uacct = "UA-676559-1"; urchinTracker();
 </script>
 <!-- End of GoogleAnalytics Code --></div>
-
-
 </body>
+
 </html>

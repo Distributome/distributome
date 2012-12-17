@@ -1,40 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>www.Distributome.org: Poisson Distribution Calculator</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="description"
- content="Probability and Statistics Distributions Resource - Distributome">
-  <meta name="keywords"
- content="Probability Statistics Distributions Resource Distributome Java Applets">
-  <meta name="author" content="http://www.Distributome.org">
-  <link rel="stylesheet" type="text/css"
- href="../../images/Distributome_style.css">
-  <link rel="shortcut icon" href="../../images/favicon.ico">
-  <style type="text/css">
-	body {
-  		margin: 0;
-	}
-    </style>
-  <script type="text/javascript" src="core.js"></script>
-  <script type="text/javascript" src="PoissonCalculator.js"></script>
-  <script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<title>www.Distributome.org: Poisson Distribution Calculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="verify-v1"
+content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=">
+<meta name="description"
+content="Probability and Statistics Distributions Resource - Distributome">
+<meta name="keywords"
+content="Probability Statistics Distributions Resource Distributome Webapps">
+<meta name="author" content="http://www.Distributome.org">
+<link rel="stylesheet" type="text/css"
+href="../../images/Distributome_style.css">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<style type="text/css">
+body {
+margin: 0;
+}
+</style>
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="PoissonCalculator.js"></script>
+<script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body class="ancillary" onload="initialize()">
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools</span><span> »</span></li>
-  		<li><a href="../../about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../DistributomeNavigator.html"
- 			title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
- 		 <li><a href="../DistributomeEditor.html"
- 			title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
- 		 <li><a href="./index.html"
- 			title="Other Calculators"><span>Calculators</span></a></li>
-	</ul>
+<ul>
+<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
+<li><span> Tools</span><span> »</span></li>
+<li><a href="../../about.html" title="About"><span>About</span></a></li>
+<li><a href="../DistributomeNavigator.html"
+title="Interactive Distributome Navigator"><span>Navigator</span></a></li>
+<li><a href="../DistributomeEditor.html"
+title="Interactive Distributome Meta-Data Editor"><span>Editor</span></a></li>
+<li><a href="./index.html" title="Other Calculators"><span>Calculators</span></a></li>
+</ul>
 </div>
 <!--menu-top--></div>
 <!--wrapper-menu-top-->
@@ -50,45 +52,44 @@
 </div>
 </div>
 <div style="text-align: justify;" id="content">
-<center>
+<div style="text-align: justify;" id="content">
+
 <div class="applet">
+<fieldset class="toolbar">
+	<span class="tool" title="Rate">
+		<label id="lambdaLabel" for="lambdaInput"></label>
+		<input id="lambdaInput" type="range" class="parameter" tabindex="1" onchange="setDist();" />
+	</span>
+	
+	<select id="graphSelect" tabindex="2" title="Select view" onchange="distGraph.setGraphType(value);">
+		<option value="0">PDF</option>
+		<option value="1">CDF</option>
+	</select>
+</fieldset>
+
 <table class="applet">
-  <tbody>
-    <tr>
-      <td class="tool"> <label id="lambdaLabel" for="lambdaInput"></label>
-      <input id="lambdaInput" class="parameter" tabindex="2"
- onchange="setDist();" type="range"> </td>
-      <td class="tool">
-      <select id="graphSelect" tabindex="1" title="Select view"
- onchange="distGraph.setGraphType(value);">
-      <option value="pdf">PDF</option>
-      <option value="cdf">CDF</option>
-      </select>
-      </td>
-    </tr>
-    <tr>
-      <td class="device" colspan="3"><canvas id="distCanvas"
- title="Distribution graph" width="700" height="300">Distribution graph</canvas></td>
-    </tr>
-    <tr>
-      <td class="tool"> <label id="xLabel" for="xInput"></label> <input
- id="xInput" class="parameter" tabindex="4" onchange="setValue();"
- type="text"> </td>
-      <td class="tool"> <label id="pLabel" for="pInput"></label> <input
- id="pInput" class="parameter" tabindex="5" onchange="setProb()"
- type="text"> </td>
-      <td class="tool"> <br>
-      </td>
-    </tr>
-  </tbody>
+	<tr>
+		<td class="device"><canvas id="distCanvas" title="Distribution graph" width="500" height="170">Distribution graph</canvas></td>
+	</tr>
 </table>
+
+<fieldset class="toolbar">
+	<span class="tool">
+		<label id="xLabel" for="xInput"></label>
+		<input id="xInput" type="text" class="parameter" tabindex="3" onchange="setValue();" />
+	</span>
+	<span class="tool">
+		<label id="qLabel" for="qInput"></label>
+		<input id="qInput" type="text" class="parameter" tabindex="4" onchange="setProb()" />
+	</span>
+</fieldset>
+</div>
+
 <h4 class="ancillary">Description</h4>
-<p>For the Poisson distribution, this calculator gives the value of the
-cumulative distribution function \(p = F(x)\) for a given value of
-\(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a
-given value of \(p\). The Poisson parameter \(\lambda\) can be varied
-with the input controls, as can the
-variables \(x\) and \(p\)</p>
+
+<p>This is a simple calculator for the Poisson distribution with rate parameter \(\lambda\). The calculator gives the value of the cumulative distribution function \(p = F(x)\) for a given value of \(x\), or the value of the quantile function \(x = F^{-1}(p)\) for a given value of \(p\). The parameter \(\lambda\) and the variables \(x\) and \(p\) can be varied with the input controls. Either CDF view or PDF view can be selcted.</p>
+
+
 </div>
 </center>
 <div id="wrapper-footer">
