@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Semicircle Distribution Rejection Experiment</title>
+<meta name="Author" content="Kyle Siegrist" />
+<meta name="Keywords" content="probability, statistics, JavaScript, applet, beta distribution, rejection method" />
+<link rel="stylesheet" href="ScreenStyles.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="PrintStyles.css" type="text/css" media="print" />
+
+<script type="text/javascript" src="devices.js"></script>
+<script type="text/javascript" src="distributions.js"></script>
+<script type="text/javascript" src="SemicircleRejection.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+<body class="ancillary" onload="initializeExperiment();">
+
+<div class="header">
+<h3 class="ancillary">Semicircle Distribution Rejection Experiment</h3>
+</div>
+
+<div class="applet">
+<fieldset class="toolbar">
+	<button type="button" id="stepButton" tabindex="1" title="Step" onclick="stepExperiment();">
+		<img src="step.png" alt="Step" />
+	</button>
+	<button type="button" id="runButton" tabindex="2" title="Run" onclick="runExperiment()">
+		<img id="runImage" src="run.png" alt="Run" />
+	</button>
+	<button type="button" id="stopButton" tabindex="3" title="Stop" onclick="stopExperiment();">
+		<img id="stopImage" src="stop.png" alt="Stop" />
+	</button>
+	<button type="button" id="resetButton" tabindex="4" title="Reset" onclick="resetExperiment();">
+		<img src="reset.png" alt="Reset" />
+	</button>
+	<select id="stopSelect" tabindex="5" title="Stop frequency" onchange="stopFreq = value;">
+		<option value="10">Stop: 10</option>
+		<option value="100">Stop: 100</option>
+		<option value="1000">Stop: 1000</option>
+		<option value="10000">Stop: 10000</option>
+		<option value="0">Stop: never</option>
+	</select>
+</fieldset>
+
+<fieldset class="toolbar">
+	<span class="tool" title="Center">
+		<label id="aLabel" for="aInput"></label>
+		<input id="aInput" type="range" class="parameter" tabindex="8" onchange="setDist();" />
+	</span>
+	<span class="tool" title="Radius">
+		<label id="rLabel" for="rInput"></label>
+		<input id="rInput" type="range" class="parameter" tabindex="9" onchange="setDist();" />
+	</span>
+</fieldset>
+
+
+<table class="applet">
+	<tr>
+		<td class="device"><canvas id="scatterCanvas" title="Scatterplot" width="270" height="170">Scatterplot</canvas></td>
+		<td class="device"><canvas id="distCanvas" title="Distribution graph" width="270" height="170">Distribution graph</canvas></td>
+	</tr>
+	<tr>
+		<td class="device"><textarea id="recordTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
+		<td class="device"><textarea id="distTable" readonly="true" wrap="off" class="table" rows="8"></textarea></td>
+	</tr>
+</table>
+</div>
+
+<h4 class="ancillary">Description</h4>
+
+<p>This applet simulates values from the semicircle distribution with center \(a\) and radius \(r\) using the rejection method. The probability density function \(f\) is shown in both graphs. In the left graph, a bounding rectangle is also shown.  On each run, a random point \((X, Y)\) is generated which is uniformly distributed on the bounding rectangular region. If \(Y \le f(X)\), the point is accepted and \(X\) is the simulated value. If \(Y \gt f(X)\), the point is rejected. On each run, the values of \(X\) and \(Y\) are recorded, and the value of a Boolean variable \(R\) which takes the value 1 if the point is accepted and 0 if the point is rejected.  As the experiment runs, the empirical density and moments are shown in the right graph and recorded in the right table. The distribution table on the right also records \(N\), the number of accepted points. The parameters \(a\) and \(r\) can be varied with the input controls.</p>
+
+</body>
+
+</html>
