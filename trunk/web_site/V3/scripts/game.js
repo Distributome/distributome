@@ -4,7 +4,7 @@
  */
 (function() {
 
-    var PROBLEMS_URL = './data/DistributomeGame_ProblemExamples_Nov_2012.csv';
+    var PROBLEMS_URL = './data/DistributomeGame_ProblemExamples_March_2013.csv';
     var DISTRIBUTIONS_URL = './data/Distributome.xml';
 
     /**
