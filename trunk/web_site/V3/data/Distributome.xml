@@ -3556,7 +3556,7 @@
             <from>Exponential distribution</from>
             <to>Standard Uniform distribution</to>
             <statement>If \(X_1\) and \(X_2\) are independent exponential random variables 
-            	with the same mean, then \frac{X_1}{X_1+X_2} follows a standard uniform distribution.
+            	with the same mean, then \(\frac{X_1}{X_1+X_2}\) follows a standard uniform distribution.
 			</statement>
             <type>nonlinear transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
@@ -3842,9 +3842,9 @@
         <relation id="Exponential/F">
             <from>Exponential distribution</from>
             <to>F distribution</to>
-            <statement>Because \(\chi^2(2) \sim Exp(\frac{1}{2}) \sim Gamma(1, {\frac{1}{2)), 
-            	with expected value \lambda=2, if \(X_1\) and \(X_2\) \sim \chi^2(2), 
-            	then \frac{\frac{X_1}{2}}{\frac{X_2}{2}} = \frac{X_1}{X_2} \sim F(2,2) distribution.
+            <statement>Because \(\chi^2(2) \sim Exp(\frac{1}{2}) \sim Gamma(1, \frac{1}{2})\), 
+            	with expected value \(\lambda=2\), if \(X_1\) and \(X_2\) \(\sim \chi^2(2) \), 
+            	then \(\frac{\frac{X_1}{2}}{\frac{X_2}{2}} = \frac{X_1}{X_2} \sim F(2,2)\) distribution.
             </statement>
             <type>special case, transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
