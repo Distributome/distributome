@@ -1,7 +1,3 @@
-/**
- * Distributome Game project.
- * @author <a href="mailto:alxndrkalinin@gmail.com">Alexandr Kalinin</a>
- */
 (function() {
 
     var PROBLEMS_URL = './data/DistributomeGame_ProblemExamples.csv';
@@ -18,12 +14,15 @@
 
             $.ajax({
                 url: url,
+				async: true,
+				cache: false,
                 dataType: dataFormat,
-                success: function(data) {
+				success: function(data) {
                     returnJSON(data, eventName, dataFormat);
                 },
                 error: function(data, text) {
-                    alert('Load wasn\'t performed:' + text);
+                    console.log('Load wasn\'t performed:' + text);
+                    // TODO: show modal window with the error
                 }
             });
         }
@@ -82,7 +81,8 @@
                 return distributions;
 
             } else {
-                alert("Can't load Distributome.xml");
+                console.log("Can't load Distributome.xml");
+                // TODO: show error modal window
                 return false;
             }
         }
@@ -232,8 +232,6 @@
             }
         };
 
-        var getProblemDescription = function(problem) { return ; };
-
         var prepareDataForGraph = function(problemsData, distributionsData) {
 
             var filteredData = problemsData.filter(isProblem);
@@ -254,19 +252,30 @@
         };
 
         return {
-            getDataForGraph : prepareDataForGraph
+            prepareDataForGraph : prepareDataForGraph,
+            shuffleArray: fisherYatesShuffle
         }
     })();
 
     /**
      * Renders data.
      */
-    var DataRenderer = (function() {
+    var Rendering = (function() {
 
+        // graph area dom element
         var svg;
-        var width = 940;
-        var height = 500;
-        var isFisheyeMode = false;
+
+        var DEFAULT_WIDTH = 500;
+        var DEFAULT_HEIGHT = 300;
+
+        var width = DEFAULT_WIDTH;
+        var height = DEFAULT_HEIGHT;
+        var margins = 20;
+        var scoreColumnWidthPercent = 2 / 100;
+
+        // initial game settings
+        var isSimpleMode = true;
+        var initialProblemNum = 8;
 
         var problems;
         var distributions;
@@ -274,53 +283,77 @@
         var problemsNumber;
         var distributionsNumber;
 
+        var scoreColumnData = [{
+            y: 0,
+            height: 0,
+            score: 0,
+            class: 'score-rect'
+        }];
+        var guessData = [];
+
+        jQuery.extend (String.prototype, {
+            camelize: function() {
+                return this.replace(/(?:^\w|[A-Z]|\b\w)/g,function (letter, index) {
+                    return letter.toUpperCase();
+                }).replace(/\s+/g, '');
+            }
+        });
+
         var init = function(data) {
 
-            problems = data.problems;
+			problems = data.problems;
             distributions = data.distributions;
             problemsNumber = problems.length;
             distributionsNumber = distributions.length;
 
             prepareGuessingMap();
 
-            var margins = 20;
-            adjustViewport(margins);
-            $(window).resize(function() {
-                adjustViewport(margins);
-            });
-
-            $('.modal-hint-control').on('click', function() { $('.modal-body-hint').slideToggle(); });
+            $('.modal-hint-control').on('click', function() { $('.modal-body-hint').slideToggle();});
             $('#game').on('click', function () { return false; });
             $('#instructions').on('click', function() {
                 showInstructions();
                 return false;
             });
-//            $('#radio-fisheye').on('click', function() {
-//                if(!isFisheyeMode) {
-//                    isFisheyeMode = true;
-//                    createGraph();
-//                }
-//            });
-//            $('#radio-cartesian').on('click', function() {
-//                if(isFisheyeMode && $(this).prop()) {
-//                    isFisheyeMode = false;
-//                    createGraph();
-//                }
-//            });
-//
-//            $('#radio-cartesian').prop('checked', true);
-            createGraph();
 
+            createGraph();
+            addControlsListeners();
+
+            // setting initial condition
+            $('#problemNum').val(initialProblemNum).keyup();
+//            updateProblemNum(initialProblemNum);
+        };
+
+        var createGraph = function(saveData) {
+
+            saveData = saveData || false;
+            removeGraph();
+
+            adjustViewport();
+            $('.slopegraph').width(width).height(height);
+
+            svg = d3.select('#slopegraph').append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            renderCartesian(saveData);
         }
 
-        var adjustViewport = function(margins) {
+        // Clean graph area before redrawing
+        var removeGraph = function() {
+            svg = d3.select('#slopegraph svg');
+            svg.on('click', null);
+            svg.on('mousemove', null);
+
+            $('#slopegraph').empty();
+        }
+
+        var adjustViewport = function() {
+
             var viewportWidth = $(window).width() - 2 * margins;
             var viewportHeight = $(window).height() - 2 * margins - $('.header').height() - $('.descriptions').height();
 
-            width = Math.max(width, viewportWidth);
-            height = Math.max(height, viewportHeight);
-
-            $('.slopegraph').width(width).height(height);
+            width = Math.max(DEFAULT_WIDTH, viewportWidth);
+            height = Math.max(DEFAULT_HEIGHT, viewportHeight);
         }
 
         var prepareGuessingMap = function() {
@@ -330,18 +363,9 @@
                     .replace(/[^a-z]/g,'');
             });
 
-            for(var i = 0; i < problemsNumber; i++) {
+            for(var i = 0; i < problemsNumber; i++)
                 guessingMap[i] = jQuery.inArray(problems[i].distribution.toLowerCase().replace(/[^a-z]/g,''), distributionNames);
-            }
         }
-
-        jQuery.extend (String.prototype, {
-            camelize: function() {
-                return this.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-                    return letter.toUpperCase();
-                }).replace(/\s+/g, '');
-            }
-        });
 
         function coord(line, axis) {
             return line[axis + '1']['baseVal']['value'];
@@ -350,18 +374,6 @@
         var showInstructions = function () {
             var instructionsModal = $('#instructions-modal');
             instructionsModal.modal('show');
-        }
-
-        var createGraph = function() {
-
-            $('#slopegraph').empty();
-
-            svg = d3.select('#slopegraph')
-                .append('svg')
-                .attr('width', width)
-                .attr('height', height);
-
-            isFisheyeMode ? renderFisheye() : renderCartesian();
         }
 
         var getCrossAreaByIndices = function (xLine, yLine, xIndex, yIndex) {
@@ -451,12 +463,13 @@
             var area = getCrossAreaByIndices(xLine, yLine, indices.xIndex, indices.yIndex);
             highlight(area);
             setLabelsPos(xMouse, yMouse);
-            updateGuessRect(xLine, yLine);
         }
 
         var updateDescriptions = function(distributionIndex, problemIndex) {
             $('#problemDescription').text(problems[problemIndex].description);
             $('#distributionDescription').text(distributions[distributionIndex].description);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("problemDescription")]);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("distributionDescription")]);
         }
 
         var highlight = function(area) {
@@ -485,88 +498,116 @@
             updateDescriptions(area.column.index, area.row.index);
         };
 
-        var updateGuessRect = function(xLine, yLine) {
-            var currGuess = svg.select('.guess');
-            var xIndex = currGuess.attr('xIndex');
-            var yIndex = currGuess.attr('yIndex');
-
-            if(xIndex && yIndex && (currGuess.attr('width') != 0) && (currGuess.attr('height') != 0)) {
-                var classList = currGuess.attr('class');
-                var cross = getCrossAreaByIndices(xLine, yLine, parseInt(xIndex) + 1, parseInt(yIndex) + 1);
-
-                var guessRect = {
-                    x: cross.column.xLeft,
-                    y: cross.row.yUp,
-                    width: (cross.column.xRight - cross.column.xLeft),
-                    height: (cross.row.yDown - cross.row.yUp),
-                    class: classList,
-                    xIndex: cross.column.index,
-                    yIndex: cross.row.index
+        var updateScores = function(yLine, scores) {
+            for(var i = 0; i < problemsNumber - 1; i++) {
+                scoreColumnData[i] = {
+                    y: coord(yLine[0][i], 'y'),
+                    height: coord(yLine[0][i + 1], 'y') - coord(yLine[0][i], 'y'),
+                    score: scoreColumnData[i].score,
+                    class: scoreColumnData[i].class
                 };
-
-                renderGuessRect(guessRect);
             }
+            scoreColumnData[problemsNumber - 1].y = coord(yLine[0][problemsNumber - 1], 'y');
+            scoreColumnData[problemsNumber - 1].height = height - coord(yLine[0][problemsNumber - 1], 'y');
+
+            renderScores(scores);
+        };
+
+        var renderScores = function(scores) {
+            scores.scoreRects
+                .data(scoreColumnData)
+                .attr('y', function(d) { return d.y; })
+                .attr('height', function(d) { return d.height; })
+                .attr('class', function(d) { return (d && d.class) ? d.class : 'score-rect'; })
+
+            scores.scoreText
+                .data(scoreColumnData)
+                .attr('y', function(d) { return d.y + d.height / 2; })
+                .text(function(d) { return d.score; })
         };
 
         var isRightGuess = function(xIndex, yIndex) {
             return (guessingMap[yIndex] == xIndex);
         };
 
-        var showGuessRect = function(xLine, yLine, indices) {
+        var updateGuessRects = function(xLine, yLine, guessRects) {
 
-            var cross = getCrossAreaByIndices(xLine, yLine, indices.xIndex, indices.yIndex);
-            var isRight = isRightGuess(cross.column.index, cross.row.index);
+            for(var i = 0; i < guessData.length; i++) {
+                if(guessData[i] && guessData[i].xIndex != -1 && guessData[i].yIndex != -1) {
+
+                    var cross = getCrossAreaByIndices(xLine, yLine, guessData[i].xIndex + 1, guessData[i].yIndex + 1);
+                    guessData[i].x = cross.column.xLeft;
+                    guessData[i].y = cross.row.yUp;
+                    guessData[i].width = (cross.column.xRight - cross.column.xLeft);
+                    guessData[i].height = (cross.row.yDown - cross.row.yUp);
+                }
+            }
+
+            guessRects.data(guessData)
+                .attr('class', function(d) { return (d && d.class) ? d.class : 'guess-rect'; })
+                .attr('x', function(d) { return (d && d.x) ? d.x : 0; })
+                .attr('y', function(d) { return (d && d.y) ? d.y : 0; })
+                .attr('width', function(d) { return (d && d.width) ? d.width : 0; })
+                .attr('height', function(d) { return (d && d.height) ? d.height : 0; })
+                .attr('xIndex', function(d) { return ( d && d.xIndex) ? d.xIndex : -1; })
+                .attr('yIndex', function(d) { return ( d && d.yIndex) ? d.yIndex : -1; });
+        };
+
+		var addGuessRect = function(cross, isRight) {
+
             var guessRect = {
                 x: cross.column.xLeft,
                 y: cross.row.yUp,
                 width: (cross.column.xRight - cross.column.xLeft),
                 height: (cross.row.yDown - cross.row.yUp),
-                class: (isRight) ? 'guess right' : 'guess wrong',
+                class: (isRight) ? 'guess-rect right' : 'guess-rect wrong',
                 xIndex: cross.column.index,
                 yIndex: cross.row.index
             };
 
-            renderGuessRect(guessRect);
-        };
+            var guessIndex = guessRect.yIndex * distributionsNumber + guessRect.xIndex;
 
-        var hideGuessRect = function() {
-            svg.select('.guess').attr('class', 'guess')
-                .attr('width', 0)
-                .attr('height', 0);
-        }
+            if(guessData[guessIndex].xIndex == guessRect.xIndex && guessData[guessIndex].yIndex == guessRect.yIndex)
+                showGuessModal(guessRect.xIndex, guessRect.yIndex);
+            else
+                guessData[guessIndex] = guessRect;
+		};
 
-        var guess = function(xLine, yLine, mouse) {
+        var guess = function(xLine, yLine, mouse, guessRects) {
 
             var xMouse = mouse[0] || 0;
             var yMouse = mouse[1] || 0;
 
-            var guessClassList = svg.select('.guess').attr('class');
             var indices = getIndicesByCoordinate(xLine, yLine, xMouse, yMouse);
+            var cross = getCrossAreaByIndices(xLine, yLine, indices.xIndex, indices.yIndex);
+            var scoreRect = d3.selectAll('.score-rect').filter(function(d, i) { return i == cross.row.index; });
 
-            // select cell, if nothing is selected
-            if(guessClassList.indexOf('wrong') == -1 && guessClassList.indexOf('right') == -1) {
-                showGuessRect(xLine, yLine, indices);
+            var guessIndex = cross.row.index * distributionsNumber + cross.column.index;
+
+            var isRight = isRightGuess(cross.column.index, cross.row.index);
+
+            if(isRight) {
+                scoreColumnData[cross.row.index].score = 1;
+                scoreColumnData[cross.row.index].class = 'score-rect right';
             } else {
-                var currXIndex = svg.select('.guess').attr('xIndex');
-                var currYIndex = svg.select('.guess').attr('yIndex');
-
-                // show modal if the same cell is clicked
-                if ((indices.xIndex - 1) == currXIndex && (indices.yIndex - 1) == currYIndex) {
-                    showGuessModal(indices.xIndex - 1, indices.yIndex - 1);
-                // select another cell
-                } else {
-                    hideGuessRect();
-                    showGuessRect(xLine, yLine, indices);
-                }
+                scoreColumnData[cross.row.index].class = 'score-rect wrong';
+                if(scoreRect.attr('class').indexOf('right') > -1) {
+                    if(!((scoreRect.attr('class').indexOf('wrong') > -1) && guessData[guessIndex].xIndex == cross.row.index))
+                        scoreColumnData[cross.row.index].score = 1;
+                } else
+                    scoreColumnData[cross.row.index].score += 1;
             }
-        }
+
+            addGuessRect(cross, isRight);
+            updateGuessRects(xLine, yLine, guessRects);
+        };
 
         var showGuessModal = function(xIndex, yIndex) {
 
             var guessModal = $('#guess-modal');
             guessModal.modal('show');
 
-            var isRight = ($('.guess').attr('class').indexOf('right') > -1);
+            var isRight = ($('.guess-rect').attr('class').indexOf('right') > -1);
 
             $('.modal-body-comment').text((isRight && problems[yIndex].comment != '') ? 'Comment: ' + problems[yIndex].comment : '');
             $('.modal-body-hint').text((!isRight) ? 'Hint: ' + problems[yIndex].hint : '');
@@ -591,46 +632,88 @@
             $('.modal-body-hint').hide();
         }
 
-        var renderGuessRect = function(rect) {
-            svg.select('.guess')
-                .transition()
-                .ease('linear')
-                .delay(0)
-                .duration(0)
-                .attr('class', rect.class)
-                .attr('x', rect.x)
-                .attr('y', rect.y)
-                .attr('width', rect.width)
-                .attr('height', rect.height)
-                .attr('xIndex', rect.xIndex)
-                .attr('yIndex', rect.yIndex);
-        };
-
-        var redraw = function(xLine, yLine, xFisheye, yFisheye, xM, yM) {
+        var redraw = function(xLine, yLine, xFisheye, yFisheye, xM, yM, scores, guessRects) {
 
             var xMouse = xM || 0;
             var yMouse = yM || 0;
             xLine.attr("x1", xFisheye).attr("x2", xFisheye);
             yLine.attr("y1", yFisheye).attr("y2", yFisheye);
 
-            updateHighlighting(xLine, yLine, xMouse, yMouse);
+			updateHighlighting(xLine, yLine, xMouse, yMouse);
+            updateGuessRects(xLine, yLine, guessRects);
+			updateScores(yLine, scores);
         }
 
-        var fishline = function(d) {
-            return line(d.map(function(d) {
-                d = fisheye({x: d[0], y: d[1]});
-                return [d.x, d.y];
-            }));
-        }
+        var getCartesianData = function(saveData) {
 
-        var renderCartesian = function() {
+            var scoreColumnWidth = scoreColumnWidthPercent * width;
+            width = width - scoreColumnWidth;
 
-            var offset = 0;
-            var xSteps = d3.range(offset, width, (width - offset) / distributionsNumber);
-            var ySteps = d3.range(offset, height, (height - offset) / problemsNumber);
+            if (isSimpleMode && !saveData) {
+                shrinkDistributions();
+                distributionsNumber = problemsNumber;
+                var activeDistribs = distributions.slice(0, distributionsNumber);
+                activeDistribs = DataProcessor.shuffleArray(activeDistribs);
+                for (var i = 0; i < distributionsNumber; i++)
+                    distributions[i] = activeDistribs[i];
+                prepareGuessingMap();
+            }
 
-            var xFisheye = d3.fisheye.scale(d3.scale.identity).domain([0, width]).focus(360),
-                yFisheye = d3.fisheye.scale(d3.scale.identity).domain([0, height]).focus(90);
+            var xSteps = d3.range(0, width, width / distributionsNumber);
+            var ySteps = d3.range(0, height, height / problemsNumber);
+
+            var xFisheye = d3.fisheye.scale(d3.scale.identity).domain([0, width]).focus(360);
+            var yFisheye = d3.fisheye.scale(d3.scale.identity).domain([0, height]).focus(90);
+
+            if(!saveData) {
+                scoreColumnData = [ scoreColumnData[0] ];
+                scoreColumnData[0].y = 0;
+                scoreColumnData[0].height = (ySteps[1]) ? ySteps[1] - 0 : height;
+                scoreColumnData[0].score = 0;
+                scoreColumnData[0].class = 'score-rect';
+
+                if(problemsNumber > 1) {
+                    for(i = 1; i < problemsNumber; i++) {
+                        scoreColumnData.push({
+                            y: ySteps[i],
+                            height: ySteps[i] - ySteps[i - 1],
+                            score: 0,
+                            class: 'score-rect'
+                        });
+                    }
+                }
+
+                guessData = [];
+                for(i = 0; i < problemsNumber * distributionsNumber; i++)
+                    guessData[i] = {
+                        x: 0,
+                        y: 0,
+                        width: 0,
+                        height: 0,
+                        class: 'guess-rect',
+                        xIndex: -1,
+                        yIndex: -1
+                    };
+            }
+
+            return {
+                scoreColumnWidth: scoreColumnWidth,
+                xSteps: xSteps,
+                ySteps: ySteps,
+                xFisheye: xFisheye,
+                yFisheye: yFisheye
+            }
+        };
+
+        var renderCartesian = function (saveData) {
+
+            var cartesianData = getCartesianData(saveData);
+
+            var scoreColumnWidth = cartesianData.scoreColumnWidth;
+            var xSteps = cartesianData.xSteps;
+            var ySteps = cartesianData.ySteps;
+            var xFisheye = cartesianData.xFisheye;
+            var yFisheye = cartesianData.yFisheye;
 
             svg.append("g")
                 .attr("transform", "translate(-.5,-.5)");
@@ -654,12 +737,33 @@
                 .attr('width', 0)
                 .attr('height', 0);
 
-            svg.append('rect')
-                .attr('class', 'guess')
-                .attr('x', 0)
-                .attr('y', 0)
-                .attr('width', 0)
-                .attr('height', 0);
+            var guessRects = svg.selectAll('.guess-rect')
+                .data(guessData)
+                .enter().append("rect")
+                .attr('class', function(d) { return (d && d.class) ? d.class : 'guess-rect'; })
+                .attr('x', function(d) { return (d && d.x) ? d.x : 0; })
+                .attr('y', function(d) { return (d && d.y) ? d.y : 0; })
+                .attr('width', function(d) { return (d && d.width) ? d.width : 0; })
+                .attr('height', function(d) { return (d && d.height) ? d.height : 0; })
+                .attr('xIndex', function(d) { return ( d && d.xIndex) ? d.xIndex : ''; })
+                .attr('yIndex', function(d) { return ( d && d.yIndex) ? d.yIndex : ''; });
+
+            var scoreRects = svg.selectAll(".score-rect")
+                .data(scoreColumnData)
+                .enter().append("rect")
+                .attr('class', function(d) { return (d && d.class) ? d.class : 'score-rect'; })
+                .attr('x', width)
+                .attr('y', function(d) { return d.y; })
+                .attr('width', scoreColumnWidth)
+                .attr('height', function(d) { return d.height; });
+
+            var scoreText = svg.selectAll('.score-text')
+                .data(scoreColumnData)
+                .enter().append('text')
+                .attr('class', 'score-text')
+                .attr('x', width + scoreColumnWidth / 2)
+                .attr('y', function(d) { return d.y + d.height / 2; })
+                .text(function(d) { return d.score; });
 
             svg.append('text')
                 .attr('class', 'distribution pointer-text')
@@ -681,96 +785,163 @@
                 .data(ySteps)
                 .enter().append("line")
                 .attr("class", "y")
-                .attr("x2", width);
+                .attr("x2", width + scoreColumnWidth);
 
-            redraw(xLine, yLine, xFisheye, yFisheye);
-            addListeners(xLine, yLine, xFisheye, yFisheye);
-        }
+            svg.append('line')
+                .attr('class', 'x')
+                .attr('y2', height)
+                .attr('x1', width)
+                .attr('x2', width);
 
-        var renderFisheye = function() {
+            var scores = { scoreRects: scoreRects, scoreText: scoreText };
+            redraw(xLine, yLine, xFisheye, yFisheye, 0, 0, scores, guessRects);
+            addGraphListeners(xLine, yLine, xFisheye, yFisheye, scores, guessRects);
+        };
 
-            var offset = 0;
-            var xStepsBig = d3.range(offset, width, (width - offset) / problemsNumber);
-            var yStepsBig = d3.range(offset, height, (height - offset) / problemsNumber);
-            var xStepsSmall = d3.range(offset, width + 6, (width - offset) / (2 * problemsNumber));
-            var yStepsSmall = d3.range(offset, height + 6, (width - offset) / (2 * problemsNumber));
+        var isProblemNumValid = function(newProblemNum) {
+            var numberOnly = /^\d+$/;
+            return (numberOnly.test(newProblemNum) &&
+                parseInt(newProblemNum) > 0 &&
+                parseInt(newProblemNum) <= problems.length)
+        };
 
-            var fisheye = d3.fisheye.circular()
-                .focus([360, 90])
-                .radius(100);
+        var updateProblemNum = function(newProblemNum) {
 
-            var line = d3.svg.line();
+            if(isProblemNumValid(newProblemNum)) {
+                problemsNumber = newProblemNum;
+                if(isSimpleMode) {
+                    distributionsNumber = newProblemNum;
+                }
+                createGraph();
+            } else {
+                $('#problemNum').tooltip('show');
+                setTimeout(function() {
+                    $('#problemNum').tooltip('hide');
+                }, 3000);
+            }
+        };
 
-            svg.append("g")
-                .attr("transform", "translate(-.5,-.5)");
+        var shrinkDistributions = function () {
+            var temp;
+            for(var i = 0; i < problemsNumber; i++) {
+                if(guessingMap[i] !== i) {
+                    temp = distributions[guessingMap[i]];
+                    distributions[guessingMap[i]] = distributions[i];
+                    distributions[i] = temp;
 
-            svg.append("rect")
-                .attr("class", "background")
-                .attr("width", width)
-                .attr("height", height);
+                    prepareGuessingMap();
+                }
+            }
+        };
 
-//            svg.insert('rect', 'background')
-//                .attr('class', 'highlight column')
-//                .attr('x', 0)
-//                .attr('y', 0)
-//                .attr('width', 0)
-//                .attr('height', 0);
-//
-//            svg.insert('rect', 'background')
-//                .attr('class', 'highlight row')
-//                .attr('x', 0)
-//                .attr('y', 0)
-//                .attr('width', 0)
-//                .attr('height', 0);
-//
-//            svg.append('rect')
-//                .attr('class', 'guess')
-//                .attr('x', 0)
-//                .attr('y', 0)
-//                .attr('width', 0)
-//                .attr('height', 0);
-//
-//            svg.append('text')
-//                .attr('class', 'distribution pointer-text')
-//                .attr('x', 0)
-//                .attr('y', 0);
-//
-//            svg.append('text')
-//                .attr('class', 'problem pointer-text')
-//                .attr('x', 0)
-//                .attr('y', 0);
+        var toggleSimpleMode = function() {
+            if(!isSimpleMode)
+                isSimpleMode = true;
+            else {
+                isSimpleMode = false;
+                distributionsNumber = distributions.length;
+            }
+            createGraph();
+        };
 
-            svg.selectAll(".x")
-                .data(xStepsBig)
-                .enter().append("path")
-                .attr("class", "x")
-                .datum(function(x) { return yStepsSmall.map(function(y) { return [x, y]; }); });
+        // Set listeners to graph controls group
+        var addControlsListeners = function() {
 
-            svg.selectAll(".y")
-                .data(yStepsBig)
-                .enter().append("path")
-                .attr("class", "y")
-                .datum(function(y) { return xStepsSmall.map(function(x) { return [x, y]; }); });
+            var startButton = $('#startButton');
+            var startHtml = '<i class="icon-play"></i> START';
+            var pauseHtml = '<i class="icon-pause"></i> PAUSE';
 
-            var path = svg.selectAll("path")
-                .attr("d", fishline);
+            var waitForInputStop = (function() {
 
-//            addListeners(xLine, yLine, xFisheye, yFisheye);
-        }
+                var typeOut;
 
-        var addListeners = function(xLine, yLine, xFisheye, yFisheye) {
+                function clearTimer() {
+                    if (typeOut) {
+                        clearTimeout(typeOut);
+                    }
+                }
+
+                function startTimer(obj) {
+                    clearTimer();
+
+                    typeOut = setTimeout(function () {
+                        // TODO: recreate graph with new number of problems
+                        updateProblemNum(obj.val());
+                        $('#resetButton').click();
+                    }, 500);
+                }
+
+                return {
+                    clearTimer: clearTimer,
+                    startTimer: startTimer
+                }
+            })();
+
+            var waitForFinalEvent = (function () {
+                var timers = {};
+                return function (callback, ms, uniqueId) {
+                    if (!uniqueId) {
+                        uniqueId = "Don't call this twice without a uniqueId";
+                    }
+                    if (timers[uniqueId]) {
+                        clearTimeout (timers[uniqueId]);
+                    }
+                    timers[uniqueId] = setTimeout(callback, ms);
+                };
+            })();
+
+            $(window).resize(function() {
+                waitForFinalEvent(function() {
+                    var saveData = true;
+                    createGraph(saveData);
+                }, 500, "some unique string");
+            });
+
+            $('#problemNum')
+                .keydown(waitForInputStop.clearTimer)
+                .keyup(function() { waitForInputStop.startTimer($(this)); })
+                .tooltip({
+                    'selector': '',
+                    'delay': { show: 500, hide: 100 },
+                    'title': 'Enter number from 1 to ' + problems.length
+                })
+                .focus();
+
+            $('#isSimpleMode').live('change', function() {
+                toggleSimpleMode();
+                $('#resetButton').click();
+            });
+
+            startButton.click(function() {
+                $('#countUp').stopwatch().stopwatch('toggle');
+                $(this).html(($(this).html() == startHtml) ? pauseHtml : startHtml);
+            });
+
+            $('#resetButton').click(function() {
+                $('#countUp').stopwatch().stopwatch('reset').stopwatch('stop').text('00:00:00');
+                startButton.html(startHtml);
+                createGraph();
+            });
+        };
+
+        // Set listeners to objects inside graph
+        var addGraphListeners = function(xLine, yLine, xFisheye, yFisheye, scores, guessRects) {
+
             svg.on("mousemove", function() {
-                var mouse = d3.mouse(this);
+
+				var mouse = d3.mouse(this);
+
                 xFisheye.focus(mouse[0]);
                 yFisheye.focus(mouse[1]);
-                redraw(xLine, yLine, xFisheye, yFisheye, mouse[0], mouse[1]);
+                redraw(xLine, yLine, xFisheye, yFisheye, mouse[0], mouse[1], scores, guessRects);
             });
 
             svg.on('click', function() {
+                console.log('click');
                 var mouse = d3.mouse(this);
-                guess(xLine, yLine, mouse);
+                guess(xLine, yLine, mouse, guessRects);
             });
-        }
+        };
 
         return {
             renderData: init
@@ -796,7 +967,6 @@
                 return false;
 
             switch(event.msg) {
-
                 case 'problems_loaded' :
                     problems = event.data;
                     processData();
@@ -812,11 +982,7 @@
                     break;
 
                 default:
-                    try {
-                        console.log('Callback was not mapped.');
-                    } catch(e) {
-                        window.alert('Callback was not mapped. Console is unavailable.');
-                    }
+                    console.log('Callback was not mapped.');
                     break;
             }
 
@@ -832,6 +998,8 @@
                 var slopegraph = document.getElementById('slopegraph');
                 if(slopegraph)
                     slopegraph.innerHTML = '<h1>D3js cannot bo loaded. Check Internet connection.</h1>';
+                else
+                    console.log('There is no container for graphics in html. It should have class .slopegraph');
             }
         };
 
@@ -846,11 +1014,11 @@
 
         var processData = function() {
             if(problems && distributions)
-                DataProcessor.getDataForGraph(problems, distributions);
+                DataProcessor.prepareDataForGraph(problems, distributions);
         };
 
         var renderData = function(data) {
-            DataRenderer.renderData(data);
+            Rendering.renderData(data);
         };
 
         return {
@@ -860,4 +1028,4 @@
     })();
 
     return { start : Core.init() }
-})();
+} ());
