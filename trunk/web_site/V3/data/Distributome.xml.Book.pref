@@ -29,28 +29,36 @@
 
 	<hierarchy_level id="top_hierarchy">
 		<name>Bernoulli</name>
-		<name>Binomial</name>
-		<name>Geometric</name>
-		<name>Negative Binomial</name>
-		<name>Poisson</name>
-		<name>Continuous Uniform</name>
-		<name>Standard Normal</name>
 		<name>Beta</name>
+		<name>Binomial</name>
 		<name>Cauchy</name>
-		
+		<name>Chi-Square</name>
+		<name>Continuous Uniform</name>
+		<name>Discrete Uniform</name>
+		<name>Exponential</name>
+		<name>F</name>
+		<name>Gamma</name>
+		<name>Geometric</name>
+		<name>Hypergeometric</name>
+		<name>Negative Binomial</name>
+		<name>Normal</name>
+		<name>Poisson</name>
+		<name>Students T</name>		
 	</hierarchy_level>
 
 	<hierarchy_level id="middle_hierarchy">
-		<name>Student</name>
-		<name>Discrete Uniform</name>
-		<name>Gamma</name>
-		<name>Pareto</name>
-		<name>ChiSquare</name>
-		<name>F</name>
-		<name>Exponential</name>
+		<name>Arcsine</name>
+		<name>Bivariate Normal</name>
+		<name>Laplace</name>
+		<name>Log-Gamma</name>
+		<name>Logistic</name>
+		<name>Log-Normal</name>
+		<name>Maxwell</name>
 		<name>Multinomial</name>
-		<name>Hypergeometric</name>
-		<name>Normal</name>
+		<name>Pareto</name>
+		<name>Pascal</name>
+		<name>Rayleigh</name>
+		<name>Weibull</name>
 	</hierarchy_level>
 
 </distributome_ontology>
