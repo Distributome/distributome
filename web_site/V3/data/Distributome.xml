@@ -868,12 +868,12 @@
             <model>Student's t distirbutiuon arises when estimating the mean of a normally distributed
                 population when the sample size is small and population standard deviation is
                 unknown. It comes into play in various statistical analyses like
-                Studentâ€™s t-test for assessing the between-group statistical significant differences of two
+                Students t-test for assessing the between-group statistical significant differences of two
                 sample means,  construction of confidence intervals for difference between two population
                 means, linear regression analyses, etc.
                 Like the normal distribution, the t-distribution is symmetric, bell-shaped and unimodal.
                 However it has heavier tails, meaning that it is more prone to producing values that fall
-                far from its mean. The Studentâ€™s t-distribution is a special case of the generalised
+                far from its mean. The Students t-distribution is a special case of the generalised
                 hyperbolic distribution</model>
             <parameter>\(df \in (1, \infty)\), degrees of freedom</parameter>
             <support>\((-\infty, \infty)\)</support>
