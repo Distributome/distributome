@@ -1,5 +1,7 @@
 (function() {
 
+    var VERSION = '1.1.0';
+
     var PROBLEMS_URL = './data/DistributomeGame_ProblemExamples.csv';
     var DISTRIBUTIONS_URL = './data/Distributome.xml';
 
@@ -308,19 +310,28 @@
 
             prepareGuessingMap();
 
-            $('.modal-hint-control').on('click', function() { $('.modal-body-hint').slideToggle();});
-            $('#game').on('click', function () { return false; });
-            $('#instructions').on('click', function() {
-                showInstructions();
+            $('.modal-hint-control').click(function() { $('.modal-body-hint').slideToggle();});
+            $('#game').click(function () { return false; });
+
+            var instructionsModal = $('#instructions-modal');
+            $('#instructions').click(function() {
+                instructionsModal.modal('show');
                 return false;
+            });
+            instructionsModal.on('hide', function() {
+                $('#countUp').stopwatch().stopwatch('start');
+                $('#pauseTimerButton').removeClass('hide');
+                $('#startTimerButton').addClass('hide');
+                $('#startGameButton').addClass('hide');
+                $('#closeInstructionsButton').removeClass('hide');
+                instructionsModal.off('hide');
+                $('#problemNum').focus();
             });
 
             createGraph();
             addControlsListeners();
-
-            // setting initial condition
             $('#problemNum').val(initialProblemNum).keyup();
-//            updateProblemNum(initialProblemNum);
+            instructionsModal.modal('show');
         };
 
         var createGraph = function(saveData) {
@@ -369,11 +380,6 @@
 
         function coord(line, axis) {
             return line[axis + '1']['baseVal']['value'];
-        }
-
-        var showInstructions = function () {
-            var instructionsModal = $('#instructions-modal');
-            instructionsModal.modal('show');
         }
 
         var getCrossAreaByIndices = function (xLine, yLine, xIndex, yIndex) {
@@ -592,7 +598,8 @@
             } else {
                 scoreColumnData[cross.row.index].class = 'score-rect wrong';
                 if(scoreRect.attr('class').indexOf('right') > -1) {
-                    if(!((scoreRect.attr('class').indexOf('wrong') > -1) && guessData[guessIndex].xIndex == cross.row.index))
+                    if(!((scoreRect.attr('class').indexOf('wrong') > -1)
+                        && guessData[guessIndex].xIndex == cross.row.index))
                         scoreColumnData[cross.row.index].score = 1;
                 } else
                     scoreColumnData[cross.row.index].score += 1;
@@ -841,15 +848,44 @@
                 isSimpleMode = false;
                 distributionsNumber = distributions.length;
             }
-            createGraph();
+        };
+
+        var getGuessesSummary = function() {
+            var guessRects = d3.selectAll('.guess-rect')[0];
+            var guessRect;
+            var problemWrongGuesses;
+            var isSolved;
+            var attemptedProblems = [];
+            for(var k = 0; k < problemsNumber; k++) {
+                isSolved = false;
+                problemWrongGuesses = 0;
+                for(var j = 0; j < distributionsNumber; j++) {
+                    guessRect = d3.selectAll('.guess-rect').filter(function(d, i) { return i == k * distributionsNumber + j; })
+                    if(guessRect.attr('class').indexOf('right') > -1) {
+                        isSolved = true;
+                    } else if(guessRect.attr('class').indexOf('wrong') > -1) {
+                        problemWrongGuesses += 1;
+                    }
+                }
+                if(problemWrongGuesses !== 0 || isSolved === true)
+                attemptedProblems.push({
+                    name: problems[k].name,
+                    isSolved: isSolved,
+                    problemWrongGuesses: problemWrongGuesses
+                });
+            }
+
+            return attemptedProblems;
         };
 
         // Set listeners to graph controls group
         var addControlsListeners = function() {
 
-            var startButton = $('#startButton');
-            var startHtml = '<i class="icon-play"></i> START';
-            var pauseHtml = '<i class="icon-pause"></i> PAUSE';
+            var isResume = false;
+
+            var startTimerBtn = $('#startTimerButton');
+            var pauseTimerBtn = $('#pauseTimerButton');
+            var countUpDiv = $('#countUp');
 
             var waitForInputStop = (function() {
 
@@ -867,7 +903,8 @@
                     typeOut = setTimeout(function () {
                         // TODO: recreate graph with new number of problems
                         updateProblemNum(obj.val());
-                        $('#resetButton').click();
+                        resetTimer();
+                        createGraph();
                     }, 500);
                 }
 
@@ -890,11 +927,40 @@
                 };
             })();
 
+            var toggleTimer = function() {
+                countUpDiv.stopwatch().stopwatch('toggle');
+                (startTimerBtn.hasClass('hide')) ? startTimerBtn.removeClass('hide') : startTimerBtn.addClass('hide');
+                (pauseTimerBtn.hasClass('hide')) ? pauseTimerBtn.removeClass('hide') : pauseTimerBtn.addClass('hide');
+            };
+
+            var resetTimer = function() {
+                countUpDiv.stopwatch().stopwatch('reset').stopwatch('stop').text('00:00:00');
+                if(startTimerBtn.hasClass('hide')) {
+                    startTimerBtn.removeClass('hide');
+                    pauseTimerBtn.addClass('hide');
+                }
+            };
+
+            var toggleDistribInfo = function() {
+                var distribDescriptionBlock = $('#distr-description-block');
+                var problemDescriptionBlock = $('#problem-description-block');
+                var timerInfoBlock = $('#timer-block');
+                if(distribDescriptionBlock.hasClass('hide')) {
+                    problemDescriptionBlock.removeClass('span7').addClass('span4');
+                    timerInfoBlock.removeClass('span5').addClass('span3');
+                    distribDescriptionBlock.removeClass('hide');
+                } else {
+                    problemDescriptionBlock.addClass('span7').removeClass('span4');
+                    timerInfoBlock.addClass('span5').removeClass('span3');
+                    distribDescriptionBlock.addClass('hide');
+                }
+            };
+
             $(window).resize(function() {
                 waitForFinalEvent(function() {
                     var saveData = true;
                     createGraph(saveData);
-                }, 500, "some unique string");
+                }, 500, "0a1edaaa-3f4e-4a23-8bc2-7f6e1a5f35b0");
             });
 
             $('#problemNum')
@@ -904,23 +970,57 @@
                     'selector': '',
                     'delay': { show: 500, hide: 100 },
                     'title': 'Enter number from 1 to ' + problems.length
-                })
-                .focus();
-
+                });
             $('#isSimpleMode').live('change', function() {
                 toggleSimpleMode();
-                $('#resetButton').click();
-            });
-
-            startButton.click(function() {
-                $('#countUp').stopwatch().stopwatch('toggle');
-                $(this).html(($(this).html() == startHtml) ? pauseHtml : startHtml);
-            });
-
-            $('#resetButton').click(function() {
-                $('#countUp').stopwatch().stopwatch('reset').stopwatch('stop').text('00:00:00');
-                startButton.html(startHtml);
+                resetTimer();
                 createGraph();
+            });
+            $('#hideDistrInfo').live('change', function() {
+                toggleDistribInfo();
+                resetTimer();
+                createGraph();
+            });
+
+            startTimerBtn.click(toggleTimer);
+            pauseTimerBtn.click(toggleTimer);
+
+            $('#stopButton').click(function() {
+                countUpDiv.stopwatch().stopwatch('stop');
+                startTimerBtn.removeClass('hide');
+                (pauseTimerBtn.hasClass('hide')) ? void(0) : pauseTimerBtn.addClass('hide');
+                $('#results-modal').modal('show');
+                $('#resultTime').text(countUpDiv.text());
+
+                var resultsTableBody = $('#resultsTableBody');
+                resultsTableBody.html('');
+                var attemptedGuesses = getGuessesSummary();
+                var html = '';
+                for(var i = 0; i < attemptedGuesses.length; i++) {
+
+                    html = '<tr class="' + ((attemptedGuesses[i].isSolved) ? 'success' : 'error') + '">'
+                        + '<td>' + attemptedGuesses[i].name + '</td>'
+                        + '<td>' + attemptedGuesses[i].problemWrongGuesses + '</td>'
+                        + '<td>' + ((attemptedGuesses[i].isSolved) ? 'Solved' : 'Not solved') + '</td>'
+                        + '</tr>';
+
+                    resultsTableBody.append(html);
+                }
+            });
+            $('#results-modal').on('hide', function(a, b) {
+                if(!isResume) {
+                    resetTimer();
+                    createGraph();
+                } else
+                    isResume = false;
+            });
+            $('#printResultsButton').click(function() { window.print(); });
+            $('#resumeGameButton').click(function() {
+                isResume = true;
+                $('#results-modal').modal('hide');
+                pauseTimerBtn.removeClass('hide');
+                startTimerBtn.addClass('hide');
+                countUpDiv.stopwatch().stopwatch('start');
             });
         };
 
@@ -990,10 +1090,8 @@
         };
 
         var init = function() {
-            if(window.d3) {
-
+            if(window.d3 && window.$) {
                 getData();
-
             } else {
                 var slopegraph = document.getElementById('slopegraph');
                 if(slopegraph)
