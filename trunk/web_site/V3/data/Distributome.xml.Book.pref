@@ -56,7 +56,6 @@
 		<name>Maxwell</name>
 		<name>Multinomial</name>
 		<name>Pareto</name>
-		<name>Pascal</name>
 		<name>Rayleigh</name>
 		<name>Weibull</name>
 	</hierarchy_level>
