@@ -860,12 +860,12 @@
             <history>The normal distribution was first derived by Carl Friedrich Gauss in 1809 (hence the alternative name Gaussian distribution). The normalizing constant and the first version of the Central Limit Theorem were contributions by Pierre Simon Laplace. The term normalizing constant was popularized by Karl Pearson around the turn of the 20th century.</history>
         </distribution>
 
-        <distribution id="Student's t">
-            <name>Student's t distribution </name>
-            <name>Student t distribution </name>
+        <distribution id="students t">
+            <name>students t distribution </name>
+            <name>Students t distribution </name>
             <name>Students t distribution</name>
             <type>continuous</type>
-            <model>Student's t distirbutiuon arises when estimating the mean of a normally distributed
+            <model>students t distirbutiuon arises when estimating the mean of a normally distributed
                 population when the sample size is small and population standard deviation is
                 unknown. It comes into play in various statistical analyses like
                 Students t-test for assessing the between-group statistical significant differences of two
@@ -1207,10 +1207,10 @@
         </distribution>
 
         <distribution id="student">
-            <name>t-distribution </name>
-            <name>Student t-distribution</name>
+            <name>t distribution </name>
+            <name>Students t distribution</name>
             <type>continuous</type>
-            <model>The Student t-distribution arises in a sample from a normal distribution, when the sample mean is standardized using the sample standard deviation </model>
+            <model>The Students t-distribution arises in a sample from a normal distribution, when the sample mean is standardized using the sample standard deviation </model>
             <parameter>\(n \in (0, \infty)\), degrees of freedom</parameter>
             <support>\((-\infty, \infty)\)</support>
             <pdf>\(\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!\) where \(\Gamma\) is the gamma function</pdf>
@@ -1238,7 +1238,7 @@
             <median>\(Q(\frac{1}{2})\) where \(Q\) is the quantile function</median>
             <q1>\(Q(\frac{1}{4})\) where \(Q\) is the quantile function</q1>
             <q3>\(Q(\frac{3}{4})\) where \(Q\) is the quantile function</q3>
-            <history>The \(t\)-distribution was derived by William Sealy Gosset while he worked at the Guinness Brewery in Dublin.  Gosset published his work under the pseudonym Student. The \(t\)-test in statistics was developed by Ronald Fisher who called the distribution Student's distribution</history>
+            <history>The \(t\)-distribution was derived by William Sealy Gosset while he worked at the Guinness Brewery in Dublin.  Gosset published his work under the pseudonym Student. The \(t\)-test in statistics was developed by Ronald Fisher who called the distribution students distribution</history>
             <cite>fisher1925applications</cite>
         </distribution>
 
@@ -1914,8 +1914,8 @@
             <cite>moothathu1986characterization</cite>
         </distribution>
 
-        <distribution id="Student's T Non-Central">
-            <name>Student's T Non-Central</name>
+        <distribution id="Students T Non-Central">
+            <name>Students T Non-Central</name>
             <type>continuous</type>
             <type>nonsymmetric</type>
             <type>infinite</type>
@@ -2426,8 +2426,8 @@
         <relation id="chi-square/standard-normal/student">
             <from>chi-square distribution</from>
             <from>standard normal distribution</from>
-            <to>Student's t-distribution</to>
-            <statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the Student's's \(t\)-distribution with \(n\) degrees of freedom.</statement>
+            <to>Students t distribution</to>
+            <statement>If \(Z\) has the standard normal distribution, \(V\) has the chi-square distribution with \(n \in (0, \infty)\) degrees of freedom, and \(Z\) and \(V\) are independent, then \(T = \frac{Z}{\sqrt{V / n}}\) has the students's \(t\)-distribution with \(n\) degrees of freedom.</statement>
             <type>transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
@@ -3169,8 +3169,8 @@
 
         <relation id="normal/student">
             <from>normal distribution</from>
-            <to>Student t distribution</to>
-            <statement>If \(X_1, X_2, \ldots, X_n\) are independent normally distributed random variables with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(T = \frac{\overline{X} - \mu}{S / \sqrt{n}}\) has the Student's t distribution with \(n-1\) degrees of freedom.</statement>
+            <to>Students t distribution</to>
+            <statement>If \(X_1, X_2, \ldots, X_n\) are independent normally distributed random variables with mean \(\mu \in (-\infty, \infty)\) and standard deviation \(\sigma \in (0, \infty)\), then \(T = \frac{\overline{X} - \mu}{S / \sqrt{n}}\) has the students t distribution with \(n-1\) degrees of freedom.</statement>
             <type>transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
@@ -3403,19 +3403,19 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="r"> %Student's t to F
-            <from>Student's t-distribution</from>
-            <to>F-distribution</to>
-            <statement>if \(X\) has the Student's t-distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(Y = X^2\) has the F distribuiton with \(1\) degree of freedom in the numerator and \(n\) degrees of freedom in the denominator.</statement>
+        <relation id="student/f">
+            <from>Students t distribution</from>
+            <to>F distribution</to>
+            <statement>if \(X\) has the students t-distribution with \(n \in \{1, 2, \ldots\}\) degrees of freedom, then \(Y = X^2\) has the F distribuiton with \(1\) degree of freedom in the numerator and \(n\) degrees of freedom in the denominator.</statement>
             <type>transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
         <relation id="student/Cauchy">
-            <from>Student t-distribution</from>
+            <from>Students t distribution</from>
             <to>Cauchy distribution</to>
-            <statement>The Student's t-distribution with 1 degree of freedom is the standard Cauchy distribuiton.</statement>
+            <statement>The students t-distribution with 1 degree of freedom is the standard Cauchy distribuiton.</statement>
             <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
@@ -3484,8 +3484,8 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="Student's t/Standard Normal">
-            <from>Student's t distribution</from>
+        <relation id="students t/Standard Normal">
+            <from>students t distribution</from>
             <to>Standard Normal distribution</to>
             <statement>As \(n\longrightarrow\infty\), the t-distribution approaches the normal distribution with mean 0 and variance 1</statement>
             <type>limiting</type>
@@ -3493,10 +3493,10 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="Fisher's F/Student's T">
+        <relation id="Fisher's F/students T">
             <from>Fisher's F distribution</from>
-            <to>Student's t distribution</to>
-            <statement>The square root of a Fisher's F distribution is a Student's t distribution</statement>
+            <to>students t distribution</to>
+            <statement>The square root of a Fisher's F distribution is a students t distribution</statement>
             <type>transformation</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
@@ -3521,8 +3521,8 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="Noncentral Student's t/Normal">
-            <from>Noncentral Student's t distribution</from>
+        <relation id="Noncentral students t/Normal">
+            <from>Noncentral students t distribution</from>
             <to>Normal distribution</to>
             <statement>If \(T\) is noncentral t-distributed with \(\nu\) degrees of freedom and noncentrality parameter \(\mu\) and \(Z=\lim_{\nu\to\infty}T\), then \(Z\) has a normal distribution with mean \(\mu\) and unit variance</statement>
             <type>limiting</type>
@@ -3971,9 +3971,9 @@
         </relation>
 
         <relation id="noncentral-student/student">
-            <from>noncentral Student's t-distribution</from>
-            <to>Student's t-distribution</to>
-            <statement>Student's t-distribution is a special case of the noncentral Student's t-distribution where \(\delta=1\)</statement>
+            <from>noncentral Students t distribution</from>
+            <to>Students t distribution</to>
+            <statement>students t-distribution is a special case of the noncentral students t-distribution where \(\delta=1\)</statement>
             <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
