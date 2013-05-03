@@ -554,7 +554,7 @@
             <support>\(x\in[0,n]\)</support>
             <pdf>\(\frac{1}{(n-1)!}\sum_{k=0}^{\lfloor x\rfloor}(-1)^k\binom{n}{k}(x-k)^{n-1}\)</pdf>
             <mode><![CDATA[
-            \(\begin{cases}\text{anyvaluein}[0,1]&\text{for}n=1\\\frac{n}{2}&\text{otherwise}\end{cases}\)
+            \(\begin{cases}\text{any value in}[0,1]&\text{for }n=1\\\frac{n}{2}&\text{otherwise}\end{cases}\)
         ]]></mode>
             <cdf>\(\frac{1}{n!}\sum_{k=0}^{\lfloor x\rfloor}(-1)^k\binom{n}{k}(x-k)^n\)</cdf>
             <qf>\(Q(p) = F^{-1}(p), \quad p \in (0, 1)\) where \(F\) is the distribution function</qf>
