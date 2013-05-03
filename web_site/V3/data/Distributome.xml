@@ -306,11 +306,7 @@
 	            \end{matrix}\)
 	        	]]></pdf>
             <mode>all \(x \in \{a, a+1, \ldots, b\}\)</mode>
-            <cdf><![CDATA[
-	            \(\begin{matrix}
-	            0 & \mbox{for }k<a \\ \frac{floor[k] -a+1}{n} & \mbox{for }a \le k \le b \\1 & \mbox{for }k>b
-	            \end{matrix}\)
-	        	]]></cdf>
+            <cdf>\(\frac{\lfloor k \rfloor -a+1}{n}\), for \(a \le k \le b\)</cdf>
             <qf>\(Q(p) = \lceil a + p (b - a) \rceil, \; p \in [0, 1]\)</qf>
             <mgf>\(\frac{e^{at}-e^{(b+1)t}}{n(1-e^t)}\,\)</mgf>
             <cf>\(\varphi(t) = \frac{e^{i a t} - e^{i (b+1) t}}{(b + a + 1)(1 - e^{i t})}, \; t \in (-\infty, \infty)\)</cf>
