@@ -301,16 +301,16 @@
             <parameter>\(b \in \{a, a+1, \ldots\}\), the right endpoint</parameter>
             <support>\(k \in \{a,a+1,\dots,b-1,b\}\,\)</support>
             <pdf><![CDATA[
-            \(\begin{matrix}
-            \frac{1}{n} & \mbox{for }a\le k \le b\ \\0 & \mbox{otherwise }
-            \end{matrix}\)
-        ]]></pdf>
+	            \(\begin{matrix}
+	            \frac{1}{n} & \mbox{for }a\le k \le b\ \\0 & \mbox{otherwise }
+	            \end{matrix}\)
+	        	]]></pdf>
             <mode>all \(x \in \{a, a+1, \ldots, b\}\)</mode>
             <cdf><![CDATA[
-            \(\begin{matrix}
-            0 & \mbox{for }k<a\\ \frac{\lfloor k \rfloor -a+1}{n} & \mbox{for }a \le k \le b \\1 & \mbox{for }k>b
-            \end{matrix}\)
-        ]]></cdf>
+	            \(\begin{matrix}
+	            0 & \mbox{for }k<a \\ \frac{floor[k] -a+1}{n} & \mbox{for }a \le k \le b \\1 & \mbox{for }k>b
+	            \end{matrix}\)
+	        	]]></cdf>
             <qf>\(Q(p) = \lceil a + p (b - a) \rceil, \; p \in [0, 1]\)</qf>
             <mgf>\(\frac{e^{at}-e^{(b+1)t}}{n(1-e^t)}\,\)</mgf>
             <cf>\(\varphi(t) = \frac{e^{i a t} - e^{i (b+1) t}}{(b + a + 1)(1 - e^{i t})}, \; t \in (-\infty, \infty)\)</cf>
@@ -2203,11 +2203,14 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
-        <relation id="beta/standard-uniform">
+        <relation id="beta/continuous-uniform">
             <from>beta distribution</from>
-            <to>standard uniform distribution</to>
-            <statement>The beta distribution with parameters \(\alpha = 1\) and \(\beta = 1\) is the standard uniform distribution.</statement>
+            <to>continuous uniform distribution</to>
+            <statement>The beta distribution with parameters \(\alpha = 1\) and \(\beta = 1\) is the (standard) continuous uniform distribution.
+            		Also, the k-th order statistic from sample of n independent continuous uniform variables 
+            		is Beta(k,n+1-k).</statement>
             <type>special case</type>
+            <type>convolution</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
@@ -2298,8 +2301,11 @@
         <relation id="binomial/Bernoulli">
             <from>binomial distribution</from>
             <to>Bernoulli distribution</to>
-            <statement>The binomial distribution with parameters \(n = 1\) and \(p \in [0, 1]\) is the Bernoulli distribution with parameter \(p\).</statement>
+            <statement>The binomial distribution with parameters \(n = 1\) and \(p \in [0, 1]\) is the Bernoulli distribution with parameter \(p\).
+            		Also, if \((X_1, X_2, \ldots, X_n)\) is a sequence of independent Bernoulli variables, each with parameter \(p \in [0, 1]\) then \(Y = \sum_{i = 1}^n X_i\) has the binomial distribution with parameters \(n\) and \(p\).
+           	</statement>
             <type>special case</type>
+            <type>convolution</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
@@ -2354,6 +2360,16 @@
 			<to>standard-normal Distribution</to>
 			<statement>If \(Z_1\) and \(Z_2\) are two independent normally distributed random 
 				variables with expected value 0 and variance 1, then the ratio \(\frac{Z_1}{Z_2}\)
+				has the standard Cauchy distribution.</statement>
+			<type>transformation</type>
+			<cite>MR1326603</cite>
+		</relation>
+		
+		<relation id="Cauchy/normal">
+			<from>Cauchy Distribution</from>
+			<to>normal Distribution</to>
+			<statement>If \(Z_1\) and \(Z_2\) are two independent normally distributed random 
+				variables \(\sim N(0, \sigma^2)\), then the ratio \(\frac{Z_1}{Z_2}\)
 				has the standard Cauchy distribution.</statement>
 			<type>transformation</type>
 			<cite>MR1326603</cite>
@@ -2626,8 +2642,10 @@
         <relation id="exponential/gamma">
             <from>exponential distribution</from>
             <to>gamma distribution</to>
-            <statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = \sum_{i=1}^n X_i\) has the gamma distribution with shape parameter \(n\) and scale parameter \(\frac{1}{\lambda}\).</statement>
+            <statement>If \((X_1, X_2, \ldots, X_n)\) is a sequence of independent random variables, each with the exponential distribution with parameter \(\lambda \in (0, \infty)\) then \(Y = \sum_{i=1}^n X_i\) has the gamma distribution with shape parameter \(n\) and scale parameter \(\frac{1}{\lambda}\).
+            		Also, If \(X\) has the gamma distributed with parameter shape parameter \(k = 1\) and scale parameter \(\lambda \in (0, \infty)\) then and then \(X\) has the exponential distribution with scale parameter \(\lambda\) (and hence rate parameter \(1/\lambda\).</statement>
             <type>convolution</type>
+            <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
@@ -3053,8 +3071,10 @@
         <relation id="negative-binomial/geometric">
             <from>negative binomial distribution</from>
             <to>geometric distribution</to>
-            <statement>The negative binomial distribution with stopping parameter \(1\) and success parameter \(p \in (0, 1)\) is the geometric distribution with success parameter \(p\).</statement>
+            <statement>The negative binomial distribution with stopping parameter \(1\) and success parameter \(p \in (0, 1)\) is the geometric distribution with success parameter \(p\).
+            		Also, if \((X_1, X_2, \ldots, X_n)\) is a sequence of independent Geometric(p) random variables, their sum \(\sum_{i=1}^n{X_i} is negative binomial(n,p).</statement>
             <type>special case</type>
+            <type>convolution</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
@@ -3064,6 +3084,18 @@
             <to>Poisson distribution</to>
             <statement>If \(p_r \in (0, 1)\) for each \(r \in (0, \infty)\) and \(r \frac{p}{1-p} \to \lambda \in (0, \infty)\) as \(r \to \infty\), then the negative binomial distribution with stopping parameter \(r\) and success parameter \(p_r\) converges to the Poisson distribution with parameter \(\lambda\).</statement>
             <type>limiting distribution with respect to parameter</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+        
+        <relation id="Poisson/exponential">
+            <from>Poisson distribution</from>
+            <to>Exponential distribution</to>
+            <statement>If for every t > 0 the number of arrivals in the time interval [0,t] follows
+            	the Poisson distribution with mean \(\lambda t\), then the sequence of inter-arrival 
+            	times are independent and identically distributed exponential random variables 
+				with mean \(\fract{1}{λ}\).</statement>
+            <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
@@ -3642,7 +3674,7 @@
         <relation id="Rectangular/Beta-Binomial">
             <from>Rectangular distribution</from>
             <to>Beta-Binomial distribution</to>
-            <statement>For \(a=b=1)\), the rectangular distribution reduces to the beta-binomial distribution as a special case</statement>
+            <statement>For \(a=b=1\), the rectangular distribution reduces to the beta-binomial distribution as a special case</statement>
             <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
@@ -4020,15 +4052,6 @@
             <to>hyperbolic secant distribution</to>
             <statement>If X has the standard Cauchy distribution then \(\log{\frac{\lvert X \rvert}{\pi}}\) has the hyperbolic secant distribution.</statement>
             <type>transformation</type>
-            <cite>doi:10.1080/07408170590948512</cite>
-            <cite>doi:10.1198/000313008X270448</cite>
-        </relation>
-
-        <relation id="discrete-uniform/rectangular">
-            <from>Discrete Uniform Distribution</from>
-            <to>Rectangular Distribution</to>
-            <statement>The Rectangular distribution is a particular case of the Discrete Uniform distribution where \(\a=0 and \b=n\)</statement>
-            <type>special case</type>
             <cite>doi:10.1080/07408170590948512</cite>
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
