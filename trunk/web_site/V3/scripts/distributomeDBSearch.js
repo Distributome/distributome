@@ -46,10 +46,15 @@ function displayXmlText(displayAll){
 			parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, i, true, DistributomeDBSearchXML_Objects);
 			nodehtml.push(parserOutput[0]);
 			referenceName= parserOutput[1];
+			console.log(referenceName)
 			if(referenceName !=null){
 				if(!reference) reference = true;
 				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
-				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				//referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				BibtexManager.pasteCitationByCiteTag(referenceName[0],function(cite){
+					if(cite != undefined) 
+						referencehtml.push(cite);
+				});
 				referencehtml.push("</div>");
 			}
 			nodehtml.push("</div>");
@@ -70,7 +75,11 @@ function displayXmlText(displayAll){
 			if(referenceName !=null){
 				if(!reference) reference = true;
 				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
-				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				//referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				BibtexManager.pasteCitationByCiteTag(referenceName[0],function(cite){
+					if(cite != undefined) 
+						referencehtml.push(cite);
+				});
 				referencehtml.push("</div>");
 			}
 			relationhtml.push("</div>");

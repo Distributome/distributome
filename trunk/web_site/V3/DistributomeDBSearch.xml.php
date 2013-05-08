@@ -18,14 +18,14 @@
   <script type="text/javascript"
  	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
-  
+  	  <script type="text/javascript" src="./scripts/jquery.js"></script>
+  	  <script type="text/javascript" src="./scripts/validator.js"></script>
   	  <script type="text/javascript" src="./scripts/distributome.js"></script>
   
 	  <script type="text/javascript" src="./scripts/common.js"></script>
 	  <script type="text/javascript" src="./scripts/distributomeDBSearch.js"></script>
 	  <script type="text/javascript" src="./scripts/slider.js"></script>
   
-  	  <script type="text/javascript" src="./scripts/jquery.js"></script>
 	  <!-- Adding bibtex script after jQuery script -->
 	  <script type="text/javascript" src="./scripts/bibtex_js.js"></script>
 	
@@ -89,25 +89,22 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
 <div id="wrapper-menu-top">
 <div id="menu-top">
 			<ul class = "mainmenu">
-			    <!-- to add a new menu item: insert a new 
-			    	<li><a href="link to content">MenuItemName</a></li>
-			        <ul class="subnav">  </ul> indicates that the <li> objects within are 
-			        part of the submenu 
-			    -->
-				<li id = "home"><a href="http://www.distributome.org/" 
-					title="Distributome Home Page">Distributome</a></li>
+			    <li id = "home"><a href="http://www.distributome.org/" 
+					title="Distributome Home Page"><span>Distributome</span></a></li>
 				<li><a href="http://www.distributome.org/about.html" 
-					title="About the Distributome Project">About</a></li>
+					title="About the Distributome Project"><span>About</span></a></li>
 				<li><a href="http://distributome.org/js/DistributomeDBSearch.xml.html"  
-					title="Dynamic Search of the Distributome Database">DB Search</a></li>
+					title="Dynamic Search of the Distributome Database"><span>DB Search
+					</span></a></li>
 				<li><a href="./DistributomeGame.html" 
-					title="Distributome Game">Game</a></li>
+					title="Distributome Game"><span>Game</span></a></li>
 				<li><a href="http://distributome.org/tools.html"  
-					title="Probability Calculators, Virtual Experiments, Interactive Simulators">Tools</a></li>
+					title="Probability Calculators, Virtual Experiments, Interactive Simulators">
+					<span>Tools</span></a></li>
 				<li><a href="http://distributome.org/blog/?cat=4" 
-					title="Learning Modules and Activities">Activities</a></li>
+					title="Learning Modules and Activities"><span>Activities</span></a></li>
 				<li><a href="http://distributome.org/blog/" 
-					title="Distributome Blog">Blog</a></li>
+					title="Distributome Blog"><span>Blog</span></a></li>
 			</ul>
 	</ul>
 </div>
