@@ -2,7 +2,7 @@ var distributome = new Object ();
 
 distributome.nodes = new Array ();
 distributome.edges = new Array ();
-distributome.references = new Array ();
+
 var distributomeNodes = new Array();
 var referenceNodes = new Array();
 var DistributomeXML_Objects;
@@ -94,7 +94,8 @@ function resetVariables(){
 /*************** Reset search text **************/
 function resetText(){
 	document.getElementById('distributome.text').value = '';
-	document.getElementById('distributome.referencePanel').innerHTML = '<b><u>Distribution Referencies</u></b>';
+	//debugging
+	document.getElementById('bibtex_display').innerHTML = '<b><u>Distribution Referencies</u></b>';
 	document.getElementById('distributome.propertiesPannel').innerHTML = '<b><u>Distribution Properties</u></b>';	
 	document.getElementById('distributome.relationPannel').innerHTML = '<b><u>Distribution Relations</u></b>';
 }
@@ -138,8 +139,34 @@ function getLinkColor(d,l){
 	else return 'rgb(170,170,170)';
 }
 
+/*************** Fetch relation information of an edge **************/
+function getRelationProperties(nodeName, linkIndex){
+	if(!_shiftKey){
+		resetEdges();
+	}
+	distributome.edges[linkIndex].selected = "red";
+	var html = new Array();;
+	html.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
+	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true, DistributomeXML_Objects);
+	html.push(parserOutput[0]);
+	//alert(parserOutput);
+
+	var referenceName = parserOutput[1];
+	//alert(referenceName);
+	document.getElementById('distributome.relationPannel').innerHTML = html.join('');
+	//(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName.toUpperCase());
+	
+	(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName);
+
+	renderMath();
+	vis.render();
+}
+
 /*************** Fetch node properties **************/
 function getNodeProperties(index, nodeName, d){
+	
+	//alert("distributome.js::getNodeProperties::index = " + index+"\t nodeName="+nodeName);
+	
 	if(connectivity && d.selected != "top_hierarchy" && d.selected != "middle_hierarchy") return;
 	if(!_shiftKey){
 		resetNodes();
@@ -151,19 +178,48 @@ function getNodeProperties(index, nodeName, d){
 	}
 	distributome.nodes[index].selected = "red";
 	var html = new Array();
+	
+	// FILLS DISTRIBUTOME PROPERTIES PANEL
 	html.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	var parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, index, true, DistributomeXML_Objects);
 	html.push(parserOutput[0]);
 	var referenceName= parserOutput[1];
 	document.getElementById('distributome.propertiesPannel').innerHTML = html.join('');	
-	if(referenceName !=null)
+	
+
+	(new BibtexDisplay()).displayBibtex2(bib_data, $("#bibtex_display"), referenceName);
+
+	
+
+	
+	//
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//
+	// GETS DISTRIBUTOME REFERENCES
+	//alert("distributome.js::getNodeProperties::referenceName = " + referenceName);
+	
+	/*
+	if(referenceName !=null){
+		if (BibtexParser != null) {
+			BibtexParser.setRef(referenceName);
+		}
 		getReferences(referenceNodes[referenceName]);
-	else getReferences(false);
+		} //
+	else {
+		if (BibtexParser != null) {
+			BibtexParser.setRef(null);
+		}
+		getReferences(false);
+	}
+	*/
+	
 	renderMath();
 	nodeName = trimSpecialCharacters(nodeName);
 	var firstChar = nodeName.substring(0,1).toUpperCase();
 	nodeName = nodeName.substring(1); //Is it camel case or only first letter Upper Case?
 	
+	// GENERATES LINKS FOR DISTRIBUTION ACTIONS
+	//alert("...Setting the Calc, Sim and Exp ...");
 	document.getElementById('distributome.calculator').href = './calc/'+firstChar+nodeName+'Calculator.html';
 	document.getElementById('distributome.experiment').href = './exp/'+firstChar+nodeName+'Experiment.html';
 	document.getElementById('distributome.simulation').href = './sim/'+firstChar+nodeName+'Simulation.html';
@@ -330,35 +386,22 @@ function textSearch(){
 	vis.render();
 }
 
-/*************** Fetch References from the XML **************/
+//
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//
+/*************** Fetch References from the Bib-TeX DB **************/
 function getReferences(index){
 	var html = new Array();
-	html.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	html.push("<b><u>Distribution References</u></b> <div style='height:7px'></div>");
 	if(index){
-		//html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
-		html.push("TEST ...... TEST");
+		html.push(XMLParser(getObjectReferenceNumber('reference'), 9, index, false, DistributomeXML_Objects)[0]);
+		document.getElementById('#bibtex_display').innerHTML = 
+			'<b><u>Distribution Referencies <br> TEST!!!!!!!!!!!!!!!!!!</u></b>';
 	}
 	document.getElementById('distributome.referencePanel').innerHTML = html.join('');
 }
 
-/*************** Fetch relation information of an edge **************/
-function getRelationProperties(nodeName, linkIndex){
-	if(!_shiftKey){
-		resetEdges();
-	}
-	distributome.edges[linkIndex].selected = "red";
-	var html = new Array();;
-	html.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
-	var parserOutput = XMLParser(getObjectReferenceNumber('relation'), 7, linkIndex, true, DistributomeXML_Objects);
-	html.push(parserOutput[0]);
-	var referenceName = parserOutput[1];
-	document.getElementById('distributome.relationPannel').innerHTML = html.join('');
-	if(referenceName!=null)
-		getReferences(referenceNodes[referenceName]);
-	else getReferences(false);
-	renderMath();
-	vis.render();
-}
+
 
 /*************** Node Action **************/
 function nodeTypeInfoFetch(){
@@ -410,17 +453,19 @@ function updateNodeColor(ontologyArray, level){
 }
 
 	
-{		
+$(document).ready(function(){		
 		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml",false);
+		xmlhttp.open("GET","./data/Distributome.xml",false);
+		
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		xmlDoc = xmlhttp.responseXML;
 		try{
 			DistributomeXML_Objects=xmlDoc.documentElement.childNodes;
+			
 		}catch(error){
 			DistributomeXML_Objects=xmlDoc.childNodes;
 		}
@@ -428,10 +473,14 @@ function updateNodeColor(ontologyArray, level){
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
 		
 		xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml.pref",false);
+		xmlhttp.open("GET","./data/Distributome.xml.Book.pref",false);
+		xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+		// Override MIME type.  Set this before send. 
+    	if (xmlhttp.overrideMimeType)   xmlhttp.overrideMimeType('text/xml');
+
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		var ontologyOrder = xmlhttp.responseXML;	
 		getOntologyOrderArray(ontologyOrder);
-}
+});

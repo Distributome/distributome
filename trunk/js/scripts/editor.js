@@ -291,7 +291,7 @@ function fetchArray(xmlDoc){
 		var myXMLasJSON = convertXMLToJSON(convertTextToXML(xmlData));
 		fetchArray(myXMLasJSON);
 		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml",false);
+		xmlhttp.open("GET","../Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);

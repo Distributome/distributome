@@ -18,9 +18,18 @@
   <script type="text/javascript"
  	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
-  <script type="text/javascript" src="scripts/common.js"></script>
-  <script type="text/javascript" src="scripts/distributomeDBSearch.js"></script>
-  <script type="text/javascript" src="scripts/slider.js"></script>
+  	  <script type="text/javascript" src="./scripts/jquery.js"></script>
+  	  <script type="text/javascript" src="./scripts/validator.js"></script>
+  	  <script type="text/javascript" src="./scripts/distributome.js"></script>
+  
+	  <script type="text/javascript" src="./scripts/common.js"></script>
+	  <script type="text/javascript" src="./scripts/distributomeDBSearch.js"></script>
+	  <script type="text/javascript" src="./scripts/slider.js"></script>
+  
+	  <!-- Adding bibtex script after jQuery script -->
+	  <script type="text/javascript" src="./scripts/bibtex_js.js"></script>
+	
+	  <script type="text/javascript" src="./scripts/xml2json.js"></script>
   
   <style>
 	h1 {text-align:center}
@@ -79,18 +88,22 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
 
 <div id="wrapper-menu-top">
 <div id="menu-top">
-	<ul>
-  		<li><a href="http://www.Distributome.org" title="Distributome Home"><span>Home</span></a></li>
-  		<li><span> Tools »</span></li>
-  		<li><a href="./Distributome.xml.html" title="HTML View of the Compelte Distributome Meta-data"><span>Complete DB View</span></a></li>
- 		<li><a href="./DistributomeNavigator.html" title="Distributome Interactive Explorer"><span>Navigator</span></a></li>
-  		<li><a href="http://www.distributome.org/about.html" title="About"><span>About</span></a></li>
-  		<li><a href="../docs.html" title="Distributome Technical Documentation"><span>Tech Docs</span></a></li>
-  		<li><a href="http://www.SOCR.ucla.edu" title="Statistics Online Computational Resource (SOCR)"><span>SOCR</span></a></li>
-  		<li><a href="http://www.math.uah.edu/stat/" title="UAH Virtual Laboratories in Probability and Statistics"><span>VLPS</span></a></li>
-  		<li><a href="http://mbi.osu.edu/" title="OSU Mathematical Biosciences Institute"><span>OSU Bioscience</span></a></li> 		
-  		<li><a href="../legacy.html" title="Legacy Distributome Java Resources"><span>Legacy Resources</span></a></li>
-   		<li><a href="../blog" title="Distributome Blog"><span>Blog</span></a></li>
+			<ul>
+				<li><a href="http://www.distributome.org/" 
+					title="Distributome Home Page"><span>Distributome</span></a></li>
+				<li><a href="http://www.distributome.org/about.html" 
+					title="About the Distributome Project"><span>About</span></a></li>
+				<li><a href="http://distributome.org/js/DistributomeDBSearch.xml.html"  
+					title="Dynamic Search of the Distributome Database"><span>DB Search</span></a></li>
+				<li><a href="./DistributomeGame.html" 
+					title="Distributome Game"><span>Game</span></a></li>
+				<li><a href="http://distributome.org/tools.html"  
+					title="Probability Calculators, Virtual Experiments, Interactive Simulators"><span>Tools</span></a></li>
+				<li><a href="http://distributome.org/blog/?cat=4" 
+					title="Learning Modules and Activities"><span>Activities</span></a></li>
+				<li><a href="http://distributome.org/blog/" 
+					title="Distributome Blog"><span>Blog</span></a></li>
+			</ul>
 	</ul>
 </div>
 <!--menu-top--></div>
