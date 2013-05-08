@@ -414,7 +414,7 @@ function updateNodeColor(ontologyArray, level){
 		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml",false);
+		xmlhttp.open("GET","../Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
@@ -428,7 +428,7 @@ function updateNodeColor(ontologyArray, level){
 		traverseXML(false, null, DistributomeXML_Objects, distributome.nodes, distributome.edges, distributome.references, distributomeNodes, referenceNodes);
 		
 		xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml.Book.pref",false);
+		xmlhttp.open("GET","../Distributome.xml.Book.pref",false);
 		xmlhttp.setRequestHeader('Content-Type', 'text/xml');
 		// Override MIME type.  Set this before send. 
     	if (xmlhttp.overrideMimeType)   xmlhttp.overrideMimeType('text/xml');

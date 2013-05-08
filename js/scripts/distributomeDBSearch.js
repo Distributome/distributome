@@ -32,7 +32,7 @@ function displayXmlText(displayAll){
 	var relationhtml = new Array();
 	/*nodehtml.push("<b><u>Distribution Properties</u></b> <div style='height:7px'></div>");
 	relationhtml.push("<b><u>Inter-Distribution Relations</u></b> <div style='height:7px'></div>");
-	referencehtml.push("<b><u>Distribution Referencies</u></b> <div style='height:7px'></div>");
+	referencehtml.push("<b><u>Distribution References</u></b> <div style='height:7px'></div>");
 	*/
 	var display = true;
 	for(var i=0; i< distributomeDBSearch.nodes.length; i++){
@@ -46,10 +46,15 @@ function displayXmlText(displayAll){
 			parserOutput = XMLParser(getObjectReferenceNumber('node'), 1, i, true, DistributomeDBSearchXML_Objects);
 			nodehtml.push(parserOutput[0]);
 			referenceName= parserOutput[1];
+			console.log(referenceName)
 			if(referenceName !=null){
 				if(!reference) reference = true;
 				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
-				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				//referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				BibtexManager.pasteCitationByCiteTag(referenceName[0],function(cite){
+					if(cite != undefined) 
+						referencehtml.push(cite);
+				});
 				referencehtml.push("</div>");
 			}
 			nodehtml.push("</div>");
@@ -70,7 +75,11 @@ function displayXmlText(displayAll){
 			if(referenceName !=null){
 				if(!reference) reference = true;
 				referencehtml.push("<b>reference:</b> <div style='padding-left:5px'>");
-				referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				//referencehtml.push(XMLParser(getObjectReferenceNumber('reference'), 9, i, false, DistributomeDBSearchXML_Objects)[0]);
+				BibtexManager.pasteCitationByCiteTag(referenceName[0],function(cite){
+					if(cite != undefined) 
+						referencehtml.push(cite);
+				});
 				referencehtml.push("</div>");
 			}
 			relationhtml.push("</div>");
@@ -109,7 +118,7 @@ function displayXmlText(displayAll){
 		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml",false);
+		xmlhttp.open("GET","./data/Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);

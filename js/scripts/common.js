@@ -98,10 +98,6 @@ function trim(inputString) {
 }
 
 /*************** Removing special characters like -,spaces **************/
-// Why is each new keyword capitalized. It shouldn't. For example, "Student's T Distribution
-// becomes rendered as "http://distributome.org/js/calc/StudentSTCalculator.html"
-// The exact name of the distribution is "Student's t distribution" and perhaps the 
-// URL needs to be: http://www.distributome.org/js/calc/StudentstCalculator.html
 function trimSpecialCharacters(inputString) {
 	if(typeof inputString != "string"){
 		return inputString; 
@@ -197,17 +193,60 @@ function getObjectReferenceNumber(object){
 	}
 }
 
+
+/*************** Merge XML doc B onto XML doc A *************/
+//function XMLMerge(A, B) {
+//var C;
+//return C;
+//}
+
+/*************** Get XML node of object **************/
+function XMLObject(index, type){
+	var i;
+	var nodeNameIndex;
+	if (type == "node") {
+		i = getObjectReferenceNumber('node');
+		nodeNameIndex  = 1;
+	} else if (type == "link") {
+		i = getObjectReferenceNumber('relation');
+		nodeNameIndex  = 7;
+	}
+	var reference = true;
+	var XML_Objects = DistributomeXML_Objects;
+	var xmlObject;
+	
+	// get object by index
+	var Level1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].childNodes;
+	//var currLevel1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].firstChild;
+	
+	//var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].childNodes;
+	//var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].firstChild;
+	xmlObject = xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index];
+	
+	// alert xmlObject as string
+	// alert(new XMLSerializer().serializeToString(xmlObject));
+	
+	// alert xmlObject name
+	// alert(xmlObject.getElementsByTagName("name")[0].childNodes[0].nodeValue);
+	
+	return xmlObject;
+}
+
 /*************** Parse XML to fetch information per node in the XML **************/
 function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 	var html = new Array();
-	var referenceName = null;
+	//var referenceName = null;
+	//referenceName as the list of reference names
+	var referenceName = new Array();
+	try{
 	if (XML_Objects[i].nodeType==1) {
 		
 		var Level1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].childNodes;
 		var currLevel1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].firstChild;
-
+		
 		var Level2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].childNodes;
 		var currLevel2Prop=xmlDoc.getElementsByTagName(Level1Prop[nodeNameIndex].nodeName)[index].firstChild;
+
 		
 		var k_corr=0;
 		var nameText = ''; var nameFlag = true; var typeFlag = false; var typeText = '';
@@ -217,7 +256,10 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 					//Process only level=3 element nodes (type 1)
 					if(reference){
 						if(currLevel2Prop.nodeName == "cite"){
-							referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
+							//referenceName = trim(currLevel2Prop.childNodes[0].nodeValue);
+							var a=trim(currLevel2Prop.childNodes[0].nodeValue);
+							referenceName.push(a);
+							//alert(referenceName);
 						}
 					}
 					if(currLevel2Prop.nodeName == 'name' && nameFlag){
@@ -260,6 +302,10 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 			html.push('<div style="padding-left:3px">'+typeText+'</div>');
 			html.push("<div style='height:5px'></div>");
 		}
+	}
+	}
+	catch(e){
+		console.log(e.message);
 	}
 	return new Array(html.join(''), referenceName);
 }
@@ -602,7 +648,15 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 				}
 				// end for relations
 			
-			} else 	if (Level1Prop[i] && Level1Prop[i].nodeName == 'reference' & !searchFlag)	{ // for references, citations
+			} 
+			
+			//
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// Need a new way of parsing Distributome.bib and generating Array of Reference Objects
+			//
+			/***** OLD: This is the old way of managing references using Distributome.XML 
+			 
+			  else if (Level1Prop[i] && Level1Prop[i].nodeName == 'reference' & !searchFlag)	{ // for references, citations
 				for (var j=0;j<Level1Prop.length;j++) {
 					var k_corr=0;					
 					if (currLevel1Prop.nodeType==1) {
@@ -634,6 +688,8 @@ function traverseXML(searchFlag, text, XML_Objects, nodes, edges, references, no
 					currLevel1Prop=currLevel1Prop.nextSibling;
 				}					
 			}
+			************/
+			
 		}	//end of nodeType = 1
 		
 	}	// End of for (i=0;i<XML_Objects.length;i++)
