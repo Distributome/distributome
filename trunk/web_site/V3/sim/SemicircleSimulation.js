@@ -5,7 +5,7 @@ var currentRecord, completeRecord = "", header = "Run\tX";
 var dist, distGraph, rParam;
 var recordTable, distTable;
 var runButton, stepButton, distCanvas, stopSelect, showSelect;
-var r = 1;
+var a = 0, r = 1;
 
 function initializeExperiment(){
 	runButton = document.getElementById("runButton");
@@ -17,6 +17,8 @@ function initializeExperiment(){
 	stopSelect.value = "10";
 	showCheck = document.getElementById("showCheck");
 	showCheck.checked = true;
+	aParam = new Parameter(document.getElementById("aInput"), document.getElementById("aLabel"));
+	aParam.setProperties(-10, 10, 0.1, a, "<var>a</var>");
 	rParam = new Parameter(document.getElementById("rInput"), document.getElementById("rLabel"));
 	rParam.setProperties(1, 10, 0.1, r, "<var>r</var>");
 	resetExperiment();
@@ -44,10 +46,11 @@ function stopExperiment(){
 function resetExperiment(){
 	stopExperiment();
 	runCount = 0; stopCount = 0;
+	a = aParam.getValue();
 	r = rParam.getValue();
 	completeRecord = "";
 	recordTable.value = header;
-	dist = new SemiCircleDistribution(r);
+	dist = new SemiCircleDistribution(a, r);
 	distGraph = new DistributionGraph(distCanvas, dist, "X");
 	distGraph.showDist(showCheck.checked);
 	distTable.value = distGraph.text();
