@@ -32,7 +32,7 @@ function stepExperiment(){
 	time = 0;
 	count = 0;
 	y = 0;
-	dist0.data.reset();
+	dist0.data().reset();
 	p = dist0.simulate();
 	dist0Graph.draw();
 	timeline.reset();
