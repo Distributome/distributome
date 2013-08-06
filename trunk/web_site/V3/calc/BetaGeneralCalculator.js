@@ -18,7 +18,7 @@ function initialize(){
 	leftParam.setProperties(-100, 100, 0.1, 0, "<var>L</var>");
 	rightParam = new Parameter(document.getElementById("rightLimitInput"), 
 			document.getElementById("rightLimitLabel"));
-	rightParam.setProperties(leftParam.getValue()+1, 100+1, 0.1, 1, "<var>R</var>");
+	rightParam.setProperties(leftParam.getValue()+1, 1000+1, 0.1, 1, "<var>R</var>");
 	
 	xParam = new Parameter(document.getElementById("xInput"), document.getElementById("xLabel"));
 	pParam = new Parameter(document.getElementById("pInput"), document.getElementById("pLabel"));
