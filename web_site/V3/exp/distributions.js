@@ -1763,6 +1763,111 @@ function BetaDistribution(a0, b0){
 }
 BetaDistribution.prototype = new Distribution;
 
+//Beta General distribution with left shape parameter a, right shape parameter b,
+// left-limit parameter L, and right-limit parameter R
+function BetaGeneralDistribution(a0, b0, L0, R0){
+	var a, b, L, R, mn, mx;
+	
+	if (0 < a0 && a0 < Infinity) a = a0; else a = 0;
+	if (0 < b0 && b0 < Infinity) b = b0; else b = 1;
+	
+	if (L0 >= R0) { L=0; R=1; }
+	else {L=L0; R=R0; }
+	
+	var c = logGamma(a + b) - (logGamma(a) + logGamma(b)) - Math.log(R - L);
+
+	Distribution.call(this, L, R, 0.01*(R-L), CONT);
+	
+	this.mode = function(){
+		var mode;	
+		if (a < 1) mode = L + 0.01 * (R - L);
+        else if (b <= 1) mode = R - 0.01 * (R - L);
+        else mode = L + ((R - L) * (a - 1)) / (a + b - 2);
+        return mode;
+	};
+	
+	this.density = function(x){
+		var den = 0.0;
+		if ((x < L) || (x > R)) den=0;
+        else if ((x == L) && (a == 1)) den= b/(R - L);
+        else if ((x == L) && (a < 1)) den=Infinity;
+        else if ((x == L) && (a > 1)) den=0;
+        else if ((x == R) && (b == 1)) den=a/(R - L);
+        else if ((x == R) && (b < 1)) den=Infinity;
+        else if ((x == R) && (b > 1)) den=0;
+        else den=Math.exp(c+(a-1)*Math.log((x-L)/(R-L))+(b-1)*Math.log((R-x)/(R-L)));
+		return den;
+	};
+
+	this.CDF = function(x){
+		if (x <= L) return 0;
+		else if (x >= R) return 1;
+		else return betaCDF((x-L)/R, a, b);
+	};
+			
+	this.mean = function(){
+		return L + ((R - L) * a) / (a + b);;
+	};
+	
+	this.variance = function(){
+		return ((R-L)*(R-L)*a*b)/((a+b)*(a+b)*(a+b+1));
+	};
+	
+	this.left = function(){
+		return a;
+	};
+	
+	this.right = function(){
+		return b;
+	};
+	
+	this.leftLimit = function(){
+		return L;
+	};
+	
+	this.rightLimit = function(){
+		return R;
+	};
+	
+	/*
+	 * Need to add the paramEstimation(data) method
+	 	public void paramEstimate(double[] distData) {
+	        double alpha, beta;
+	        double sMean = sampleMean(distData);
+	        double sVar = sampleVar(distData, sMean);
+	
+	        if (distData.length < 2) {
+	            setParameters(1.0, 1.0, 1.0, 1.0);
+	            return;
+	        }
+	
+	        ***********************************************************************
+	         * estimate the domain/support of the Beta(a,b,A,B) double A =
+	         * distData[0]; // Min, left end, of support region double B =
+	         * distData[0]; // Max, right end. for (int i=0; i <distData.length();
+	         * i++) { if (A > distData[i]) A = distData[i]; if (B < distData[i]) B =
+	         * distData[i]; }
+	         **********************************************************************
+	
+	        // estimate left and right a,b parameters and the Left(A) & Right(B)
+	        // limits
+	        //      from sample statistics
+	        double A = minDouble(distData);
+	        double B = maxDouble(distData);
+	        double C = (sMean - A) / (B - A);
+	        //double q = (sMean - A)/(B-A);
+	        //alpha = ( (B-A)*(B-A)*(1-q)*q*q/sVar) - 1;
+	        //beta = alpha*(1-q)/q;
+	
+	        beta = C - 1 + (B - A) * (B - A) * C * (1 - C) * (1 - C) / sVar;
+	        alpha = beta * C / (1 - C);
+	
+	        setParameters(alpha, beta, A, B);
+	    }
+	 */
+}
+BetaGeneralDistribution.prototype = new Distribution;
+
 //Beta prime distribution with shape parameters a and b
 function BetaPrimeDistribution(a0, b0){
 	var a, b, c, mn, mx;
