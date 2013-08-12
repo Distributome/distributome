@@ -80,6 +80,48 @@
             <cite>mcdonald1995generalization</cite>
         </distribution>
 
+        <distribution id="general beta">
+            <name>beta general distribution</name>
+            <name>beta generalized distribution</name>
+            <name>generalized beta distribution</name>
+            <type>continuous</type>
+            <model>The generalized beta distribution is used to model random proportions and probabilities. 
+            	It extends the (standard) beta distribution, supported on \([0, 1]\) to an arbitrary range
+            	\([L, R]\).</model>
+            <parameter>\(\alpha \in (0, \infty)\), the left shape parameter</parameter>
+            <parameter>\(\beta \in (0, \infty)\), the right shape parameter</parameter>
+            <parameter>\(L \in (-\infty, \infty)\), the left limit of the support range</parameter>
+            <parameter>\(R \in (L, \infty)\), the right limit of the support range</parameter>
+            <support>\((L, R)\)</support>
+            <pdf><![CDATA[
+	            \(\begin{cases}  
+		            \frac{\beta}{R - L} & \text{for } x < L \text{or } X > R \\
+		            \frac{\beta}{R - L} & \text{for } x == L \text{and } \alpha == 1 \\
+		            \infty & \text{for } x == L \text{and } \alpha > 1 \\
+		            0 & \text{for } x == L \text{and } \alpha > 1 \\
+		            \frac{\alpha}{R - L} & \text{for } x == R \text{and } \beta == 1 \\
+		            \infty & \text{for } x == R \text{and } \beta < 1 \\
+		            0 & \text{for } x == R \text{and } \beta > 1 \\
+		            \exp(\loggamma(\alpha + \beta) - (\log\Gamma(\alpha) + \log\Gamma(\beta)) - \log(R - L) + 
+		            	(\alpha-1)*\log(\frac{x-L}{R-L})+(\beta-1)*\log(\frac{R-x}{R-L})) & otherwise
+	            \end{cases}\)
+        		]]>
+        	</pdf>
+            <mode><![CDATA[
+            	\(\begin{cases}  
+		            L & \text{for } \alpha <1 \\
+		            R & \text{for } \beta \leq 1 \\
+		            L + \frac{(R - L) * (\alpha - 1)}{a + b - 2} & otherwise
+	            \end{cases}\)
+        		]]>
+            </mode>
+            <cdf>\(I_{\frac{x-L}{R}}(\alpha,\beta)\!\)</cdf>
+            <mean>\( \frac{\alpha * (R - L)}{\alpha + \beta}\)</mean>
+            <variance>\( \frac{(R-L)*(R-L)*\alpha*\beta}{(\alpha+\beta)^2*(\alpha+\betab+1)} \)</variance>
+            <family>exponential</family>
+            <cite>mcdonald1995generalization</cite>
+        </distribution>
+
         <distribution id="inverse beta">
             <name>inverse beta distribution</name>
             <type>continuous</type>
