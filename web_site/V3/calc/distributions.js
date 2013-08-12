@@ -1806,7 +1806,7 @@ function BetaGeneralDistribution(a0, b0, L0, R0){
 	};
 			
 	this.mean = function(){
-		return L + ((R - L) * a) / (a + b);;
+		return L + ((R - L) * a) / (a + b);
 	};
 	
 	this.variance = function(){
