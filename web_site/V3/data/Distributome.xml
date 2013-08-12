@@ -95,16 +95,16 @@
             <support>\((L, R)\)</support>
             <pdf><![CDATA[
 	            \(\begin{cases}  
-		            \frac{\beta}{R - L} & \text{for } x < L \text{or } X > R \\
-		            \frac{\beta}{R - L} & \text{for } x == L \text{and } \alpha == 1 \\
-		            \infty & \text{for } x == L \text{and } \alpha > 1 \\
-		            0 & \text{for } x == L \text{and } \alpha > 1 \\
-		            \frac{\alpha}{R - L} & \text{for } x == R \text{and } \beta == 1 \\
-		            \infty & \text{for } x == R \text{and } \beta < 1 \\
-		            0 & \text{for } x == R \text{and } \beta > 1 \\
-		            \exp(\loggamma(\alpha + \beta) - (\log\Gamma(\alpha) + \log\Gamma(\beta)) - \log(R - L) + 
+		            \frac{\beta}{R - L} & \text{for } x < L \text{ or } X > R \\
+		            \frac{\beta}{R - L} & \text{for } x == L \text{ and } \alpha == 1 \\
+		            \infty & \text{for } x == L \text{ and } \alpha > 1 \\
+		            0 & \text{for } x == L \text{ and } \alpha > 1 \\
+		            \frac{\alpha}{R - L} & \text{for } x == R \text{ and } \beta == 1 \\
+		            \infty & \text{for } x == R \text{ and } \beta < 1 \\
+		            0 & \text{for } x == R \text{ and } \beta > 1 \\
+		            \exp(\log\Gamma(\alpha + \beta) - (\log\Gamma(\alpha) + \log\Gamma(\beta)) - \log(R - L) + 
 		            	(\alpha-1)*\log(\frac{x-L}{R-L})+(\beta-1)*\log(\frac{R-x}{R-L})) & otherwise
-	            \end{cases}\)
+	            \end{cases}\) 
         		]]>
         	</pdf>
             <mode><![CDATA[
@@ -117,7 +117,7 @@
             </mode>
             <cdf>\(I_{\frac{x-L}{R}}(\alpha,\beta)\!\)</cdf>
             <mean>\( \frac{\alpha * (R - L)}{\alpha + \beta}\)</mean>
-            <variance>\( \frac{(R-L)*(R-L)*\alpha*\beta}{(\alpha+\beta)^2*(\alpha+\betab+1)} \)</variance>
+            <variance>\( \frac{(R-L)*(R-L)*\alpha*\beta}{(\alpha+\beta)^2*(\alpha+\beta+1)} \)</variance>
             <family>exponential</family>
             <cite>mcdonald1995generalization</cite>
         </distribution>
@@ -2253,6 +2253,15 @@
             <cite>doi:10.1198/000313008X270448</cite>
         </relation>
 
+		<relation id="beta general/beta">
+            <from>beta general distribution</from>
+            <to> beta distribution</to>
+            <statement>If \(X\) has the beta general distribution with parameters \(\alpha \in (0, \infty)\), \(\beta \in (0, \infty)\) and \(L \lt R\), then \(Y = \frac{X-L}{R-L}\) has beta distribution with parameters \(\alpha\) and \(\beta\).</statement>
+            <type>transformation</type>
+            <cite>doi:10.1080/07408170590948512</cite>
+            <cite>doi:10.1198/000313008X270448</cite>
+        </relation>
+        
         <relation id="beta/inverse-beta">
             <from>beta distribution</from>
             <to>inverse beta distribution</to>
