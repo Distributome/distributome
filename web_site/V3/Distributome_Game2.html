@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graph Blitz</title>
+  <script
+ src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+  <script
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <script src="./scripts/protovis-r3.2.js"></script>
+  <script src="./scripts/jquery.flip.js"></script>
+  <script src="./scripts/gameDriver.js"></script>
+  <script src="./scripts/cardClass.js"></script>
+  <script src="./scripts/devices.js"></script>
+  <script src="./scripts/distributions.js"></script>
+  <script src="./scripts/histMakerClass.js"></script>
+  <script src="./scripts/distMakerClass.js"></script>
+  <script src="./scripts/parmFinder.js"></script>
+  <link type="text/css" rel="stylesheet" href="./css/boardStyles.css">
+</head>
+<body>
+<section id="intro"> <header id="title"> </header></section>
+<div>Distributome Game 2</div>
+Number of Graphs (10-20) <input id="numgraphs" type="text"> <br>
+Sample size (200-1000) <input id="samplesize" type="text"> <br>
+Game Type <input name="gametype" value="1" type="radio"> General <input
+ name="gametype" value="0" checked="checked" type="radio"> Simplified <br>
+Game Speed <input name="gamespeed" value="15" type="radio"> Slow <input
+ name="gamespeed" value="10" checked="checked" type="radio"> Medium <input
+ name="gamespeed" value="5" type="radio"> Fast <br>
+Enemy Difficulty <input name="enemydiff" value=".80" type="radio">
+Easy <input name="enemydiff" value=".5" checked="checked" type="radio">
+Medium <input name="enemydiff" value=".25" type="radio"> Hard <br>
+<a href="#" id="startButton">START!</a> <br>
+<br>
+<a href="./docs/instructions.html">How to Play</a> <section id="game"> <section
+ id="board"></section> <br>
+<br>
+<section id="facecard"></section>
+<script type="text/javascript+protovis" id="matchtimer">
+			var fsec = pv.Format.date("%S s"),
+			radius = 200 / 2;
+			var interTracker;
+			var endTime;
+			var timerLength;
+			var vis= new pv.Panel()
+			  .width(radius * 2)
+			  .height(radius * 2);
+			vis.add(pv.Wedge)
+			  .data(fields)
+			  .left(radius)
+			  .bottom(radius)
+			  .outerRadius(function(d) radius * (d.index + .1))
+			  .innerRadius(function(d) radius * (d.index - .1))
+			  .startAngle(-Math.PI/2)
+			  .angle(function(d) 2*Math.PI * d.value)
+			  .fillStyle(function(d) "hsl(" + (180 * (d.value)) + ", 50%, 50%)");
+			
+			function startTimer(num1)
+			{
+				timerLength=num1;
+				var tempStart=new Date();
+				endTime=tempStart.getSeconds()+tempStart.getMilliseconds()/1000+tempStart.getMinutes()*60+tempStart.getHours()*60*60;
+				endTime+=timerLength;
+				interTracker=setInterval(function(){vis.render()}, 5);
+			}
+			
+			function fields() 
+			{
+				var d = new Date();
+				var curTime=d.getMinutes()*60+d.getHours()*60*60+d.getSeconds() + d.getMilliseconds() / 1000;
+				var second = (endTime-curTime )/timerLength;
+				
+				if(second<=0)
+				{
+					window.clearTimeout(interTracker)
+					endRound();
+				}
+				return [{ value: second,  index: .9}];
+			}
+		</script><section
+ id="scores"></section> </section>
+</body>
+</html>
