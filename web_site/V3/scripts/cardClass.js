@@ -1,4 +1,4 @@
-function Card(num1)
+function CardClass(num1)
 {
 	this.cardID=num1;
 	this.controller=0;
@@ -36,7 +36,9 @@ function Card(num1)
 		{
 			this.controller=1;
 			$("#card"+this.cardID).css({"border-color":"darkGreen"});
+			return fields()[0].value;
 		}
+		return 0;
 	};
 	
 	//selecting of cards by AI

@@ -1,15 +1,15 @@
+//bools
+var simpleGame
+
 //integers
-var numGraphs, numCards, rowCards, p1bonus, p2bonus, p1score, p2score, sampleSize, perfectSquare, graphTypes, roundsLeft, enemyDiff,gameSpeed, currRound, smartTime, weightedAverage;
-//booleans
-var simpleGame, roundOn, smartAI, answerFound, hideCards;
+var numCards, gameSpeed, roundsLeft, p1score, numGraphs, curCard, swapsLeft;
 
 //arrays
-var cardUsed, cardList, chosenGraph, masterParms, roundCard,downCards, downColor, numRight, numWrong, answerTimes, startTimes=[.75,.5,.25], smartAdd=[.1,0,-.1], smartMult=[.35,.5,.7];
+var graphTypes, graphChosen, cardList, masterParms, distCard;
 
-var distCard;
+var distributions, intervalKey;
 
 //jquery calls
-$('.slider').slider()
 $(document).ready(function() {
 	
 	$('#startup-modal').modal('show');
@@ -37,143 +37,91 @@ $(document).ready(function() {
 //sets up board for a new game
 function boardSetup()
 {
-	//initialize variables and arrays
-	p1score=0;p2score=0;p1bonus=1;p2bonus=1;
-	numRight=new Array();
-	numWrong=new Array();
-	downCards=new Array();
-	downColor=new Array();
-	roundOn=false;
-	currRound=0;
-	numGraphs=Number($('input[name="numgraphs"]:checked').val());
-	sampleSize=Number($('input[name="samplesize"]:checked').val());
-	numCards=numGraphs*2;
-	roundsLeft=numGraphs;
-	chosenGraph=new Array();
-	roundCard=new Array();
-	cardUsed=new Array();
-	cardList=new Array();
+	numCards=Number($('input[name="numcards"]:checked').val());
 	gameSpeed=Number($('input[name="gamespeed"]:checked').val());
-	enemyDiff=Number($('input[name="enemydiff"]:checked').val());
-	masterParms=new Array()
-	weightedAverage=startTimes[enemyDiff];
+	roundsLeft=Number($('input[name="gamelength"]:checked').val());
+	cardList=new Array();
+	masterParms=new Array();
 	for(var j=0;j<31;j++)
 	{
 		masterParms[j]=getParms(j+1);
 	} 
-	
-	
-	//determines board dims
-	rowCards=Math.floor(Math.sqrt(numCards));
-	for(perfectSquare=0;rowCards*(rowCards+perfectSquare)<numCards;perfectSquare++)
-	{}
 	
 	//checks for simplified or general veresion
 	if($('input[name="gametype"]:checked').val()==1)
 		simpleGame=false;
 	else
 		simpleGame=true;
-		
-	//checks for hidden or regular mode
-	if($('input[name="hidecards"]:checked').val()==1)
-		hideCards=true;
-	else
-		hideCards=false;
-	
-	
-	//checks for smart AI mode
-	if($('input[name="smartai"]:checked').val()==1)
-		smartAI=true;
-	else
-		smartAI=false;
 	
 	//determines list of selectable graphs
 	if(simpleGame)
-		graphTypes=22;
+		numGraphs=22;
 	else
-		graphTypes=31;
-	var graphTaken=new Array()
+		numGraphs=31;
 	
-	for(var j=0;j<graphTypes;j++)
-	{
-		graphTaken[j]=false;
-	}	
+	p1score=0;
 	
-	//selects graph for each card
-	for(var j=0;j<numGraphs;j++)
-	{
-		cardUsed[j]=false;
-		var k;
-		do
-		{
-			k=Math.floor(Math.random()*graphTypes);
-		}while (graphTaken[k]);
-		graphTaken[k]=true;
-		chosenGraph[j]=k;
-	}
-	
-	//duplicates cards
-	for(var j=numGraphs;j<numCards;j++)
-	{
-		var k;
-		do
-		{
-			k=Math.floor(Math.random()*numGraphs);
-		}while (cardUsed[k]);
-		cardUsed[k]=true;
-		chosenGraph[j]=chosenGraph[k];
-	}
-	
-	for(var j=0;j<numGraphs;j++)
-		cardUsed[j]=false;
-	
-	//populates card list
 	for(var j=0;j<numCards;j++)
 	{
-		cardList[j]=new CardClass(j);
-	}
-	
-	for(var j=0;j<numGraphs;j++)
-	{
-		var k;
-		do
-		{
-			k=Math.floor(Math.random()*numGraphs);
-		}while (cardUsed[k]);
-		cardUsed[k]=true;
-		roundCard[j]=chosenGraph[k];
+		cardList[j]=new monteClass(j);
 	}
 	
 	//wipes instructions and creates board	
-	$("#intro").empty();
 	setBoard();
-	$("#scores").html('P1 Score: <b>'+p1score+'</b> P2 Score: <b>'+p2score+'</b><br>P1 Combo Multiplier: <b>x'+p1bonus+'</b> P2 Combo Multiplier: <b>x'+p2bonus+"</b>");
-	$('#facecard').append('<img src="scripts/images/cardBack.jpg" id="backimage"></img>');
-	$("#backimage").css({"width":"300","height":"150"});
-	$("#facecard").css({"position":"inline","width":"300","background-color":"white","height":"150"});
-	$("#matchtimer").css({"position":"inline","width":"300"});
-	//revealAll();
+/* 	$("#scores").html('P1 Score: <b>'+p1score+'</b> P2 Score: <b>'+p2score+'</b><br>P1 Combo Multiplier: <b>x'+p1bonus+'</b> P2 Combo Multiplier: <b>x'+p2bonus+"</b>"); */
 	
-	window.setTimeout(function(){startRound()},3000);
+	window.setTimeout(function(){startRound()},2000);
 }
 
 //starts next round
 function startRound()
 {
-	$("#facecard").flip({
-		direction:'tb',
-		onEnd:function(){
-			$("#backimage").hide();
-			$('#facecard').append('<canvas id="distcanv"></canvas>');
-			$("#distcanv").css({"width":"300","background-color":"white","height":"150"});
-			distCard=new distMaker(roundCard[currRound]+1,masterParms[roundCard[currRound]]);
-			distCard.initialize();
+	getGraphs();
+	distCard=new Array()
+	curCard=0;
+	for(var j=0;j<numCards;j++)
+	{
+		$("#card"+j).flip({
+			direction:'tb',
+			onEnd:function()
+			{
+				$("#card"+curCard).hide();
+				$("#space"+curCard).append('<canvas id="distcanv'+curCard+'"></canvas>');
+				$("#distcanv"+curCard).css({"width":"190","background-color":"white","height":"90"});
+				cardList[curCard].setDist(graphTypes[curCard]+1,curCard, masterParms);
+				curCard++;
+			}
+		})
+		window.setTimeout(function(){
+			$("#distcanv"+(curCard-numCards)).flip({
+				direction:'tb',
+				onEnd:function()
+				{
+					$("#card"+(curCard-numCards-numCards)).show();
+					$("#distcanv"+(curCard-numCards-numCards)).remove();
+					curCard++;
+				}
+			})
+			curCard++;
+		},2000);
+	}
+	swapsLeft=1;
+ 	window.setTimeout(function(){
+		intervalKey=window.setInterval(function(){
+		var c1=Math.floor(Math.random()*numCards);
+		var c2;
+		do{c2=Math.floor(Math.random()*numCards)}while(c2==c1)
+		if(c1>c2)
+		{
+			var tempc=c1;
+			c1=c2;
+			c2=tempc
 		}
-	});
-	answerFound=false;
-	answerTimes=new Array();
-	window.setTimeout(function(){startTimer(gameSpeed)},1000);
-	window.setTimeout(function(){AIselect()},1000+gameSpeed*1000*startTimes[enemyDiff]);
+		swapCards("#space"+c1,"#space"+c2,(c1*(190+40)),(c2*(190+40)));
+		},1000/gameSpeed+120);
+	},3200); 
+	
+	
 	roundOn=true;
 }
 
@@ -228,20 +176,6 @@ function endRound()
 	}
 }
 
-function AIselect()
-{
-	for(var i=0;i<numCards;i++)
-	{
-		if(chosenGraph[i]==roundCard[currRound])
-		{
-			var answerChance=Math.random()-.05;
-			if(answerChance>startTimes[enemyDiff]/2)
-				cardList[i].p2select();
-			else if((answerChance<startTimes[enemyDiff]/2)&&(Math.random()<.55)&&(i<numCards-1))
-				cardList[i+1].p2select();
-		}
-	}
-}
 
 //determines scores and performs board cleanup
 function reconcileBoard()
@@ -331,24 +265,61 @@ function flipDown()
 //creates gameboard using recieved parameters;
 function setBoard()
 {
-	$("#board").css({"width":((190*(rowCards)+10)+"px"),"z-index":"0","height":(90*(rowCards+perfectSquare)+10)+"px","background-color":"rgb(194, 194, 208)","padding":"5px"});
+	$("#facecard").html("Let's play a game!");
+	$("#facecard").css({"position":"relative","top":"350px","height":"200px","width":"500px", "background-color":"rgb(50,200,60)", "text-align":"center", "line-height":"200px", "font-family":"Verdana","font-size":"2.5em", "color":"white"})
+	$("#board").css({"position":"relative", "top":"110px","width":((190*(numCards)+50*(numCards-1))+"px"),"z-index":"0","height":(110)+"px","background-color":"rgb(255, 255, 255)"});
 	for(var j=0;j<numCards;j++)
 	{
 		cardList[j].placeCard();
-		cardList[j].setHist(chosenGraph[j]+1,sampleSize,j, masterParms);
 	}
 }
 
-//function to reveal field cards
-function revealAll()
+function getGraphs()
 {
+	graphTypes=new Array();
+	graphChosen=new Array();
+	for(var j=0;j<numGraphs;j++)
+	{
+		graphChosen[j]=false;
+	}
 	for(var j=0;j<numCards;j++)
 	{
-		revealCard(j);
+		var k;
+		
+		do
+		{
+			k=Math.floor(Math.random()*numGraphs);
+		}while (graphChosen[k]);
+		graphChosen[k]=true;
+		graphTypes[j]=k;
 	}
 }
 
-function revealCard(num2)
+//total time:1000/speed
+function animateAround(name,radius,startX, startY, dir, theta, speed)
 {
-		window.setTimeout(function(){$("#card"+num2).css({"border-color":"yellow"});},500*(num2+1));
+	theta+=.01;
+	var nextX=(Math.cos(theta*Math.PI+Math.PI)+1)*radius*dir+startX;
+	var nextY=(-1)*Math.sin(theta*Math.PI+Math.PI)*100*dir+startY;
+	$(name).css({"left":nextX+"px"});
+	$(name).css({"top":nextY+"px"});
+	if(theta<1)
+	{
+		window.setTimeout(function(){animateAround(name, radius, startX, startY, dir, theta, speed)}, 10/speed)
+	}
+}
+function swapCards(card1, card2, card1x, card2x)
+{console.log(card1+" "+card2);
+	animateAround(card1, (card2x-card1x)/2, card1x, 210, 1, 0,gameSpeed)
+	animateAround(card2, (card2x-card1x)/2, card2x, 210, -1, 0,gameSpeed)
+	swapsLeft--;
+	if(swapsLeft<1)
+		window.clearInterval(intervalKey)
+	window.setTimeout(function(){
+		var temp=card1;
+		var temp2=card2;
+		$(card1).attr('id',"temp")
+		$(card2).attr('id',"HHH")
+		$("#temp").attr('id',temp2) 
+	},1000/gameSpeed+70)
 }
