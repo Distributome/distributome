@@ -1,12 +1,13 @@
-function distMaker(num1, parm1)
+function distMaker(num1, num2, parm1)
 {
 	this.parms=parm1;
 	this.output="";
+	this.cardNum=num2
 	this.dist=0; this.distGraph=0;
 	this.graphKey=num1;
 	this.distCanvas=0;
 	 this.initialize=function(){
-		this.distCanvas = document.getElementById("distcanv");
+		this.distCanvas = document.getElementById("distcanv"+this.cardNum);
 		this.setDist();	
 	}
 	this.getDist=function()
