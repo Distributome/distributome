@@ -11,7 +11,7 @@ function monteClass(num1)
 	{
 		$('#board').append(this.dropCode);
 		$("#card"+this.cardID).css({"width":"190px","height":"90px","border-style":"solid","border-width":"5px","background-color":"white","border-color":"rgb(255, 255, 255)"});
-		$("#space"+this.cardID).css({"position":"fixed", "top":"210px","left":((this.cardID*(190+40))+"px")});
+		$("#space"+this.cardID).css({"width":"200px","position":"relative", "bottom":(90*this.cardID-30)+"px","left":((this.cardID*(190+40))+"px")});
 
 	};
 	
