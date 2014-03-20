@@ -1,7 +1,6 @@
 function distMaker(num1, parm1)
 {
 	this.parms=parm1;
-	this.output="";
 	this.dist=0; this.distGraph=0;
 	this.graphKey=num1;
 	this.distCanvas=0;
@@ -9,140 +8,7 @@ function distMaker(num1, parm1)
 		this.distCanvas = document.getElementById("distcanv");
 		this.setDist();	
 	}
-	this.getDist=function()
-	{
-		this.output="";
-		switch(this.graphKey)
-		{
-			case 1:
-				this.output="Discrete uniform";
-				break;
-			
-			case 2:
-				this.output="Pareto";
-				break;
-			case 3:
-				this.output="poisson lambda";
-				break;
-			
-			case 4:
-				this.output="negative binomial";
-				break;
-			
-			case 5:
-				this.output="hypergeometric";
-				break;
-			
-			case 6:
-				this.output="exponential";
-				break;
-			
-			case 7:
-				this.output="normal mu";
-				break;
-				
-			case 8:
-				this.output="geometric";
-				break;
-			
-			case 9:
-				this.output="beta";
-				break;
-			
-			case 10:
-				this.output="F";
-				break;
-			
-			case 11:
-				this.output="log normal mu";
-				break;
-				
-			case 12:
-				this.output="binomial";
-				break;
-			
-			case 13:
-				this.output="laplace";
-				break;
-				
-			case 14:
-				this.output="maxwell boltzmann";
-				break;
-			
-			case 15:
-				this.output="chi-square";
-				break;
-			
-			case 16:
-				this.output="continous uniform";
-				break;
-				
-			case 17:
-				this.output="gamma";
-				break;
-				
-			case 18:
-				this.output="weibull";
-				break;
-			
-			case 19:
-				this.output="cauchy";
-				break;
-				
-			case 20:
-				this.output="arcsine";
-				break;
-			
-			case 21:
-				this.output="students T";
-				break;
-			
-			case 22:
-				this.output="logistic";
-				break;
-			
-		/*---------------------------------------End Simple-------------------------------------------*/
-			
-			case 23:
-				this.output="beta negative binomial";
-				break;
-			
-			case 24:
-				this.output="Benford's first digit";
-				break;
-			
-			case 25:
-				this.output="beta binomial";
-				break;
-			case 26:
-				this.output="birthday";
-				break;
-				
-			case 27:
-				this.output="exponential log";
-				break;	
-				
-			case 28:
-				this.output="coupon collector";
-				break;	
-				
-			case 29:
-				this.output="extreme value";
-				break;	
-			
-			case 30:
-				this.output="folded-normal";
-				break;
-			
-			case 31:
-				this.output="hyperbolic secant";
-				break;
-			default:
-				alert("Error:Unknown GraphType Encountered");
-				break;
-		}
-		return this.output;
-	}
+
 	this.setDist=function()
 	{
 		switch(this.graphKey)

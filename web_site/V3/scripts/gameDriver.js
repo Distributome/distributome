@@ -17,6 +17,8 @@ $(document).ready(function() {
 	$('#startup-modal').on('hidden.bs.modal', function (e) {
 		boardSetup();
 	});
+	
+	//graph hovering and clicking
 	$(document).on('mouseenter', ".boardcard", function() 
 	{ 
 		cardList[Number(this.id.substring(4,this.id.length))].highlight();
@@ -170,6 +172,8 @@ function startRound()
 			distCard.initialize();
 		}
 	});
+	
+	//starts timer and initializes selection phase
 	answerFound=false;
 	answerTimes=new Array();
 	window.setTimeout(function(){startTimer(gameSpeed)},1000);
@@ -194,6 +198,8 @@ function endRound()
 	if(hideCards)
 	flipDown();
 	reconcileBoard();
+	
+	//determines new times and accuracies for smart AI
 	if(answerFound)
 	{
 		weightedAverage+=smartTime;
@@ -207,6 +213,8 @@ function endRound()
 		if(startTimes[enemyDiff]>1)
 			startTimes[enemyDiff]=.95;
 	}
+	
+	//checks to see if game is over
 	if(currRound<numGraphs)
 		window.setTimeout(function(){startRound()},1500);
 	else
@@ -337,18 +345,4 @@ function setBoard()
 		cardList[j].placeCard();
 		cardList[j].setHist(chosenGraph[j]+1,sampleSize,j, masterParms);
 	}
-}
-
-//function to reveal field cards
-function revealAll()
-{
-	for(var j=0;j<numCards;j++)
-	{
-		revealCard(j);
-	}
-}
-
-function revealCard(num2)
-{
-		window.setTimeout(function(){$("#card"+num2).css({"border-color":"yellow"});},500*(num2+1));
 }

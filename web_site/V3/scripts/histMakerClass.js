@@ -20,7 +20,7 @@ function histMaker(num1, num2, num3, parm1)
 		this.resetExperiment();
 	}
 	this.runExperiment=function(){
-		this.runID = setIntervalWithContext(function(){this.simulate();},1,this);
+		this.simulateN();
 	}
 
 	this.stopExperiment=function(){
@@ -200,7 +200,12 @@ function histMaker(num1, num2, num3, parm1)
 		this.runCount++;
 		this.stopCount++;
 		this.dist.simulate();
-		if (this.stopCount == this.stopFreq) this.stopExperiment();
+		if (this.stopCount == this.stopFreq) {this.stopExperiment();
+		this.distGraph.draw();}
+	}
+	this.simulateN=function(){
+		for(var j=0;j<this.stopFreq;j++)
+			this.dist.simulate();
 		this.distGraph.draw();
 	}
 
