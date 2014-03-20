@@ -1,8 +1,8 @@
 //bools
-var simpleGame
+var simpleGame, roundOn, textMode;
 
 //integers
-var numCards, gameSpeed, roundsLeft, p1score, numGraphs, curCard, swapsLeft;
+var numCards, gameSpeed, roundsLeft, p1score, numGraphs, curCard, swapsLeft, correctCard, answeredCard, numRounds, longestStreak, currStreak;
 
 //arrays
 var graphTypes, graphChosen, cardList, masterParms, distCard;
@@ -13,6 +13,9 @@ var distributions, intervalKey;
 $(document).ready(function() {
 	
 	$('#startup-modal').modal('show');
+    
+	//printer button
+	$('#printResultsButton').click(function() { window.print(); });
 	
 	$('#startup-modal').on('hidden.bs.modal', function (e) {
 		boardSetup();
@@ -29,7 +32,9 @@ $(document).ready(function() {
 	{ 
 		if(roundOn)
 		{
-			answerTimes[Number(this.id.substring(4,this.id.length))]=1-cardList[Number(this.id.substring(4,this.id.length))].p1select();
+			answeredCard=Number(this.id.substring(4,this.id.length));
+			console.log(answeredCard);
+			endRound();
 		}
 	}); 
 });
@@ -37,11 +42,15 @@ $(document).ready(function() {
 //sets up board for a new game
 function boardSetup()
 {
+	longestStreak=0;
+	currStreak=0;
 	numCards=Number($('input[name="numcards"]:checked').val());
 	gameSpeed=Number($('input[name="gamespeed"]:checked').val());
 	roundsLeft=Number($('input[name="gamelength"]:checked').val());
 	cardList=new Array();
 	masterParms=new Array();
+	makeBar((190*(numCards)+50*(numCards-1)),2)
+	numRounds=roundsLeft;
 	for(var j=0;j<31;j++)
 	{
 		masterParms[j]=getParms(j+1);
@@ -52,6 +61,13 @@ function boardSetup()
 		simpleGame=false;
 	else
 		simpleGame=true;
+		
+	if($('input[name="textmode"]:checked').val()==1)
+		textMode=true;
+	else
+		textMode=false;
+	
+	console.log(textMode)
 	
 	//determines list of selectable graphs
 	if(simpleGame)
@@ -68,8 +84,6 @@ function boardSetup()
 	
 	//wipes instructions and creates board	
 	setBoard();
-/* 	$("#scores").html('P1 Score: <b>'+p1score+'</b> P2 Score: <b>'+p2score+'</b><br>P1 Combo Multiplier: <b>x'+p1bonus+'</b> P2 Combo Multiplier: <b>x'+p2bonus+"</b>"); */
-	
 	window.setTimeout(function(){startRound()},2000);
 }
 
@@ -79,6 +93,8 @@ function startRound()
 	getGraphs();
 	distCard=new Array()
 	curCard=0;
+	
+	//shows identity of each card, then hides again
 	for(var j=0;j<numCards;j++)
 	{
 		$("#card"+j).flip({
@@ -105,168 +121,137 @@ function startRound()
 			curCard++;
 		},2000);
 	}
-	swapsLeft=1;
+	swapsLeft=5;
  	window.setTimeout(function(){
 		intervalKey=window.setInterval(function(){
+		
+		//select cards to be swapped
 		var c1=Math.floor(Math.random()*numCards);
 		var c2;
+		
+		//check to make sure 2 different cards are selected
 		do{c2=Math.floor(Math.random()*numCards)}while(c2==c1)
+		
+		//sort cards in ascending order
 		if(c1>c2)
 		{
 			var tempc=c1;
 			c1=c2;
 			c2=tempc
 		}
+		
+		//swap cards
 		swapCards("#space"+c1,"#space"+c2,(c1*(190+40)),(c2*(190+40)));
-		},1000/gameSpeed+120);
+		},1200/gameSpeed+900);
 	},3200); 
 	
-	
-	roundOn=true;
+	window.setTimeout(function(){
+		console.log("start clickEvent");
+		roundOn=true;
+	},3200+(1000+1200/gameSpeed)*5)
 }
 
 //ends current round
 function endRound()
 {
-	currRound++;
+	roundsLeft--;
 	roundOn=false;
 	smartTime=0;
-	$("#facecard").flip({
-		direction:'bt',
-		onEnd:function(){
-			$("#backimage").show();
-			$("#distcanv").remove();
-			
+	
+	//compares selected card to actual card
+	if(answeredCard==correctCard)
+	{console.log("correct");
+		currStreak++;
+		p1score++;
+		if(textMode)
+			$("#facecard").flip({
+				direction:"tb", 
+				color:"rgb(50,200,60)", 
+				content:"Correct!"
+			})
+		else
+		{
+			$("#facecard").css({"background-color":"rgb(50,200,60)"})
+			$("#facecard").text("Correct!")
+			$("#hist"+correctCard).flip({
+				direction:"tb", 
+				color:"rgb(50,200,60)", 
+				onEnd:function(){
+					$("#hist"+correctCard).remove()
+					$("#facecard").show()
+				}
+			})
 		}
-	});
-	if(hideCards)
-	flipDown();
-	reconcileBoard();
-	if(answerFound)
-	{
-		weightedAverage+=smartTime;
-		weightedAverage/=2;
 	}
-	if(smartAI)
+	
+	else
 	{
-		startTimes[enemyDiff]+=(weightedAverage-startTimes[enemyDiff]+smartAdd[enemyDiff])*smartMult[enemyDiff];
-		if(startTimes[enemyDiff]<0)
-			startTimes[enemyDiff]=.05;
-		if(startTimes[enemyDiff]>1)
-			startTimes[enemyDiff]=.95;
+		if(currStreak>longestStreak)
+			longestStreak=currStreak;
+		currStreak=0;
+		if(textMode)
+			$("#facecard").flip({
+				direction:"tb", 
+				color:"red", 
+				content:"Incorrect! Too Bad!"
+			})
+		else
+		{console.log("wrong")
+			$("#facecard").css({"background-color":"red"})
+			$("#facecard").text("Incorrect! Too Bad!")
+			$("#hist"+correctCard).flip({
+				direction:"tb", 
+				color:"rgb(50,200,60)", 
+				onEnd:function(){
+					$("#hist"+correctCard).remove()
+					$("#facecard").show()
+				}
+			})
+		}
 	}
-	if(currRound<numGraphs)
+	changeBar([p1score,numRounds-roundsLeft-p1score],numRounds)
+	console.log("streak"+currStreak+" longest: "+longestStreak);
+	//checks to see if game is over
+	if(roundsLeft>0)
+	{
 		window.setTimeout(function(){startRound()},1500);
+	}
+	
+	//endgame sequence
 	else
 	{
 		window.setTimeout(function()
 		{
 			$("#game").empty();
 			$("#yourscore").html(p1score);
-			$("#hisscore").html(p2score);
-			if(p1score>p2score)
-				$("#finalmess").html('<b>Congratulations, you win!</b>');
-			else if(p2score>p1score)
-				$("#finalmess").html('<b>You lose. Better luck next time!</b>');
+			console.log(numRounds+" score: "+p1score);
+			$("#stats").html("<h4>Longest Streak:</h4><p>"+longestStreak+"</p><h4>Accuracy:</h4><p>"+(p1score*100/numRounds).toFixed(2)+"%</p>");
+			if(p1score<numRounds/2)
+				$("#finalmess").html("<b>You need more practice!</b>");
+			else if(p1score<numRounds)
+				$("#finalmess").html("<b>Great Job! Try to get a perfect score next time!</b>");
 			else
-				$("#finalmess").html("<b>It's a tie!</b>");
+				$("#finalmess").html("<b>Wow! Perfect Score!</b>");
 			$('#results-modal').modal('show');
 			
 		},1000);
 	}
+	$("#scores").html('<p>Score: '+p1score+'</p><p>Current Round: '+(numRounds-roundsLeft+1)+'</p><p>Rounds Left: '+(roundsLeft-1)+'</p><p>Longest Streak: '+longestStreak+'</p>')
+
 }
-
-
-//determines scores and performs board cleanup
-function reconcileBoard()
-{
-	for(var i=0;i<2;i++)
-	{
-		numRight[i]=0;
-		numWrong[i]=0;
-	}
-	for(var i=0;i<numCards;i++)
-	{
-		if(cardList[i].controller!=0)
-		{
-			if(chosenGraph[i]==roundCard[currRound-1])
-			{
-				numRight[(cardList[i].controller==1)?0:1]++;
-				if(cardList[i].controller==1)
-				{
-					if(answerFound)
-					{
-						smartTime+=answerTimes[i];
-						smartTime/=2;
-					}
-					else
-					{
-						smartTime+=answerTimes[i];
-						answerFound=true;
-					}
-				}
-			}
-			else
-				numWrong[(cardList[i].controller==1)?0:1]++;
-		}
-	}
-	p1bonus*=(numRight[0]>0)?numRight[0]:1;
-	p2bonus*=(numRight[1]>0)?numRight[1]:1;
-	if(numWrong[0]>0)
-		p1bonus=1;
-	if(numWrong[1]>0)
-		p2bonus=1;
-	p1score+=(numRight[0]-numWrong[0])*p1bonus;
-	p2score+=(numRight[1]-numWrong[1])*p2bonus;
-	$("#scores").html('P1 Score: <b>'+p1score+'</b> P2 Score: <b>'+p2score+'</b><br>P1 Combo Multiplier: <b>x'+p1bonus+'</b> P2 Combo Multiplier: <b>x'+p2bonus+"</b>");
-	for(var i=0;i<numCards;i++)
-	{
-		cardList[i].deselect();
-	}
-}
-
-//flips down correct cards
-function flipDown()
-{
-	var curDown=0,nextFlip=0;
-	for(var j=0;j<numCards;j++)
-	{
-		if(chosenGraph[j]==roundCard[currRound-1])
-		{
-			downCards[curDown]=j;
-			var color;
-			if(cardList[j].controller==1)
-			{
-				downColor[curDown]="green";
-			}
-			else if(cardList[j].controller==-1)
-			{
-				downColor[curDown]="red";
-			}
-			else
-			{
-				downColor[curDown]="black";
-			}
-			curDown++;
-			$("#card"+j).flip({
-				direction:'tb',
-				onEnd:function(){
-				var flipDex=downCards[nextFlip];
-				nextFlip++;
-					$("#card"+flipDex).hide();
-					$("#space"+flipDex).append('<img src="scripts/images/'+downColor[nextFlip-1]+'.jpg" id="color'+flipDex+'"></img>');
-					$("#color"+flipDex).css({"width":"190","height":"90", "float":"left","border-style":"solid","border-width":"5px","border-color":"rgb(194, 194, 208)"}); 
-				}
-			});
-		}
-	}
-};
 
 //creates gameboard using recieved parameters;
 function setBoard()
 {
 	$("#facecard").html("Let's play a game!");
-	$("#facecard").css({"position":"relative","top":"350px","height":"200px","width":"500px", "background-color":"rgb(50,200,60)", "text-align":"center", "line-height":"200px", "font-family":"Verdana","font-size":"2.5em", "color":"white"})
+	$("#scores").html('<p>Score: 0</p><p>Current Round: 1</p><p>Rounds Left: '+numRounds+'</p><p>Longest Streak: 0</p>')
+	$("#scores").css({"position":"relative", "left":(((textMode)?1000:400)+15)+"px", "top":"50px","border-style":"solid", "width":"200px"})
+	$("#facecard").css({"position":"relative","top":"0px","height":"200px","width":"1000px", "background-color":"rgb(50,200,60)", "text-align":"center", "line-height":"200px", "font-family":"Verdana","font-size":"2.5em", "color":"white"})
+	$("#flipsection").css({"position":"relative","top":"250px","height":"200px","width":"1000px"})
+	if(!textMode)
+	{
+		$("#facecard").css({"height":"200px","width":"400px", "top":"0px"})
+	}
 	$("#board").css({"position":"relative", "top":"110px","width":((190*(numCards)+50*(numCards-1))+"px"),"z-index":"0","height":(110)+"px","background-color":"rgb(255, 255, 255)"});
 	for(var j=0;j<numCards;j++)
 	{
@@ -274,6 +259,7 @@ function setBoard()
 	}
 }
 
+//obtains random graph types for each card on board
 function getGraphs()
 {
 	graphTypes=new Array();
@@ -295,31 +281,61 @@ function getGraphs()
 	}
 }
 
+//function to animate any HTML object in an elliptical path
 //total time:1000/speed
 function animateAround(name,radius,startX, startY, dir, theta, speed)
 {
 	theta+=.01;
 	var nextX=(Math.cos(theta*Math.PI+Math.PI)+1)*radius*dir+startX;
-	var nextY=(-1)*Math.sin(theta*Math.PI+Math.PI)*100*dir+startY;
+	var nextY=startY+(-1)*Math.sin(theta*Math.PI+Math.PI)*100*dir;
 	$(name).css({"left":nextX+"px"});
-	$(name).css({"top":nextY+"px"});
+	$(name).css({"bottom":nextY+"px"});
 	if(theta<1)
 	{
 		window.setTimeout(function(){animateAround(name, radius, startX, startY, dir, theta, speed)}, 10/speed)
 	}
 }
+
+//function to swap 2 cards, and prompt for choice
 function swapCards(card1, card2, card1x, card2x)
-{console.log(card1+" "+card2);
-	animateAround(card1, (card2x-card1x)/2, card1x, 210, 1, 0,gameSpeed)
-	animateAround(card2, (card2x-card1x)/2, card2x, 210, -1, 0,gameSpeed)
+{
+	animateAround(card1, (card2x-card1x)/2, card1x, 90*Number($(card1).children().attr('id').substring(4,$(card1).children().attr('id').length))-30, 1, 0,gameSpeed)
+	animateAround(card2, (card2x-card1x)/2, card2x, 90*Number($(card2).children().attr('id').substring(4,$(card2).children().attr('id').length))-30, -1, 0,gameSpeed)
 	swapsLeft--;
 	if(swapsLeft<1)
+	{console.log("flip done")
 		window.clearInterval(intervalKey)
-	window.setTimeout(function(){
+		correctCard=Math.floor(Math.random()*numCards);
+		roundOn=true;
+		if(textMode)
+		{
+			$("#facecard").flip({
+				direction:"tb", 
+				color:"#008B8B", 
+				content:("Select the "+(cardList[correctCard].dist.getDist())+" distribution")
+			})
+		}
+		else
+		{
+			$("#facecard").flip({
+				direction:"tb", 
+				onEnd: function()
+				{
+					var histogram=new histMaker(graphTypes[correctCard]+1,500,correctCard, masterParms[correctCard] )
+				$("#flipsection").append('<canvas id="hist'+correctCard+'"></canvas>');
+				histogram.initializeExperiment();
+				$("#hist"+correctCard).css({"width":"400","background-color":"white","height":"200"});
+				$("#facecard").hide();				
+				}
+			})
+		}
+		console.log("Correct card: "+correctCard);
+	}
+	window.setTimeout(function(){console.log("namechange!!!!!!!!!!!!"+card1+" "+card2);
 		var temp=card1;
 		var temp2=card2;
 		$(card1).attr('id',"temp")
-		$(card2).attr('id',"HHH")
-		$("#temp").attr('id',temp2) 
-	},1000/gameSpeed+70)
+		$(card2).attr('id',card1.substring(1))
+		$("#temp").attr('id',card2.substring(1)) 
+	},1200/gameSpeed+700)
 }

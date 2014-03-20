@@ -1,150 +1,35 @@
-function distMaker(num1, parm1)
+setIntervalWithContext = function(code,delay,context){
+ return setInterval(function(){
+  code.call(context);
+ },delay);
+};
+
+function histMaker(num1, num2, num3, parm1)
 {
-	this.parms=parm1;
-	this.output="";
-	this.dist=0; this.distGraph=0;
-	this.graphKey=num1;
+	//Beta-Negative Binomial distribution simulation
+	this.runID=0;
+	this.runCount = 0;this.stopCount = 0; this.stopFreq = num2;
+	this.dist=0;this.distGraph=0;
 	this.distCanvas=0;
-	 this.initialize=function(){
-		this.distCanvas = document.getElementById("distcanv");
-		this.setDist();	
+	this.parms=parm1;
+	this.graphKey=num1;
+	this.cardNum=num3;
+	cardNum2=this.cardNum;
+	this.initializeExperiment=function(){
+		this.distCanvas = document.getElementById("hist"+this.cardNum);
+		this.resetExperiment();
 	}
-	this.getDist=function()
-	{
-		this.output="";
-		switch(this.graphKey)
-		{
-			case 1:
-				this.output="Discrete uniform";
-				break;
-			
-			case 2:
-				this.output="Pareto";
-				break;
-			case 3:
-				this.output="poisson lambda";
-				break;
-			
-			case 4:
-				this.output="negative binomial";
-				break;
-			
-			case 5:
-				this.output="hypergeometric";
-				break;
-			
-			case 6:
-				this.output="exponential";
-				break;
-			
-			case 7:
-				this.output="normal mu";
-				break;
-				
-			case 8:
-				this.output="geometric";
-				break;
-			
-			case 9:
-				this.output="beta";
-				break;
-			
-			case 10:
-				this.output="F";
-				break;
-			
-			case 11:
-				this.output="log normal mu";
-				break;
-				
-			case 12:
-				this.output="binomial";
-				break;
-			
-			case 13:
-				this.output="laplace";
-				break;
-				
-			case 14:
-				this.output="maxwell boltzmann";
-				break;
-			
-			case 15:
-				this.output="chi-square";
-				break;
-			
-			case 16:
-				this.output="continous uniform";
-				break;
-				
-			case 17:
-				this.output="gamma";
-				break;
-				
-			case 18:
-				this.output="weibull";
-				break;
-			
-			case 19:
-				this.output="cauchy";
-				break;
-				
-			case 20:
-				this.output="arcsine";
-				break;
-			
-			case 21:
-				this.output="students T";
-				break;
-			
-			case 22:
-				this.output="logistic";
-				break;
-			
-		/*---------------------------------------End Simple-------------------------------------------*/
-			
-			case 23:
-				this.output="beta negative binomial";
-				break;
-			
-			case 24:
-				this.output="Benford's first digit";
-				break;
-			
-			case 25:
-				this.output="beta binomial";
-				break;
-			case 26:
-				this.output="birthday";
-				break;
-				
-			case 27:
-				this.output="exponential log";
-				break;	
-				
-			case 28:
-				this.output="coupon collector";
-				break;	
-				
-			case 29:
-				this.output="extreme value";
-				break;	
-			
-			case 30:
-				this.output="folded-normal";
-				break;
-			
-			case 31:
-				this.output="hyperbolic secant";
-				break;
-			default:
-				alert("Error:Unknown GraphType Encountered");
-				break;
-		}
-		return this.output;
+	this.runExperiment=function(){
+		this.simulateN();
 	}
-	this.setDist=function()
-	{
+
+	this.stopExperiment=function(){
+		this.stopCount = 0;
+		clearInterval(this.runID);
+	}
+
+	this.resetExperiment=function(){ 
+		this.runCount = 0; this.stopCount = 0;
 		switch(this.graphKey)
 		{
 			//Discrete uniform a,n
@@ -306,12 +191,22 @@ function distMaker(num1, parm1)
 				alert("Error:Unknown GraphType Encountered");
 				break;
 		}
-		this.distGraph = new QuantileGraph(this.distCanvas, this.dist, "X");
-		this.distGraph.setGraphType(0);
-		this.setProb();	
+		this.distGraph = new DistributionGraph(this.distCanvas, this.dist, "X");
+		this.distGraph.showDist(false);
+		this.runExperiment();
 	}
 
-	this.setProb=function(){
-		this.distGraph.setProb(.999);
+	this.simulate=function(){
+		this.runCount++;
+		this.stopCount++;
+		this.dist.simulate();
+		if (this.stopCount == this.stopFreq) this.stopExperiment();
+		this.distGraph.draw();
 	}
+	this.simulateN=function(){
+		for(var j=0;j<this.stopFreq;j++)
+			this.dist.simulate();
+		this.distGraph.draw();
+	}
+
 }
