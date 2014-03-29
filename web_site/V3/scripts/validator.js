@@ -89,15 +89,11 @@ var Validator = (function() {
     }
 
     var pasteDistributomData = function(content) {
-        try{
-            var divContent = document.getElementById('wrapper-content');
-            // Add content to the page
-            divContent.innerHTML = content;
-            pasteCitations(divContent);
-        }
-        catch(e){
-            console.log(e.message);
-        }
+        var divContent = document.getElementById('wrapper-content');
+        // Add content to the page
+        divContent.innerHTML = content;
+
+        pasteCitations(divContent);
     }
 
     var pasteCitations = function(divContent) {
