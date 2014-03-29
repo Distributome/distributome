@@ -453,7 +453,7 @@ function updateNodeColor(ontologyArray, level){
 }
 
 	
-$(document).ready(function(){		
+{		
 		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
@@ -483,4 +483,4 @@ $(document).ready(function(){
 			xmlhttp.responseXML.load(xmlhttp.responseStream);
 		var ontologyOrder = xmlhttp.responseXML;	
 		getOntologyOrderArray(ontologyOrder);
-});
+}
