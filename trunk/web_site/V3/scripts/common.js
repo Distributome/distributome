@@ -238,7 +238,6 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 	//var referenceName = null;
 	//referenceName as the list of reference names
 	var referenceName = new Array();
-	try{
 	if (XML_Objects[i].nodeType==1) {
 		
 		var Level1Prop=xmlDoc.getElementsByTagName(XML_Objects[i].nodeName)[0].childNodes;
@@ -302,10 +301,6 @@ function XMLParser(i, nodeNameIndex, index, reference, XML_Objects){
 			html.push('<div style="padding-left:3px">'+typeText+'</div>');
 			html.push("<div style='height:5px'></div>");
 		}
-	}
-	}
-	catch(e){
-		console.log(e.message);
 	}
 	return new Array(html.join(''), referenceName);
 }
