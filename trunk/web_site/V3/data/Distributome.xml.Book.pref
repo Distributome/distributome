@@ -35,6 +35,8 @@
 		<name>Poisson</name>
 		<name>Continuous Uniform</name>
 		<name>Standard Normal</name>
+		<name>Exponential</name>
+		<name>Gamma</name>
 		<name>Beta</name>
 		<name>Cauchy</name>
 		
@@ -43,11 +45,9 @@
 	<hierarchy_level id="middle_hierarchy">
 		<name>Student</name>
 		<name>Discrete Uniform</name>
-		<name>Gamma</name>
 		<name>Pareto</name>
 		<name>ChiSquare</name>
 		<name>F</name>
-		<name>Exponential</name>
 		<name>Multinomial</name>
 		<name>Hypergeometric</name>
 		<name>Normal</name>
