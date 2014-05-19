@@ -34,7 +34,7 @@
 		<name>Negative Binomial</name>
 		<name>Poisson</name>
 		<name>Continuous Uniform</name>
-		<name>Standard Normal</name>
+		<name>Normal</name>
 		<name>Exponential</name>
 		<name>Gamma</name>
 		<name>Beta</name>
