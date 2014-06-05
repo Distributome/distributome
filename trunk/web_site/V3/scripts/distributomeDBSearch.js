@@ -109,7 +109,7 @@ function displayXmlText(displayAll){
 		getURLParameters();
 		/*** Read in and parse the Distributome.xml DB ***/
 		var xmlhttp=createAjaxRequest();
-		xmlhttp.open("GET","Distributome.xml",false);
+		xmlhttp.open("GET","./data/Distributome.xml",false);
 		xmlhttp.send();
 		if (!xmlhttp.responseXML.documentElement && xmlhttp.responseStream)
 			xmlhttp.responseXML.load(xmlhttp.responseStream);

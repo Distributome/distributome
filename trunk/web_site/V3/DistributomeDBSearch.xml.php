@@ -130,8 +130,8 @@ if(isset($_GET['s']) && strlen($_GET['s'])>0) {
   		<!-- Search Area -->
   			<td class="tool">
   				<label id="search" for="search"></label>
-  				<form name="searchForm" action="DistributomeDBSearch.xml.php" method="GET">
-				<form name="searchForm" action="DistributomeDBSearch.xml.php" method="GET">
+  				<form name="searchForm" action="http://www.distributome.org/js/DistributomeDBSearch.xml.php" method="GET">
+				<form name="searchForm" action="http://www.distributome.org/js/DistributomeDBSearch.xml.php" method="GET">
 				<input type="hidden" name="debug"
 				<?php 
 					echo " value=\"$debug\" "; 
