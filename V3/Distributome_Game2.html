@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF8">
+	<title>Distributome Game 2: Matching Density curves to sample histograms</title>
+  
+	<link type="text/css" href="./data/bootstrap_2.min.css" rel='stylesheet'/>
+    <link href="./data/bootstrapSwitch_2.css" rel="stylesheet">
+    <link rel="stylesheet" href="./data/font-awesome_2.min.css">
+    <link type="text/css" href="./basic/DistributomeNavigator_V3.css" rel="stylesheet"/>
+    <link type="text/css" href="./data/game_2.css" rel='stylesheet'/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script src="./scripts/jquery.flip.js"></script>
+	<script src="./scripts/gameDriver_2.js"></script>
+	<script src="./scripts/cardClass_2.js"></script>
+	<script src="./scripts/devices_2.js"></script>
+	<script src="./scripts/distributions_2.js"></script>
+	<script src="./scripts/histMakerClass_2.js"></script>
+	<script src="./scripts/distMakerClass_2.js"></script>
+	<script src="./scripts/parmFinder_2.js"></script>
+	<script src="./scripts/bootstrap_2.min.js"></script>
+	<script src="http://d3js.org/d3.v3.js"></script>
+</head>
+<body>
+
+
+
+<div id="wrap">
+    <div class="header">
+        <!-- TOP MENU CODE -->
+        <ul class="mainmenu">
+            <!-- to add a new menu item: insert a new
+                <li><a href="link to content">MenuItemName</a></li>
+                <ul class="subnav">  </ul> indicates that the <li> objects within are
+                part of the submenu
+            -->
+            <li id="game"><a href="./Distributome_Game2.html"
+                             title="Distributome Home Page">Distributome Game</a></li>
+            <li id='instructions' class="instruction"><a href="./docs/instructions_2.html"
+                                     title="How to play the Distributome Game">Instructions</a></li>
+            <li>&nbsp;</li>
+            <li><a href="http://www.distributome.org/about.html"
+                   title="About the Distributome Project">About</a></li>
+            <li><a href="./DistributomeNavigator_V3.html"
+                   title="Distributome Navigator">Navigator</a></li>
+            <li><a href="http://www.distributome.org/docs.html"
+                   title="Technical Documentation">Tech Docs</a></li>
+            <li><a href="http://distributome.org/tools.html"
+                   title="Probability Calculators, Virtual Experiments, Interactive Simulators">Tools</a></li>
+            <li><a href="http://distributome.org/blog/?cat=4"
+                   title="Learning Modules and Activities">Activities</a></li>
+            <li><a href="http://distributome.org/blog/"
+                   title="Distributome Blog">Blog</a></li>
+        </ul>
+    </div>
+	
+	<div class="content">
+	
+		 <div id="startup-modal" class="modal fade">
+			 <div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Welcome to the Distributome Game 2!</h3>
+					</div>
+					<div class="modal-body">
+						<h4>Goal of the Distributome Game</h4>
+						<p>The goal of the Distributome Game is to correctly match corresponding histograms and density graphs</p>
+						<h4>How to play?</h4>
+						<p>For instructions on how to play the game, click <a href="./docs/instructions_2.html">here</a></p>
+						<p>To begin playing, choose your settings below, and click start!</p>
+						<h4>Enjoy the Distributome Game!</h4>
+						<b>Number of Graphs</b> 
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="numgraphs" value="10" type="radio"> Small 
+							</label>
+							<label class="btn btn-primary">
+								<input name="numgraphs" value="15" checked="checked" type="radio"> Medium 
+							</label>
+							<label class="btn btn-primary">
+								<input name="numgraphs" value="20" type="radio"> Large
+							</label>
+						</div> <br><br>
+						<b>Sample size 
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="samplesize" value="300" type="radio"> Small 
+							</label>
+							<label class="btn btn-primary">
+								<input name="samplesize" value="500" checked="checked" type="radio"> Medium 
+							</label>
+							<label class="btn btn-primary">
+								<input name="samplesize" value="900" type="radio"> Large
+							</label>
+						</div><br><br>
+						<b>Game Type </b>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="gametype" value="1" type="radio"> General
+							</label>
+							<label class="btn btn-primary">
+								<input name="gametype" value="0" checked="checked" type="radio"> Simplified
+							</label>
+						</div>
+						<br><br>
+						
+						<b>Game Speed </b>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="gamespeed" value="15" type="radio"> Slow 
+							</label>
+							<label class="btn btn-primary">
+								<input name="gamespeed" value="10" checked="checked" type="radio"> Medium 
+							</label>
+							<label class="btn btn-primary">
+								<input name="gamespeed" value="4" type="radio"> Fast
+							</label>
+						</div>
+						
+						   <br><br>
+						
+						<b>Hide Cards </b>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="hidecards" value="1" checked="checked" type="radio"> On
+							</label>
+							<label class="btn btn-primary">
+								<input name="hidecards" value="0" type="radio"> Off
+							</label>
+						</div>
+						<br><br>
+						
+						<b>AI Difficulty </b>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="enemydiff" value="0" type="radio"> Easy
+							</label>
+							<label class="btn btn-primary">
+								<input name="enemydiff" value="1" checked="checked" type="radio"> Medium 
+							</label>
+							<label class="btn btn-primary">
+								<input name="enemydiff" value="2" type="radio"> Hard
+							</label>
+						</div>
+						<br><br>
+						<b>Smart AI </b>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary">
+								<input name="smartai" value="1" type="radio" checked="checked" > On
+							</label>
+							<label class="btn btn-primary">
+								<input name="smartai" value="0" type="radio"> Off 
+							</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a id="startButton" class="btn btn-danger" data-dismiss="modal"> START</a>
+					</div>
+				</div>
+			</div>
+        </div>
+		<div id="results-modal" class="modal fade">
+			 <div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Game Summary</h3>
+					</div>
+					<div class="modal-body">
+						<h4>Your Score:</h4>
+						<p id="yourscore" >0</p>
+						<h4>Opponent's Score</h4>
+						<p id="hisscore" >0</p>
+						<p id="finalmess"></p>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="Distributome_Game2.html" class="btn btn-danger" >Reset</a>
+					</div>
+				</div>
+			</div>
+        </div>
+		<section id="game"> 
+			<section id="board"></section> 
+			<br>
+			<br>
+			<table style="width:600px; height:250px">
+				<tr>
+					<td><section id="facecard"></section></td>
+					<td>
+						<section id="timerzone"></section>
+						<script type="text/javascript" id="matchtimer">
+							radius = 200 / 2;
+							var interTracker;
+							var endTime;
+							var timerLength;
+							
+							var vis = d3.select("#timerzone").append("svg")
+								.attr("width", radius*2)
+								.attr("height", radius*2)
+								.append("g")
+								.attr("transform", "translate(" + radius + "," + radius+ ")");
+							var field = vis.selectAll("g")
+								.data(fields)
+								.enter().append("g");
+							var arc = d3.svg.arc()
+								.startAngle(0)
+								.endAngle(function(d) {return 2*Math.PI * d.value})
+								.innerRadius(function(d) { return (d.index-.1) * radius; })
+								.outerRadius(function(d) { return (d.index +.1) * radius; });
+								
+							field.append("path");
+
+							function tick() {
+								field
+								  .data(fields);
+
+							  field.select("path")
+								.transition()
+								  .duration(0)
+								  .attrTween("d", arcTween)
+								  .style("fill", function(d) { return ("hsl(" + (180 * (d.value)) + ", 50%, 50%)") });
+							}
+
+							function arcTween(d) {
+							  return function(t) {  return arc(d); };
+							}
+							
+							
+							function startTimer(num1)
+							{
+								timerLength=num1;
+								var tempStart=new Date();
+								endTime=tempStart.getSeconds()+tempStart.getMilliseconds()/1000+tempStart.getMinutes()*60+tempStart.getHours()*60*60;
+								endTime+=timerLength;
+								interTracker=setInterval(function(){tick()}, 5);
+							}
+							
+							function fields() 
+							{
+								var d = new Date();
+								var curTime=d.getMinutes()*60+d.getHours()*60*60+d.getSeconds() + d.getMilliseconds() / 1000;
+								var second = (endTime-curTime )/timerLength;
+								
+								if(second<=0)
+								{
+									window.clearTimeout(interTracker)
+									endRound();
+								}
+								return [{ value: second,  index: .9}];
+							}
+						</script>
+					</td>	
+				</tr>
+			</table>
+			<section id="scores"></section> 
+		</section> 
+	</div>
+</div>
+
+</body>
+</html>
