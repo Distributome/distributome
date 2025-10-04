@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>How to Play</title>
+  <link type="text/css" href="../data/bootstrap.min.css" rel='stylesheet'/>
+  <link href="../data/bootstrapSwitch.css" rel="stylesheet">
+  <link rel="stylesheet" href="../data/font-awesome.min.css">
+  <link type="text/css" href="../basic/DistributomeNavigator_V3.css" rel="stylesheet"/>
+  <link type="text/css" href="../data/game.css" rel='stylesheet'/>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="wrap">
+    <div class="header">
+        <!-- TOP MENU CODE -->
+        <ul class="mainmenu">
+            <!-- to add a new menu item: insert a new
+                <li><a href="link to content">MenuItemName</a></li>
+                <ul class="subnav">  </ul> indicates that the <li> objects within are
+                part of the submenu
+            -->
+            <li id="game"><a href="/game"
+                             title="Distributome Home Page">Distributome Game</a></li>
+            <li id='instructions' class="instruction"><a href="../Distributome_Game2.html"
+                                     title="Return to the game">Back to Game</a></li>
+            <li>&nbsp;</li>
+            <li><a href="http://www.distributome.org/about.html"
+                   title="About the Distributome Project">About</a></li>
+            <li><a href="./DistributomeNavigator_V3.html"
+                   title="Distributome Navigator">Navigator</a></li>
+            <li><a href="http://www.distributome.org/docs.html"
+                   title="Technical Documentation">Tech Docs</a></li>
+            <li><a href="http://distributome.org/tools.html"
+                   title="Probability Calculators, Virtual Experiments, Interactive Simulators">Tools</a></li>
+            <li><a href="http://distributome.org/blog/?cat=4"
+                   title="Learning Modules and Activities">Activities</a></li>
+            <li><a href="http://distributome.org/blog/"
+                   title="Distributome Blog">Blog</a></li>
+        </ul>
+    </div>
+	<b>
+	<h1>Distributome Game 2 Instructions</h1>
+	</b>
+	<h3><b>Objective:</b></h3>
+	<p>The objective of this game is to score the most amount of points by
+	matching the given density curve with its corresponding histograms.</p>
+	<h3><b>Number of Players:</b></h3>
+	<p>This game requires 1 player, and is played against the enemy AI</p>
+	<h3><b>The Gameboard:</b></h3>
+	<p>A typical gameboard is shown below:</p>
+	<img src="../scripts/images/screenshot.jpg">
+	<p><b>Board:</b>Shows all of the possible histograms that can be
+	matched to the density curve
+	<br>
+	<b>Current Graph:</b>Shows the current graph whose matches need to be
+	found
+	<br>
+	<b>Timer: </b>Shows the amount of time remaining for the current round
+	<br>
+	<b>Score: </b>Shows scores as well as multipliers for both players</p>
+	<h3><b>Gampeplay:</b></h3>
+	<p>The first round begins when the current graph is revealed. At this
+	point, it is the job of both players to find the correct histograms
+	within the time limit. Once the time limit is reached, the
+	corresponding histograms are flipped face down, and the next round
+	begins with a different graph.</p>
+	<h3><b>Scoring:</b></h3>
+	<p>Players recieve 1 point per each correct histograms(there are two
+	correct histograms per graph), and lose one point for each incorrect
+	histogram. No points are awarded or deducted if nothing is selected.</p>
+	<h3><b>Multipliers:</b></h3>
+	<p>At the end of the round, before the points earned are added to the total score, they are first multiplied by the score multiplier.
+	Initially, the score multiplier is set to 1x.
+	The multiplier is doubled by choosing both of the corresponding
+	histograms in a round. Choosing an incorrect histogram resets the
+	multiplier back to 1x.</p>
+	<h3><b>Endgame:</b></h3>
+	<p>The game ends when all graphs have been shown</p>
+	<h3><b>Options:</b></h3>
+	<p>The following options can be configured before pressing the start
+	button:
+	<br>
+	<b>Number of Graphs:</b> Determines the number of graphs, as well as
+	the number of rounds to be presented
+	<br>
+	<b>Sample Size:</b> Determines the sample size of the histograms
+	<br>
+	<b>Game Type: </b>Determines the pool that the graphs will be drawn
+	from.
+	<br>
+	<b>Game speed:</b> Determines the length of each round
+	<br>
+	<b>Enemy Difficulty:</b> Determines the difficulty level of the Enemy AI</p>
+	<br>
+	<br>
+	<a href="../Distributome_Game2.html">Back to Game</a>
+</div>
+
+</body>
+</html>
