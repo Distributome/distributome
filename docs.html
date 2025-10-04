@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Distributome.org</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="verify-v1"
+	content="S6zclu9UcbbjR6mX8ELA6R4G0lCJKUAtaTLeQmxvg8A=" />
+<meta name="description"
+	content="Probability and Statistics Distributions Resource - Distributome" />
+<meta name="keywords"
+	content="Probability Statistics Distributions Resource Distributome Webapps" />
+<meta name="author" content="Ivo Dinov - http://www.Distributome.org" />
+<link rel="stylesheet" type="text/css"
+	href="images/Distributome_style.css" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+</head>
+<body>
+<div id="wrapper-menu-top">
+<div id="menu-top">
+<ul>
+	<li><a href="http://www.Distributome.org"
+		title="Distributome Home"><span>Home</span></a></li>
+	<li><span>Resources »<br />
+	</span></li>
+	<li><a href="about.html" title="About"><span>About</span></a></li>
+	<li><a href="tools.html"
+		title="Simulations, Calculators, Experiments"><span>Tools</span></a></li>
+	<li><a href="http://distributome.org/V3"
+		title="Distributome Interactive Explorer"><span>Navigator</span></a></li>
+	<li><a href="http://distributome.org/blog/?cat=4"
+		title="Distributome Learning Activities"><span>Activities</span></a></li>
+	<li><a href="js/DistributomeDBSearch.xml.php"
+		title="Keyword Search the Distributome Meta-data"><span>DB
+	Search</span></a></li>
+	<li><a href="legacy.html"
+		title="Legacy Distributome Java Resources"><span>Legacy	Resources</span></a></li>
+	<li><a href="blog" title="Distributome Blog"><span>Blog</span></a></li>
+</ul>
+</div>
+<!--menu-top--></div>
+<!--wrapper-menu-top-->
+<div id="wrapper-header">
+<div id="header">
+<div id="wrapper-header2">
+<div id="wrapper-header3">
+<h1><center>Probability Distributome Project - Technical
+Documentation<br />
+</center></h1>
+</div>
+</div>
+</div>
+</div>
+<div style="text-align: justify;" id="content">This page includes
+some of the <b>Distributome Project</b> technical documentation. <br />
+<ul>
+	<li>Distributome Game Webapp enables the interactive exploration of natural phenomena and 
+		models as a game of matching pairs of processes and distributions.</li>
+		<ul>
+		<li><a href="http://distributome.org/blog/?p=202">Game Blog Posting</a> (January 2013)</li>
+		<li><a href="https://distributome.googlecode.com/svn/trunk/web_site/V.3.0">Source Code SVN</a></li>
+		<li><a href="http://www.distributome.org/V3/DistributomeGame.html">Game Webapp</a></li>
+		<li><a href="https://code.google.com/p/distributome/source/browse/#svn%2Ftrunk%2Fweb_site%2FV.3.0%2Fdata">Problem-Distribution Meta-Data SVN</a></li>
+		<li><a href="http://www.distributome.org/V3/data/DistributomeGame_ProblemExamples.csv">Current Meta-Data (CSV)</a></li>
+		</ul>
+	<li><a href="js/Distributome.xml">XML meta-data on
+	distribution properties and inter-distribution relations is available
+	here</a></li>
+	<li>Current <a href="V3/data/Distributome.xsd">XSD schema is
+	available here</a></li>
+	<li>Distributome XML Meta-Data retrieval<br />
+	</li>
+	<ul>
+		<li><a href="V3/Distributome.xml.html"
+			title="HTML View of the Complete Distributome Meta-data">Complete
+		XML DB HTML5 View (Validator)</a></li>
+		<li><a href="js/DistributomeDBSearch.xml.php"
+			title="Distributome Database Keyword Search">Keyword search of
+		XML DB</a>
+		<ul>
+			<li>Use <b>AND</b>, <b>OR</b> and <b>NOT</b> operators for
+			complex Boolean search, use capital letters, example <a
+				href="http://www.distributome.org/js/DistributomeDBSearch.xml.php?s=Normal+AND+Cauchy+NOT+nonlinear"
+				title="Distributome Interactive Explorer">Normal AND Cauchy NOT
+			nonlinear</a></li>
+			<li>The order of the operations is not commutative, example <a
+				href="http://www.distributome.org/js3/DistributomeDBSearch.xml.php?s=poisson+AND+Normal+NOT+Lorentz">
+			Poisson AND Normal <b>NOT</b> Lorentz</a> is different from <a
+				href="http://www.distributome.org/js/DistributomeDBSearch.xml.php?s=poisson+NOT+Lorentz+AND+Normal">Poisson
+			<b>NOT</b> Lorentz AND Normal</a></li>
+		</ul>
+		</li>
+	</ul>
+	<li>For each probability distribution included in the Distributome
+	database there is a <span style="font-style: italic;">unique URL
+	page</span>. The syntax of these distribution specific pages is "<a
+		href="http://www.distributome.org/js/DistributomeDBSearch.xml.php?s=Poisson">http://www.distributome.org/js/DistributomeDBSearch.xml.php?s=<span
+		style="font-weight: bold;">Poisson</span></a>". These are also generated
+	by keyword/phrase searchers using the <a
+		href="./js/DistributomeDBSearch.xml.php">Distributome XML DB
+	Search engine</a>. <br />
+	</li>
+	<li>Preference XML files provide a mechanism for specifying the appearance, behavior and loading of the 
+		<a href="http://www.distributome.org/V3">Distirbutome Navigator</a>. For example:
+		<ul>
+			<li> <a
+				href="http://distributome.org/V3/data/Distributome.xml.pref">(default) Distributome.xml.pref</a>
+				specifies the ontological hierarchy of the appearance of the Distributome Graph in the default
+				<a href="http://www.distributome.org/V3">Distirbutome Navigator</a>.</li>
+			<li>And <a
+				href="http://distributome.org/V3/data/Distributome.xml.Book.pref">a specialized Distributome.xml.Book.pref</a>
+				file specifies the ontological hierarchy of the appearance of the Distributome Graph based on common textbook
+				distribution classifications,
+				<a href="http://www.distributome.org/js/DistributomeNavigator_Book.html">Distirbutome (Book) Navigator</a>.</li>
+			<li>See also this <a href="http://distributome.org/blog/?p=157">Distributome Blog posting</a>.</li>
+		</ul>
+	</li> 
+	<li>The prototype <b>V.3</b> <a href="http://distributome.org/V3/">Distributome Navigator</a> 
+		and <a href="http://distributome.org/V3/Distributome.xml.html">Distributome Database (HTML5) Validator</a> use the 
+		<a href="https://distributome.googlecode.com/svn/trunk/web_site/Tests/V.3.0">new version</a> of the 
+		<a href="http://distributome.org/blog/?p=33">Distributome XML+BiBTeX format</a> for managing citation 
+		references to distribution properties and inter-distributional relations. The complete
+		<a href="http://distributome.org/blog/?p=193">V3 documentation is available here</a>.
+	</li>
+	<li><a href="http://wiki.stat.ucla.edu/distributome">Distributome
+	Wiki page is here</a> and the <a
+		href="http://wiki.stat.ucla.edu/distributome/index.php/LearningActivities"
+		title="Distributome Learning Activities">Distributome Learning Activities</a></li>
+	<li>Debugging: Technical users may utilize the <i>optional</i>
+	Distributome debug-functionality (include <b>?debug=true</b> in the
+	URL). Examples of debugging requests include the following cases:
+	<ul>
+		<li><a
+			href="http://www.distributome.org/V3/data/Distributome.xml.html?debug=true">
+		Debugging the entire Distributome XML Database can be accomplished by
+		loading the following page</a></li>
+		<li><a
+			href="http://www.distributome.org/js/DistributomeDBSearch.xml.php?debug=true&amp;s=poisson+AND+NOT+Lorentz">
+		Specific Database query (e.g., Poisson AND NOT Lorentz)</a></li>
+	</ul>
+	</li>
+	<li>The complete <a href="http://distributome.googlecode.com/">Distributome
+	project Java source code</a>, available online under LGPL license</li>
+	<li>The&nbsp; <a href="V3"
+		title="Distributome Navigator">interactive Distributome graphical
+	user <span style="font-weight: bold;">Navigator</span></a> (requires
+	JavaScript-enabled browser)</li>
+	<li>The <span style="font-weight: bold;">legacy</span> <a
+		href="jars/">Java applet binary JAR files</a> and the <a
+		href="Navigator.html">HTML wrappers</a></li>
+</ul>
+</div>
+<div id="wrapper-footer">
+<div id="footer">Visitor number <img
+	src="http://counter.digits.com/?counter=%7B567347b6-ad03-67d4-1993-0fc7aa8563de%7D&amp;template=simple"
+	align="middle" border="0" height="20" hspace="4" vspace="2" width="60"
+	alt="" /> <script type="text/javascript"> var d=new Date(); 
+		document.write(" | 2008-"+d.getFullYear()+" | ");
+	</script> <a href="http://www.Distributome.org">www.Distributome.org</a></div>
+</div>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=5714596; 
+var sc_invisible=1; 
+var sc_partition=71; 
+var sc_click_stat=1; 
+var sc_security="038e9ac4"; 
+</script>
+<script type="text/javascript"
+	src="http://www.statcounter.com/counter/counter.js"></script>
+<!-- End of StatCounter Code -->
+<!-- GoogleAnalytics -->
+<script src="http://www.google-analytics.com/urchin.js"
+	type="text/javascript"> </script>
+<script type="text/javascript"> _uacct = "UA-46560710-1"; urchinTracker();
+  </script>
+<!-- End of GoogleAnalytics Code -->
+</body>
+</html>
