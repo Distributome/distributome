@@ -1,0 +1,285 @@
+text {
+    font: 10px sans-serif;
+}
+
+body {
+    overflow: auto;
+}
+
+.mainmenu {
+    min-width: 1000px;
+}
+
+.mainmenu #game {
+    font-size: 1.5em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding: 0px 60px 0px 27px;
+    margin: 0;
+    border: none;
+    padding-top: 3px;
+}
+
+.mainmenu > #instructions > a {
+    font-size: 1.15em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #71c1d8;
+    border: none;
+}
+
+.mainmenu li a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding-top: 4px;
+}
+
+.notmargined {
+    margin-left: 0;
+}
+
+.mainmenu #game > a {
+    cursor: default;
+}
+
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+.game-data {
+    margin: 20px;
+}
+
+.modal-header {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+.modal-body {
+    min-height: 100px;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.btn {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.switch {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.slopegraph {
+    width: 940px;
+    height: 500px;
+    border: solid 1px #ccc;
+}
+
+.slopegraph line {
+    fill: none;
+    stroke: #333;
+    shape-rendering: crispEdges;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+.highlight {
+    fill: #eaf1f6;
+    border: #000 2px;
+}
+
+.pointer-text {
+    font: 1.2em bold;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.guess-rect {
+    border: #000 2px;
+}
+
+.score-rect {
+    border: #000 2px;
+	fill: #f5f5f5;
+}
+
+.scoreRight {
+    border: #000 2px;
+	fill: #6F0;
+}
+.scoreWrong {
+    border: #000 2px;
+	fill: #F03;    
+}
+.score-text{
+    font: 0.8em bold;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.timer-group {
+    padding: 10px;
+}
+
+.countup-digits {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    display: inline-block;
+}
+
+.game-control {
+    display: inline-block;
+    padding: 3px 3px 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.timer-label {
+    font-family: 'Droid Sans', sans-serif;;
+    font-size: 1em;
+    border: 1px;
+    background-color: #eee;
+    color: #000000;
+}
+
+.problems-control-label {
+    font-family: 'Droid Sans', sans-serif;;
+    font-size: 1em;
+    background-color: #f5f5f5;
+    color: #000000;
+    display: inline-block;
+}
+
+.problems-control {
+    display: inline-block;
+    padding: 1px 1px 1px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.problems-input {
+    margin-top: 5px;
+}
+
+.switch label {
+    margin: 0px;
+}
+
+.resultsTable thead tr th {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/*----*/
+.right {
+    fill: #49da50;
+}
+
+.wrong {
+    fill: #da4f49;
+}
+
+.distribution-description {
+    min-height: 100px;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.problem-description {
+    min-height: 100px;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.description-header {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+.nondisplay {
+    display: none;
+}
+
+.btn {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.switch {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.has-switch {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.has-switch span.switch-left {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.form-actions {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.hero-unit {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.modal {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.btn-group {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.btn-group > input {
+    display: none;
+}
+
+.btn-group > label {
+    margin: 0 0 0 0;
+}
+
+.btn-group input:first-child + .btn {
+    /* This is an actual copy/paste of the .btn-group .btn:first-child style */
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    margin-left: 0;
+}
+
+input:checked + label.btn {
+    /* This is an actual copy/paste of the .btn:active style */
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.5);
+    outline: 0 none;
+}
+
+input[disabled] + label.btn {
+    /* This is an actual copy/paste of the .btn:disabled style */
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.65;
+}
